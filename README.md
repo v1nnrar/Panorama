@@ -16,6 +16,6 @@ scheme, then developing and modelling our new design.
 
 - [ ] Project parameters received
 - [ ] Regulations received
-- [ ] Current renders received
+- [x] Current renders received (`03_existing/renders/`)
 - [ ] Existing scheme modelled
 - [ ] Proposed design modelled

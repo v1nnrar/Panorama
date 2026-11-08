@@ -235,5 +235,7 @@ render:
     - {name: street_SW_like_render005, location: [-62, -86, 1.7], target: [5, -45, 16], lens: 24}
     - {name: street_SE_like_render004, location: [112, -92, 1.7], target: [72, -35, 30], lens: 24}
     - {name: dusk_diagrid_like_render006, location: [-36, -27, 1.7], target: [8, 0, 42], lens: 22}
-    - {name: park_N_like_render003, location: [-30, 100, 1.7], target: [-5, 40, 18], lens: 20}
+    # ESTIMATED from render-003: least-squares fit of D's corners (NE/NW parapet + underside, joint, SE) at eye height,
+    # level camera with vertical shift (client uses 2-point perspective); residuals ~10 px on 990x450. Camera stands NE of D.
+    - {name: park_N_like_render003, location: [20.1, 108.6, 1.7], target: [1.4, 51.6, 1.7], lens: 19.6, shift_y: 0.153, resolution: [1980, 900]}
     - {name: top_view, location: [40, -10, 600], target: [40, -9.99, 0], lens: 35}

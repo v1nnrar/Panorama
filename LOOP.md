@@ -38,7 +38,7 @@ Read `CLAUDE.md` first; its conventions and agent roles apply.
 
 ## Backlog (ranked)
 ### A. Fidelity of the existing scheme (measurable with `score_match.py`)
-- [ ] A1. Camera match render-003 (park view, score 0.02): find the viewpoint (north park, looking at D's north
+- [x] A1. Camera match render-003 (park view, score 0.02): find the viewpoint (north park, looking at D's north
       façade), set location/target/lens and `resolution` to the client image's aspect ratio.
 - [ ] A2. Set every matched camera's `resolution` to its client image's aspect ratio, then fine-tune location/target/lens
       for render-000 (aerial) with 50 % overlays (`overlays/overlay_*.jpg`) until silhouettes align.

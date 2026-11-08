@@ -1,0 +1,8 @@
+# PIPELINE TEST ONLY — placeholder limits, not real regulations.
+rules:
+  - {id: max_height, label: Max building height (parapet), metric: height_top_of_parapet_m, max: 22, source: placeholder}
+  - {id: max_storeys, label: Max storeys above ground, metric: storeys_above_ground, max: 6, source: placeholder}
+  - {id: built_up, label: Max built-up ratio, metric: built_up_ratio, max: 0.40, source: placeholder}
+  - {id: far, label: Max plot ratio (FAR), metric: plot_ratio_far, max: 2.0, source: placeholder}
+  - {id: setback, label: Min setback from site boundary, metric: min_setback_m, min: 5, source: placeholder}
+  - {id: green, label: Min green area ratio, metric: green_ratio_max, min: 0.35, source: placeholder}

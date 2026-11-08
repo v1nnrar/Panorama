@@ -1,0 +1,21 @@
+# PIPELINE TEST ONLY — placeholder numbers, not Panorama project data.
+name: Test Block (pipeline check)
+output_dir: out          # relative to this file
+rules: rules.yaml
+
+site:
+  boundary: [[0, 0], [70, 0], [70, 50], [0, 50]]
+  setback: 5
+
+building:
+  footprint: [[8, 8], [58, 8], [58, 24], [26, 24], [26, 42], [8, 42]]   # L-shape
+  exterior_wall: 0.35
+  slab_thickness: 0.30
+  windows: {width: 1.6, height: 1.9, sill: 0.8, spacing: 3.6}
+  roof: {parapet: 1.1}
+  storeys:
+    - {name: GF, height: 4.5, use: Lobby / restaurant, windows: {width: 3.0, height: 3.2, sill: 0.2, spacing: 4.0}}
+    - {name: L, count: 5, start: 1, height: 3.2, use: Guest rooms, rooms: 28}
+
+render:
+  samples: 32

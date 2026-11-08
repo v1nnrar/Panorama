@@ -12,8 +12,20 @@ scheme, then developing and modelling our new design.
 5. **Drawings** — plans, sections, elevations, site plan → `05_drawings/`
 6. **Reports** — area schedules, compliance checks, comparisons → `06_reports/`
 
+## Setup & build
+
+```bash
+./setup.sh                                                    # Blender (bpy) + IfcOpenShell venv
+.venv/bin/python build.py examples/test_block/params.yaml --render
+```
+
+Each scheme is one parameters YAML → IFC (BIM) → Blender `.blend` / `.glb` / renders → DXF plans,
+area schedule (XLSX) and compliance report. See `CLAUDE.md` for the full stack, conventions and the
+8 project agents in `.claude/agents/`.
+
 ## Status
 
+- [x] Toolchain set up and tested (`examples/test_block`)
 - [ ] Project parameters received
 - [ ] Regulations received
 - [ ] Current renders received

@@ -1,0 +1,78 @@
+{
+  "metrics": {
+    "storeys_above_ground": 6,
+    "height_top_of_roof_m": 20.8,
+    "height_top_of_parapet_m": 21.9,
+    "footprint_area_m2": 1124.0,
+    "gfa_m2": 6744.0,
+    "net_floor_area_m2": 6394.1,
+    "rooms": 140,
+    "site_area_m2": 3500.0,
+    "built_up_ratio": 0.321,
+    "plot_ratio_far": 1.927,
+    "green_ratio_max": 0.679,
+    "min_setback_m": 8.0
+  },
+  "compliance": [
+    {
+      "id": "max_height",
+      "label": "Max building height (parapet)",
+      "metric": "height_top_of_parapet_m",
+      "max": 22,
+      "source": "placeholder",
+      "value": 21.9,
+      "limit": "≤ 22",
+      "status": "PASS"
+    },
+    {
+      "id": "max_storeys",
+      "label": "Max storeys above ground",
+      "metric": "storeys_above_ground",
+      "max": 6,
+      "source": "placeholder",
+      "value": 6,
+      "limit": "≤ 6",
+      "status": "PASS"
+    },
+    {
+      "id": "built_up",
+      "label": "Max built-up ratio",
+      "metric": "built_up_ratio",
+      "max": 0.4,
+      "source": "placeholder",
+      "value": 0.321,
+      "limit": "≤ 0.4",
+      "status": "PASS"
+    },
+    {
+      "id": "far",
+      "label": "Max plot ratio (FAR)",
+      "metric": "plot_ratio_far",
+      "max": 2.0,
+      "source": "placeholder",
+      "value": 1.927,
+      "limit": "≤ 2.0",
+      "status": "PASS"
+    },
+    {
+      "id": "setback",
+      "label": "Min setback from site boundary",
+      "metric": "min_setback_m",
+      "min": 5,
+      "source": "placeholder",
+      "value": 8.0,
+      "limit": "≥ 5",
+      "status": "PASS"
+    },
+    {
+      "id": "green",
+      "label": "Min green area ratio",
+      "metric": "green_ratio_max",
+      "min": 0.35,
+      "source": "placeholder",
+      "value": 0.679,
+      "limit": "≥ 0.35",
+      "status": "PASS"
+    }
+  ]
+}

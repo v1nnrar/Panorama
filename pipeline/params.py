@@ -15,6 +15,8 @@ import yaml
 from shapely.geometry import Polygon
 from shapely.geometry.polygon import orient
 
+from .geom import facing_edges, offset_edges
+
 DEFAULTS = {
     "slab_thickness": 0.30,
     "exterior_wall": 0.35,
@@ -48,16 +50,32 @@ def _building(b: dict, scheme_defaults: dict) -> dict:
 
     storeys, z = [], float(b.get("ground_elevation", 0.0))
     prefix = b.get("id", "")
+    n_total = sum(int(g.get("count", 1)) for g in groups)
+    base_fp = ccw(b["footprint"])
+    setbacks = b.get("setbacks", [])
     for s in groups:
         n = int(s.get("count", 1))
         for i in range(n):
+            idx = len(storeys) + 1
+            fp = ccw(s.get("footprint", b["footprint"]))
+            if setbacks and "footprint" not in s:
+                dist = [0.0] * len(base_fp)
+                for r in setbacks:
+                    lo, hi = r.get("from", 1), r.get("to", n_total)
+                    if not lo <= idx <= hi:
+                        continue
+                    step = r["distance"] if "distance" in r else r["per_storey"] * (idx - lo + 1)
+                    for e in facing_edges(base_fp, r.get("facing")):
+                        dist[e] += step
+                fp = offset_edges(base_fp, dist)
             label = s["name"] if n == 1 else f"{s['name']}{i + s.get('start', 1)}"
             storeys.append({
                 "name": f"{prefix}-{label}" if prefix else label,
                 "elevation": round(z, 4),
                 "height": float(s["height"]),
                 "use": s.get("use", b.get("use", "")),
-                "footprint": ccw(s.get("footprint", b["footprint"])),
+                "n": idx,
+                "footprint": ccw(fp),
                 "windows": None if s.get("windows", b.get("windows")) is False
                 else _merge(d["windows"], s.get("windows") if isinstance(s.get("windows"), dict) else None),
                 "rooms": s.get("rooms"),
@@ -74,6 +92,9 @@ def _building(b: dict, scheme_defaults: dict) -> dict:
         "top_of_slab": round(z, 4),
         "target_height": b.get("height"),
         "notes": b.get("notes", ""),
+        "facade": b.get("facade", []),
+        "material": b.get("material", "Render white"),
+        "below_ground": float(b.get("ground_elevation", 0.0)) < 0,
     }
 
 
@@ -88,8 +109,13 @@ def load_site(site: dict, base: Path) -> dict:
     context = site.get("context")
     if context:
         context = str((cbase / context).resolve())
+    glb = site.get("context_glb")
+    if glb:
+        glb = str((cbase / glb).resolve())
     return {"boundary": boundary, "parcels": parcels, "setback": site.get("setback"), "context": context,
-            "origin": site.get("origin")}
+            "context_glb": glb, "context_exclude": site.get("context_exclude", []),
+            "trees": str((cbase / site["trees"]).resolve()) if site.get("trees") else None,
+            "site_park": site.get("site_park"), "origin": site.get("origin")}
 
 
 def load(path: str | Path) -> dict:
@@ -106,5 +132,6 @@ def load(path: str | Path) -> dict:
         "site": site,
         "buildings": buildings,
         "materials": raw.get("materials", {}),
+        "landscape": raw.get("landscape", {}),
         "render": raw.get("render", {}),
     }

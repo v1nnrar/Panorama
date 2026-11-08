@@ -1,8 +1,8 @@
-# EXISTING SCHEME — client's current Panorama Pankrác design, rebuilt from the official renders.
+# EXISTING SCHEME — client's current Panorama Pankrác design, rebuilt from the official renders (v1, full detail).
 # Footprints: PSG website v3 fit (00_site/psg_panorama_blocks_v3.json) — ESTIMATED from renders.
 # Storey counts: counted on the renders (03_existing/observations.md). Heights: PSG v3 estimates unless noted.
-# Building heights are parapet tops; typical storeys are scaled to hit them (params.py `height`).
-name: Panorama Pankrác — existing scheme (v0)
+# Facade / roof / landscape parameters: ESTIMATED from renders (render-000…006, top view).
+name: Panorama Pankrác — existing scheme (v1)
 output_dir: model
 site: {file: ../00_site/site.yaml}
 rules: ../02_regulations/rules.yaml
@@ -12,82 +12,228 @@ slab_thickness: 0.30
 roof: {parapet: 1.1}
 
 buildings:
+  # ---------------------------------------------------------------- A: diagrid tower (render-000, -005, -006, top view)
   - id: A
     name: Diagrid tower (T2)
     use: Residential / hotel tower
     footprint: [[-11.98, 13.74], [21.05, 19.8], [27.34, -14.89], [-5.35, -20.62]]
-    height: 88.2                       # PSG v3 estimate
-    notes: ESTIMATED 26 storeys = 2-level glazed podium + 24 tower floors (render-006 count ≈25)
+    height: 88.2                         # PSG v3 estimate (parapet)
+    notes: 26 storeys = 2 podium + 24 tower floors (render-006 ≈25); white steel diagrid, full balconies
     storeys:
-      - {name: P1, height: 5.0, use: Lobby, windows: {width: 3.0, height: 3.8, sill: 0.2, spacing: 3.4}}
-      - {name: P2, height: 4.0, use: Amenities, windows: {width: 3.0, height: 3.0, sill: 0.2, spacing: 3.4}}
+      - {name: P1, height: 5.0, use: Lobby}
+      - {name: P2, height: 4.0, use: Amenities}
       - {name: L, count: 24, start: 3, height: 3.2, use: Units}
+    facade:
+      - {type: curtain, glass: Glass, mullion: 1.6}
+      - {type: balcony, from: 3, depth: 1.7, railing_material: Glass dark}
+      - {type: diagrid, from: 2, offset: 1.9, bays: 5, storeys_per_module: 3, member: [0.45, 0.55], above_roof: 1.1, material: Steel white}
+    roof:
+      parapet: 1.1
+      parapet_material: Steel white
+      structures:                        # top view: central raised green square + 3 plant boxes
+        - {name: green box, dx: 0, dy: 0, w: 10, d: 10, h: 2.4, green: true, material: Render grey}
+        - {name: plant, dx: -9, dy: 11.5, w: 3.2, d: 3.2, h: 2.4}
+        - {name: plant, dx: -3, dy: 11.5, w: 3.2, d: 3.2, h: 2.4}
+        - {name: plant, dx: 9, dy: 11.5, w: 4.5, d: 3.2, h: 2.4}
+      pv: {azimuth: building, tilt: 10, row: 2.0, gap: 0.7}
 
+  - id: A0
+    name: Diagrid tower podium + courtyard link
+    use: Lobby / restaurant
+    footprint: [[48.0, -32.0], [0.89, -23.59], [31.99, -18.14], [24.27, 24.46], [-16.67, 16.95], [-8.54, -25.22], [-9.5, -31.0], [46.5, -41.0]]
+    notes: ESTIMATED glazed single-storey base with green roof and timber fascia (render-006, render-000 link)
+    storeys:
+      - {name: GF, height: 5.0, use: Lobby / restaurant}
+    facade:
+      - {type: curtain, glass: Glass dark, mullion: 2.4}
+    roof: {parapet: 0.6, parapet_material: Timber, green: true}
+
+  # ---------------------------------------------------------------- B: green tower on base (render-000, -002, -004)
   - id: B
     name: Green tower (E residential tower)
     use: Residential
     footprint: [[55.1, -16.66], [81.29, -11.74], [88.95, -48.07], [61.76, -53.62]]
-    height: 68.9                       # PSG v3 estimate
-    notes: ESTIMATED 22 storeys (render-004 ≈ 6 base + 17 tower floors)
+    height: 68.9                         # PSG v3 estimate
+    notes: 22 storeys; storeys 1–6 = timber-fin base widened 4 m to the west, 7–22 = tower with planted balconies
+    setbacks:
+      - {facing: W, distance: -4.0, from: 1, to: 6}
     storeys:
-      - {name: GF, height: 4.5, use: Retail / lobby, windows: {width: 3.0, height: 3.4, sill: 0.2, spacing: 3.6}}
+      - {name: GF, height: 4.5, use: Retail / lobby}
       - {name: L, count: 21, height: 3.0, use: Apartments}
+    facade:
+      - {type: curtain, from: 1, to: 1, glass: Glass dark}
+      - {type: curtain, from: 2, to: 6, glass: Glass, mullion: 1.5}
+      - {type: fins, from: 2, to: 6, spacing: 1.5, width: 0.28, depth: 0.35, material: Timber}
+      - {type: band, from: 2, to: 6, depth: 0.3, thickness: 0.3, material: Concrete white}
+      - {type: curtain, from: 7, glass: Glass, mullion: 1.5}
+      - {type: balcony, from: 7, depth: 1.6, planter: true, planter_material: Concrete white}
+      - {type: band, from: 7, every: 2, depth: 1.9, thickness: 0.5, material: Concrete white}
+      - {type: fins, from: 7, spacing: 0.9, width: 0.06, depth: 0.25, offset: 1.3, material: Aluminium white}
+    terrace_edge: {planter: true, railing: true}
+    roof:
+      parapet: 1.0
+      parapet_material: Concrete white
+      structures:
+        - {name: plant, dx: 4, dy: -3, w: 6, d: 4, h: 2.6}
+        - {name: plant, dx: -6, dy: 5, w: 3, d: 3, h: 2.6}
+      pv: {azimuth: building, tilt: 10, row: 2.0, gap: 1.0}
 
   - id: B2
     name: Terraced block (E)
     use: Residential
-    footprint: [[69.96, -75.24], [65.79, -52.87], [89.04, -48.54], [82.15, -11.58], [94.48, -9.264], [105.6, -68.59]]
-    height: 26.9                       # PSG v3 estimate
-    notes: ESTIMATED 8 storeys (render-004); terraces stepping not yet modelled
+    footprint: [[69.96, -75.24], [65.79, -52.87], [89.04, -48.54], [82.15, -11.58], [94.48, -9.26], [105.6, -68.59]]
+    height: 26.9                         # PSG v3 estimate (top terrace level)
+    notes: 8 storeys stepping back 1.0 m per floor to the south and east (render-004, render-002)
+    setbacks:
+      - {facing: [S, E], per_storey: 1.0, from: 2}
     storeys:
-      - {name: GF, height: 4.5, use: Retail, windows: {width: 3.0, height: 3.4, sill: 0.2, spacing: 3.6}}
+      - {name: GF, height: 4.5, use: Retail}
       - {name: L, count: 7, height: 3.0, use: Apartments}
+    facade:
+      - {type: curtain, from: 1, to: 1, glass: Glass dark}
+      - {type: curtain, from: 2, glass: Glass, mullion: 1.8}
+      - {type: fins, from: 2, spacing: 2.6, width: 0.32, depth: 0.32, material: Timber}
+      - {type: band, from: 2, depth: 0.25, thickness: 0.35, material: Concrete white}
+    terrace_edge: {planter: true, railing: true}
+    roof:
+      parapet: 0.9
+      parapet_material: Concrete white
+      green: true
+      pv: {azimuth: building, tilt: 12, row: 2.0, gap: 0.6}
 
   - id: B3
     name: Podium north (E)
     use: Residential
     footprint: [[58.9, -15.92], [56.34, -2.15], [88.94, 3.92], [91.44, -9.85]]
-    height: 19.2                       # PSG v3 estimate
-    notes: ESTIMATED 5 storeys
+    height: 19.2                         # PSG v3 estimate
+    notes: 5 storeys; base expression as B (timber fins)
     storeys:
-      - {name: GF, height: 4.5, use: Retail, windows: {width: 3.0, height: 3.4, sill: 0.2, spacing: 3.6}}
+      - {name: GF, height: 4.5, use: Retail}
       - {name: L, count: 4, height: 3.3, use: Apartments}
+    facade:
+      - {type: curtain, from: 1, to: 1, glass: Glass dark}
+      - {type: curtain, from: 2, glass: Glass, mullion: 1.5}
+      - {type: fins, from: 2, spacing: 1.5, width: 0.28, depth: 0.35, material: Timber}
+      - {type: band, from: 2, depth: 0.3, thickness: 0.3, material: Concrete white}
+    roof: {parapet: 0.9, parapet_material: Concrete white, green: true}
 
+  # ---------------------------------------------------------------- C: front block (render-000, -002, -005)
   - id: C1
     name: Front slab — west head (T5)
     use: Hotel / office
     footprint: [[-32.57, -39.21], [-11.26, -35.24], [-12.67, -59.62], [-28.08, -58.73]]
-    height: 33.9                       # PSG v3 estimate
-    notes: ESTIMATED 10 storeys (aerial ≈9 rows + GF; render-005 ≈10 + GF)
+    height: 33.9
+    notes: 10 storeys; double-height glazed GF, light grey fins + horizontal bands, green roof with rooftop units
     storeys:
-      - {name: GF, height: 5.0, use: Lobby, windows: {width: 3.2, height: 4.0, sill: 0.2, spacing: 3.6}}
+      - {name: GF, height: 5.0, use: Lobby}
       - {name: L, count: 9, height: 3.1, use: Rooms}
+    windows: {width: 1.4, height: 2.0, sill: 0.7, spacing: 2.7, edge_margin: 1.0}
+    material: Render light grey
+    facade:
+      - {type: curtain, from: 1, to: 1, glass: Glass dark, mullion: 3.0}
+      - {type: fins, from: 2, spacing: 2.7, width: 0.35, depth: 0.45, material: Aluminium white}
+      - {type: band, from: 2, depth: 0.45, thickness: 0.3, material: Aluminium white}
+    roof:
+      parapet: 1.0
+      parapet_material: Render grey
+      green: true
+      structures:                        # render-000: dark core box + rooftop units
+        - {name: core, dx: -2, dy: 3, w: 7, d: 6, h: 3.5, material: Render grey}
+        - {name: plant, dx: -7, dy: -3, w: 2.5, d: 2.5, h: 1.8, material: Aluminium}
+        - {name: plant, dx: -3, dy: -4, w: 2.5, d: 2.5, h: 1.8, material: Aluminium}
+        - {name: plant, dx: 2, dy: -4, w: 2.5, d: 2.5, h: 1.8, material: Aluminium}
+        - {name: plant, dx: 6, dy: -2, w: 2.5, d: 2.5, h: 1.8, material: Aluminium}
 
   - id: C2
     name: Front slab — wing (T5)
     use: Hotel / office
     footprint: [[-11.26, -35.24], [37.83, -48.86], [36.23, -62.45], [-12.67, -59.62]]
-    height: 33.9                       # renders: continuous cornice with C1 (PSG v3 had 25.1 m) — VERIFY with overlay
-    notes: ESTIMATED 10 storeys, same height as C1 per render-000 / render-005
+    height: 33.9                         # renders: continuous cornice with C1 (PSG v3 had 25.1 m) — VERIFY
+    notes: 10 storeys; top floor set back 4 m on the north (roof terraces, render-000)
+    setbacks:
+      - {facing: N, distance: 4.0, from: 10, to: 10}
     storeys:
-      - {name: GF, height: 5.0, use: Lobby / retail, windows: {width: 3.2, height: 4.0, sill: 0.2, spacing: 3.6}}
+      - {name: GF, height: 5.0, use: Lobby / retail}
       - {name: L, count: 9, height: 3.1, use: Rooms}
+    windows: {width: 1.4, height: 2.0, sill: 0.7, spacing: 2.7, edge_margin: 1.0}
+    material: Render light grey
+    facade:
+      - {type: curtain, from: 1, to: 1, glass: Glass dark, mullion: 3.0}
+      - {type: fins, from: 2, spacing: 2.7, width: 0.35, depth: 0.45, material: Aluminium white}
+      - {type: band, from: 2, depth: 0.45, thickness: 0.3, material: Aluminium white}
+    terrace_edge: {planter: true, railing: true}
+    roof: {parapet: 1.0, parapet_material: Render grey, green: true}
 
+  # ---------------------------------------------------------------- D: butterfly office (render-003, top view)
   - id: D
     name: Butterfly office (T1 bow-tie)
     use: Office
     footprint: [[-42.29, 42.65], [-7.31, 47.16], [27.42, 55.64], [31.58, 33.37], [-4.47, 31.91], [-38.05, 19.89]]
-    height: 34.0                       # PSG v3 estimate
-    notes: ESTIMATED 10 storeys (render-003); sawtooth PV roof not modelled
+    height: 34.0
+    notes: 10 storeys; white horizontal bands + ribbon glazing; sawtooth PV roof (top view)
     storeys:
-      - {name: GF, height: 4.5, use: Lobby, windows: {width: 3.0, height: 3.4, sill: 0.2, spacing: 3.0}}
-      - {name: L, count: 9, height: 3.3, use: Offices, windows: {width: 2.4, height: 2.2, sill: 0.6, spacing: 3.0}}
+      - {name: GF, height: 4.5, use: Lobby}
+      - {name: L, count: 9, height: 3.3, use: Offices}
+    facade:
+      - {type: curtain, glass: Glass, mullion: 1.35, spandrel: 1.0}
+      - {type: band, from: 2, depth: 0.7, thickness: 0.55, material: Aluminium white}
+    roof:
+      parapet: 1.2
+      parapet_material: Aluminium white
+      sawtooth: {azimuth: 180, tilt: 22, row: 3.6, gap: 0.3, material: PV}
+
+  # ---------------------------------------------------------------- E: existing corner office on 1133/12 (kept)
+  - id: E
+    name: Existing corner office (parcel 1133/12)
+    use: Office (existing, kept)
+    footprint: [[94.76, 12.3], [125.82, 18.02], [126.85, 12.26], [125.39, 12.02], [125.78, 10.41], [131.87, 11.17], [125.83, -4.35], [120.4, -5.47], [120.42, -6.96], [119.35, -7.83], [117.94, -7.24], [117.57, -5.99], [110.95, -6.87], [115.34, -31.18], [106.73, -53.17]]
+    height: 32.0                         # OSM / archiMap
+    notes: Existing building kept in the client scheme (render-002); dark glass, white frame, bronze crown
+    storeys:
+      - {name: GF, height: 4.5, use: Lobby}
+      - {name: L, count: 8, height: 3.3, use: Offices}
+    facade:
+      - {type: curtain, glass: Glass dark, mullion: 1.5, spandrel: 0.9}
+      - {type: fins, spacing: 6.0, width: 0.5, depth: 0.4, material: Aluminium white}
+      - {type: band, from: 2, depth: 0.35, thickness: 0.4, material: Aluminium white}
+    roof:
+      parapet: 1.6
+      parapet_material: Bronze
+      structures:
+        - {name: plant, dx: 0, dy: 0, w: 9, d: 5, h: 2.5, material: Aluminium}
+
+  # ---------------------------------------------------------------- U: underground parking (ASSUMED)
+  - id: U
+    name: Underground parking
+    use: Parking / technical
+    footprint: [[-49.78, 14.14], [-50.12, 11.75], [-49.3, 10.76], [-36.74, -55.39], [-37.61, -57.3], [53.85, -69.64], [33.28, 43.14], [-51.67, 24.54]]
+    ground_elevation: -7.0
+    notes: ASSUMED 2 basement levels under parcels 1051/3, 1090/2, 1051/16 (ramp + cars in top view) — VERIFY
+    windows: false
+    material: Concrete grey
+    storeys:
+      - {name: B, count: 2, height: 3.5, use: Parking}
+    roof: {parapet: 0, slab: false}
+
+landscape:
+  edge_paving: 1.5
+  building_paving: 3.0
+  paths:                                 # ESTIMATED from the top view
+    - [[40, -70], [47, -71], [52, 30], [45, 31]]
+    - [[-45, -20], [55, -36], [56, -31], [-44, -15]]
+  lawns:
+    - [[-51.0, 93.7], [18.2, 106.6], [27.3, 57.7], [-43.8, 44.5]]
+  courtyard_trees: {spacing: 12, height: [6, 11], seed: 7, clear: 5}
+  context_tree_radius: 450
 
 render:
-  samples: 48
+  samples: 32
   sun_azimuth: 200
   sun_altitude: 42
   cameras:
-    - {name: aerial_S_like_render000, location: [-40, -330, 245], target: [25, -5, 10], lens: 35}
+    - {name: aerial_S_like_render000, location: [-25, -250, 190], target: [30, -10, 25], lens: 35}
     - {name: street_SW_like_render005, location: [-62, -86, 1.7], target: [5, -45, 16], lens: 24}
     - {name: street_SE_like_render004, location: [112, -92, 1.7], target: [72, -35, 30], lens: 24}
+    - {name: dusk_diagrid_like_render006, location: [-36, -27, 1.7], target: [8, 0, 42], lens: 22}
+    - {name: park_N_like_render003, location: [-30, 100, 1.7], target: [-5, 40, 18], lens: 20}
+    - {name: top_view, location: [40, -10, 600], target: [40, -9.99, 0], lens: 35}

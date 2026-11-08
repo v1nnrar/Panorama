@@ -22,6 +22,7 @@ def main():
     ap.add_argument("--render", action="store_true")
     ap.add_argument("--engine", default="CYCLES", choices=["CYCLES", "WORKBENCH"])
     ap.add_argument("--no-blender", action="store_true", help="skip the Blender stage")
+    ap.add_argument("--only", nargs="*", help="render only these camera names")
     a = ap.parse_args()
 
     design = params.load(a.params)
@@ -43,7 +44,7 @@ def main():
 
     if not a.no_blender:
         from pipeline.blender_scene import build_scene
-        res = build_scene(str(ifc_path), out, design, do_render=a.render, engine=a.engine)
+        res = build_scene(str(ifc_path), out, design, do_render=a.render, engine=a.engine, only=a.only)
         print(f"Blender    -> {res['blend']}, {res['glb']}")
         for r in res["renders"]:
             print(f"Render     -> {r}")

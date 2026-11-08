@@ -43,21 +43,26 @@ parking implied (ramp/cars in the top view between A and C).
 - Large white building with three arched roof structures (north-east, rendered in white "massing" style).
 - Tall glass tower behind, shopping centre with long roof (north-west), panel housing blocks south of the street.
 
-## v0 model (03_existing/params.yaml)
+## v1 model (03_existing/params.yaml) — full detail
 
-| ID | PSG block | Storeys | Parapet height (m) | Note |
+| ID | Building | Storeys | Parapet (m) | Modelled |
 |---|---|---|---|---|
-| A | P_T2_diagrid_tower | 26 (2 podium + 24) | 88.2 | PSG height |
-| B | P_E_residential_tower | 22 | 68.9 | PSG height; tower-on-base stepping not yet modelled |
-| B2 | P_E_terraced_block | 8 | 26.9 | terraces not yet modelled |
-| B3 | P_E_podium_north | 5 | 19.2 | |
-| C1 | P_T5_office_head | 10 | 33.9 | |
-| C2 | P_T5_office_wing | 10 | 33.9 | **PSG had 25.1 m**; renders show one continuous cornice with C1 |
-| D | P_T1_bowtie_office | 10 | 34.0 | sawtooth PV roof not modelled |
-| E | — (OSM context) | 9 | 32.0 | existing corner office on parcel 1133/12, kept in the scheme |
+| A | Diagrid tower | 26 (2 podium + 24) | 88.2 | curtain wall, 1.7 m balconies, white steel diagrid (5 bays/face, 3-storey modules), PV + central green box + plant boxes |
+| A0 | Podium + courtyard link | 1 | ≈5.9 | dark glazing, green roof, timber fascia |
+| B | Green tower | 22 | 68.9 | storeys 1–6 timber-fin base widened 4 m west; 7–22 planted balconies, white bands every 2 floors, white fins; PV |
+| B2 | Terraced block | 8 | 26.9 | steps back 1 m/floor to S + E, planters + glass railings on terraces, timber fins, green roof + PV |
+| B3 | Podium north | 5 | 19.2 | timber fins, green roof |
+| C1 | Front block head | 10 | 33.9 | glazed GF, punched windows, light fins + bands, green roof, core + rooftop units |
+| C2 | Front block wing | 10 | 33.9 | as C1; top floor set back 4 m north with planted terrace; **PSG had 25.1 m** |
+| D | Butterfly office | 10 | 34.0 | curtain wall + spandrels, deep white bands, sawtooth PV roof |
+| E | Existing corner office (1133/12) | 9 | 32.0 | dark glass, white frame fins, bronze crown — existing, kept |
+| U | Underground parking | 2 below | — | **ASSUMED** 2 levels under 1051/3, 1090/2, 1051/16 |
 
-Next refinements: camera match to render-000/-004/-005 with 50 % overlays; tower-on-base for B; terrace steps
-for B2 and C roof setbacks; diagrid and balcony expression for A.
+Landscape: courtyard lawn with paths and trees, on-site park (PSG `sitePark`), street trees (PSG/OSM).
+Context: PSG website surroundings model (`00_site/context.glb`): streets, paths, parks, neighbours, towers.
+
+Still to verify / not modelled: exact camera match (overlays), interior layouts, the green balconies at
+D's joint, B tower's exact overhang over its base, parking ramp position, real floor heights.
 
 ## Open questions for the client / user
 1. ~~Which buildings are the client's scheme~~ → all coloured = hotel property (user, 8 Nov 2026). Which block(s) will be the **hotel** use?

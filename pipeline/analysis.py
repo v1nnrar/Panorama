@@ -41,10 +41,13 @@ def building_metrics(b: dict) -> dict:
 
 def metrics(design: dict) -> dict:
     per = [building_metrics(b) for b in design["buildings"]]
-    ground = unary_union([Polygon(b["storeys"][0]["footprint"]) for b in design["buildings"]])
+    ground = unary_union([Polygon(b["storeys"][0]["footprint"]) for b in design["buildings"]
+                          if not b.get("below_ground")])
     m = {
         "buildings": len(per),
         "storeys_above_ground": max(p["storeys"] for p in per),
+        "gfa_below_ground_m2": round(sum(Polygon(s["footprint"]).area for b in design["buildings"]
+                                         for s in b["storeys"] if s["elevation"] < 0), 1),
         "height_top_of_parapet_m": max(p["height_parapet_m"] for p in per),
         "footprint_area_m2": round(ground.area, 1),
         "gfa_m2": round(sum(p["gfa_m2"] for p in per), 1),

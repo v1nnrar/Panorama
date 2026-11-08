@@ -8,6 +8,7 @@ Source: `params.yaml`
 |---|---|
 | buildings | 1 |
 | storeys_above_ground | 6 |
+| gfa_below_ground_m2 | 0 |
 | height_top_of_parapet_m | 21.9 |
 | footprint_area_m2 | 1124.0 |
 | gfa_m2 | 6744.0 |

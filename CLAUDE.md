@@ -22,6 +22,36 @@ Build: `.venv/bin/python build.py <params.yaml> [--render] [--engine WORKBENCH] 
 Use `--engine WORKBENCH` for fast clay checks (needs Mesa EGL: `apt-get install -y libegl1 libgl1-mesa-dri`); Cycles (~30 s/camera) for presentation.
 Schemes use `buildings:` (list) and `site: {file: ../00_site/site.yaml}`.
 
+## Params schema (per building)
+```yaml
+- id: B                       # short id, prefixes storey names
+  footprint: [[x,y], ...]     # outer face of the facade, any orientation (made CCW)
+  height: 68.9                # optional: repeated storeys are scaled so the parapet top hits it
+  ground_elevation: -7.0      # optional, basements
+  storeys: [{name, height, count, use, windows: {...}|false}]
+  windows: {width, height, sill, spacing, edge_margin}   # punched windows in solid walls
+  material: Render white      # wall material (IfcMaterial name → Blender PALETTE)
+  setbacks:                   # per-storey footprint changes (terraces, overhangs)
+    - {facing: [S, E], per_storey: 1.0, from: 2}     # cumulative step back
+    - {facing: W, distance: -4.0, from: 1, to: 6}    # fixed (negative = outward)
+  terrace_edge: {planter: true, railing: true}       # on slab edges exposed by setbacks
+  facade:                     # rules apply to storeys from..to (1-based, inclusive), facing = compass list
+    - {type: curtain, glass: Glass, mullion: 1.5, spandrel: 1.0}   # replaces walls + windows
+    - {type: balcony, depth: 1.6, planter: true, railing: true}
+    - {type: band, depth: 0.5, thickness: 0.4, every: 2}           # slab-edge band
+    - {type: fins, spacing: 1.2, width: 0.1, depth: 0.4, offset: 0, material: Timber}
+    - {type: diagrid, offset: 1.9, bays: 5, storeys_per_module: 3, member: [w, d], above_roof: 1.1}
+  roof:
+    parapet: 1.1
+    slab: true
+    green: true
+    structures: [{name, dx, dy, w, d, h, green, material}]  # local frame: centroid + longest edge
+    pv: {azimuth: building|deg, tilt, row, gap, exclude_center: [w, d]}
+    sawtooth: {azimuth, tilt, row, gap}
+```
+Scheme level: `landscape: {paths, lawns, courtyard_trees, context_tree_radius}`, `render: {cameras, sun_*, samples}`.
+Site (`00_site/site.yaml`): parcels, `context_glb` (PSG surroundings), `context_exclude`, `trees`.
+
 ## Folders
 | Folder | Content |
 |---|---|

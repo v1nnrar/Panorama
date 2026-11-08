@@ -1,17 +1,18 @@
 {
   "metrics": {
-    "buildings": 7,
+    "buildings": 10,
     "storeys_above_ground": 26,
+    "gfa_below_ground_m2": 17194.0,
     "height_top_of_parapet_m": 88.2,
-    "footprint_area_m2": 6658.9,
-    "gfa_m2": 92623.8,
-    "net_floor_area_m2": 88293.8,
+    "footprint_area_m2": 9058.1,
+    "gfa_m2": 103239.5,
+    "net_floor_area_m2": 98225.6,
     "rooms": 0,
     "site_area_m2": 16462.7,
-    "built_up_ratio": 0.404,
-    "plot_ratio_far": 5.626,
-    "unbuilt_ratio": 0.597,
-    "footprint_outside_plot_m2": 29.4,
+    "built_up_ratio": 0.55,
+    "plot_ratio_far": 6.271,
+    "unbuilt_ratio": 0.454,
+    "footprint_outside_plot_m2": 65.4,
     "per_building": [
       {
         "id": "A",
@@ -26,15 +27,27 @@
         "rooms": 0
       },
       {
+        "id": "A0",
+        "name": "Diagrid tower podium + courtyard link",
+        "use": "Lobby / restaurant",
+        "storeys": 1,
+        "height_parapet_m": 5.9,
+        "target_height_m": null,
+        "footprint_m2": 2288.9,
+        "gfa_m2": 2288.9,
+        "nfa_m2": 2191.2,
+        "rooms": 0
+      },
+      {
         "id": "B",
         "name": "Green tower (E residential tower)",
         "use": "Residential",
         "storeys": 22,
         "height_parapet_m": 68.9,
         "target_height_m": 68.9,
-        "footprint_m2": 1015.5,
-        "gfa_m2": 22341.8,
-        "nfa_m2": 21358.7,
+        "footprint_m2": 1165.9,
+        "gfa_m2": 23243.9,
+        "nfa_m2": 22243.8,
         "rooms": 0
       },
       {
@@ -44,9 +57,9 @@
         "storeys": 8,
         "height_parapet_m": 26.9,
         "target_height_m": 26.9,
-        "footprint_m2": 1297.0,
-        "gfa_m2": 10376.1,
-        "nfa_m2": 9839.2,
+        "footprint_m2": 1297.1,
+        "gfa_m2": 7811.3,
+        "nfa_m2": 7313.6,
         "rooms": 0
       },
       {
@@ -81,8 +94,8 @@
         "height_parapet_m": 33.9,
         "target_height_m": 33.9,
         "footprint_m2": 942.5,
-        "gfa_m2": 9425.5,
-        "nfa_m2": 8947.3,
+        "gfa_m2": 9222.2,
+        "nfa_m2": 8747.0,
         "rooms": 0
       },
       {
@@ -95,6 +108,30 @@
         "footprint_m2": 1362.1,
         "gfa_m2": 13620.6,
         "nfa_m2": 12965.8,
+        "rooms": 0
+      },
+      {
+        "id": "E",
+        "name": "Existing corner office (parcel 1133/12)",
+        "use": "Office (existing, kept)",
+        "storeys": 9,
+        "height_parapet_m": 32.0,
+        "target_height_m": 32.0,
+        "footprint_m2": 1132.5,
+        "gfa_m2": 10192.8,
+        "nfa_m2": 9581.4,
+        "rooms": 0
+      },
+      {
+        "id": "U",
+        "name": "Underground parking",
+        "use": "Parking / technical",
+        "storeys": 0,
+        "height_parapet_m": 0.3,
+        "target_height_m": null,
+        "footprint_m2": 8597.0,
+        "gfa_m2": 0,
+        "nfa_m2": 0,
         "rooms": 0
       }
     ]

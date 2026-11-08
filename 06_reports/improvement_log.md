@@ -18,3 +18,16 @@ client's renders, higher is better).
   park **0.022 → 0.304**, mean **0.2464 → 0.3028**. IFC validation 0 errors; test block 6/6 pass.
 - Observation for A4: in our render the diagrid tower A shows above D's east wing, where the client image has
   open sky — A is either too tall, too far north-east, or D's east wing is too low in our model. Check in A4.
+
+## 2026-11-08 — iteration 2: A2 client aspect for all cameras + aerial render-000 fine-tune — KEPT
+- Set `resolution` of every matched camera to its client image's aspect (render-005 700×724, -004 622×742,
+  -006 543×871, -000 1280×905). Lenses kept: at the new aspect each street camera scored higher than with
+  1.3×/1.6× lenses (Workbench: SW 0.169→0.224, SE 0.142→0.255, diagrid 0.268→0.406). Fine-tuning those is A3.
+- Aerial (render-000): corner fit of towers A and B (roof corners, A base), which left depth vs lens ambiguous; resolved
+  with a Workbench search on the score itself (`camsearch`: ~9 s per render at 50 %, ~35 candidates). New camera:
+  location (−148.8, −453.3, 372.8), target (21.4, −11.3, 20), **lens 78 mm** (old: 35 mm from 250 m). The 50 % overlay lines up
+  towers A and B, block C, the street and the slab blocks in front.
+- Score, Cycles: mean **0.3028 → 0.3497** (aerial 0.292→0.359, SW 0.347→0.394, SE 0.289→0.351, diagrid 0.283→0.341,
+  park 0.304 unchanged). Workbench mean 0.169 → 0.260. IFC 0 errors; test block 6/6 pass. Params only, no geometry.
+- Observation for A4: with the aerial aligned, our tower A's roof sits clearly **above** the client's (about 2 storeys
+  at this scale), and in render-003 A shows above D where the client has sky, so A at 88.2 m is probably too tall.

@@ -1,10 +1,10 @@
 {
- "mean": 0.3028,
+ "mean": 0.3497,
  "per_camera": {
-  "aerial_S_like_render000": 0.2916,
-  "street_SW_like_render005": 0.3469,
-  "street_SE_like_render004": 0.2888,
-  "dusk_diagrid_like_render006": 0.283,
+  "aerial_S_like_render000": 0.3594,
+  "street_SW_like_render005": 0.3936,
+  "street_SE_like_render004": 0.3509,
+  "dusk_diagrid_like_render006": 0.3407,
   "park_N_like_render003": 0.3037
  }
 }

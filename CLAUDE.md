@@ -55,6 +55,7 @@ Site (`00_site/site.yaml`): parcels, `context_glb` (PSG surroundings), `context_
 ## Folders
 | Folder | Content |
 |---|---|
+| `00_site/survey/` | survey grid, ČÚZK orthophoto + cadastre sheets, control points, board registration — see its README |
 | `00_site/` | `site.yaml` (11 parcels, origin Milevská 7, x east / y north), `context.json` (neighbours), PSG v3 block fit — source: psg-website repo |
 | `01_brief/` | client brief, `programme.yaml` (room mix, area targets) |
 | `02_regulations/` | source documents + `rules.yaml` (machine-checkable limits, each with a source) |
@@ -65,7 +66,8 @@ Site (`00_site/site.yaml`): parcels, `context_glb` (PSG surroundings), `context_
 | `examples/test_block/` | pipeline test with PLACEHOLDER numbers — not project data |
 
 ## Conventions
-- Units: metres. Local site grid: x = east, y = north, z = 0 at ground floor finished level.
+- Units: metres. Local survey frame (00_site/survey/README.md): aeqd at Milevská 7, x = east, y = true north, z = 0 at GF. Grid axes: columns A… from x=−150, rows 1… from y=+200 (D5 = origin).
+- Plot = official ČÚZK parcels (WFS), 16,487 m². Convert to S-JTSK (EPSG:5514) with tools/site_survey.py helpers.
 - Footprints are polygons; the pipeline makes them CCW. Footprint = outer face of the exterior wall.
 - Every number taken from a document records its source (file + page/article) in a YAML comment.
   Every **assumed** number is marked `# ASSUMED: <reason>` so it can be replaced later.

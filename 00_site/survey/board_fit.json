@@ -1,0 +1,117 @@
+{
+ "scale_m_per_px": 0.40305568094834715,
+ "rotation_deg": 8.008197210475956,
+ "R": [
+  [
+   0.990248147346297,
+   -0.13931477551655091
+  ],
+  [
+   0.13931477551655091,
+   0.990248147346297
+  ]
+ ],
+ "t": [
+  -82.15762798329473,
+  99.27810645255855
+ ],
+ "rms_m": 2.439146101043535,
+ "control_points": [
+  {
+   "name": "3-wing building, W wing S end",
+   "px": [
+    316,
+    240
+   ],
+   "local": [
+    57,
+    20
+   ],
+   "residual_m": 1.31
+  },
+  {
+   "name": "3-wing building, M wing S end",
+   "px": [
+    386,
+    240
+   ],
+   "local": [
+    84,
+    26
+   ],
+   "residual_m": 1.62
+  },
+  {
+   "name": "3-wing building, E wing S end",
+   "px": [
+    456,
+    240
+   ],
+   "local": [
+    113,
+    31
+   ],
+   "residual_m": 1.93
+  },
+  {
+   "name": "E office NW corner",
+   "px": [
+    394,
+    263
+   ],
+   "local": [
+    93,
+    16
+   ],
+   "residual_m": 3.16
+  },
+  {
+   "name": "E office S tip",
+   "px": [
+    400,
+    420
+   ],
+   "local": [
+    100,
+    -48
+   ],
+   "residual_m": 2.37
+  },
+  {
+   "name": "drum N roof garden centre",
+   "px": [
+    28,
+    80
+   ],
+   "local": [
+    -68,
+    66
+   ],
+   "residual_m": 3.29
+  },
+  {
+   "name": "drum NE roof garden centre",
+   "px": [
+    12,
+    190
+   ],
+   "local": [
+    -67,
+    27
+   ],
+   "residual_m": 2.9
+  },
+  {
+   "name": "drum SE roof garden centre",
+   "px": [
+    25,
+    290
+   ],
+   "local": [
+    -54,
+    -14
+   ],
+   "residual_m": 2.17
+  }
+ ]
+}

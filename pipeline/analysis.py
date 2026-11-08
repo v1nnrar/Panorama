@@ -174,6 +174,32 @@ def _site_layers(msp, design):
                                dxfattribs={"layer": "SETBACK", "linetype": "DASHED"})
 
 
+def _survey_grid(doc, msp, bounds, minor=10, major=50, margin=30):
+    """Survey grid of the local frame (see 00_site/survey): 10 m lines, 50 m axes lettered W→E, numbered N→S.
+    Axis labels match tools/site_survey.py (columns from x = -150, rows from y = +200)."""
+    import string
+    for n, c in (("GRID_MINOR", 9), ("GRID_MAJOR", 2), ("GRID_TEXT", 2)):
+        if n not in doc.layers:
+            doc.layers.add(n, color=c)
+    x0, y0, x1, y1 = bounds
+    x0, y0 = (int(x0 - margin) // minor) * minor, (int(y0 - margin) // minor) * minor
+    x1, y1 = (int(x1 + margin) // minor + 1) * minor, (int(y1 + margin) // minor + 1) * minor
+    for x in range(x0, x1 + 1, minor):
+        msp.add_line((x, y0), (x, y1), dxfattribs={"layer": "GRID_MAJOR" if x % major == 0 else "GRID_MINOR"})
+        if x % major == 0:
+            lab = string.ascii_uppercase[(x + 150) // major]
+            for yy in (y0 - 6, y1 + 2):
+                _text(msp, lab, (x, yy + 2), 3.0)
+            _text(msp, f"x={x:+d}", (x + 6, y1 - 3), 1.2)
+    for y in range(y0, y1 + 1, minor):
+        msp.add_line((x0, y), (x1, y), dxfattribs={"layer": "GRID_MAJOR" if y % major == 0 else "GRID_MINOR"})
+        if y % major == 0:
+            lab = str((200 - y) // major + 1)
+            for xx in (x0 - 5, x1 + 5):
+                _text(msp, lab, (xx, y), 3.0)
+            _text(msp, f"y={y:+d}", (x0 + 6, y + 1.5), 1.2)
+
+
 def drawings(design, out_dir: Path):
     d_dir = out_dir / "drawings"
     d_dir.mkdir(parents=True, exist_ok=True)
@@ -188,7 +214,11 @@ def drawings(design, out_dir: Path):
             if Polygon(c["poly"]).distance(sp) < 120:
                 msp.add_lwpolyline(c["poly"], close=True, dxfattribs={"layer": "CONTEXT"})
     _site_layers(msp, design)
+    if sp is not None:
+        _survey_grid(doc, msp, sp.bounds)
     for b in design["buildings"]:
+        if b.get("below_ground"):
+            continue
         fp = b["storeys"][0]["footprint"]
         msp.add_lwpolyline(fp, close=True, dxfattribs={"layer": "BUILDING", "lineweight": 50})
         c = Polygon(fp).representative_point()

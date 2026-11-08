@@ -14,11 +14,12 @@ Source: `params.yaml`
 | gfa_m2 | 103239.5 |
 | net_floor_area_m2 | 98225.6 |
 | rooms | 0 |
-| site_area_m2 | 16462.7 |
-| built_up_ratio | 0.55 |
-| plot_ratio_far | 6.271 |
+| site_area_m2 | 16491.7 |
+| built_up_ratio | 0.549 |
+| plot_ratio_far | 6.26 |
 | unbuilt_ratio | 0.454 |
-| footprint_outside_plot_m2 | 65.4 |
+| footprint_outside_plot_m2 | 53.2 |
+| min_setback_m | 0.0 |
 
 ## Buildings
 

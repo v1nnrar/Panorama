@@ -2,8 +2,9 @@
 
 Source: `renders/Panorama-Pankrac-Official-Renders.pdf` (7 pages, images extracted as `render-000…006.jpg`)
 and `renders/site_top_view_photo.png` (photo of a printed top-view board).
-Status: **first pass, unscaled** — storey counts are counted from the renders; plan dimensions are
-pending a scale reference (site plan, OSM footprints, or client numbers).
+Status: **v0 model built** (`params.yaml` → `model/`). Plot and footprints come from the PSG website
+data (`00_site/`): the plot = all coloured area = 11 cadastral parcels, 16,463 m² (union; cadastre sum 16,474 m²,
+to verify at ČÚZK). Footprints = PSG v3 fit to these renders. Storey counts = counted below.
 
 ## Render inventory
 
@@ -42,9 +43,25 @@ parking implied (ramp/cars in the top view between A and C).
 - Large white building with three arched roof structures (north-east, rendered in white "massing" style).
 - Tall glass tower behind, shopping centre with long roof (north-west), panel housing blocks south of the street.
 
+## v0 model (03_existing/params.yaml)
+
+| ID | PSG block | Storeys | Parapet height (m) | Note |
+|---|---|---|---|---|
+| A | P_T2_diagrid_tower | 26 (2 podium + 24) | 88.2 | PSG height |
+| B | P_E_residential_tower | 22 | 68.9 | PSG height; tower-on-base stepping not yet modelled |
+| B2 | P_E_terraced_block | 8 | 26.9 | terraces not yet modelled |
+| B3 | P_E_podium_north | 5 | 19.2 | |
+| C1 | P_T5_office_head | 10 | 33.9 | |
+| C2 | P_T5_office_wing | 10 | 33.9 | **PSG had 25.1 m**; renders show one continuous cornice with C1 |
+| D | P_T1_bowtie_office | 10 | 34.0 | sawtooth PV roof not modelled |
+| E | — (OSM context) | 9 | 32.0 | existing corner office on parcel 1133/12, kept in the scheme |
+
+Next refinements: camera match to render-000/-004/-005 with 50 % overlays; tower-on-base for B; terrace steps
+for B2 and C roof setbacks; diagrid and balcony expression for A.
+
 ## Open questions for the client / user
-1. Which buildings are the client's scheme (A–E), and which one is the **hotel**?
-2. Site boundary / plot area, and any dimensions (tower plan size, floor-to-floor heights, total heights).
-3. North direction and street names (to place the site on the map).
+1. ~~Which buildings are the client's scheme~~ → all coloured = hotel property (user, 8 Nov 2026). Which block(s) will be the **hotel** use?
+2. ~~Site boundary~~ → from PSG data. Still useful: any real dimensions (tower plan size, floor-to-floor heights, total heights).
+3. ~~North / location~~ → Milevská 7, Praha 4; north = up in the top view.
 4. Is the white arched building (NE) existing, approved, or part of the scheme?
 5. Uses per building (hotel / residential / office / retail) and number of underground levels.

@@ -1,0 +1,93 @@
+# EXISTING SCHEME — client's current Panorama Pankrác design, rebuilt from the official renders.
+# Footprints: PSG website v3 fit (00_site/psg_panorama_blocks_v3.json) — ESTIMATED from renders.
+# Storey counts: counted on the renders (03_existing/observations.md). Heights: PSG v3 estimates unless noted.
+# Building heights are parapet tops; typical storeys are scaled to hit them (params.py `height`).
+name: Panorama Pankrác — existing scheme (v0)
+output_dir: model
+site: {file: ../00_site/site.yaml}
+rules: ../02_regulations/rules.yaml
+
+exterior_wall: 0.35
+slab_thickness: 0.30
+roof: {parapet: 1.1}
+
+buildings:
+  - id: A
+    name: Diagrid tower (T2)
+    use: Residential / hotel tower
+    footprint: [[-11.98, 13.74], [21.05, 19.8], [27.34, -14.89], [-5.35, -20.62]]
+    height: 88.2                       # PSG v3 estimate
+    notes: ESTIMATED 26 storeys = 2-level glazed podium + 24 tower floors (render-006 count ≈25)
+    storeys:
+      - {name: P1, height: 5.0, use: Lobby, windows: {width: 3.0, height: 3.8, sill: 0.2, spacing: 3.4}}
+      - {name: P2, height: 4.0, use: Amenities, windows: {width: 3.0, height: 3.0, sill: 0.2, spacing: 3.4}}
+      - {name: L, count: 24, start: 3, height: 3.2, use: Units}
+
+  - id: B
+    name: Green tower (E residential tower)
+    use: Residential
+    footprint: [[55.1, -16.66], [81.29, -11.74], [88.95, -48.07], [61.76, -53.62]]
+    height: 68.9                       # PSG v3 estimate
+    notes: ESTIMATED 22 storeys (render-004 ≈ 6 base + 17 tower floors)
+    storeys:
+      - {name: GF, height: 4.5, use: Retail / lobby, windows: {width: 3.0, height: 3.4, sill: 0.2, spacing: 3.6}}
+      - {name: L, count: 21, height: 3.0, use: Apartments}
+
+  - id: B2
+    name: Terraced block (E)
+    use: Residential
+    footprint: [[69.96, -75.24], [65.79, -52.87], [89.04, -48.54], [82.15, -11.58], [94.48, -9.264], [105.6, -68.59]]
+    height: 26.9                       # PSG v3 estimate
+    notes: ESTIMATED 8 storeys (render-004); terraces stepping not yet modelled
+    storeys:
+      - {name: GF, height: 4.5, use: Retail, windows: {width: 3.0, height: 3.4, sill: 0.2, spacing: 3.6}}
+      - {name: L, count: 7, height: 3.0, use: Apartments}
+
+  - id: B3
+    name: Podium north (E)
+    use: Residential
+    footprint: [[58.9, -15.92], [56.34, -2.15], [88.94, 3.92], [91.44, -9.85]]
+    height: 19.2                       # PSG v3 estimate
+    notes: ESTIMATED 5 storeys
+    storeys:
+      - {name: GF, height: 4.5, use: Retail, windows: {width: 3.0, height: 3.4, sill: 0.2, spacing: 3.6}}
+      - {name: L, count: 4, height: 3.3, use: Apartments}
+
+  - id: C1
+    name: Front slab — west head (T5)
+    use: Hotel / office
+    footprint: [[-32.57, -39.21], [-11.26, -35.24], [-12.67, -59.62], [-28.08, -58.73]]
+    height: 33.9                       # PSG v3 estimate
+    notes: ESTIMATED 10 storeys (aerial ≈9 rows + GF; render-005 ≈10 + GF)
+    storeys:
+      - {name: GF, height: 5.0, use: Lobby, windows: {width: 3.2, height: 4.0, sill: 0.2, spacing: 3.6}}
+      - {name: L, count: 9, height: 3.1, use: Rooms}
+
+  - id: C2
+    name: Front slab — wing (T5)
+    use: Hotel / office
+    footprint: [[-11.26, -35.24], [37.83, -48.86], [36.23, -62.45], [-12.67, -59.62]]
+    height: 33.9                       # renders: continuous cornice with C1 (PSG v3 had 25.1 m) — VERIFY with overlay
+    notes: ESTIMATED 10 storeys, same height as C1 per render-000 / render-005
+    storeys:
+      - {name: GF, height: 5.0, use: Lobby / retail, windows: {width: 3.2, height: 4.0, sill: 0.2, spacing: 3.6}}
+      - {name: L, count: 9, height: 3.1, use: Rooms}
+
+  - id: D
+    name: Butterfly office (T1 bow-tie)
+    use: Office
+    footprint: [[-42.29, 42.65], [-7.31, 47.16], [27.42, 55.64], [31.58, 33.37], [-4.47, 31.91], [-38.05, 19.89]]
+    height: 34.0                       # PSG v3 estimate
+    notes: ESTIMATED 10 storeys (render-003); sawtooth PV roof not modelled
+    storeys:
+      - {name: GF, height: 4.5, use: Lobby, windows: {width: 3.0, height: 3.4, sill: 0.2, spacing: 3.0}}
+      - {name: L, count: 9, height: 3.3, use: Offices, windows: {width: 2.4, height: 2.2, sill: 0.6, spacing: 3.0}}
+
+render:
+  samples: 48
+  sun_azimuth: 200
+  sun_altitude: 42
+  cameras:
+    - {name: aerial_S_like_render000, location: [-40, -330, 245], target: [25, -5, 10], lens: 35}
+    - {name: street_SW_like_render005, location: [-62, -86, 1.7], target: [5, -45, 16], lens: 24}
+    - {name: street_SE_like_render004, location: [112, -92, 1.7], target: [72, -35, 30], lens: 24}

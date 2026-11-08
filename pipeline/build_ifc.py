@@ -80,34 +80,30 @@ def _window_positions(L, w):
     return [start + i * spacing for i in range(n)]
 
 
-def build(design: dict) -> ifcopenshell.file:
-    f = API.project.create_file(version="IFC4")
-    project = API.root.create_entity(f, ifc_class="IfcProject", name=design["name"])
-    units = [API.unit.add_si_unit(f, unit_type=t) for t in ("LENGTHUNIT", "AREAUNIT", "VOLUMEUNIT")]
-    API.unit.assign_unit(f, units=units)
-    model = API.context.add_context(f, context_type="Model")
-    body = API.context.add_context(f, context_type="Model", context_identifier="Body",
-                                   target_view="MODEL_VIEW", parent=model)
+def _site_rep(f, ctx, rings):
+    items = []
+    for ring in rings:
+        pts = [f.createIfcCartesianPoint((float(x), float(y))) for x, y in ring]
+        profile = f.createIfcArbitraryClosedProfileDef("AREA", None, f.createIfcPolyline(pts + [pts[0]]))
+        pos = f.createIfcAxis2Placement3D(f.createIfcCartesianPoint((0.0, 0.0, -0.05)), None, None)
+        items.append(f.createIfcExtrudedAreaSolid(profile, pos, f.createIfcDirection((0.0, 0.0, 1.0)), 0.05))
+    return f.createIfcShapeRepresentation(ctx, "Body", "SweptSolid", items)
 
-    site = API.root.create_entity(f, ifc_class="IfcSite", name="Site")
-    building = API.root.create_entity(f, ifc_class="IfcBuilding", name=design["name"])
-    API.aggregate.assign_object(f, products=[site], relating_object=project)
+
+def _add_building(f, body, site, b):
+    building = API.root.create_entity(f, ifc_class="IfcBuilding", name=b["name"])
+    building.Description = b.get("use") or None
     API.aggregate.assign_object(f, products=[building], relating_object=site)
-    if design["site"]["boundary"]:
-        API.geometry.assign_representation(
-            f, product=site, representation=_extrusion(f, body, design["site"]["boundary"], 0.05, -0.05))
-        _place(f, site, 0.0)
-
-    t, slab = design["exterior_wall"], design["slab_thickness"]
-    storey_entities = []
-    for s in design["storeys"]:
+    API.pset.edit_pset(f, pset=API.pset.add_pset(f, product=building, name="Panorama_Building"),
+                       properties={"Id": b["id"], "Use": b["use"] or "", "Notes": b["notes"] or ""})
+    t, slab = b["exterior_wall"], b["slab_thickness"]
+    for s in b["storeys"]:
         st = API.root.create_entity(f, ifc_class="IfcBuildingStorey", name=s["name"])
         _place(f, st, s["elevation"])
         st.Elevation = s["elevation"]
         API.aggregate.assign_object(f, products=[st], relating_object=building)
         API.pset.edit_pset(f, pset=API.pset.add_pset(f, product=st, name="Panorama_Storey"),
                            properties={"Use": s["use"], "Height": s["height"]})
-        storey_entities.append(st)
         z, fp = s["elevation"], s["footprint"]
 
         _element(f, body, "IfcSlab", f"{s['name']} slab", fp, slab, z, container=st, predefined="FLOOR")
@@ -123,15 +119,15 @@ def build(design: dict) -> ifcopenshell.file:
         ring = inset_ring(fp, t)
         for i, a in enumerate(fp):
             j = (i + 1) % len(fp)
-            b = fp[j]
-            _, L, (nx, ny) = _wall_rect(a, b, t)
-            rect = [a, b, ring[j], ring[i]]
+            b_ = fp[j]
+            _, L, (nx, ny) = _wall_rect(a, b_, t)
+            rect = [a, b_, ring[j], ring[i]]
             wall = _element(f, body, "IfcWall", f"{s['name']} ext wall {i + 1}", rect, wall_h, z, z0=slab,
                             container=st, predefined="SOLIDWALL")
             w = s["windows"]
             if not w:
                 continue
-            ux, uy = (b[0] - a[0]) / L, (b[1] - a[1]) / L
+            ux, uy = (b_[0] - a[0]) / L, (b_[1] - a[1]) / L
             for k, d in enumerate(_window_positions(L, w)):
                 c0, c1 = d - w["width"] / 2, d + w["width"] / 2
                 p = lambda dd, off: (a[0] + ux * dd + nx * off, a[1] + uy * dd + ny * off)
@@ -145,20 +141,42 @@ def build(design: dict) -> ifcopenshell.file:
                 API.feature.add_filling(f, opening=opening, element=win)
 
     # Roof slab + parapet on top of the last storey
-    top = design["storeys"][-1]
-    roof_st = API.root.create_entity(f, ifc_class="IfcBuildingStorey", name="Roof")
-    _place(f, roof_st, design["top_of_slab"])
-    roof_st.Elevation = design["top_of_slab"]
+    top = b["storeys"][-1]
+    roof_st = API.root.create_entity(f, ifc_class="IfcBuildingStorey", name=f"{b['id']}-Roof")
+    _place(f, roof_st, b["top_of_slab"])
+    roof_st.Elevation = b["top_of_slab"]
     API.aggregate.assign_object(f, products=[roof_st], relating_object=building)
-    _element(f, body, "IfcRoof", "Roof slab", top["footprint"], slab, design["top_of_slab"], container=roof_st,
-             predefined="FLAT_ROOF")
-    par = design["roof"].get("parapet", 0)
+    _element(f, body, "IfcRoof", f"{b['id']} roof slab", top["footprint"], slab, b["top_of_slab"],
+             container=roof_st, predefined="FLAT_ROOF")
+    par = b["roof"].get("parapet", 0)
     if par:
         fp = top["footprint"]
         ring = inset_ring(fp, 0.25)
         for i, a in enumerate(fp):
             j = (i + 1) % len(fp)
-            rect = [a, fp[j], ring[j], ring[i]]
-            _element(f, body, "IfcWall", f"Parapet {i + 1}", rect, par, design["top_of_slab"], z0=slab,
-                     container=roof_st, predefined="PARAPET")
+            _element(f, body, "IfcWall", f"{b['id']} parapet {i + 1}", [a, fp[j], ring[j], ring[i]], par,
+                     b["top_of_slab"], z0=slab, container=roof_st, predefined="PARAPET")
+
+
+def build(design: dict) -> ifcopenshell.file:
+    f = API.project.create_file(version="IFC4")
+    project = API.root.create_entity(f, ifc_class="IfcProject", name=design["name"])
+    units = [API.unit.add_si_unit(f, unit_type=t) for t in ("LENGTHUNIT", "AREAUNIT", "VOLUMEUNIT")]
+    API.unit.assign_unit(f, units=units)
+    model = API.context.add_context(f, context_type="Model")
+    body = API.context.add_context(f, context_type="Model", context_identifier="Body",
+                                   target_view="MODEL_VIEW", parent=model)
+
+    site = API.root.create_entity(f, ifc_class="IfcSite", name="Site")
+    API.aggregate.assign_object(f, products=[site], relating_object=project)
+    sd = design["site"]
+    rings = [p["ring"] for p in sd["parcels"]] or ([sd["boundary"]] if sd["boundary"] else [])
+    if rings:
+        API.geometry.assign_representation(f, product=site, representation=_site_rep(f, body, rings))
+        _place(f, site, 0.0)
+    if sd["parcels"]:
+        API.pset.edit_pset(f, pset=API.pset.add_pset(f, product=site, name="Panorama_Site"),
+                           properties={"Parcels": ", ".join(p["no"] or "?" for p in sd["parcels"])})
+    for b in design["buildings"]:
+        _add_building(f, body, site, b)
     return f

@@ -1,7 +1,7 @@
 {
   "metrics": {
+    "buildings": 1,
     "storeys_above_ground": 6,
-    "height_top_of_roof_m": 20.8,
     "height_top_of_parapet_m": 21.9,
     "footprint_area_m2": 1124.0,
     "gfa_m2": 6744.0,
@@ -10,8 +10,23 @@
     "site_area_m2": 3500.0,
     "built_up_ratio": 0.321,
     "plot_ratio_far": 1.927,
-    "green_ratio_max": 0.679,
-    "min_setback_m": 8.0
+    "unbuilt_ratio": 0.679,
+    "footprint_outside_plot_m2": 0.0,
+    "min_setback_m": 8.0,
+    "per_building": [
+      {
+        "id": "B",
+        "name": "",
+        "use": "",
+        "storeys": 6,
+        "height_parapet_m": 21.9,
+        "target_height_m": null,
+        "footprint_m2": 1124.0,
+        "gfa_m2": 6744.0,
+        "nfa_m2": 6394.1,
+        "rooms": 140
+      }
+    ]
   },
   "compliance": [
     {
@@ -70,9 +85,9 @@
       "metric": "green_ratio_max",
       "min": 0.35,
       "source": "placeholder",
-      "value": 0.679,
+      "value": null,
       "limit": "≥ 0.35",
-      "status": "PASS"
+      "status": "N/A"
     }
   ]
 }

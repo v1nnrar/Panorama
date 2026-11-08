@@ -78,9 +78,37 @@ def import_ifc(ifc_path: str, overrides: dict | None = None):
     return collections
 
 
+def add_context(path: str | None, centre_xy=(0, 0), radius=350.0):
+    """Neighbouring buildings as plain grey extrusions (not part of the IFC)."""
+    if not path:
+        return
+    import json
+    data = json.loads(Path(path).read_text())
+    col = bpy.data.collections.new("Context")
+    bpy.context.scene.collection.children.link(col)
+    mat = _material("Context", (0.80, 0.80, 0.79, 1), 0.9, 0.0)
+    for i, c in enumerate(data["buildings"]):
+        poly = c["poly"][:-1] if c["poly"][0] == c["poly"][-1] else c["poly"]
+        cx = sum(p[0] for p in poly) / len(poly)
+        cy = sum(p[1] for p in poly) / len(poly)
+        if math.hypot(cx - centre_xy[0], cy - centre_xy[1]) > radius:
+            continue
+        z0, z1, n = c.get("z0", 0.0), c["h"], len(poly)
+        verts = [(x, y, z0) for x, y in poly] + [(x, y, z1) for x, y in poly]
+        faces = [tuple(range(n - 1, -1, -1)), tuple(range(n, 2 * n))]
+        faces += [(k, (k + 1) % n, n + (k + 1) % n, n + k) for k in range(n)]
+        mesh = bpy.data.meshes.new(f"ctx_{i}")
+        mesh.from_pydata(verts, [], faces)
+        mesh.validate()
+        obj = bpy.data.objects.new(c.get("name") or f"ctx_{i}", mesh)
+        obj["context"] = True
+        obj.data.materials.append(mat)
+        col.objects.link(obj)
+
+
 def _bbox():
-    pts = [o.matrix_world @ Vector(c) for o in bpy.data.objects if o.type == "MESH"
-           and o.get("ifc_class") not in ("IfcSite", "IfcSpace") for c in o.bound_box]
+    pts = [o.matrix_world @ Vector(c) for o in bpy.data.objects if o.type == "MESH" and not o.get("context")
+           and o.get("ifc_class") not in ("IfcSite", "IfcSpace", None) for c in o.bound_box]
     lo = Vector((min(p.x for p in pts), min(p.y for p in pts), min(p.z for p in pts)))
     hi = Vector((max(p.x for p in pts), max(p.y for p in pts), max(p.z for p in pts)))
     return lo, hi
@@ -92,7 +120,7 @@ def stage(render_cfg: dict | None = None):
     lo, hi = _bbox()
     centre, size = (lo + hi) / 2, (hi - lo).length
 
-    bpy.ops.mesh.primitive_plane_add(size=size * 8, location=(centre.x, centre.y, -0.06))
+    bpy.ops.mesh.primitive_plane_add(size=max(size * 8, 900), location=(centre.x, centre.y, -0.06))
     ground = bpy.context.active_object
     ground.name = "Ground"
     ground.data.materials.append(_material("Ground", (0.42, 0.44, 0.40, 1), 0.95, 0.0))
@@ -108,6 +136,7 @@ def stage(render_cfg: dict | None = None):
     world.use_nodes = True
     world.node_tree.nodes["Background"].inputs["Color"].default_value = (0.62, 0.74, 0.88, 1)
     world.node_tree.nodes["Background"].inputs["Strength"].default_value = 0.9
+    world.color = (0.62, 0.74, 0.88)  # Workbench background
     scene.world = world
 
     cams = cfg.get("cameras") or [{"name": "aerial_SW", "dir": [-1.0, -1.3, 0.8]},
@@ -115,12 +144,13 @@ def stage(render_cfg: dict | None = None):
     for c in cams:
         cam = bpy.data.objects.new(c["name"], bpy.data.cameras.new(c["name"]))
         cam.data.lens = c.get("lens", 35)
+        cam.data.clip_end = 5000
         if "location" in c:
             cam.location = Vector(c["location"])
         else:
             d = Vector(c["dir"]).normalized()
             cam.location = centre + d * size * c.get("distance", 1.6)
-        target = Vector(c.get("target", centre))
+        target = Vector(c["target"]) if "target" in c else centre
         cam.rotation_euler = (target - cam.location).to_track_quat("-Z", "Y").to_euler()
         scene.collection.objects.link(cam)
     scene.camera = bpy.data.objects[cams[0]["name"]]
@@ -139,6 +169,7 @@ def render(out_dir: Path, cameras, engine="CYCLES", samples=48, res=(1600, 1000)
         scene.display.shading.color_type = "MATERIAL"
         scene.display.shading.show_shadows = True
         scene.display.shading.show_cavity = True
+        scene.display.shading.background_type = "WORLD"
     scene.view_settings.view_transform = "AgX"
     scene.render.resolution_x, scene.render.resolution_y = res
     scene.render.image_settings.file_format = "PNG"
@@ -154,6 +185,7 @@ def render(out_dir: Path, cameras, engine="CYCLES", samples=48, res=(1600, 1000)
 def build_scene(ifc_path: str, out_dir: Path, design: dict, do_render=False, engine="CYCLES"):
     _reset()
     import_ifc(ifc_path, design.get("materials"))
+    add_context(design["site"].get("context"))
     cams = stage(design.get("render"))
     out_dir.mkdir(parents=True, exist_ok=True)
     blend = out_dir / "model.blend"

@@ -19,11 +19,13 @@ params YAML ──► pipeline/build_ifc.py ──► model.ifc
 ```
 
 Build: `.venv/bin/python build.py <params.yaml> [--render] [--engine WORKBENCH] [--rules <rules.yaml>]`
-Use `--engine WORKBENCH` for fast clay checks (seconds); Cycles (~30 s/camera) for presentation.
+Use `--engine WORKBENCH` for fast clay checks (needs Mesa EGL: `apt-get install -y libegl1 libgl1-mesa-dri`); Cycles (~30 s/camera) for presentation.
+Schemes use `buildings:` (list) and `site: {file: ../00_site/site.yaml}`.
 
 ## Folders
 | Folder | Content |
 |---|---|
+| `00_site/` | `site.yaml` (11 parcels, origin Milevská 7, x east / y north), `context.json` (neighbours), PSG v3 block fit — source: psg-website repo |
 | `01_brief/` | client brief, `programme.yaml` (room mix, area targets) |
 | `02_regulations/` | source documents + `rules.yaml` (machine-checkable limits, each with a source) |
 | `03_existing/` | `renders/` (client images), `params.yaml`, `model/` outputs, `overlays/` |

@@ -157,6 +157,28 @@ details[open] .chev::after { transform: rotate(0deg); }
 .links a { font: 500 13px/1 var(--body); color: var(--accent); text-decoration: none; padding: 10px 14px; border: 1px solid var(--accent); border-radius: 999px; background: var(--sheet); }
 .links a:hover { background: var(--accent); color: #fff; }
 
+/* Question cards */
+.q { background: var(--sheet); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px 14px; display: grid; gap: 10px; min-width: 0; }
+.q.sub { background: var(--paper); }
+.q.key { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+.q-label { margin: 0; font: 600 15px/1.4 var(--body); color: var(--ink); max-width: 66ch; }
+.q textarea, .q input[type="text"] { width: 100%; box-sizing: border-box; font: 400 15px/1.5 var(--body); color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 9px 12px; resize: vertical; }
+.q textarea:focus, .q input[type="text"]:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.q input.cell { padding: 6px 8px; font: 500 14px var(--mono); max-width: 9em; }
+.more { gap: 10px; }
+.fu { display: grid; gap: 10px; }
+.fu h4 { margin: 6px 0 0; font: 700 13px/1.3 var(--display); letter-spacing: .02em; text-transform: uppercase; color: var(--accent); }
+.guess { margin: 0; color: var(--muted); font-size: 14px; }
+.copybar { margin-top: 44px; padding: 18px; border: 1px solid var(--line); border-top: 2px solid var(--accent); border-radius: 6px; background: var(--sheet); display: grid; gap: 12px; justify-items: start; }
+.copybar p { margin: 0; color: var(--muted); }
+.copybar textarea { width: 100%; box-sizing: border-box; font: 13px/1.5 var(--mono); border: 1px solid var(--line); border-radius: 6px; padding: 10px; background: #fff; color: var(--ink); }
+button.primary { background: var(--accent); color: #fff; border-radius: 999px; padding: 11px 18px; font-weight: 600; }
+button.primary:hover { filter: brightness(1.08); }
+
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+.seg .dot { width: 8px; height: 8px; margin-right: 4px; vertical-align: 1px; }
+.seg button[aria-pressed="true"] .dot { background: #fff; }
+
 footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 
 @media (max-width: 560px) {
@@ -176,7 +198,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     <div class="toolbar">
       <div class="seg" role="group" aria-label="Filter questions">
         <button id="f-all" aria-pressed="true" data-filter="all">All <span id="c-all"></span></button>
-        <button id="f-start" aria-pressed="false" data-filter="start">Needed to start <span id="c-start"></span></button>
+        <button id="f-start" aria-pressed="false" data-filter="start"><span class="dot" aria-hidden="true"></span> Most important <span id="c-start"></span></button>
       </div>
       <button id="toggle-all" class="ghost">Expand all</button>
     </div>
@@ -185,125 +207,381 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
   <section>
     <div class="sec-head"><span class="sec-no">1</span><h2>What you want to build</h2></div>
     <div class="list">
-      <details data-start open><summary><span class="qno">1.1</span><h3>The existing hotel: demolish or refurbish? And is the new building a hotel or residential?</h3><span class="chip">Start here</span><span class="chev"></span></summary>
+      <details data-start open><summary><span class="qno">1.1</span><h3>The existing hotel: demolish or refurbish? And is the new building a hotel or residential?</h3><span class="dot" title="Most important" aria-label="Most important"></span><span class="chev"></span></summary>
         <div class="more">
           <fieldset class="choice">
             <legend><span class="tag">A</span>The existing hotel building</legend>
-            <div class="opts">
-              <label><input type="radio" name="existing" id="ex-demolish" value="demolish"><span>Demolish</span></label>
-              <label><input type="radio" name="existing" id="ex-refurbish" value="refurbish"><span>Refurbish</span></label>
-              <label><input type="radio" name="existing" id="ex-open" value="open"><span>Not decided</span></label>
+            <div class="opts" data-q="The existing hotel building">
+              <label><input type="radio" class="ans" name="existing" id="ex-demolish" value="Demolish"><span>Demolish</span></label>
+              <label><input type="radio" class="ans" name="existing" id="ex-refurbish" value="Refurbish"><span>Refurbish</span></label>
+              <label><input type="radio" class="ans" name="existing" id="ex-open" value="Not decided"><span>Not decided</span></label>
             </div>
-            <ul class="pts" data-group="existing" data-show="demolish" hidden>
-              <li>Which buildings go? Only the hotel, or others too?</li>
-              <li>Is there a demolition permit? When does the hotel close?</li>
-              <li>Is there an asbestos survey?</li>
-              <li>Should we reuse the existing basement?</li>
-            </ul>
-            <ul class="pts" data-group="existing" data-show="refurbish" hidden>
-              <li>Old drawings of the building, any format</li>
-              <li>A survey of its condition</li>
-              <li>How much changes: facade, interiors, extra floors?</li>
-              <li>Does the hotel stay open during works?</li>
-              <li>Is the building heritage protected?</li>
-            </ul>
-            <ul class="pts" data-group="existing" data-show="open" hidden>
-              <li>We can compare both options, with costs</li>
-              <li>What matters most: budget, time or size?</li>
-            </ul>
+            <div class="fu" data-group="existing" data-show="Demolish" hidden>
+<div class="q sub" data-q="Which buildings go?">
+  <p class="q-label" id="q-1-l">Which buildings go?</p>
+  <div class="opts" role="group" aria-labelledby="q-1-l">
+    <label><input type="radio" class="ans" name="q-1" id="q-1-0" value="Only the hotel"><span>Only the hotel</span></label>
+    <label><input type="radio" class="ans" name="q-1" id="q-1-1" value="The hotel and others"><span>The hotel and others</span></label>
+    <label><input type="radio" class="ans" name="q-1" id="q-1-2" value="Not sure"><span>Not sure</span></label>
+  </div>
+</div>
+<div class="q sub" data-q="Is there a demolition permit?">
+  <p class="q-label" id="q-2-l">Is there a demolition permit?</p>
+  <div class="opts" role="group" aria-labelledby="q-2-l">
+    <label><input type="radio" class="ans" name="q-2" id="q-2-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-2" id="q-2-1" value="Applied for"><span>Applied for</span></label>
+    <label><input type="radio" class="ans" name="q-2" id="q-2-2" value="No"><span>No</span></label>
+  </div>
+</div>
+<div class="q sub" data-q="When does the hotel close?">
+  <p class="q-label" id="q-3-l">When does the hotel close?</p>
+  <input type="text" class="ans" id="q-3" aria-labelledby="q-3-l" placeholder="Your answer">
+</div>
+<div class="q sub" data-q="Is there an asbestos survey?">
+  <p class="q-label" id="q-4-l">Is there an asbestos survey?</p>
+  <div class="opts" role="group" aria-labelledby="q-4-l">
+    <label><input type="radio" class="ans" name="q-4" id="q-4-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-4" id="q-4-1" value="No"><span>No</span></label>
+    <label><input type="radio" class="ans" name="q-4" id="q-4-2" value="Not sure"><span>Not sure</span></label>
+  </div>
+</div>
+<div class="q sub" data-q="Should we reuse the existing basement?">
+  <p class="q-label" id="q-5-l">Should we reuse the existing basement?</p>
+  <div class="opts" role="group" aria-labelledby="q-5-l">
+    <label><input type="radio" class="ans" name="q-5" id="q-5-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-5" id="q-5-1" value="No"><span>No</span></label>
+    <label><input type="radio" class="ans" name="q-5" id="q-5-2" value="Your call"><span>Your call</span></label>
+  </div>
+</div>
+            </div>
+            <div class="fu" data-group="existing" data-show="Refurbish" hidden>
+<div class="q sub" data-q="Do you have old drawings of the building?">
+  <p class="q-label" id="q-6-l">Do you have old drawings of the building?</p>
+  <div class="opts" role="group" aria-labelledby="q-6-l">
+    <label><input type="radio" class="ans" name="q-6" id="q-6-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-6" id="q-6-1" value="No"><span>No</span></label>
+  </div>
+</div>
+<div class="q sub" data-q="Is there a survey of its condition?">
+  <p class="q-label" id="q-7-l">Is there a survey of its condition?</p>
+  <div class="opts" role="group" aria-labelledby="q-7-l">
+    <label><input type="radio" class="ans" name="q-7" id="q-7-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-7" id="q-7-1" value="No"><span>No</span></label>
+  </div>
+</div>
+<div class="q sub" data-q="What changes?">
+  <p class="q-label" id="q-8-l">What changes?</p>
+  <div class="opts" role="group" aria-labelledby="q-8-l">
+    <label><input type="checkbox" class="ans" name="q-8" id="q-8-0" value="Facade"><span>Facade</span></label>
+    <label><input type="checkbox" class="ans" name="q-8" id="q-8-1" value="Interiors"><span>Interiors</span></label>
+    <label><input type="checkbox" class="ans" name="q-8" id="q-8-2" value="Building services"><span>Building services</span></label>
+    <label><input type="checkbox" class="ans" name="q-8" id="q-8-3" value="Extra floors"><span>Extra floors</span></label>
+  </div>
+</div>
+<div class="q sub" data-q="Does the hotel stay open during works?">
+  <p class="q-label" id="q-9-l">Does the hotel stay open during works?</p>
+  <div class="opts" role="group" aria-labelledby="q-9-l">
+    <label><input type="radio" class="ans" name="q-9" id="q-9-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-9" id="q-9-1" value="Partly"><span>Partly</span></label>
+    <label><input type="radio" class="ans" name="q-9" id="q-9-2" value="No"><span>No</span></label>
+  </div>
+</div>
+<div class="q sub" data-q="Is the building heritage protected?">
+  <p class="q-label" id="q-10-l">Is the building heritage protected?</p>
+  <div class="opts" role="group" aria-labelledby="q-10-l">
+    <label><input type="radio" class="ans" name="q-10" id="q-10-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-10" id="q-10-1" value="No"><span>No</span></label>
+    <label><input type="radio" class="ans" name="q-10" id="q-10-2" value="Not sure"><span>Not sure</span></label>
+  </div>
+</div>
+            </div>
+            <div class="fu" data-group="existing" data-show="Not decided" hidden>
+<p class="guess">We can compare both options, with costs.</p>
+<div class="q sub" data-q="What matters most?">
+  <p class="q-label" id="q-11-l">What matters most?</p>
+  <div class="opts" role="group" aria-labelledby="q-11-l">
+    <label><input type="checkbox" class="ans" name="q-11" id="q-11-0" value="Budget"><span>Budget</span></label>
+    <label><input type="checkbox" class="ans" name="q-11" id="q-11-1" value="Time"><span>Time</span></label>
+    <label><input type="checkbox" class="ans" name="q-11" id="q-11-2" value="Size"><span>Size</span></label>
+  </div>
+</div>
+            </div>
           </fieldset>
 
           <fieldset class="choice">
             <legend><span class="tag">B</span>The new building is…</legend>
-            <div class="opts">
-              <label><input type="radio" name="newuse" id="use-hotel" value="hotel"><span>Hotel</span></label>
-              <label><input type="radio" name="newuse" id="use-res" value="residential"><span>Residential</span></label>
-              <label><input type="radio" name="newuse" id="use-both" value="both"><span>Both</span></label>
+            <div class="opts" data-q="The new building is">
+              <label><input type="radio" class="ans" name="newuse" id="use-hotel" value="Hotel"><span>Hotel</span></label>
+              <label><input type="radio" class="ans" name="newuse" id="use-res" value="Residential"><span>Residential</span></label>
+              <label><input type="radio" class="ans" name="newuse" id="use-both" value="Both"><span>Both</span></label>
             </div>
-            <div class="fu-block" data-group="newuse" data-show="both" hidden>
+            <div class="fu" data-group="newuse" data-show="Both" hidden>
               <h4>For a mix</h4>
-              <ul class="pts">
-                <li>Which parts are hotel, which are apartments?</li>
-                <li>Separate or shared entrances and parking?</li>
-              </ul>
+<div class="q sub" data-q="Which parts are hotel, which are apartments?">
+  <p class="q-label" id="q-12-l">Which parts are hotel, which are apartments?</p>
+  <textarea class="ans" id="q-12" rows="2" aria-labelledby="q-12-l" placeholder="Your answer"></textarea>
+</div>
+<div class="q sub" data-q="Entrances and parking">
+  <p class="q-label" id="q-13-l">Entrances and parking</p>
+  <div class="opts" role="group" aria-labelledby="q-13-l">
+    <label><input type="radio" class="ans" name="q-13" id="q-13-0" value="Separate"><span>Separate</span></label>
+    <label><input type="radio" class="ans" name="q-13" id="q-13-1" value="Shared"><span>Shared</span></label>
+    <label><input type="radio" class="ans" name="q-13" id="q-13-2" value="Not sure"><span>Not sure</span></label>
+  </div>
+</div>
             </div>
-            <div class="fu-block" data-group="newuse" data-show="hotel both" hidden>
+            <div class="fu" data-group="newuse" data-show="Hotel|Both" hidden>
               <h4>Hotel</h4>
-              <ul class="pts">
-                <li>Which buildings or floors are hotel?</li>
-                <li>How many stars: 3★, 4★ or 5★?</li>
-                <li>Run by a chain (e.g. Marriott, Accor) or by you?</li>
-                <li class="key"><strong>How many rooms, and how big? How many suites and penthouse suites?</strong></li>
-                <li>Restaurant, bar, meeting rooms, spa, gym, rooftop bar?</li>
-                <li>Kitchen, laundry, staff areas?</li>
-              </ul>
+<div class="q sub" data-q="Which buildings or floors are hotel?">
+  <p class="q-label" id="q-14-l">Which buildings or floors are hotel?</p>
+  <textarea class="ans" id="q-14" rows="2" aria-labelledby="q-14-l" placeholder="Your answer"></textarea>
+</div>
+<div class="q sub" data-q="How many stars?">
+  <p class="q-label" id="q-15-l">How many stars?</p>
+  <div class="opts" role="group" aria-labelledby="q-15-l">
+    <label><input type="radio" class="ans" name="q-15" id="q-15-0" value="3★"><span>3★</span></label>
+    <label><input type="radio" class="ans" name="q-15" id="q-15-1" value="4★"><span>4★</span></label>
+    <label><input type="radio" class="ans" name="q-15" id="q-15-2" value="5★"><span>5★</span></label>
+  </div>
+</div>
+<div class="q sub" data-q="Who runs it?">
+  <p class="q-label" id="q-16-l">Who runs it?</p>
+  <div class="opts" role="group" aria-labelledby="q-16-l">
+    <label><input type="radio" class="ans" name="q-16" id="q-16-0" value="A chain (e.g. Marriott, Accor)"><span>A chain (e.g. Marriott, Accor)</span></label>
+    <label><input type="radio" class="ans" name="q-16" id="q-16-1" value="A local operator"><span>A local operator</span></label>
+    <label><input type="radio" class="ans" name="q-16" id="q-16-2" value="You"><span>You</span></label>
+    <label><input type="radio" class="ans" name="q-16" id="q-16-3" value="Not decided"><span>Not decided</span></label>
+  </div>
+</div>
+<div class="q key sub" data-q="How many rooms, and how big? How many suites and penthouse suites?">
+  <p class="q-label" id="q-17-l">How many rooms, and how big? How many suites and penthouse suites?</p>
+  <textarea class="ans" id="q-17" rows="2" aria-labelledby="q-17-l" placeholder="Your answer"></textarea>
+</div>
+<div class="q sub" data-q="Guest facilities">
+  <p class="q-label" id="q-18-l">Guest facilities</p>
+  <div class="opts" role="group" aria-labelledby="q-18-l">
+    <label><input type="checkbox" class="ans" name="q-18" id="q-18-0" value="Restaurant"><span>Restaurant</span></label>
+    <label><input type="checkbox" class="ans" name="q-18" id="q-18-1" value="Bar"><span>Bar</span></label>
+    <label><input type="checkbox" class="ans" name="q-18" id="q-18-2" value="Meeting rooms"><span>Meeting rooms</span></label>
+    <label><input type="checkbox" class="ans" name="q-18" id="q-18-3" value="Spa"><span>Spa</span></label>
+    <label><input type="checkbox" class="ans" name="q-18" id="q-18-4" value="Gym"><span>Gym</span></label>
+    <label><input type="checkbox" class="ans" name="q-18" id="q-18-5" value="Rooftop bar"><span>Rooftop bar</span></label>
+  </div>
+</div>
+<div class="q sub" data-q="Back of house">
+  <p class="q-label" id="q-19-l">Back of house</p>
+  <div class="opts" role="group" aria-labelledby="q-19-l">
+    <label><input type="checkbox" class="ans" name="q-19" id="q-19-0" value="Kitchen"><span>Kitchen</span></label>
+    <label><input type="checkbox" class="ans" name="q-19" id="q-19-1" value="Laundry"><span>Laundry</span></label>
+    <label><input type="checkbox" class="ans" name="q-19" id="q-19-2" value="Staff areas"><span>Staff areas</span></label>
+  </div>
+</div>
             </div>
-            <div class="fu-block" data-group="newuse" data-show="residential both" hidden>
+            <div class="fu" data-group="newuse" data-show="Residential|Both" hidden>
               <h4>Residential</h4>
-              <ul class="pts">
-                <li>Sell or rent the apartments?</li>
-                <li class="key"><strong>How many apartments of each size?</strong>
-                  <div class="tbl"><table>
-                    <thead><tr><th>Layout</th><th>Typical size</th><th>How many?</th><th>Your size</th></tr></thead>
-                    <tbody>
-                      <tr><td>1+kk</td><td class="n">30–40 m²</td><td>?</td><td>?</td></tr>
-                      <tr><td>2+kk</td><td class="n">50–65 m²</td><td>?</td><td>?</td></tr>
-                      <tr><td>3+kk</td><td class="n">75–95 m²</td><td>?</td><td>?</td></tr>
-                      <tr><td>4+kk</td><td class="n">100–130 m²</td><td>?</td><td>?</td></tr>
-                      <tr class="ph"><td>Penthouse</td><td class="n">150 m² +</td><td>?</td><td>?</td></tr>
-                    </tbody></table></div>
-                  <span class="note">Typical sizes are for orientation only.</span></li>
-                <li>Standard, premium or luxury?</li>
-                <li>A balcony or terrace for every apartment?</li>
-                <li>Gym, concierge, storage, bike room?</li>
-                <li>Shops on the ground floor?</li>
-              </ul>
+<div class="q sub" data-q="Sell or rent the apartments?">
+  <p class="q-label" id="q-20-l">Sell or rent the apartments?</p>
+  <div class="opts" role="group" aria-labelledby="q-20-l">
+    <label><input type="radio" class="ans" name="q-20" id="q-20-0" value="Sell"><span>Sell</span></label>
+    <label><input type="radio" class="ans" name="q-20" id="q-20-1" value="Rent"><span>Rent</span></label>
+    <label><input type="radio" class="ans" name="q-20" id="q-20-2" value="Both"><span>Both</span></label>
+  </div>
+</div>
+<div class="q key sub" data-q="How many apartments of each size?" data-table="1">
+  <p class="q-label">How many apartments of each size?</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Layout</th><th>Typical size</th><th>How many?</th><th>Your size (m²)</th></tr></thead>
+    <tbody>
+      <tr data-row="1+kk"><td>1+kk</td><td class="n">30–40 m²</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-0" aria-label="1+kk: how many"></td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-s-0" aria-label="1+kk: your size"></td></tr>
+      <tr data-row="2+kk"><td>2+kk</td><td class="n">50–65 m²</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-1" aria-label="2+kk: how many"></td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-s-1" aria-label="2+kk: your size"></td></tr>
+      <tr data-row="3+kk"><td>3+kk</td><td class="n">75–95 m²</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-2" aria-label="3+kk: how many"></td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-s-2" aria-label="3+kk: your size"></td></tr>
+      <tr data-row="4+kk"><td>4+kk</td><td class="n">100–130 m²</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-3" aria-label="4+kk: how many"></td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-s-3" aria-label="4+kk: your size"></td></tr>
+      <tr class="ph" data-row="Penthouse"><td>Penthouse</td><td class="n">150 m² +</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-4" aria-label="Penthouse: how many"></td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-s-4" aria-label="Penthouse: your size"></td></tr>
+    </tbody></table></div>
+  <span class="note">Typical sizes are for orientation only.</span>
+</div>
+<div class="q sub" data-q="Standard, premium or luxury?">
+  <p class="q-label" id="q-21-l">Standard, premium or luxury?</p>
+  <div class="opts" role="group" aria-labelledby="q-21-l">
+    <label><input type="radio" class="ans" name="q-21" id="q-21-0" value="Standard"><span>Standard</span></label>
+    <label><input type="radio" class="ans" name="q-21" id="q-21-1" value="Premium"><span>Premium</span></label>
+    <label><input type="radio" class="ans" name="q-21" id="q-21-2" value="Luxury"><span>Luxury</span></label>
+  </div>
+</div>
+<div class="q sub" data-q="A balcony or terrace for every apartment?">
+  <p class="q-label" id="q-22-l">A balcony or terrace for every apartment?</p>
+  <div class="opts" role="group" aria-labelledby="q-22-l">
+    <label><input type="radio" class="ans" name="q-22" id="q-22-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-22" id="q-22-1" value="Some"><span>Some</span></label>
+    <label><input type="radio" class="ans" name="q-22" id="q-22-2" value="No"><span>No</span></label>
+  </div>
+</div>
+<div class="q sub" data-q="Shared amenities">
+  <p class="q-label" id="q-23-l">Shared amenities</p>
+  <div class="opts" role="group" aria-labelledby="q-23-l">
+    <label><input type="checkbox" class="ans" name="q-23" id="q-23-0" value="Gym"><span>Gym</span></label>
+    <label><input type="checkbox" class="ans" name="q-23" id="q-23-1" value="Concierge"><span>Concierge</span></label>
+    <label><input type="checkbox" class="ans" name="q-23" id="q-23-2" value="Storage"><span>Storage</span></label>
+    <label><input type="checkbox" class="ans" name="q-23" id="q-23-3" value="Bike room"><span>Bike room</span></label>
+  </div>
+</div>
+<div class="q sub" data-q="Shops on the ground floor?">
+  <p class="q-label" id="q-24-l">Shops on the ground floor?</p>
+  <div class="opts" role="group" aria-labelledby="q-24-l">
+    <label><input type="radio" class="ans" name="q-24" id="q-24-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-24" id="q-24-1" value="No"><span>No</span></label>
+    <label><input type="radio" class="ans" name="q-24" id="q-24-2" value="Not sure"><span>Not sure</span></label>
+  </div>
+</div>
             </div>
           </fieldset>
         </div></details>
-      <details><summary><span class="qno">1.2</span><h3>Parking and how people arrive</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li>Roughly how many parking spaces?</li>
-          <li>A stop for taxis or tour buses at the entrance?</li>
-          <li>Charging for electric cars?</li>
-          <li class="guess">Our guess: 2 underground floors. Correct?</li>
-        </ul></div></details>
-      <details data-start><summary><span class="qno">1.3</span><h3>What stays from your current plan?</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li>Do the apartment and office buildings stay as drawn?</li>
-          <li>Does the existing corner office stay?</li>
-          <li>What may we change?</li>
-        </ul></div></details>
+      <details><summary><span class="qno">1.2</span><h3>Parking and how people arrive</h3><span></span><span class="chev"></span></summary>
+        <div class="more">
+<div class="q" data-q="Roughly how many parking spaces?">
+  <p class="q-label" id="q-25-l">Roughly how many parking spaces?</p>
+  <input type="text" class="ans" id="q-25" aria-labelledby="q-25-l" placeholder="Your answer">
+</div>
+<div class="q" data-q="A stop at the entrance for">
+  <p class="q-label" id="q-26-l">A stop at the entrance for</p>
+  <div class="opts" role="group" aria-labelledby="q-26-l">
+    <label><input type="checkbox" class="ans" name="q-26" id="q-26-0" value="Taxis"><span>Taxis</span></label>
+    <label><input type="checkbox" class="ans" name="q-26" id="q-26-1" value="Tour buses"><span>Tour buses</span></label>
+    <label><input type="checkbox" class="ans" name="q-26" id="q-26-2" value="Neither"><span>Neither</span></label>
+  </div>
+</div>
+<div class="q" data-q="Charging for electric cars?">
+  <p class="q-label" id="q-27-l">Charging for electric cars?</p>
+  <div class="opts" role="group" aria-labelledby="q-27-l">
+    <label><input type="radio" class="ans" name="q-27" id="q-27-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-27" id="q-27-1" value="Some"><span>Some</span></label>
+    <label><input type="radio" class="ans" name="q-27" id="q-27-2" value="No"><span>No</span></label>
+  </div>
+</div>
+<div class="q" data-q="Our guess is 2 underground floors. Correct?">
+  <p class="q-label" id="q-28-l">Our guess is 2 underground floors. Correct?</p>
+  <div class="opts" role="group" aria-labelledby="q-28-l">
+    <label><input type="radio" class="ans" name="q-28" id="q-28-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-28" id="q-28-1" value="No"><span>No</span></label>
+    <label><input type="radio" class="ans" name="q-28" id="q-28-2" value="Not sure"><span>Not sure</span></label>
+  </div>
+</div>
+        </div></details>
+      <details data-start><summary><span class="qno">1.3</span><h3>What stays from your current plan?</h3><span class="dot" title="Most important" aria-label="Most important"></span><span class="chev"></span></summary>
+        <div class="more">
+<div class="q" data-q="Do the apartment and office buildings stay as drawn?">
+  <p class="q-label" id="q-29-l">Do the apartment and office buildings stay as drawn?</p>
+  <div class="opts" role="group" aria-labelledby="q-29-l">
+    <label><input type="radio" class="ans" name="q-29" id="q-29-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-29" id="q-29-1" value="Partly"><span>Partly</span></label>
+    <label><input type="radio" class="ans" name="q-29" id="q-29-2" value="No"><span>No</span></label>
+  </div>
+</div>
+<div class="q" data-q="Does the existing corner office stay?">
+  <p class="q-label" id="q-30-l">Does the existing corner office stay?</p>
+  <div class="opts" role="group" aria-labelledby="q-30-l">
+    <label><input type="radio" class="ans" name="q-30" id="q-30-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-30" id="q-30-1" value="No"><span>No</span></label>
+    <label><input type="radio" class="ans" name="q-30" id="q-30-2" value="Not sure"><span>Not sure</span></label>
+  </div>
+</div>
+<div class="q" data-q="What may we change?">
+  <p class="q-label" id="q-31-l">What may we change?</p>
+  <textarea class="ans" id="q-31" rows="2" aria-labelledby="q-31-l" placeholder="Your answer"></textarea>
+</div>
+        </div></details>
     </div>
   </section>
 
   <section>
     <div class="sec-head"><span class="sec-no">2</span><h2>Budget and materials</h2></div>
     <div class="list">
-      <details data-start><summary><span class="qno">2.1</span><h3>What is the construction budget?</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li>Total construction budget, or a price per m²</li>
-          <li>What does it include: demolition, underground parking, interiors, landscaping?</li>
-          <li>Is there a reserve for unexpected costs?</li>
-          <li class="guess">For scale: your current plan has about <span class="num">100,000 m²</span> of floor space.</li>
-        </ul></div></details>
-      <details data-start><summary><span class="qno">2.2</span><h3>Materials and quality</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li>Facade: all glass, or walls with windows?</li>
-          <li>Structure: concrete, steel or timber?</li>
-          <li>Interiors: standard, premium or luxury?</li>
-        </ul></div></details>
-      <details><summary><span class="qno">2.3</span><h3>Construction prices</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li>Prices from your past projects?</li>
-          <li>A cost consultant or builder you work with?</li>
-          <li class="guess">We count the quantities from the 3D model.</li>
-        </ul></div></details>
-      <details><summary><span class="qno">2.4</span><h3>Green goals</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li>A green certificate (e.g. BREEAM, LEED)?</li>
-          <li>Solar panels, green roofs?</li>
-        </ul></div></details>
+      <details data-start><summary><span class="qno">2.1</span><h3>What is the construction budget?</h3><span class="dot" title="Most important" aria-label="Most important"></span><span class="chev"></span></summary>
+        <div class="more">
+<p class="guess">For scale: your current plan has about <span class="num">100,000 m²</span> of floor space.</p>
+<div class="q" data-q="Total construction budget, or a price per m²">
+  <p class="q-label" id="q-32-l">Total construction budget, or a price per m²</p>
+  <input type="text" class="ans" id="q-32" aria-labelledby="q-32-l" placeholder="Your answer">
+</div>
+<div class="q" data-q="What does it include?">
+  <p class="q-label" id="q-33-l">What does it include?</p>
+  <div class="opts" role="group" aria-labelledby="q-33-l">
+    <label><input type="checkbox" class="ans" name="q-33" id="q-33-0" value="Demolition"><span>Demolition</span></label>
+    <label><input type="checkbox" class="ans" name="q-33" id="q-33-1" value="Underground parking"><span>Underground parking</span></label>
+    <label><input type="checkbox" class="ans" name="q-33" id="q-33-2" value="Interiors"><span>Interiors</span></label>
+    <label><input type="checkbox" class="ans" name="q-33" id="q-33-3" value="Landscaping"><span>Landscaping</span></label>
+  </div>
+</div>
+<div class="q" data-q="Is there a reserve for unexpected costs?">
+  <p class="q-label" id="q-34-l">Is there a reserve for unexpected costs?</p>
+  <div class="opts" role="group" aria-labelledby="q-34-l">
+    <label><input type="radio" class="ans" name="q-34" id="q-34-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-34" id="q-34-1" value="No"><span>No</span></label>
+  </div>
+</div>
+        </div></details>
+      <details data-start><summary><span class="qno">2.2</span><h3>Materials and quality</h3><span class="dot" title="Most important" aria-label="Most important"></span><span class="chev"></span></summary>
+        <div class="more">
+<div class="q" data-q="Facade">
+  <p class="q-label" id="q-35-l">Facade</p>
+  <div class="opts" role="group" aria-labelledby="q-35-l">
+    <label><input type="radio" class="ans" name="q-35" id="q-35-0" value="All glass"><span>All glass</span></label>
+    <label><input type="radio" class="ans" name="q-35" id="q-35-1" value="Walls with windows"><span>Walls with windows</span></label>
+    <label><input type="radio" class="ans" name="q-35" id="q-35-2" value="A mix"><span>A mix</span></label>
+  </div>
+</div>
+<div class="q" data-q="Structure">
+  <p class="q-label" id="q-36-l">Structure</p>
+  <div class="opts" role="group" aria-labelledby="q-36-l">
+    <label><input type="radio" class="ans" name="q-36" id="q-36-0" value="Concrete"><span>Concrete</span></label>
+    <label><input type="radio" class="ans" name="q-36" id="q-36-1" value="Steel"><span>Steel</span></label>
+    <label><input type="radio" class="ans" name="q-36" id="q-36-2" value="Timber"><span>Timber</span></label>
+    <label><input type="radio" class="ans" name="q-36" id="q-36-3" value="Open"><span>Open</span></label>
+  </div>
+</div>
+<div class="q" data-q="Interiors">
+  <p class="q-label" id="q-37-l">Interiors</p>
+  <div class="opts" role="group" aria-labelledby="q-37-l">
+    <label><input type="radio" class="ans" name="q-37" id="q-37-0" value="Standard"><span>Standard</span></label>
+    <label><input type="radio" class="ans" name="q-37" id="q-37-1" value="Premium"><span>Premium</span></label>
+    <label><input type="radio" class="ans" name="q-37" id="q-37-2" value="Luxury"><span>Luxury</span></label>
+  </div>
+</div>
+        </div></details>
+      <details><summary><span class="qno">2.3</span><h3>Construction prices</h3><span></span><span class="chev"></span></summary>
+        <div class="more">
+<p class="guess">We count the quantities from the 3D model.</p>
+<div class="q" data-q="Can you share prices from your past projects?">
+  <p class="q-label" id="q-38-l">Can you share prices from your past projects?</p>
+  <div class="opts" role="group" aria-labelledby="q-38-l">
+    <label><input type="radio" class="ans" name="q-38" id="q-38-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-38" id="q-38-1" value="No"><span>No</span></label>
+  </div>
+</div>
+<div class="q" data-q="A cost consultant or builder you work with?">
+  <p class="q-label" id="q-39-l">A cost consultant or builder you work with?</p>
+  <input type="text" class="ans" id="q-39" aria-labelledby="q-39-l" placeholder="Your answer">
+</div>
+        </div></details>
+      <details><summary><span class="qno">2.4</span><h3>Green goals</h3><span></span><span class="chev"></span></summary>
+        <div class="more">
+<div class="q" data-q="A green certificate?">
+  <p class="q-label" id="q-40-l">A green certificate?</p>
+  <div class="opts" role="group" aria-labelledby="q-40-l">
+    <label><input type="radio" class="ans" name="q-40" id="q-40-0" value="BREEAM"><span>BREEAM</span></label>
+    <label><input type="radio" class="ans" name="q-40" id="q-40-1" value="LEED"><span>LEED</span></label>
+    <label><input type="radio" class="ans" name="q-40" id="q-40-2" value="None"><span>None</span></label>
+    <label><input type="radio" class="ans" name="q-40" id="q-40-3" value="Not decided"><span>Not decided</span></label>
+  </div>
+</div>
+<div class="q" data-q="Solar panels, green roofs?">
+  <p class="q-label" id="q-41-l">Solar panels, green roofs?</p>
+  <div class="opts" role="group" aria-labelledby="q-41-l">
+    <label><input type="checkbox" class="ans" name="q-41" id="q-41-0" value="Solar panels"><span>Solar panels</span></label>
+    <label><input type="checkbox" class="ans" name="q-41" id="q-41-1" value="Green roofs"><span>Green roofs</span></label>
+  </div>
+</div>
+        </div></details>
     </div>
   </section>
 
@@ -311,22 +589,41 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     <div class="sec-head"><span class="sec-no">3</span><h2>Planning rules and permits</h2>
       <p>This is our job: we will research the rules ourselves. If you already have anything, sharing it saves us time.</p></div>
     <div class="list">
-      <details><summary><span class="qno">3.1</span><h3>Do you have any documents on what may be built here?</h3><span class="chip later">If you have it</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li class="guess">We will check the land-use plan and building rules ourselves.</li>
-          <li>Any city documents on height, use or size limits you already have?</li>
-        </ul></div></details>
-      <details><summary><span class="qno">3.2</span><h3>Have you already applied for permits or talked to the city?</h3><span class="chip later">If you have it</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li class="guess">We will check the public records ourselves.</li>
-          <li>Any permit applied for or granted?</li>
-          <li>Any meetings or feedback from the city so far?</li>
-        </ul></div></details>
-      <details><summary><span class="qno">3.3</span><h3>Has the city said anything about the tower height?</h3><span class="chip later">If you have it</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li class="guess">Your tallest tower is about <span class="num">84 m</span>, around 26 floors. We will check what height is allowed.</li>
-          <li>If the city has already commented on it, please let us know.</li>
-        </ul></div></details>
+      <details><summary><span class="qno">3.1</span><h3>Do you have any documents on what may be built here?</h3><span></span><span class="chev"></span></summary>
+        <div class="more">
+<p class="guess">We will check the land-use plan and building rules ourselves.</p>
+<div class="q" data-q="City documents on height, use or size limits">
+  <p class="q-label" id="q-42-l">City documents on height, use or size limits</p>
+  <div class="opts" role="group" aria-labelledby="q-42-l">
+    <label><input type="radio" class="ans" name="q-42" id="q-42-0" value="Yes, we&#x27;ll send them"><span>Yes, we'll send them</span></label>
+    <label><input type="radio" class="ans" name="q-42" id="q-42-1" value="No"><span>No</span></label>
+  </div>
+</div>
+        </div></details>
+      <details><summary><span class="qno">3.2</span><h3>Have you already applied for permits or talked to the city?</h3><span></span><span class="chev"></span></summary>
+        <div class="more">
+<p class="guess">We will check the public records ourselves.</p>
+<div class="q" data-q="A permit">
+  <p class="q-label" id="q-43-l">A permit</p>
+  <div class="opts" role="group" aria-labelledby="q-43-l">
+    <label><input type="radio" class="ans" name="q-43" id="q-43-0" value="Applied for"><span>Applied for</span></label>
+    <label><input type="radio" class="ans" name="q-43" id="q-43-1" value="Granted"><span>Granted</span></label>
+    <label><input type="radio" class="ans" name="q-43" id="q-43-2" value="None"><span>None</span></label>
+  </div>
+</div>
+<div class="q" data-q="Any meetings or feedback from the city so far?">
+  <p class="q-label" id="q-44-l">Any meetings or feedback from the city so far?</p>
+  <textarea class="ans" id="q-44" rows="2" aria-labelledby="q-44-l" placeholder="Your answer"></textarea>
+</div>
+        </div></details>
+      <details><summary><span class="qno">3.3</span><h3>Has the city said anything about the tower height?</h3><span></span><span class="chev"></span></summary>
+        <div class="more">
+<p class="guess">Your tallest tower is about <span class="num">84 m</span>, around 26 floors. We will check what height is allowed.</p>
+<div class="q" data-q="What has the city said?">
+  <p class="q-label" id="q-45-l">What has the city said?</p>
+  <textarea class="ans" id="q-45" rows="2" aria-labelledby="q-45-l" placeholder="Your answer"></textarea>
+</div>
+        </div></details>
     </div>
   </section>
 
@@ -334,47 +631,114 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     <div class="sec-head"><span class="sec-no">4</span><h2>Your land</h2>
       <p>The piece of land the project is built on, and what is around it.</p></div>
     <div class="list">
-      <details data-start><summary><span class="qno">4.1</span><h3>How big is your land exactly?</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li class="guess">Our sources differ slightly: <span class="num">16,463–16,487 m²</span>, about 1.6 hectares.</li>
-          <li>Please send the official land register document (výpis z katastru). It lists every part of your land and its exact size.</li>
-        </ul></div></details>
-      <details><summary><span class="qno">4.2</span><h3>Drawings of your current design</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li>Floor plans and cross-sections, in any format</li>
-          <li class="guess">So far we guessed all heights from your pictures.</li>
-        </ul></div></details>
-      <details><summary><span class="qno">4.3</span><h3>What is under the ground?</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li>A soil report? It tells us how deep we can build.</li>
-          <li>Are there metro tunnels under or near your land?</li>
-          <li>Where do power, water and sewer pipes connect?</li>
-        </ul></div></details>
-      <details><summary><span class="qno">4.4</span><h3>The white building with three arches next door</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li>Does it already exist, is it planned, or is it part of your project?</li>
-        </ul></div></details>
+      <details data-start><summary><span class="qno">4.1</span><h3>How big is your land exactly?</h3><span class="dot" title="Most important" aria-label="Most important"></span><span class="chev"></span></summary>
+        <div class="more">
+<p class="guess">Our sources differ slightly: <span class="num">16,463–16,487 m²</span>, about 1.6 hectares. The official land register document (výpis z katastru) lists every part of your land and its exact size.</p>
+<div class="q" data-q="Can you send the land register document?">
+  <p class="q-label" id="q-46-l">Can you send the land register document?</p>
+  <div class="opts" role="group" aria-labelledby="q-46-l">
+    <label><input type="radio" class="ans" name="q-46" id="q-46-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-46" id="q-46-1" value="We&#x27;ll get it"><span>We'll get it</span></label>
+    <label><input type="radio" class="ans" name="q-46" id="q-46-2" value="No"><span>No</span></label>
+  </div>
+</div>
+        </div></details>
+      <details><summary><span class="qno">4.2</span><h3>Drawings of your current design</h3><span></span><span class="chev"></span></summary>
+        <div class="more">
+<p class="guess">So far we guessed all heights from your pictures.</p>
+<div class="q" data-q="Floor plans and cross-sections, in any format">
+  <p class="q-label" id="q-47-l">Floor plans and cross-sections, in any format</p>
+  <div class="opts" role="group" aria-labelledby="q-47-l">
+    <label><input type="radio" class="ans" name="q-47" id="q-47-0" value="Yes, we&#x27;ll send them"><span>Yes, we'll send them</span></label>
+    <label><input type="radio" class="ans" name="q-47" id="q-47-1" value="No"><span>No</span></label>
+  </div>
+</div>
+        </div></details>
+      <details><summary><span class="qno">4.3</span><h3>What is under the ground?</h3><span></span><span class="chev"></span></summary>
+        <div class="more">
+<div class="q" data-q="A soil report? It tells us how deep we can build.">
+  <p class="q-label" id="q-48-l">A soil report? It tells us how deep we can build.</p>
+  <div class="opts" role="group" aria-labelledby="q-48-l">
+    <label><input type="radio" class="ans" name="q-48" id="q-48-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-48" id="q-48-1" value="No"><span>No</span></label>
+  </div>
+</div>
+<div class="q" data-q="Metro tunnels under or near your land?">
+  <p class="q-label" id="q-49-l">Metro tunnels under or near your land?</p>
+  <div class="opts" role="group" aria-labelledby="q-49-l">
+    <label><input type="radio" class="ans" name="q-49" id="q-49-0" value="Yes"><span>Yes</span></label>
+    <label><input type="radio" class="ans" name="q-49" id="q-49-1" value="No"><span>No</span></label>
+    <label><input type="radio" class="ans" name="q-49" id="q-49-2" value="Not sure"><span>Not sure</span></label>
+  </div>
+</div>
+<div class="q" data-q="Where do power, water and sewer pipes connect?">
+  <p class="q-label" id="q-50-l">Where do power, water and sewer pipes connect?</p>
+  <textarea class="ans" id="q-50" rows="2" aria-labelledby="q-50-l" placeholder="Your answer"></textarea>
+</div>
+        </div></details>
+      <details><summary><span class="qno">4.4</span><h3>The white building with three arches next door</h3><span></span><span class="chev"></span></summary>
+        <div class="more">
+<div class="q" data-q="This building…">
+  <p class="q-label" id="q-51-l">This building…</p>
+  <div class="opts" role="group" aria-labelledby="q-51-l">
+    <label><input type="radio" class="ans" name="q-51" id="q-51-0" value="Already exists"><span>Already exists</span></label>
+    <label><input type="radio" class="ans" name="q-51" id="q-51-1" value="Is planned"><span>Is planned</span></label>
+    <label><input type="radio" class="ans" name="q-51" id="q-51-2" value="Is part of our project"><span>Is part of our project</span></label>
+    <label><input type="radio" class="ans" name="q-51" id="q-51-3" value="Not sure"><span>Not sure</span></label>
+  </div>
+</div>
+        </div></details>
     </div>
   </section>
 
   <section>
     <div class="sec-head"><span class="sec-no">5</span><h2>Working together</h2></div>
     <div class="list">
-      <details><summary><span class="qno">5.1</span><h3>Timeline</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li>Key dates</li>
-          <li>What first: a quick study, a design, or permit drawings?</li>
-        </ul></div></details>
-      <details><summary><span class="qno">5.2</span><h3>Your team</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li>Engineers, cost consultant or hotel operator already chosen?</li>
-          <li>Contact people</li>
-        </ul></div></details>
-      <details><summary><span class="qno">5.3</span><h3>What you'd like to receive</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li>3D model, drawings, area tables, images, full architectural plans and engineering?</li>
-          <li class="guess">We deliver everything in Czech, German and English.</li>
-        </ul></div></details>
+      <details><summary><span class="qno">5.1</span><h3>Timeline</h3><span></span><span class="chev"></span></summary>
+        <div class="more">
+<div class="q" data-q="Key dates">
+  <p class="q-label" id="q-52-l">Key dates</p>
+  <textarea class="ans" id="q-52" rows="2" aria-labelledby="q-52-l" placeholder="Your answer"></textarea>
+</div>
+<div class="q" data-q="What first?">
+  <p class="q-label" id="q-53-l">What first?</p>
+  <div class="opts" role="group" aria-labelledby="q-53-l">
+    <label><input type="radio" class="ans" name="q-53" id="q-53-0" value="A quick study"><span>A quick study</span></label>
+    <label><input type="radio" class="ans" name="q-53" id="q-53-1" value="A design"><span>A design</span></label>
+    <label><input type="radio" class="ans" name="q-53" id="q-53-2" value="Permit drawings"><span>Permit drawings</span></label>
+  </div>
+</div>
+        </div></details>
+      <details><summary><span class="qno">5.2</span><h3>Your team</h3><span></span><span class="chev"></span></summary>
+        <div class="more">
+<div class="q" data-q="Already chosen">
+  <p class="q-label" id="q-54-l">Already chosen</p>
+  <div class="opts" role="group" aria-labelledby="q-54-l">
+    <label><input type="checkbox" class="ans" name="q-54" id="q-54-0" value="Engineers"><span>Engineers</span></label>
+    <label><input type="checkbox" class="ans" name="q-54" id="q-54-1" value="Cost consultant"><span>Cost consultant</span></label>
+    <label><input type="checkbox" class="ans" name="q-54" id="q-54-2" value="Hotel operator"><span>Hotel operator</span></label>
+    <label><input type="checkbox" class="ans" name="q-54" id="q-54-3" value="None yet"><span>None yet</span></label>
+  </div>
+</div>
+<div class="q" data-q="Contact people">
+  <p class="q-label" id="q-55-l">Contact people</p>
+  <textarea class="ans" id="q-55" rows="2" aria-labelledby="q-55-l" placeholder="Your answer"></textarea>
+</div>
+        </div></details>
+      <details><summary><span class="qno">5.3</span><h3>What you'd like to receive</h3><span></span><span class="chev"></span></summary>
+        <div class="more">
+<div class="q" data-q="Pick all you need">
+  <p class="q-label" id="q-56-l">Pick all you need</p>
+  <div class="opts" role="group" aria-labelledby="q-56-l">
+    <label><input type="checkbox" class="ans" name="q-56" id="q-56-0" value="3D model"><span>3D model</span></label>
+    <label><input type="checkbox" class="ans" name="q-56" id="q-56-1" value="Drawings"><span>Drawings</span></label>
+    <label><input type="checkbox" class="ans" name="q-56" id="q-56-2" value="Area tables"><span>Area tables</span></label>
+    <label><input type="checkbox" class="ans" name="q-56" id="q-56-3" value="Images"><span>Images</span></label>
+    <label><input type="checkbox" class="ans" name="q-56" id="q-56-4" value="Full architectural plans and engineering"><span>Full architectural plans and engineering</span></label>
+  </div>
+</div>
+<p class="guess">We deliver everything in Czech, German and English.</p>
+        </div></details>
     </div>
   </section>
 
@@ -382,25 +746,42 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     <div class="sec-head"><span class="sec-no">6</span><h2>Your design</h2>
       <p>We would like to redesign the project, together with you.</p></div>
     <div class="list">
-      <details data-start><summary><span class="qno">6.1</span><h3>Would you be open to a redesign?</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
-        <div class="more"><ul class="pts">
-          <li>Is the design in your renderings (below) already final, or can we rework it?</li>
-          <li>If some parts are fixed, which ones must stay?</li>
-          <li>How often would you like to meet to choose between options?</li>
-        </ul></div></details>
-      <details><summary><span class="qno">6.2</span><h3>How we would work together</h3><span class="chip later">Our offer</span><span class="chev"></span></summary>
+      <details data-start><summary><span class="qno">6.1</span><h3>Would you be open to a redesign?</h3><span class="dot" title="Most important" aria-label="Most important"></span><span class="chev"></span></summary>
+        <div class="more">
+<div class="q" data-q="Your current design is">
+  <p class="q-label" id="q-57-l">Your current design is</p>
+  <div class="opts" role="group" aria-labelledby="q-57-l">
+    <label><input type="radio" class="ans" name="q-57" id="q-57-0" value="Final"><span>Final</span></label>
+    <label><input type="radio" class="ans" name="q-57" id="q-57-1" value="Partly fixed"><span>Partly fixed</span></label>
+    <label><input type="radio" class="ans" name="q-57" id="q-57-2" value="Open to rework"><span>Open to rework</span></label>
+  </div>
+</div>
+<div class="q" data-q="If some parts are fixed, which ones must stay?">
+  <p class="q-label" id="q-58-l">If some parts are fixed, which ones must stay?</p>
+  <textarea class="ans" id="q-58" rows="2" aria-labelledby="q-58-l" placeholder="Your answer"></textarea>
+</div>
+<div class="q" data-q="How often would you like to meet to choose between options?">
+  <p class="q-label" id="q-59-l">How often would you like to meet to choose between options?</p>
+  <div class="opts" role="group" aria-labelledby="q-59-l">
+    <label><input type="radio" class="ans" name="q-59" id="q-59-0" value="Weekly"><span>Weekly</span></label>
+    <label><input type="radio" class="ans" name="q-59" id="q-59-1" value="Every two weeks"><span>Every two weeks</span></label>
+    <label><input type="radio" class="ans" name="q-59" id="q-59-2" value="Monthly"><span>Monthly</span></label>
+  </div>
+</div>
+        </div></details>
+      <details><summary><span class="qno">6.2</span><h3>How we would work together</h3><span></span><span class="chev"></span></summary>
         <div class="more"><ul class="pts">
           <li><strong>You stay involved at every step</strong>, not only at the end.</li>
           <li><strong>Options instead of one finished plan.</strong> You choose the direction.</li>
           <li>Your current design stays as the reference.</li>
         </ul></div></details>
-      <details><summary><span class="qno">6.3</span><h3>What you get for every option</h3><span class="chip later">Our offer</span><span class="chev"></span></summary>
+      <details><summary><span class="qno">6.3</span><h3>What you get for every option</h3><span></span><span class="chev"></span></summary>
         <div class="more"><ul class="pts">
           <li>Floor area, number of rooms or apartments, and height</li>
           <li>Checked against the planning rules</li>
           <li>A cost estimate, once we have your prices</li>
         </ul></div></details>
-      <details><summary><span class="qno">6.4</span><h3>Tools and delivery</h3><span class="chip later">Our offer</span><span class="chev"></span></summary>
+      <details><summary><span class="qno">6.4</span><h3>Tools and delivery</h3><span></span><span class="chev"></span></summary>
         <div class="more"><ul class="pts">
           <li>Explore the 3D model in your web browser</li>
           <li>Fast changes: drawings, area tables and images come from one model</li>
@@ -425,13 +806,12 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
       </div>
     </div>
     <div class="slide" data-slides>
-      <div class="slide-head"><h3>The site today</h3><span>Aerial photos · land register · ČÚZK</span></div>
+      <div class="slide-head"><h3>The site today</h3><span>Aerial photo · land register · ČÚZK</span></div>
       <div class="stage"><img alt=""><button class="nav prev" aria-label="Previous image">‹</button><button class="nav next" aria-label="Next image">›</button></div>
       <div class="cap"><b></b><span></span></div>
       <div class="thumbs">
         <button data-src="img/s0.jpg" data-cap="Aerial photo of the area, north up (ČÚZK)"><img src="img/s0.jpg" alt="Aerial photo of the area"></button>
-        <button data-src="img/s1.jpg" data-cap="Close-up of the site with the existing hotel (ČÚZK)"><img src="img/s1.jpg" alt="Close-up aerial photo of the site"></button>
-        <button data-src="img/s2.jpg" data-cap="Land register map of the same area (ČÚZK)"><img src="img/s2.jpg" alt="Land register map"></button>
+        <button data-src="img/s2.jpg" data-cap="Land register map over the aerial photo, your land in orange (ČÚZK)"><img src="img/s2.jpg" alt="Land register map with your land in orange"></button>
       </div>
       <div class="links">
         <a href="https://www.google.com/maps/search/?api=1&amp;query=50.04919,14.43819" target="_blank" rel="noopener">Open in Google Maps ↗</a>
@@ -440,7 +820,13 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     </div>
   </section>
 
-  <footer>Answers to “Needed to start” let us begin. The rest can follow later.</footer>
+  <div class="copybar">
+    <p>Your answers are kept in this browser only. When you are done, copy them and send them to us.</p>
+    <button id="copy-answers" class="primary">Copy all answers</button>
+    <textarea id="copy-out" rows="6" readonly hidden aria-label="Your answers as text"></textarea>
+  </div>
+
+  <footer>Questions with an orange dot matter most. The rest can follow later.</footer>
 </div>
 
 <script>
@@ -465,14 +851,65 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
 
   function showChoice(group) {
     const picked = document.querySelector('input[name="' + group + '"]:checked');
-    const v = picked ? picked.value : 'none';
+    const v = picked ? picked.value : '';
     document.querySelectorAll('[data-group="' + group + '"]').forEach(el => {
-      el.hidden = !el.dataset.show.split(' ').includes(v);
+      el.hidden = !el.dataset.show.split('|').includes(v);
     });
   }
+
+  // Answers: kept in this browser as a draft
+  const KEY = 'panorama-questions-v1';
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { saved = {}; }
+  const fields = [...document.querySelectorAll('.ans')];
+  fields.forEach(f => {
+    if (f.type === 'radio' || f.type === 'checkbox') { if (saved[f.id]) f.checked = true; }
+    else if (saved[f.id]) f.value = saved[f.id];
+  });
+  function save() {
+    const d = {};
+    fields.forEach(f => {
+      if (f.type === 'radio' || f.type === 'checkbox') { if (f.checked) d[f.id] = 1; }
+      else if (f.value.trim()) d[f.id] = f.value;
+    });
+    try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {}
+  }
+  fields.forEach(f => f.addEventListener(f.tagName === 'INPUT' && (f.type === 'radio' || f.type === 'checkbox') ? 'change' : 'input', save));
   ['existing', 'newuse'].forEach(g => {
     document.querySelectorAll('input[name="' + g + '"]').forEach(i => i.addEventListener('change', () => showChoice(g)));
     showChoice(g);
+  });
+
+  // Copy all answers as plain text
+  function collect() {
+    const lines = [];
+    document.querySelectorAll('.list > details').forEach(d => {
+      const head = d.querySelector('.qno').textContent + ' ' + d.querySelector('h3').textContent;
+      const part = [];
+      d.querySelectorAll('[data-q]').forEach(q => {
+        if (q.closest('[hidden]')) return;
+        let a = '';
+        if (q.dataset.table) {
+          a = [...q.querySelectorAll('tr[data-row]')].map(r => {
+            const v = [...r.querySelectorAll('input')].map(i => i.value.trim());
+            return v[0] || v[1] ? r.dataset.row + ': ' + (v[0] || '?') + ' units, ' + (v[1] || '?') + ' m²' : '';
+          }).filter(Boolean).join('; ');
+        } else {
+          const t = q.querySelector('textarea, input[type="text"]');
+          a = t ? t.value.trim() : [...q.querySelectorAll('input:checked')].map(i => i.value).join(', ');
+        }
+        if (a) part.push('  - ' + q.dataset.q.replace(/<[^>]+>/g, '') + ': ' + a);
+      });
+      if (part.length) lines.push(head, ...part, '');
+    });
+    return lines.join('\n') || 'No answers yet.';
+  }
+  const out = document.getElementById('copy-out'), cbtn = document.getElementById('copy-answers');
+  cbtn.addEventListener('click', () => {
+    const text = collect();
+    out.value = text; out.hidden = false;
+    navigator.clipboard.writeText(text).then(() => { cbtn.textContent = 'Copied'; setTimeout(() => cbtn.textContent = 'Copy all answers', 2000); })
+      .catch(() => { out.focus(); out.select(); cbtn.textContent = 'Select and copy the text below'; });
   });
   const start = all.filter(d => d.hasAttribute('data-start'));
   document.getElementById('c-all').textContent = '(' + all.length + ')';

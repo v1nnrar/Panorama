@@ -1,0 +1,276 @@
+<title>Panorama Hotel Open Questions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column, like a drawing-issue sheet; sections = numbered groups, questions = expandable rows */
+:root {
+  --paper: #eef0ee;      /* cool drawing paper */
+  --sheet: #f8f9f8;
+  --ink: #1b2422;
+  --muted: #5b6764;
+  --line: #cfd5d2;
+  --accent: #2f6b55;     /* green-roof green */
+  --accent-soft: #dde9e3;
+  --flag: #a8571c;       /* "needed to start" */
+  --flag-soft: #f3e4d6;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #121816; --sheet: #19211e; --ink: #e3e9e6; --muted: #98a6a1; --line: #2c3834;
+  --accent: #7cc3a5; --accent-soft: #1f3a30; --flag: #e7a06b; --flag-soft: #3a2a1d; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #121816; --sheet: #19211e; --ink: #e3e9e6; --muted: #98a6a1; --line: #2c3834;
+  --accent: #7cc3a5; --accent-soft: #1f3a30; --flag: #e7a06b; --flag-soft: #3a2a1d; color-scheme: dark }
+
+body { background: var(--paper); color: var(--ink); font: 15px/1.6 var(--body); }
+.wrap { max-width: 860px; margin: 0 auto; padding-block: 48px 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+header { display: grid; gap: 14px; border-bottom: 2px solid var(--ink); padding-bottom: 24px; }
+.eyebrow { font: 500 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 6px 18px; }
+h1 { font: 800 clamp(30px, 6vw, 48px)/1.05 var(--display); letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+h1 span { color: var(--accent); }
+.lede { margin: 0; max-width: 62ch; color: var(--muted); }
+
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-top: 22px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--sheet); }
+button { font: 500 13px/1 var(--body); color: var(--ink); background: transparent; border: 0; padding: 10px 14px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.ghost { border: 1px solid var(--line); border-radius: 6px; background: var(--sheet); }
+button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+section { margin-top: 44px; }
+.sec-head { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; align-items: baseline; margin-bottom: 14px; }
+.sec-no { font: 700 13px/1 var(--mono); color: var(--accent); }
+h2 { font: 700 22px/1.2 var(--display); margin: 0; letter-spacing: -.01em; }
+.sec-head p { grid-column: 2; margin: 0; color: var(--muted); font-size: 14px; }
+
+.list { border-top: 1px solid var(--line); }
+details { border-bottom: 1px solid var(--line); }
+summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 2.6em 1fr auto 18px; gap: 12px;
+  align-items: center; padding: 15px 4px; }
+summary::-webkit-details-marker { display: none; }
+summary:hover h3 { color: var(--accent); }
+.qno { font: 500 13px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+h3 { font: 600 16px/1.35 var(--body); margin: 0; min-width: 0; transition: color .15s; }
+.chip { font: 500 11px/1 var(--mono); letter-spacing: .04em; text-transform: uppercase; padding: 5px 8px; border-radius: 4px;
+  background: var(--flag-soft); color: var(--flag); white-space: nowrap; }
+.chip.later { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+.chev { width: 18px; height: 18px; position: relative; }
+.chev::before, .chev::after { content: ""; position: absolute; left: 3px; top: 8px; width: 12px; height: 2px; background: var(--ink); transition: transform .2s; }
+.chev::after { transform: rotate(90deg); }
+details[open] .chev::after { transform: rotate(0deg); }
+
+.more { display: grid; gap: 14px; padding: 2px 4px 22px calc(2.6em + 16px); }
+.more p { margin: 0; max-width: 64ch; }
+.facts { display: grid; grid-template-columns: 9.5em 1fr; gap: 8px 16px; margin: 0; background: var(--sheet);
+  border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; }
+.facts dt { font: 500 11px/1.7 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 0; min-width: 0; }
+.num { font-family: var(--mono); font-size: 13.5px; background: var(--accent-soft); color: var(--ink); padding: 1px 5px; border-radius: 3px; white-space: nowrap; }
+
+footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+
+@media (max-width: 560px) {
+  summary { grid-template-columns: 2.2em 1fr 18px; }
+  summary .chip { grid-column: 2; grid-row: 2; justify-self: start; }
+  .more { padding-left: 4px; }
+  .facts { grid-template-columns: 1fr; gap: 2px; }
+  .facts dd + dt { margin-top: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span>Panorama Hotel · Milevská 7, Praha 4</span><span>For Property Solutions</span><span>9 Nov 2026</span></div>
+    <h1>What we need to know <span>before we start</span></h1>
+    <p class="lede">We have modelled your existing scheme from the renders and the cadastre. To design the proposed hotel, check it against the regulations and price it, we need answers to the questions below. Click a question to see why we ask, what we currently assume and what to send.</p>
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="Filter questions">
+        <button id="f-all" aria-pressed="true" data-filter="all">All <span id="c-all"></span></button>
+        <button id="f-start" aria-pressed="false" data-filter="start">Needed to start <span id="c-start"></span></button>
+      </div>
+      <button id="toggle-all" class="ghost">Expand all</button>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head"><span class="sec-no">1</span><h2>Brief and programme</h2>
+      <p>We have no written brief yet, so the building uses in our model are guesses.</p></div>
+    <div class="list">
+      <details data-start><summary><span class="qno">1.1</span><h3>Which buildings become the hotel?</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
+        <div class="more">
+          <p>Your scheme has nine buildings above ground. We need to know which of them, and which floors, are hotel. The rest could be residential, office or retail.</p>
+          <dl class="facts"><dt>Now assumed</dt><dd>Front slab C1/C2 = hotel / office, diagrid tower A = residential / hotel, B, B2, B3 = residential, D and E = office. All read from the renders.</dd>
+          <dt>Please send</dt><dd>Use per building and per floor, even as a marked-up render.</dd></dl>
+        </div></details>
+      <details data-start><summary><span class="qno">1.2</span><h3>Hotel category and operator</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
+        <div class="more">
+          <p>The star rating and the operator decide room sizes, corridor widths, lift numbers and back-of-house areas. International operators issue their own design standards, which override general rules of thumb.</p>
+          <dl class="facts"><dt>Please send</dt><dd>Target category (e.g. 4★ / 5★), operator or brand if chosen, and their standards book. Also whether it is a classic hotel, an aparthotel or serviced apartments.</dd></dl>
+        </div></details>
+      <details data-start><summary><span class="qno">1.3</span><h3>Room mix and room sizes</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
+        <div class="more">
+          <p>The number of keys and the room types set the floor plate depth and the structural grid.</p>
+          <dl class="facts"><dt>Please send</dt><dd>Total keys, room types with target net areas (m²), number of suites, share of accessible rooms.</dd></dl>
+        </div></details>
+      <details><summary><span class="qno">1.4</span><h3>Guest facilities</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
+        <div class="more">
+          <p>Large rooms without columns (ballroom, pool) must sit where the structure allows them, usually in the podium.</p>
+          <dl class="facts"><dt>Please send</dt><dd>Restaurants and bars (seats), conference (largest room and total m²), spa / wellness / pool, fitness, rooftop use, ground-floor retail.</dd></dl>
+        </div></details>
+      <details><summary><span class="qno">1.5</span><h3>Back of house</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
+        <div class="more">
+          <p>Kitchen, laundry and deliveries take a lot of ground-floor and basement area and need a service entrance away from the guests.</p>
+          <dl class="facts"><dt>Please send</dt><dd>Main kitchen size, laundry in-house or outsourced, staff numbers per shift, delivery and waste requirements.</dd></dl>
+        </div></details>
+      <details><summary><span class="qno">1.6</span><h3>Parking and arrivals</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
+        <div class="more">
+          <dl class="facts"><dt>Now assumed</dt><dd>2 basement levels under parcels 1051/3, 1090/2 and 1051/16, about <span class="num">17,200 m²</span>. Ramp position read from the top-view photo.</dd>
+          <dt>Please send</dt><dd>Required parking spaces, drop-off, coach parking, EV charging, number of basement levels in your scheme.</dd></dl>
+        </div></details>
+      <details data-start><summary><span class="qno">1.7</span><h3>Scope: replace or adapt your scheme?</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
+        <div class="more">
+          <p>We need to know which parts of your scheme are fixed and which we may redesign.</p>
+          <dl class="facts"><dt>Now assumed</dt><dd>The existing corner office E (parcel 1133/12) stays. Everything else is open.</dd>
+          <dt>Please confirm</dt><dd>Do the residential blocks B, B2, B3 and the office D stay as in your scheme? Is E kept?</dd></dl>
+        </div></details>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-no">2</span><h2>Budget, materials and cost</h2>
+      <p>We can take quantities straight from the BIM model. To turn them into a cost plan we need your money targets and unit rates.</p></div>
+    <div class="list">
+      <details data-start><summary><span class="qno">2.1</span><h3>Construction budget</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
+        <div class="more">
+          <dl class="facts"><dt>For scale</dt><dd>Your scheme as modelled: about <span class="num">99,900 m²</span> GFA above ground and <span class="num">17,200 m²</span> below.</dd>
+          <dt>Please send</dt><dd>Total budget or target CZK/m² GFA, and target investment per hotel key.</dd></dl>
+        </div></details>
+      <details data-start><summary><span class="qno">2.2</span><h3>Specification level and materials</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
+        <div class="more">
+          <p>The facade and structure are the largest cost items. The renders show a steel diagrid, full curtain walls and timber fins, all expensive choices.</p>
+          <dl class="facts"><dt>Please decide</dt><dd>Facade: curtain wall, punched windows or diagrid. Structure: concrete frame, steel, or timber hybrid. Level of interior fit-out and FF&amp;E (furniture, fixtures, equipment).</dd></dl>
+        </div></details>
+      <details><summary><span class="qno">2.3</span><h3>Unit rates or a cost consultant</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
+        <div class="more">
+          <p>With rates per element we can generate a cost plan from the model and update it after every design change.</p>
+          <dl class="facts"><dt>Please send</dt><dd>Your own benchmark rates (CZK per m² of facade, slab, roof, per m³ of basement…), a preferred quantity surveyor or contractor, or costs of comparable recent projects.</dd></dl>
+        </div></details>
+      <details><summary><span class="qno">2.4</span><h3>Sustainability targets</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
+        <div class="more">
+          <p>Certification targets change the facade, building services and roof design, and so the cost.</p>
+          <dl class="facts"><dt>Please send</dt><dd>BREEAM or LEED level, energy class, PV and green-roof requirements, any EU taxonomy or ESG reporting needs.</dd></dl>
+        </div></details>
+      <details><summary><span class="qno">2.5</span><h3>Business plan inputs</h3><span class="chip later">Optional</span><span class="chev"></span></summary>
+        <div class="more">
+          <p>Only if you want us to test the viability of design options.</p>
+          <dl class="facts"><dt>Please send</dt><dd>Expected average daily rate, occupancy, opening date and any phasing.</dd></dl>
+        </div></details>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-no">3</span><h2>Regulations and permits</h2>
+      <p>We have no planning limits on file yet, so we cannot check any scheme for compliance.</p></div>
+    <div class="list">
+      <details data-start><summary><span class="qno">3.1</span><h3>Zoning designation and limits</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
+        <div class="more">
+          <dl class="facts"><dt>Please send</dt><dd>Land-use designation of the parcels in the Prague land-use plan, allowed uses, height limit, plot ratio, required green area, and any area or regulation plan for Pankrác.</dd></dl>
+        </div></details>
+      <details><summary><span class="qno">3.2</span><h3>Existing permits and procedures</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
+        <div class="more">
+          <dl class="facts"><dt>Please send</dt><dd>Any planning or building permit issued or applied for, EIA, statements from the city, Prague Institute of Planning (IPR), heritage office or other authorities.</dd></dl>
+        </div></details>
+      <details><summary><span class="qno">3.3</span><h3>Is your scheme's height approved?</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
+        <div class="more">
+          <p>Pankrác has a sensitive skyline, so tower heights are often negotiated.</p>
+          <dl class="facts"><dt>Our model of it</dt><dd>Diagrid tower parapet <span class="num">83.8 m</span>, plot ratio (FAR) <span class="num">6.06</span>, built-up ratio <span class="num">55 %</span>.</dd>
+          <dt>Please confirm</dt><dd>Is this approved, agreed in principle, or a concept only?</dd></dl>
+        </div></details>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-no">4</span><h2>Site and existing scheme</h2>
+      <p>Facts that are still estimates in our model.</p></div>
+    <div class="list">
+      <details data-start><summary><span class="qno">4.1</span><h3>Official plot area</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
+        <div class="more">
+          <p>Plot ratio and built-up ratio are calculated from this number, so it must be exact.</p>
+          <dl class="facts"><dt>Our sources</dt><dd><span class="num">16,463 m²</span> (parcel union), <span class="num">16,474 m²</span> (cadastre sum), <span class="num">16,487 m²</span> (ČÚZK WFS). About <span class="num">53 m²</span> of the modelled footprints lies outside the plot.</dd>
+          <dt>Please send</dt><dd>Extract from the land register (výpis z katastru) with the list of 11 parcels, and the geodetic survey if one exists.</dd></dl>
+        </div></details>
+      <details><summary><span class="qno">4.2</span><h3>Drawings of your scheme</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
+        <div class="more">
+          <dl class="facts"><dt>Now assumed</dt><dd>All storey heights and counts are read from the renders. The basement is assumed.</dd>
+          <dt>Please send</dt><dd>Plans, sections, floor-to-floor heights, in DWG, IFC or PDF.</dd></dl>
+        </div></details>
+      <details><summary><span class="qno">4.3</span><h3>Ground conditions and utilities</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
+        <div class="more">
+          <p>Deep basements near Pankrác need early information on soil, water and the metro.</p>
+          <dl class="facts"><dt>Please send</dt><dd>Geotechnical survey, groundwater level, metro protection zones, utility connection points and capacities (power, water, sewer, heating, gas).</dd></dl>
+        </div></details>
+      <details><summary><span class="qno">4.4</span><h3>The white arched building to the north-east</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
+        <div class="more">
+          <p>The renders show it in white massing style, unlike the other neighbours.</p>
+          <dl class="facts"><dt>Please confirm</dt><dd>Is it existing, approved, or part of your scheme?</dd></dl>
+        </div></details>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-no">5</span><h2>Process and deliverables</h2>
+      <p>How you want us to work with you.</p></div>
+    <div class="list">
+      <details><summary><span class="qno">5.1</span><h3>Timeline and first deliverable</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
+        <div class="more">
+          <dl class="facts"><dt>Please send</dt><dd>Key dates, and which stage you need first: feasibility study, design study, or permit documentation.</dd></dl>
+        </div></details>
+      <details><summary><span class="qno">5.2</span><h3>Project team</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
+        <div class="more">
+          <dl class="facts"><dt>Please send</dt><dd>Who is appointed or planned: structural and MEP engineers, cost consultant, hotel operator, project manager. Contacts for each.</dd></dl>
+        </div></details>
+      <details><summary><span class="qno">5.3</span><h3>Formats you need</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
+        <div class="more">
+          <dl class="facts"><dt>We can supply</dt><dd>IFC (BIM), DWG/DXF drawings, area schedules in Excel, renders, 3D web viewer, cost plan.</dd>
+          <dt>Please confirm</dt><dd>Which of these you need, and in Czech or English.</dd></dl>
+        </div></details>
+    </div>
+  </section>
+
+  <footer>Questions marked “Needed to start” let us fill the programme and the rules file and begin the proposed design. The rest can follow in the next weeks.</footer>
+</div>
+
+<script>
+(function () {
+  const all = [...document.querySelectorAll('details')];
+  const start = all.filter(d => d.hasAttribute('data-start'));
+  document.getElementById('c-all').textContent = '(' + all.length + ')';
+  document.getElementById('c-start').textContent = '(' + start.length + ')';
+
+  const filterBtns = document.querySelectorAll('[data-filter]');
+  filterBtns.forEach(b => b.addEventListener('click', () => {
+    const only = b.dataset.filter === 'start';
+    filterBtns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    all.forEach(d => { d.hidden = only && !d.hasAttribute('data-start'); });
+    document.querySelectorAll('section').forEach(s => {
+      s.hidden = ![...s.querySelectorAll('details')].some(d => !d.hidden);
+    });
+  }));
+
+  const toggle = document.getElementById('toggle-all');
+  toggle.addEventListener('click', () => {
+    const visible = all.filter(d => !d.hidden);
+    const open = !visible.every(d => d.open);
+    visible.forEach(d => { d.open = open; });
+    toggle.textContent = open ? 'Collapse all' : 'Expand all';
+  });
+})();
+</script>

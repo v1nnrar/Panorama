@@ -10,7 +10,8 @@ Read `CLAUDE.md` first; its conventions and agent roles apply.
 2. **Pick one item**: the highest open item in the backlog below that is not blocked. If the user left new
    instructions or files (new commits by the user, files in `01_brief/`, `02_regulations/`, `04_proposed/`),
    handle those first, using the matching agent's role.
-3. **Baseline.** Note the current `06_reports/match_score.json` mean (and per camera) and the metrics in
+3. **Check cameras on context** with `tools/project_outlines.py` (white = real surroundings) before trusting a score.
+4. **Baseline.** Note the current `06_reports/match_score.json` mean (and per camera) and the metrics in
    `03_existing/model/metrics.json`.
 4. **Change** one thing, in the source of truth (`params.yaml`, `pipeline/*.py`, `tools/*.py`), never in generated files.
 5. **Rebuild & check** (fast): `.venv/bin/python build.py 03_existing/params.yaml --render --engine WORKBENCH`
@@ -56,7 +57,8 @@ Read `CLAUDE.md` first; its conventions and agent roles apply.
 - [ ] A10. Landscape: courtyard paths, planting and trees against the top view.
 
 - [ ] A11. C2 east end hides B's timber base in render-004 (client shows the base): check C2 length / whether the client render omits it.
-- [ ] A13. Tower A shows above D in render-003 where the client image has sky: check A's position/height from the north.
+- [x] A13. Tower A shows above D in render-003 where the client image has sky: the client render omits A (audit 2026-11-09).
+- [ ] A14. Calibrate render-002 (SE) on context and triangulate A and B2 with render-000 (two-view check, see audit report).
 - [ ] A12. B2 roof terrace: green roof + planters around the PV penthouse (aerial render-000).
 
 ### B. Completeness of the plan

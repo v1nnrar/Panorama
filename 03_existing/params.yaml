@@ -16,7 +16,10 @@ buildings:
   - id: A
     name: Diagrid tower (T2)
     use: Residential / hotel tower
-    footprint: [[-11.98, 13.74], [21.05, 19.8], [27.34, -14.89], [-5.35, -20.62]]
+    # MEASURED (audit 2026-11-09): moved 4.15 m W, 10.0 m N of the PSG v3 fit. Calibrated aerial (render-000, camera solved on
+    # context buildings, 4 px RMS) puts the roof/base corner at centre ≈ (2.7, 14.4); the lean-corrected top-view board gives
+    # (4.6, 11.2). Shift limited to +10 m N so the facade keeps a 3 m gap to D (D verified in the same view).
+    footprint: [[-16.13, 23.74], [16.9, 29.8], [23.19, -4.89], [-9.5, -10.62]]
     height: 83.8                         # ESTIMATED from render-006 + render-000: 7 diagrid modules x 3 storeys on the podium;
                                          # tower height/width ratio in render-006 gives ~3.7 m storeys (5.0 + 21 x 3.7 + 1.1 parapet). Was 88.2 (PSG v3 estimate), which put the roof ~2
                                          # storeys above the client's in the tuned aerial and above D in render-003.
@@ -42,7 +45,8 @@ buildings:
   - id: A0
     name: Diagrid tower podium + courtyard link
     use: Lobby / restaurant
-    footprint: [[48.0, -32.0], [0.89, -23.59], [31.99, -18.14], [24.27, 24.46], [-16.67, 16.95], [-8.54, -25.22], [-9.5, -31.0], [46.5, -41.0]]
+    # MEASURED (audit): podium re-drawn around the moved tower A (+3 m) plus the original link strip to the east
+    footprint: [[-12.5, -13.62], [-11.99, -13.53], [-19.52, 25.46], [-15.47, 26.91], [9.38, 31.47], [19.57, 31.88], [26.68, -7.32], [26.28, -7.39], [30.0, -29.3], [26.68, -29.44], [48.0, -32.0], [46.5, -41.0], [-9.5, -31.0]]
     notes: ESTIMATED glazed single-storey base with green roof and timber fascia (render-006, render-000 link)
     storeys:
       - {name: GF, height: 5.0, use: Lobby / restaurant}
@@ -83,7 +87,9 @@ buildings:
   - id: B2
     name: Terraced block (E)
     use: Residential
-    footprint: [[69.96, -75.24], [65.79, -52.87], [89.04, -48.54], [82.15, -11.58], [94.48, -9.26], [105.6, -68.59]]
+    # MEASURED (audit): south face ~8 m further north and east end ~5 m further west than the PSG fit (calibrated aerial:
+    # terrace edge SW (65.9, -68.5), SE (100.4, -61.3), vertical check 25.8 m); now inside the official plot.
+    footprint: [[68.0, -66.2], [65.79, -52.87], [89.04, -48.54], [82.15, -11.58], [94.48, -9.26], [99.45, -60.31]]
     height: 26.9                         # PSG v3 estimate (top terrace level)
     notes: >-
       8 storeys, straight walls (render-000 aerial, render-004): deep white balcony slabs with planters on every floor,
@@ -92,8 +98,8 @@ buildings:
     storeys:
       - {name: GF, height: 4.5, use: Retail}
       - {name: L, count: 6, start: 1, height: 3.0, use: Apartments}
-      # ESTIMATED from render-000: compact PV-roofed penthouse at the SE corner of the L, 3 m terrace to the street edges
-      - {name: PH, height: 3.0, use: Apartments, footprint: [[102.10, -66.19], [86.37, -69.13], [83.79, -55.37], [99.52, -52.43]]}
+      # MEASURED (audit, calibrated aerial): PV penthouse ≈ 26 x 9.5 m along tower B's south face, terrace to the south
+      - {name: PH, height: 3.0, use: Apartments, footprint: [[72.0, -61.5], [69.8, -52.8], [96.4, -47.2], [97.8, -55.3]]}
     facade:
       - {type: curtain, from: 1, to: 1, glass: Glass dark}
       - {type: curtain, from: 2, glass: Glass, mullion: 1.8}
@@ -200,7 +206,9 @@ buildings:
   - id: E
     name: Existing corner office (parcel 1133/12)
     use: Office (existing, kept)
-    footprint: [[94.76, 12.3], [125.82, 18.02], [126.85, 12.26], [125.39, 12.02], [125.78, 10.41], [131.87, 11.17], [125.83, -4.35], [120.4, -5.47], [120.42, -6.96], [119.35, -7.83], [117.94, -7.24], [117.57, -5.99], [110.95, -6.87], [115.34, -31.18], [106.73, -53.17]]
+    # AUDIT: OSM polygon trimmed at y ≈ -6.9. Its 45 m wedge south to (106.73, -53.17) is ramp/greenery on the ČÚZK
+    # orthophoto (00_site/survey/grid_ortho.jpg), not building; render-002 shows a compact block.
+    footprint: [[94.76, 12.3], [125.82, 18.02], [126.85, 12.26], [125.39, 12.02], [125.78, 10.41], [131.87, 11.17], [125.83, -4.35], [120.4, -5.47], [120.42, -6.96], [119.35, -7.83], [117.94, -7.24], [117.57, -5.99], [110.95, -6.87], [98.27, -6.87]]
     height: 32.0                         # OSM / archiMap
     notes: Existing building kept in the client scheme (render-002); dark glass, white frame, bronze crown
     storeys:
@@ -245,13 +253,13 @@ render:
   sun_azimuth: 200
   sun_altitude: 42
   cameras:
-    # ESTIMATED from render-000: corner fit of towers A and B (roof + base), then Workbench search on score_match
-    # (lens/position/target). Long lens from far SSW, as in the client aerial. Resolution = client aspect 1280x905.
-    - {name: aerial_S_like_render000, location: [-140.8, -453.3, 372.8], target: [21.4, -11.3, 17], lens: 76, resolution: [1280, 905]}
-    - {name: street_SW_like_render005, location: [-70, -86, 1.7], target: [8, -42, 37], lens: 36, shift_y: 0.075, resolution: [1400, 1448]}   # ESTIMATED from render-005: tools/cam_search.py (retuned after A height fix), client aspect 700x724
+    # CALIBRATED (audit) on context only: 6 slab-block roof corners, 2 drum roofs, 104 m tower edges -> 4.4 px RMS.
+    # (Earlier 78 mm / 76 mm cameras were tuned on our own buildings and absorbed their errors.)
+    - {name: aerial_S_like_render000, location: [-93.67, -255.78, 218.91], target: [14.88, -5.5, 20], lens: 36.86, resolution: [1280, 905]}
+    - {name: street_SW_like_render005, location: [-74, -86, 1.7], target: [3.5, -37.5, 37], lens: 32.5, shift_y: 0.075, resolution: [1400, 1448]}   # cam_search after the audit geometry fix; client aspect 700x724
     # ESTIMATED from render-004: corner fit of tower B (nearest corner = SW, so the camera stands SW of B, not SE)
-    - {name: street_SE_like_render004, location: [-7.9, -115.7, 1.7], target: [42.1, -70.9, 1.7], lens: 41.5, shift_y: 0.479, resolution: [1244, 1484]}   # refined with tools/cam_search.py; client aspect 622x742
-    - {name: dusk_diagrid_like_render006, location: [-48, -15, 1.7], target: [11, 0, 42], lens: 21, resolution: [1086, 1742]}   # ESTIMATED from render-006: tools/cam_search.py, client aspect 543x871
+    - {name: street_SE_like_render004, location: [-7.9, -119.7, 1.7], target: [42.1, -70.9, 4.7], lens: 40.5, shift_y: 0.454, resolution: [1244, 1484]}   # cam_search after the audit; client aspect 622x742
+    - {name: dusk_diagrid_like_render006, location: [-48, -9, 1.7], target: [0.5, 4.5, 42], lens: 21.5, shift_y: -0.025, resolution: [1086, 1742]}   # cam_search after the audit (A moved); client aspect 543x871
     # ESTIMATED from render-003: least-squares fit of D's corners (NE/NW parapet + underside, joint, SE) at eye height,
     # level camera with vertical shift (client uses 2-point perspective); residuals ~10 px on 990x450. Camera stands NE of D.
     - {name: park_N_like_render003, location: [20.1, 108.6, 1.7], target: [1.4, 51.6, 1.7], lens: 19.6, shift_y: 0.153, resolution: [1980, 900]}

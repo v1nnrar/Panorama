@@ -4,15 +4,15 @@
     "storeys_above_ground": 22,
     "gfa_below_ground_m2": 17194.0,
     "height_top_of_parapet_m": 83.8,
-    "footprint_area_m2": 8757.7,
-    "gfa_m2": 98224.9,
-    "net_floor_area_m2": 93450.7,
+    "footprint_area_m2": 8277.5,
+    "gfa_m2": 91482.8,
+    "net_floor_area_m2": 87028.2,
     "rooms": 0,
     "site_area_m2": 16491.7,
-    "built_up_ratio": 0.531,
-    "plot_ratio_far": 5.956,
-    "unbuilt_ratio": 0.472,
-    "footprint_outside_plot_m2": 53.2,
+    "built_up_ratio": 0.502,
+    "plot_ratio_far": 5.547,
+    "unbuilt_ratio": 0.499,
+    "footprint_outside_plot_m2": 9.1,
     "min_setback_m": 0.0,
     "per_building": [
       {
@@ -34,9 +34,9 @@
         "storeys": 1,
         "height_parapet_m": 5.9,
         "target_height_m": null,
-        "footprint_m2": 2288.9,
-        "gfa_m2": 2288.9,
-        "nfa_m2": 2191.2,
+        "footprint_m2": 2704.6,
+        "gfa_m2": 2704.6,
+        "nfa_m2": 2616.5,
         "rooms": 0
       },
       {
@@ -58,9 +58,9 @@
         "storeys": 8,
         "height_parapet_m": 26.9,
         "target_height_m": 26.9,
-        "footprint_m2": 1297.1,
-        "gfa_m2": 9303.4,
-        "nfa_m2": 8813.1,
+        "footprint_m2": 847.8,
+        "gfa_m2": 6165.3,
+        "nfa_m2": 5726.5,
         "rooms": 0
       },
       {
@@ -118,9 +118,9 @@
         "storeys": 9,
         "height_parapet_m": 32.0,
         "target_height_m": 32.0,
-        "footprint_m2": 1132.5,
-        "gfa_m2": 10192.8,
-        "nfa_m2": 9581.4,
+        "footprint_m2": 685.9,
+        "gfa_m2": 6173.1,
+        "nfa_m2": 5820.2,
         "rooms": 0
       },
       {

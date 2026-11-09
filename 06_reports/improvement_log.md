@@ -107,3 +107,16 @@ client's renders, higher is better).
 - Wing lengths: outline already coincides with render-003 after iteration 7; PSG footprint kept.
 - Score: Workbench mean 0.4165 → 0.4170. Cycles (park + aerial re-rendered): mean **0.4486 → 0.4488**. In the park view the
   slot is mostly behind one of our generated courtyard trees. IFC 0 errors; test block 6/6.
+
+## 2026-11-09 — measurement audit (user request) — KEPT
+- Full report: `06_reports/audit_measurements_2026-11-09.md`. New tool `tools/project_outlines.py` (model + context outlines
+  through each camera onto the client images → `03_existing/overlays/outline_*.jpg`).
+- Key finding: the cameras had been tuned on our own buildings and absorbed their errors; the real surroundings were
+  70–150 px off in render-000. Aerial camera re-calibrated on context only (slab blocks, drums, 104 m tower): 4.4 px RMS.
+- Corrections from back-projection + ČÚZK orthophoto + top-view board: **A** moved 4.15 m W / 10 m N (height 83.8 m
+  confirmed, independent vertical 86.3 m); **A0** re-drawn; **B2** south face 8 m north, east end 5 m west, penthouse along
+  tower B's south face (outside-plot area 53 → 9 m²); **E** OSM wedge (not a building on the orthophoto) trimmed.
+  B, C1/C2, D confirmed within 1–3 m.
+- Street cameras re-tuned with cam_search. Cycles mean **0.4488 → 0.4236**: lower because the aerial and park cameras now
+  sit in their measured places instead of the positions that best matched our errors; visual alignment of buildings
+  *and* surroundings is clearly better (see outline overlays). GFA 98,225 → 91,483 m². IFC 0 errors; test block 6/6.

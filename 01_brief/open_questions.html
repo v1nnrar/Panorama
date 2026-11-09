@@ -313,13 +313,13 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
 <div class="q key sub" data-q="How many apartments of each size?" data-table="1">
   <p class="q-label">How many apartments of each size?</p>
   <div class="tbl"><table>
-    <thead><tr><th>Layout</th><th>Typical size</th><th>How many?</th><th>Your size (m²)</th></tr></thead>
+    <thead><tr><th>Layout</th><th>Typical size</th><th>How many?</th></tr></thead>
     <tbody>
-      <tr data-row="1+kk"><td>1+kk</td><td class="n">30–40 m²</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-0" aria-label="1+kk: how many"></td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-s-0" aria-label="1+kk: your size"></td></tr>
-      <tr data-row="2+kk"><td>2+kk</td><td class="n">50–65 m²</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-1" aria-label="2+kk: how many"></td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-s-1" aria-label="2+kk: your size"></td></tr>
-      <tr data-row="3+kk"><td>3+kk</td><td class="n">75–95 m²</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-2" aria-label="3+kk: how many"></td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-s-2" aria-label="3+kk: your size"></td></tr>
-      <tr data-row="4+kk"><td>4+kk</td><td class="n">100–130 m²</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-3" aria-label="4+kk: how many"></td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-s-3" aria-label="4+kk: your size"></td></tr>
-      <tr class="ph" data-row="Penthouse"><td>Penthouse</td><td class="n">150 m² +</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-4" aria-label="Penthouse: how many"></td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-s-4" aria-label="Penthouse: your size"></td></tr>
+      <tr data-row="1+kk"><td>1+kk</td><td class="n">30–40 m²</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-0" aria-label="1+kk: how many"></td></tr>
+      <tr data-row="2+kk"><td>2+kk</td><td class="n">50–65 m²</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-1" aria-label="2+kk: how many"></td></tr>
+      <tr data-row="3+kk"><td>3+kk</td><td class="n">75–95 m²</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-2" aria-label="3+kk: how many"></td></tr>
+      <tr data-row="4+kk"><td>4+kk</td><td class="n">100–130 m²</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-3" aria-label="4+kk: how many"></td></tr>
+      <tr class="ph" data-row="Penthouse"><td>Penthouse</td><td class="n">150 m² +</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-4" aria-label="Penthouse: how many"></td></tr>
     </tbody></table></div>
   <span class="note">Typical sizes are for orientation only.</span>
 </div>
@@ -611,7 +611,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
         if (q.dataset.table) {
           a = [...q.querySelectorAll('tr[data-row]')].map(r => {
             const v = [...r.querySelectorAll('input')].map(i => i.value.trim());
-            return v[0] || v[1] ? r.dataset.row + ': ' + (v[0] || '?') + ' units, ' + (v[1] || '?') + ' m²' : '';
+            return v[0] ? r.dataset.row + ': ' + v[0] : '';
           }).filter(Boolean).join('; ');
         } else {
           const t = q.querySelector('textarea, input[type="text"]');

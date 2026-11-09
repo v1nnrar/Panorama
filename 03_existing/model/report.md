@@ -35,3 +35,11 @@ Source: `params.yaml`
 | D | Butterfly office (T1 bow-tie) | Office | 8 | 32.3 | 32.3 | 1061.6 | 10456.2 | 9919.9 |
 | E | Existing corner office (parcel 1133/12) | Office (existing, kept) | 9 | 32.0 | 32.0 | 685.9 | 6173.1 | 5820.2 |
 | U | Underground parking | Parking / technical | 0 | 0.3 |  | 8597.0 | 0 | 0 |
+
+## Compliance
+
+| Rule | Limit | Value | Status | Source |
+|---|---|---|---|---|
+| Max regulated building height (storey range 27) | ≤ 100 | 83.8 | ✅ PASS | MPP text čl. 98 odst. 3 (range 27: >21 RNP, max 100 m); Z 02 / KLZ 058 map — squares over the plot read 27 |
+| Max regulated above-ground storeys (range 27) | ≤ 27 | 22 | ✅ PASS | MPP čl. 98 odst. 3 — INTERPRETATION: range label 27 = maximum RNP (ranges 21 = 13–21, 15 = 10–15 …) |
+| Regulated floor area (HPPreg) — not set in stabilised areas |  | 91482.8 | ℹ️ | MPP čl. 96 odst. 2: HPPreg/Zmax apply only to [T] and [R] areas; plot is [S] (KLZ 058 map, no T hatch) |

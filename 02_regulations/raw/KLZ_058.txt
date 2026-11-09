@@ -1,0 +1,163 @@
+   Z         Z          Z         Z         Z         Z         Z         Z         Z         Z           zN      zN     zN     N      N      N        N     N      N        N
+   01        02        03        04        05        06        07        08        09        10           11      12     13     14     15     16       17    18     19       20
+                    TYP STRUKTURY: hybridní struktura
+
+
+
+
+                                                                                                                   058 / Horní Pankrác
+SPRÁVNÍ OBVOD
+
+
+                                                                                                                          Z                            (03)
+Praha 4
+
+MĚSTSKÁ ČÁST
+                                                                                                               ZASTAVITELNOST: zastavitelná        TYP STRUKTURY: hybridní
+Praha 4                                                                                                                 stavební                          struktura
+KATASTRÁLNÍ ÚZEMÍ
+Krč, Michle, Nusle
+
+ROZLOHA
+                                                                                                                        /O                              [S]
+                                                                                                               ZPŮSOB VYUŽITÍ: zastavitelná   MÍRA STABILITY: stabilizovaná
+40 ha                                                                                                                   obytná
+
+
+
+
+POPIS CÍLOVÉHO CHARAKTERU LOKALITY
+Dotvořit a posilovat cílový charakter zastavitelné, stabilizované, obytné lokality Horní Pankrác se strukturou hybridní. Lokalita je součástí krajiny
+vymezené v ZÚR s názvem Městská krajina Prahy.
+Lokalita Horní Pankrác je vymezena jako lokalita s hybridní strukturou. Cílem navržených regulativů je zachování prostorového uspořádání ve stabilizované
+části, dokomponování metropolitních a čtvrťových tříd 5. května, Na Pankráci, Budějovická, ve vymezených transformačních plochách doplnění zástavby s
+ohledem na potenciál místa a respektování výškové kompozice lokality, rozvíjení různorodosti a posílení kulturní funkce. Využití lokality je stanoveno jako
+obytné, součástí lokality jsou budovy administrativy a komerční vybavenosti. Je navržena úprava křižovatky ulic 5. května a Na Strži. Transformační plochy ve
+východní části lokality mají významný potenciál pro širší okolí.
+
+
+
+
+Územní plán hl. m. Prahy (Metropolitní plán) | příloha č. 4 — krycí listy lokalit | 058 / Horní Pankrác
+                                                                                                          058 / Horní Pankrác
+                                                                                                                  Z(03) O [S]
+
+
+
+
+Územní plán hl. m. Prahy (Metropolitní plán) | příloha č. 4 — krycí listy lokalit | 058 / Horní Pankrác
+                                                                                                                             058 / Horní Pankrác
+                                                                                                                                     Z(03) O [S]
+
+100 / MĚSTSKÁ PŘÍRODA
+          Individuální regulativy nejsou stanoveny.
+
+
+
+200 / VYSTAVĚNÉ PROSTŘEDÍ
+          -> (03) Hybridní struktura, čl. 43
+
+          Uliční prostranství
+          Náměstí a ulice metropolitní úrovně: 5. května
+          Náměstí a ulice čtvrťové úrovně: náměstí Arkády, Budějovická, Na Pankráci
+          -> Hierarchie uličních prostranství, čl. 82
+
+          Výšková regulace
+          Místo se stanovenou hladinou věží XIV. Pankrác
+          Podíl zástavby, pro který je možné uplatnit hladinu věží: 75 %
+          Maximální výška věží: 70 m
+
+          -> Hladina věží, čl. 100
+          -> Panoramata a veduty k ochraně čl. 104—105
+          -> Příloha č. 1 textové části: Panoramata a veduty
+
+
+300 / VYUŽITÍ ÚZEMÍ
+          -> Zastavitelná obytná lokalita a plocha, čl. 63
+          Individuální regulativy nejsou stanoveny.
+
+
+400 / STABILITA A MÍRA VYUŽITÍ ÚZEMÍ
+          -> Typy stability lokalit, čl. 69
+
+          Zastavitelné transformační a rozvojové plochy doplňující stávající struktury
+          Transformační plocha 411/058/2235 o rozloze 120967 m2
+          Typ struktury: hybridní struktura
+          Způsob využití: obytná
+          Zmax: 70 %
+          Zz: 35 %
+          Vz: 8,0
+          Transformační plocha 411/058/2336 o rozloze 22809 m2
+          Typ struktury: hybridní struktura
+          Způsob využití: obytná
+          Zmax: 100 %
+          Zz: 60 %
+          Vz: 8,0
+          -> Míra využití území k zastavění pro transformační a rozvojové plochy doplňující stávající struktury, čl. 76
+
+
+
+
+500 / KRAJINNÁ INFRASTRUKTURA
+          Individuální regulativy nejsou stanoveny.
+
+
+600 / DOPRAVNÍ INFRASTRUKTURA
+
+          Veřejná doprava / Metro
+          621/-/1 Trasa metra D - úsek Pankrác - Nové Dvory — návrh
+             Při umisťování metra minimalizovat vliv na přírodní hodnoty nivy Kunratického potoka pod Zámeckým rybníkem a na hydrologické poměry v území.
+          621/-/21 Výhledové tangenciální spojení kolejovou dopravou - úsek Smíchovské nádraží - Pankrác — územní rezerva
+             Koridor je vymezen pro budoucí upřesnění nového kolejového tangenciálního spojení veřejné dopravy. Převážně podzemní vedení trasy, případně vedení
+             veřejným prostranstvím, neomezí umisťování nových nebo změny stávajících budov.
+          621/-/22 Výhledové tangenciální spojení kolejovou dopravou - úsek Pankrác - Želivského — územní rezerva
+             Koridor je vymezen pro budoucí upřesnění nového kolejového tangenciálního spojení veřejné dopravy. Převážně podzemní vedení trasy, případně vedení
+             veřejným prostranstvím, neomezí umisťování nových nebo změny stávajících budov.
+          621/-/3 Trasa metra D - úsek Náměstí Míru - Pankrác — návrh
+          621/058/1001 Vestibul stanice metra Pankrác (D) — návrh
+          621/058/1020 Stanice metra Pankrác (D) — návrh
+          621/058/1045 Vestibul stanice metra Pankrác (D) 2 — návrh
+
+Územní plán hl. m. Prahy (Metropolitní plán) | příloha č. 4 — krycí listy lokalit | 058 / Horní Pankrác
+                                                                                                                                  058 / Horní Pankrác
+                                                                                                                                          Z(03) O [S]
+          621/058/1046 Vestibul stanice metra Pankrác (D) 3 — návrh
+          -> Systém veřejné dopravy, čl. 121
+          -> Metro, čl. 122
+
+          Veřejná doprava / Tramvajová doprava
+          622/-/9 Tramvajová trať Pankrác - Budějovická — návrh
+               V rámci následných řízení prověřit možnosti kompenzace ztráty stávajících parkovacích míst, ke které by mohlo výstavbou tramvajové tratě dojít.
+          -> Systém veřejné dopravy, čl. 121
+          -> Tramvajová doprava, čl. 123
+
+          Bezmotorová doprava
+          650/-/127 Cyklotrasa na magistrále — návrh
+          650/-/222 Cyklotrasa na Pankráci — návrh
+          -> Bezmotorová doprava, čl. 127—128
+
+
+
+700 / TECHNICKÁ INFRASTRUKTURA
+          Individuální regulativy nejsou stanoveny.
+
+
+800 / VEŘEJNÁ VYBAVENOST
+          Individuální regulativy nejsou stanoveny.
+
+
+900 / VEŘEJNÝ ZÁJEM
+
+          Veřejně prospěšné stavby dopravní infrastruktury
+          910-621/-/1 Trasa metra D - úsek Pankrác - Nové Dvory
+          910-621/-/3 Trasa metra D - úsek Náměstí Míru - Pankrác
+          910-622/-/9 Tramvajová trať Pankrác - Budějovická
+          -> Veřejně prospěšné stavby, veřejně prospěšná opatření, stavby a opatření k zajišťování obrany a bezpečnost státu a plochy asanací, čl. 150—152
+          Navrhované veřejně prospěšné stavby, veřejně prospěšná opatření, stavby a opatření k zajišťování obrany a bezpečnost státu jsou vymezeny v grafické
+          části ve výkrese Z 04 a jejich výčet je uveden v příloze č. 2/900.
+
+
+
+
+Územní plán hl. m. Prahy (Metropolitní plán) | příloha č. 4 — krycí listy lokalit | 058 / Horní Pankrác
+

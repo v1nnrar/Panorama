@@ -137,5 +137,35 @@
       }
     ]
   },
-  "compliance": []
+  "compliance": [
+    {
+      "id": "max_height",
+      "label": "Max regulated building height (storey range 27)",
+      "metric": "height_top_of_parapet_m",
+      "max": 100,
+      "source": "MPP text čl. 98 odst. 3 (range 27: >21 RNP, max 100 m); Z 02 / KLZ 058 map — squares over the plot read 27",
+      "value": 83.8,
+      "limit": "≤ 100",
+      "status": "PASS"
+    },
+    {
+      "id": "max_storeys",
+      "label": "Max regulated above-ground storeys (range 27)",
+      "metric": "storeys_above_ground",
+      "max": 27,
+      "source": "MPP čl. 98 odst. 3 — INTERPRETATION: range label 27 = maximum RNP (ranges 21 = 13–21, 15 = 10–15 …)",
+      "value": 22,
+      "limit": "≤ 27",
+      "status": "PASS"
+    },
+    {
+      "id": "hppreg_info",
+      "label": "Regulated floor area (HPPreg) — not set in stabilised areas",
+      "metric": "gfa_m2",
+      "source": "MPP čl. 96 odst. 2: HPPreg/Zmax apply only to [T] and [R] areas; plot is [S] (KLZ 058 map, no T hatch)",
+      "value": 91482.8,
+      "limit": "",
+      "status": "INFO"
+    }
+  ]
 }

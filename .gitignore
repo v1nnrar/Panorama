@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 *.blend1
 00_site/survey/raw/*_jtsk.png
+02_regulations/raw/MPP_priloha2_tabulky.pdf
+02_regulations/raw/KLZ_0[45][0-9].pdf
+02_regulations/raw/klz058_img/

@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="utf-8">
+    <meta
+        http-equiv="X-UA-Compatible"
+        content="IE=edge"
+    >
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+    <meta
+        name="author"
+        content="IPR Praha"
+    >
+    <meta
+        name="copyright"
+        content="IPR Praha"
+    >
+    <link
+        rel="apple-touch-icon"
+        href="img/logo_praha.png"
+    >
+    <link
+        rel="icon"
+        href="favicon.ico"
+    >
+    <title>Metropolitní Plán Prahy</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-N8DKSJD9M9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-N8DKSJD9M9');
+    </script> -->
+
+    <!-- ArcGIS JS 4.x -->
+    <link
+        rel="stylesheet"
+        href="https://js.arcgis.com/4.13/esri/css/main.css"
+    >
+
+    <!--
+    /**
+    * @license
+    * MyFonts Webfont Build ID 581534
+    *
+    * The fonts listed in this notice are subject to the End User License
+    * Agreement(s) entered into by the website owner. All other parties are
+    * explicitly restricted from using the Licensed Webfonts(s).
+    *
+    * You may obtain a valid license from one of MyFonts official sites.
+    * http://www.fonts.com
+    * http://www.myfonts.com
+    * http://www.linotype.com
+    *
+    */
+    -->
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="css/fonts/MyFontsWebfontsKit.css"
+    >
+
+    <script src="./modules/js/jquery/jqeury.min.js"></script>
+    <script src="./modules/js/jquery/jquery-ui.min.js"></script>
+    <script src="./modules/js/jquery/fileSaver.min.js"></script>
+
+    <!-- FINAL STYLESHEETS -->
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="./modules/css/style.css"
+    />
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="css/base.css"
+    />
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="css/legendaStyly.css"
+    />
+
+    <script type="module">
+        import keycloakJs from 'https://cdn.jsdelivr.net/npm/keycloak-js@26.2.1/+esm'
+        window.Keycloak = keycloakJs
+    </script>
+
+    <script src="./conf/paths.js"></script>
+
+    <script src="js/tabs.js"></script>
+
+    <script src="js/query.js"></script>
+    <script src="js/queryAdvanced.js"></script>
+    <script src="js/queryConfig.js"></script>
+
+
+    <!-- <script src="js/identify.js"></script>
+  <script src="js/identifyConfig.js"></script> -->
+    <script src="js/odkazyLegenda.js"></script>
+    <script src="js/howToUse.js"></script>
+    <script src="js/help.js"></script>
+
+    <script src="js/CookieBanner.js"></script>
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="css/cookieBanner.css"
+    >
+
+
+
+</head>
+
+<body>
+
+    <div id="initialOverlay">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div
+        id="warningBox"
+        style="display: none;"
+    ></div>
+
+    <div id="firstHelpOverlay">
+        <div class="first-view-help-wrapper">
+            <div class="first-view-help-text active"></div>
+            <div class="first-view-help-controls">
+                <div class="first-view-help-bullets"></div>
+                <div class="first-view-help-btns">
+                    <!-- <div class="first-view-help-btn acknowledge">dict_disclaimer_btn_1</div>
+          <a href="https://praha.eu/web/metropolitniplan/ke-stazeni-2026" target="_blank"><div class="first-view-help-btn go-to-download">dict_disclaimer_btn_2</div></a> -->
+                    <div class="first-view-help-btn skip">Přeskočit</div>
+                    <div class="first-view-help-btn next">Další krok</div>
+                </div>
+                <div class="first-view-help-cookie">
+                    <div class="first-view-checkbox"></div>
+                    <div class="first-view-help-cookie-title">Příště nezobrazovat</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="nav-bar">
+        <div class="title-div">
+            <span class="title-main">dict_title</span>
+            <!-- <span class="title-logo"></span> -->
+        </div>
+        <div class="textova-cast-div">
+            <div class="textova-cast-btn">dict_textova_cast</div>
+        </div>
+        <div class="menu-div">
+            <div id="menuWidgetBox"></div>
+        </div>
+        <div class="layer-toggle-div">
+            <button class="layer-toggle-btn"></button>
+            <span class="layer-toggle">dict_vice_vrstev</span>
+        </div>
+    </div>
+
+    <div class="menu-div-mobile mobile-block">
+        <span class="mobile-menu-active-layer">Z02</span>
+        <div class="mobile-menu-close-btn-buffer">
+            <div class="mobile-menu-close-btn">
+                <img src="img/figma_arrow_bottom.svg"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-wrapper-div">
+        <div class="search-btn">
+            <img
+                class="search-btn-img"
+                src="img/search.svg"
+            >
+        </div>
+        <div class="search-wrapper">
+            <div class="search-close-btn-wrapper">
+                <div class="search-close-btn">
+                    <img src="img/figma_arrow_bottom.svg">
+                </div>
+            </div>
+            <div id="searchWidgetBox">
+                <div id="searchTypeBox">
+                    <select
+                        name="searchType"
+                        id="searchTypeSelect"
+                    >
+                        <option value="MPPLocality">dict_lokality_mpp</option>
+                        <option value="Address">dict_head_search_adresy</option>
+                        <option value="Parcels">dict_head_search_parcely</option>
+                    </select>
+                </div>
+                <div id="searchParcelsFormBox"></div>
+                <div id="searchAddressFormBox"></div>
+                <div id="searchMPPLocalityFormBox"></div>
+            </div>
+        </div>
+    </div>
+
+    <a
+        class="language-btn-wrapper"
+        href="./?lang=en"
+    >
+        <div
+            class="language-btn hidden-xs"
+            title="English version"
+        >
+            EN
+        </div>
+    </a>
+
+    <div class="help-btn">
+        <img src="img/help.svg">
+    </div>
+
+    <div class="mpp-menu-btn">
+        <img src="img/menu.svg">
+    </div>
+    <div class="mpp-menu-div">
+        <div class="mpp-menu-close-btn">
+            <img src="img/menu-close-btn.svg">
+        </div>
+        <a
+            href="https://praha.eu/web/metropolitniplan"
+            target="_blank"
+            class="mpp-menu-item"
+        >
+            <div class="mpp-menu-title">Metropolitní plán</div>
+            <div class="mpp-menu-title-icon">&larr;</div>
+        </a>
+        <a
+            href="https://praha.eu/web/metropolitniplan/co-je-plan"
+            target="_blank"
+            class="mpp-menu-item"
+        >
+            <div class="mpp-menu-title">Co je plán</div>
+            <div class="mpp-menu-title-icon">&larr;</div>
+        </a>
+        <a
+            href="https://praha.eu/web/metropolitniplan/principy-planu"
+            target="_blank"
+            class="mpp-menu-item"
+        >
+            <div class="mpp-menu-title">Principy plánu</div>
+            <div class="mpp-menu-title-icon">&larr;</div>
+        </a>
+        <!-- <a href="" target="_blank" class="mpp-menu-item active">
+      <div class="mpp-menu-title">Prohlížení plánu</div>
+      <div class="mpp-menu-title-icon"></div>
+    </a> -->
+        <a
+            href="https://praha.eu/web/metropolitniplan/jak-pracovat-s-planem"
+            target="_blank"
+            class="mpp-menu-item"
+        >
+            <div class="mpp-menu-title">Jak pracovat s plánem</div>
+            <div class="mpp-menu-title-icon">&larr;</div>
+        </a>
+        <!-- <a href="https://praha.eu/web/metropolitniplan/pripominkovani-planu" target="_blank" class="mpp-menu-item">
+      <div class="mpp-menu-title">Připomínkování plánu</div>
+      <div class="mpp-menu-title-icon">&larr;</div>
+    </a> -->
+        <a
+            href="https://praha.eu/web/metropolitniplan/ke-stazeni"
+            target="_blank"
+            class="mpp-menu-item"
+        >
+            <div class="mpp-menu-title">Ke stažení</div>
+            <div class="mpp-menu-title-icon">&larr;</div>
+        </a>
+    </div>
+
+    <!-- Map Container  -->
+    <div class="map-wrapper">
+        <div id="mapViewDiv">
+            <div id="iprLogo">
+                <img src="img/ipr_logo.png">
+            </div>
+            <div id="homeButton">
+                <img src="img/home-button.svg">
+            </div>
+            <div class="scale-div">
+                <div id="scaleSelectBox"></div>
+            </div>
+            <div id="copyright"><span>dict_map_copyright</span>: © <span class="thisYear"></span> IPR Praha, © <span
+                    class="thisYear"
+                ></span> ČÚZK</div>
+            <div id="mppResultWindow"></div>
+            <!-- <div id="disclaimer">
+        <span>dict_disclaimer</span>
+      </div> -->
+        </div>
+        <div id="windowBox"></div>
+        <div id="mapViewOverlay"></div>
+
+
+    </div><!-- /.container -->
+
+    <div class="panels">
+        <div class="panel-btns">
+            <div
+                id="panelBtnSearch"
+                class="panel-btn mobile-flex"
+                title="Vyhledávání"
+            >
+                <div class="panel-btn-img">
+                    <img src="img/search.svg">
+                </div>
+            </div>
+            <div
+                id="panelBtnLegend"
+                class="panel-btn active"
+                title="Obsah a legenda"
+            >
+                <div class="panel-btn-img">
+                    <img src="img/layers-btn.svg">
+                </div>
+            </div>
+            <div
+                id="panelBtnBasemaps"
+                class="panel-btn"
+                title="Podkladové mapy"
+            >
+                <div class="panel-btn-img">
+                    <img src="img/basemaps.svg">
+                </div>
+            </div>
+            <div
+                id="panelBtnMeasure"
+                class="panel-btn"
+                title="Měření"
+            >
+                <div class="panel-btn-img">
+                    <img src="img/measure-btn.svg">
+                </div>
+            </div>
+            <div
+                id="panelBtnPrint"
+                class="panel-btn no-mobile"
+                title="Tisk"
+            >
+                <div class="panel-btn-img">
+                    <img src="img/print-btn.svg">
+                </div>
+            </div>
+            <div
+                id="panelBtnShare"
+                class="panel-btn"
+                title="Odkazy"
+            >
+                <div class="panel-btn-img">
+                    <img src="img/share-btn.svg">
+                </div>
+            </div>
+            <div
+                id="panelBtnInfo"
+                class="panel-btn"
+                title="Zapnout usnadnění výkladu MPP"
+            >
+                <div class="panel-btn-img">
+                    <img src="img/info.svg">
+                </div>
+            </div>
+            <!-- <div id="panelBtnBook" class="panel-btn" title="Textová část">
+      <div class="panel-btn-img">
+        <span><i class="fa-solid fa-book"></i></span>
+      </div>
+    </div> -->
+        </div>
+
+        <div
+            id="panelSearch"
+            class="panel-content mobile-block"
+        >
+            <div class="panel-content-header">dict_tab_search</div>
+            <div
+                id="searchWidgetBoxMobile"
+                class="panel-content-widget"
+            ></div>
+        </div>
+        <div
+            id="panelLegend"
+            class="panel-content active"
+        >
+            <div class="panel-content-header">dict_tab_toc_legend</div>
+            <div
+                id="legendWidgetBox"
+                class="panel-content-widget"
+            ></div>
+            <div class="panel-content-footer"></div>
+        </div>
+        <div
+            id="panelBasemaps"
+            class="panel-content"
+        >
+            <div class="panel-content-header">dict_tab_basemapy</div>
+            <div
+                id="basemapsWidgetBox"
+                class="panel-content-widget"
+            ></div>
+            <div class="panel-content-footer"></div>
+        </div>
+        <div
+            id="panelMeasure"
+            class="panel-content"
+        >
+            <div class="panel-content-header">dict_tab_mereni</div>
+            <div
+                id="measureWidgetBox"
+                class="panel-content-widget"
+            ></div>
+            <div class="panel-content-footer"></div>
+        </div>
+        <div
+            id="panelPrint"
+            class="panel-content"
+        >
+            <div class="panel-content-header">dict_tab_tisk</div>
+            <div
+                id="printWidgetBox"
+                class="panel-content-widget"
+            ></div>
+            <div class="panel-content-footer"></div>
+        </div>
+        <div
+            id="panelShare"
+            class="panel-content"
+        >
+            <div class="panel-content-header">dict_tab_odkazy</div>
+            <div
+                id="iprInfo"
+                class="panel-content-widget"
+            >
+                <div class="iprInfoLinkShare">
+                    <button
+                        class="iprInfoButton"
+                        id="generateUrl"
+                        type="button"
+                    >dict_odkazy_vytvorit</button>
+                    <span id="showUrl"></span>
+                    <button
+                        class="btn iprInfoButton"
+                        id="copyUrl"
+                        type="button"
+                        data-clipboard-target="#showUrl"
+                        title="dict_odkazy_copy"
+                    ><img src="img/copy-url.svg"></button>
+                </div>
+                <div class="iprInfoShareBtns">
+                    <a
+                        href=""
+                        target="_blank"
+                        class="iprInfoShareBtn"
+                    ><img src="img/facebook.svg"></a>
+                    <a
+                        href=""
+                        target="_blank"
+                        class="iprInfoShareBtn"
+                    ><img src="img/instagram.svg"></a>
+                    <a
+                        href=""
+                        target="_blank"
+                        class="iprInfoShareBtn"
+                    ><img src="img/twitter.svg"></a>
+                </div>
+                <!-- <a href="./?lang=en" id="mobileLanguage" class="hidden-mobile">
+            <p>English version</p>
+        </a> -->
+                <a
+                    href="http://www.geoportalpraha.cz/"
+                    target="_blank"
+                    rel="noopener"
+                    class="outer-link"
+                >
+                    <p>Geoportál Praha</p>
+                </a>
+                <div id="infoPanelDiv">
+                    <span>dict_odkazy_copyright</span>: © <span class="thisYear"></span> IPR Praha, © <span
+                        class="thisYear"
+                    ></span> ČÚZK
+                </div>
+            </div>
+            <div class="panel-content-footer"></div>
+        </div>
+
+        <div class="panel-close-btn active">
+            <img src="img/figma_arrow_bottom.svg"></span>
+        </div>
+
+        <div class="legend-textova-cast">
+            <div class="legend-textova-cast-header">
+                <span>dict_textova_cast</span>
+                <img
+                    class="legend-go-to-textova-cast"
+                    src="img/book.svg"
+                    title="Přejít na textovou část"
+                >
+                <img
+                    class="legend-textova-cast-close-btn"
+                    src="img/close-btn.svg"
+                >
+            </div>
+            <div class="legend-textova-cast-content"></div>
+            <div class="legend-textova-cast-footer"></div>
+        </div>
+    </div>
+
+    <div class="help-wrapper">
+        <div class="help-header">
+            <span>dict_odkazy_cenovamapa_napoveda</span>
+            <img
+                class="help-close-btn"
+                src="img/close-btn.svg"
+            ></span>
+        </div>
+        <div class="help-side-panel"></div>
+        <div class="help-content"></div>
+        <div class="help-footer"></div>
+    </div>
+
+    <div class="textova-cast-wrapper">
+        <div class="textova-cast-header">
+            <span>dict_textova_cast</span>
+            <img
+                class="textova-cast-close-btn"
+                src="img/close-btn.svg"
+            >
+        </div>
+        <div class="textova-cast-side-panel">
+            <div class="textova-cast-side-panel-input-wrapper">
+                <div class="textova-cast-search-input">
+                    <input
+                        type="text"
+                        placeholder="dict_textova_cast_input"
+                    >
+                    <button
+                        type="button"
+                        class="textova-cast-search-input-clear-btn"
+                    ><span class='esri-icon esri-icon-close'></span></button>
+                </div>
+                <div class="textova-cast-search-controls">
+                    <button
+                        type="button"
+                        class="textova-cast-search-prev"
+                        title="dict_textova_cast_search_prev"
+                    ><span class='esri-icon esri-icon-left'></span></button>
+                    <button
+                        type="button"
+                        class="textova-cast-search-next"
+                        title="dict_textova_cast_search_next"
+                    ><span class='esri-icon esri-icon-right'></span></button>
+                    <span class="textova-cast-search-counter"></span>
+                </div>
+            </div>
+            <div class="textova-cast-side-panel-content"></div>
+            <!-- <script src="textovaCastObsahShort.js"></script> -->
+        </div>
+        <div class="textova-cast-content">
+            <!-- <script src="data/20_4_22/tcz_document copy.js"></script>
+      <script src="textovaCast_en.js"></script> -->
+        </div>
+        <div class="textova-cast-footnotes">
+            <div class="textova-cast-footnotes-header">
+                <span>dict_textova_cast_poznamky</span>
+                <div class="textova-cast-footnotes-header-close-btn">
+                    <img src="img/close-btn.svg">
+                </div>
+            </div>
+            <div class="textova-cast-footnotes-content">
+                <!-- <script src="data/20_4_22/tcz_footnotes copy.js"></script> -->
+            </div>
+        </div>
+        <div class="textova-cast-footer"></div>
+
+    </div>
+    <div class="advanced-info-disclaimer">
+        Je aktivní funkce pro usnadnění výkladu MPP, obsah je pouze orientační.
+    </div>
+
+    <script>
+
+        var app = {
+            map: undefined,
+            SOURCES: undefined,
+            MODULES_PATH: Paths.getModulesPath(),
+            PRIVATE_MODULES_PATH: Paths.getPrivateModulesPath(),
+            TRANSLATIONS_PATH: Paths.getTranslationsPath(),
+            SOURCES_PATH: Paths.getSourcesPath(),
+            TOKENS_PATH: Paths.getTokensPath(),
+            URL_PARAMETERS: {
+                LANGUAGE: "lang", // example: lang=en
+                PARCEL: "parckey",
+                SERVICES: "service[]", // example: service[]=43&service[]=9
+                MC: "mc", // example: mc=500097
+                ADDRESS: "address", // example: address=vysehradska 57
+                SCALE: "scale", // scale=5000
+                GPS_LON: "gpslon", // gpslon=14.4175 - both gpslon and gpslat must be given
+                GPS_LAT: "gpslat", // gpslat=50.0735 - both gpslon and gpslat must be given
+                EXTENT: "extent", // extent=-742000,-1042000,-741000,-1040000 - xmin,ymin,xmax,ymax
+                CENTER: "center" // center=-742000,-1042000 - x,y
+            },
+            CONSTANTS: {
+                SPATIAL_REFERENCE: { wkid: 5514 },
+                ZOOM_LEVELS: {
+                    "750000": 0,
+                    "500000": 1,
+                    "350000": 2,
+                    "200000": 3,
+                    "150000": 4,
+                    "100000": 5,
+                    "75000": 6,
+                    "50000": 7,
+                    "25000": 8,
+                    "20000": 9,
+                    "15000": 10,
+                    "10000": 11,
+                    "7500": 12,
+                    "5000": 13,
+                    "3500": 14,
+                    "2000": 15,
+                    "1500": 16,
+                    "1000": 17,
+                    "750": 18,
+                    "500": 19
+                }
+            },
+            modules: undefined,
+            widgets: {},
+            settings: {
+                language: "cs",
+                services: [],
+                graphics: undefined,
+                address: "",
+                parcel: "",
+                zoom: 13,
+                coordinates: "",
+                center: ""
+            },
+            URLS: {
+                APP_CONFIG: "conf/app_config.json",
+                APP_TRANSLATIONS: "conf/translations.json"
+            }
+        }
+
+        function gup(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+
+            var regexS = "[\\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+            var results = regex.exec(window.location.href);
+
+            if (results == null) { return ""; }
+            else { return results[1].replace(/\+/g, ' '); }
+        }
+
+        var language = (gup("lang") === "") ? "cs" : gup("lang");
+
+        const scriptDocument = document.createElement("script")
+        scriptDocument.src = language === "cs" ? "data/11_06_26/textovaCast.js" : "data/11_06_26/textovaCast_en.js"
+        document.querySelector("body").appendChild(scriptDocument)
+
+        const scriptFootnotes = document.createElement("script")
+        scriptFootnotes.src = language === "cs" ? "data/11_06_26/footnotes.js" : "data/11_06_26/footnotes_en.js"
+        document.querySelector("body").appendChild(scriptFootnotes)
+
+        const scriptObsah = document.createElement("script")
+        scriptObsah.src = language === "cs" ? "data/11_06_26/obsah.js" : "data/11_06_26/obsah_en.js"
+        document.querySelector("body").appendChild(scriptObsah)
+
+        var dojoConfig = {
+            locale: language,
+            packages: [
+                {
+                    "name": "modules", // name of the modules root - used in require(["modules/..."])
+                    "location": app.MODULES_PATH + "js_api_v4.20+" // path to modules js folder
+                },
+                {
+                    "name": "privateModules", // name of the modules root - used in require(["modules/..."])
+                    "location": app.PRIVATE_MODULES_PATH // path to modules js folder
+                }
+            ]
+        };
+        window.cookieBanner = new CookieBanner({
+            targetElement: "body",
+            googleAnalyticsId: "G-KV0EV37RR0",
+            includePersonalCookies: false,
+        })
+    </script>
+
+
+
+    <!-- ArcGIS JS 4.x -->
+    <script src="//js.arcgis.com/4.23/"></script>
+
+    <script>
+
+        // load module layers sources (JSON with source urls and their IDs)
+        function getSources(callback) {
+
+            $.getJSON(app.SOURCES_PATH, function (sources) {
+
+                app.SOURCES = sources;
+                callback();
+
+            });
+
+        }
+
+    </script>
+
+    <!-- UI INTERACTION FUNCTIONS -->
+    <script src="js/ui.js"></script>
+    <script src="js/url_parameters.js"></script>
+
+    <!-- MAIN APP CODE: run DOJO, ARCGIS JS API and MODULES together -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

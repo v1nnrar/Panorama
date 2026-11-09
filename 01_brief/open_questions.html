@@ -511,14 +511,13 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     <div class="slide" data-slides>
       <div class="slide-head"><h3>The site today</h3></div>
       <div class="stage"><img alt=""><button class="nav prev" aria-label="Previous image">‹</button><button class="nav next" aria-label="Next image">›</button></div>
-      <div class="cap"><b></b><span></span></div>
+      
       <div class="thumbs">
-        <button data-src="img/s0.jpg" data-cap="Aerial photo of the area, north up (ČÚZK)"><img src="img/s0.jpg" alt="Aerial photo of the area"></button>
-        <button data-src="img/s2.jpg" data-cap="Land register map over the aerial photo, your land in orange (ČÚZK)"><img src="img/s2.jpg" alt="Land register map with your land in orange"></button>
+        <button data-src="img/s0.jpg" data-cap="Aerial photo of the area with streets and your land (ČÚZK)"><img src="img/s0.jpg" alt="Aerial photo of the area"></button>
+        <button data-src="img/s2.jpg" data-cap="Land register map, your land in orange: 16,487 m² (official ČÚZK total of 11 parcels)"><img src="img/s2.jpg" alt="Land register map with your land in orange"></button>
       </div>
       <div class="links">
         <a href="https://www.google.com/maps/search/?api=1&amp;query=50.04919,14.43819" target="_blank" rel="noopener">Open in Google Maps ↗</a>
-        <a href="https://www.google.com/maps/@?api=1&amp;map_action=pano&amp;viewpoint=50.04919,14.43819" target="_blank" rel="noopener">Open Street View ↗</a>
       </div>
     </div>
   </section>
@@ -542,7 +541,8 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
       i = (k + btns.length) % btns.length;
       const b = btns[i];
       img.src = b.dataset.src; img.alt = b.dataset.cap;
-      num.textContent = (i + 1) + '/' + btns.length; txt.textContent = b.dataset.cap;
+      if (num) num.textContent = (i + 1) + '/' + btns.length;
+      if (txt) txt.textContent = b.dataset.cap;
       btns.forEach((x, n) => x.setAttribute('aria-current', String(n === i)));
     }
     btns.forEach((b, n) => b.addEventListener('click', () => show(n)));

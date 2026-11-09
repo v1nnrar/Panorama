@@ -319,6 +319,17 @@ def stage(render_cfg: dict | None = None, ground=True):
     return cams
 
 
+def hide_buildings(ids):
+    """Hide the objects of the given building ids for one camera (a client render that omits a building).
+    Objects are named after their storey ('C1-L3 ...') or building ('C1 roof slab')."""
+    out = []
+    for o in bpy.data.objects:
+        if not o.hide_render and any(o.name.startswith(i + "-") or o.name.startswith(i + " ") for i in ids):
+            o.hide_render = True
+            out.append(o)
+    return out
+
+
 def render(out_dir: Path, cams, engine="CYCLES", samples=48, only=None):
     scene = bpy.context.scene
     scene.render.engine = "BLENDER_WORKBENCH" if engine == "WORKBENCH" else "CYCLES"
@@ -340,7 +351,10 @@ def render(out_dir: Path, cams, engine="CYCLES", samples=48, only=None):
         scene.render.resolution_x, scene.render.resolution_y = c.get("resolution", [1600, 1000])
         scene.camera = bpy.data.objects[c["name"]]
         scene.render.filepath = str(out_dir / f"render_{c['name']}.png")
+        hidden = hide_buildings(c.get("hide", []))
         bpy.ops.render.render(write_still=True)
+        for o in hidden:
+            o.hide_render = False
         paths.append(scene.render.filepath)
     return paths
 

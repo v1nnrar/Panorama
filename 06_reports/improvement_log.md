@@ -120,3 +120,16 @@ client's renders, higher is better).
 - Street cameras re-tuned with cam_search. Cycles mean **0.4488 → 0.4236**: lower because the aerial and park cameras now
   sit in their measured places instead of the positions that best matched our errors; visual alignment of buildings
   *and* surroundings is clearly better (see outline overlays). GFA 98,225 → 91,483 m². IFC 0 errors; test block 6/6.
+
+## 2026-11-09 — iteration 9: A7 diagrid check + render-006 / render-003 cameras — KEPT
+- Diagrid: render-006 shows **5 feet per wide face** at the podium (≈40 px apart) → 5 bays/face; 7 modules × 3 storeys
+  (iteration 4). Model already matches — no geometry change.
+- Found while checking: after the audit moved A, cam_search had parked the render-006 camera 38 m from the tower (false
+  optimum, tower face-on). Re-solved from A's corners (front = SW corner, 5 points, 14 px RMS): camera at (−54, −80).
+  From there block C1 would hide A's base, but the client image shows it → **the client render omits block C**
+  (as render-003 omits tower A).
+- New per-camera option `hide: [ids]` (pipeline/blender_scene.py `hide_buildings`, tools/cam_search.py; CLAUDE.md):
+  buildings left out of that client render are hidden for that camera only. render-006 → `hide: [C1, C2]`,
+  render-003 → `hide: [A]`; render-006 refined with cam_search.
+- Score, Cycles: mean **0.4236 → 0.4851** (diagrid 0.423 → 0.605, park 0.265 → 0.391, others unchanged).
+  IFC 0 errors; test block 6/6.

@@ -47,6 +47,9 @@ def main():
     sh.show_shadows = sh.show_cavity = True
     sh.background_type = "WORLD"
     sc.view_settings.view_transform = "AgX"
+    for o in bpy.data.objects:  # buildings this client render omits (camera `hide:` list)
+        if any(o.name.startswith(i + "-") or o.name.startswith(i + " ") for i in c.get("hide", [])):
+            o.hide_render = True
     cam = bpy.data.objects[a.camera]
     sc.camera = cam
     sc.render.resolution_x, sc.render.resolution_y = c.get("resolution", [1600, 1000])
@@ -93,6 +96,8 @@ def main():
     if abs(p["shift_y"]) > 1e-6:
         line["shift_y"] = round(p["shift_y"], 3)
     line["resolution"] = c.get("resolution", [1600, 1000])
+    if c.get("hide"):
+        line["hide"] = c["hide"]
     print(f"BEST {best:.4f} renders={len(cache)}")
     print("RESULT " + json.dumps(line))
 

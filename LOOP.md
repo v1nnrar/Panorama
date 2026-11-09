@@ -51,7 +51,8 @@ Read `CLAUDE.md` first; its conventions and agent roles apply.
       (iteration 6, user request: B2 straight walls + balconies/timber piers/penthouse; render-004 camera moved to SW.)
 - [x] A6. D butterfly: recessed joint with green balconies (render-003), wing lengths against the top view.
       (iteration 8: joint slot + planted balconies; wing lengths left as the PSG footprint, the outline matches render-003.)
-- [ ] A7. A diagrid: bay count and module height against render-006 (count diamonds per face).
+- [x] A7. A diagrid: bay count and module height against render-006 (count diamonds per face).
+      (iteration 9: 5 bays/face + 7 modules confirmed; render-006 camera re-solved, client omits block C there.)
 - [ ] A8. C front block: roof setbacks and terraces against render-000; rooftop units positions.
 - [ ] A9. A0 podium / courtyard link shape and timber fascia against render-000 and render-006.
 - [ ] A10. Landscape: courtyard paths, planting and trees against the top view.

@@ -51,6 +51,7 @@ Schemes use `buildings:` (list) and `site: {file: ../00_site/site.yaml}`.
     sawtooth: {azimuth, tilt, row, gap}
 ```
 Scheme level: `landscape: {paths, lawns, courtyard_trees, context_tree_radius}`, `render: {cameras, sun_*, samples}`.
+A camera may list `hide: [C1, C2]` = buildings the client render it reproduces leaves out (hidden for that camera only).
 Site (`00_site/site.yaml`): parcels, `context_glb` (PSG surroundings), `context_exclude`, `trees`.
 
 ## Folders

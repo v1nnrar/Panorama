@@ -17,12 +17,14 @@ buildings:
     name: Diagrid tower (T2)
     use: Residential / hotel tower
     footprint: [[-11.98, 13.74], [21.05, 19.8], [27.34, -14.89], [-5.35, -20.62]]
-    height: 88.2                         # PSG v3 estimate (parapet)
-    notes: 26 storeys = 2 podium + 24 tower floors (render-006 ≈25); white steel diagrid, full balconies
+    height: 83.8                         # ESTIMATED from render-006 + render-000: 7 diagrid modules x 3 storeys on the podium;
+                                         # tower height/width ratio in render-006 gives ~3.7 m storeys (5.0 + 21 x 3.7 + 1.1 parapet). Was 88.2 (PSG v3 estimate), which put the roof ~2
+                                         # storeys above the client's in the tuned aerial and above D in render-003.
+    notes: 22 storeys = podium level + 21 tower floors (7 diagrid modules x 3, counted in render-006 and render-000)
     storeys:
       - {name: P1, height: 5.0, use: Lobby}
-      - {name: P2, height: 4.0, use: Amenities}
-      - {name: L, count: 24, start: 3, height: 3.2, use: Units}
+      - {name: P2, height: 3.7, use: Amenities}   # ASSUMED: same as typical storey so the 3-storey diagrid modules are equal
+      - {name: L, count: 20, start: 3, height: 3.7, use: Units}   # ESTIMATED from render-006 height/width ratio
     facade:
       - {type: curtain, glass: Glass, mullion: 1.6}
       - {type: balcony, from: 3, depth: 1.7, railing_material: Glass dark}
@@ -233,8 +235,8 @@ render:
   cameras:
     # ESTIMATED from render-000: corner fit of towers A and B (roof + base), then Workbench search on score_match
     # (lens/position/target). Long lens from far SSW, as in the client aerial. Resolution = client aspect 1280x905.
-    - {name: aerial_S_like_render000, location: [-148.8, -453.3, 372.8], target: [21.4, -11.3, 20], lens: 78, resolution: [1280, 905]}
-    - {name: street_SW_like_render005, location: [-70, -86, 1.7], target: [5, -45, 37], lens: 32, shift_y: 0.075, resolution: [1400, 1448]}   # ESTIMATED from render-005: tools/cam_search.py, client aspect 700x724
+    - {name: aerial_S_like_render000, location: [-140.8, -453.3, 372.8], target: [21.4, -11.3, 17], lens: 76, resolution: [1280, 905]}
+    - {name: street_SW_like_render005, location: [-70, -86, 1.7], target: [8, -42, 37], lens: 36, shift_y: 0.075, resolution: [1400, 1448]}   # ESTIMATED from render-005: tools/cam_search.py (retuned after A height fix), client aspect 700x724
     - {name: street_SE_like_render004, location: [116, -96, 1.7], target: [90, -56, 42], lens: 24, resolution: [1244, 1484]}   # ESTIMATED from render-004: tools/cam_search.py, client aspect 622x742
     - {name: dusk_diagrid_like_render006, location: [-48, -15, 1.7], target: [11, 0, 42], lens: 21, resolution: [1086, 1742]}   # ESTIMATED from render-006: tools/cam_search.py, client aspect 543x871
     # ESTIMATED from render-003: least-squares fit of D's corners (NE/NW parapet + underside, joint, SE) at eye height,

@@ -7,16 +7,16 @@ Source: `params.yaml`
 | Metric | Value |
 |---|---|
 | buildings | 10 |
-| storeys_above_ground | 26 |
+| storeys_above_ground | 22 |
 | gfa_below_ground_m2 | 17194.0 |
-| height_top_of_parapet_m | 88.2 |
+| height_top_of_parapet_m | 83.8 |
 | footprint_area_m2 | 9058.1 |
-| gfa_m2 | 103239.5 |
-| net_floor_area_m2 | 98225.6 |
+| gfa_m2 | 98549.2 |
+| net_floor_area_m2 | 93725.1 |
 | rooms | 0 |
 | site_area_m2 | 16491.7 |
 | built_up_ratio | 0.549 |
-| plot_ratio_far | 6.26 |
+| plot_ratio_far | 5.976 |
 | unbuilt_ratio | 0.454 |
 | footprint_outside_plot_m2 | 53.2 |
 | min_setback_m | 0.0 |
@@ -25,7 +25,7 @@ Source: `params.yaml`
 
 | ID | Name | Use | Storeys | Height (m) | Target (m) | Footprint (m²) | GFA (m²) | NFA (m²) |
 |---|---|---|---|---|---|---|---|---|
-| A | Diagrid tower (T2) | Residential / hotel tower | 26 | 88.2 | 88.2 | 1172.6 | 30486.9 | 29252.8 |
+| A | Diagrid tower (T2) | Residential / hotel tower | 22 | 83.8 | 83.8 | 1172.6 | 25796.6 | 24752.3 |
 | A0 | Diagrid tower podium + courtyard link | Lobby / restaurant | 1 | 5.9 |  | 2288.9 | 2288.9 | 2191.2 |
 | B | Green tower (E residential tower) | Residential | 22 | 68.9 | 68.9 | 1165.9 | 23243.9 | 22243.8 |
 | B2 | Terraced block (E) | Residential | 8 | 26.9 | 26.9 | 1297.1 | 7811.3 | 7313.6 |

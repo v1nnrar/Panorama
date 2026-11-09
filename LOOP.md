@@ -44,6 +44,7 @@ Read `CLAUDE.md` first; its conventions and agent roles apply.
       for render-000 (aerial) with 50 % overlays (`overlays/overlay_*.jpg`) until silhouettes align.
 - [x] A3. Same fine-tuning for render-004, render-005, render-006.
 - [ ] A4. Verify storey counts and the C2 wing height (33.9 m vs PSG 25.1 m) against the tuned overlays; adjust.
+      (A tower done in iteration 4: 7 diagrid modules × 3 storeys, 83.8 m. Remaining: C1/C2, B, D storey counts.)
 - [ ] A5. B tower: overhang / alignment over its base and the B2 terrace steps against render-004.
 - [ ] A6. D butterfly: recessed joint with green balconies (render-003), wing lengths against the top view.
 - [ ] A7. A diagrid: bay count and module height against render-006 (count diamonds per face).

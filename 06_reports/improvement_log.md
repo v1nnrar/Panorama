@@ -44,3 +44,17 @@ client's renders, higher is better).
 - Score, Cycles: mean **0.3497 → 0.4723** (SW 0.394→0.672, SE 0.351→0.536, diagrid 0.341→0.491; aerial and park
   unchanged). Workbench mean 0.260 → 0.445. IFC 0 errors; test block 6/6 pass. Params + new tool, no geometry.
 - All five matched cameras are now tuned, so geometry items (A4 onward) can be judged on the score.
+
+## 2026-11-09 — iteration 4: A4 (part 1) tower A storey count and height — KEPT
+- Counted the diagrid in render-006 (close-up) and render-000 (aerial): **7 modules of 3 storeys** standing on the
+  podium roof (balcony slabs every ⅓ module). The model had 25 storeys under the diagrid (8.3 modules, 88.2 m).
+- Attempt 1: 7 × 3 storeys at 3.2 m → 73.3 m. The overlay showed the right module count but a tower too short.
+  Workbench mean 0.4446 → 0.412, and 0.436 after retuning the cameras; reverted within the iteration.
+- Attempt 2 (kept): the client tower's height/width ratio in render-006 is ~18 % larger, so ~3.7 m storeys:
+  P1 5.0 + 21 × 3.7 + 1.1 parapet = **83.8 m**, 22 storeys. Retuned the render-005 and aerial cameras with
+  `tools/cam_search.py` (render-006 camera search found no better position).
+- Score: Cycles mean **0.4723 → 0.4718** (−0.0005, within the 0.005 tolerance; aerial 0.359→0.360, SW 0.672→0.691,
+  SE 0.536→0.534, diagrid 0.491→0.451, park 0.304→0.323). Workbench mean 0.4446 → 0.4392. IFC 0 errors; test block 6/6.
+- Kept despite the flat score because the module count is now right in both views. Render-006 dropped, so tower A's
+  width or diagrid offset may still be off: check under A7 (diagrid bays). Full Cycles presentation renders made
+  (4th kept iteration). A4 stays open for C1/C2, B and D storey counts.

@@ -87,3 +87,13 @@ client's renders, higher is better).
   the drop: requested by the user, and the old render-004 score came from a camera on the wrong side.
   IFC 0 errors; test block 6/6.
 - Known gaps: C2's east end hides B's timber base in render-004 (A11); B2 roof terrace not green yet (A12).
+
+## 2026-11-09 — iteration 7: A4 (part 3) building D storey count — KEPT
+- render-003: **7 ribbon-glazed office floors** over a tall recessed GF (≈1.9 × typical storey, white canopy/colonnade
+  in front), then a tall parapet band and a grey roof screen. The model had GF + 9 = 10 storeys.
+- Height: in iteration 1 the camera fit had the 34.0 m model ~6 % taller than the client image → **32.3 m**:
+  GF 6.5 + 7 × 3.45 + 1.6 parapet band. Added a 3 m GF recess on the N and E faces (the overhang visible in render-003).
+- Overlay: D's outline, floor bands and GF overhang now coincide with the client image.
+- Score: Workbench mean ≈0.4156 → 0.4165 (park 0.140→0.145). Cycles (park + aerial re-rendered): mean **0.4487 → 0.4486**
+  (aerial 0.351→0.359, park 0.323→0.315). IFC 0 errors; test block 6/6. A4 closed.
+- New item A13: tower A appears above D in our park view, but the client image shows sky there.

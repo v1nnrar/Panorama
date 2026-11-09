@@ -176,16 +176,19 @@ buildings:
     name: Butterfly office (T1 bow-tie)
     use: Office
     footprint: [[-42.29, 42.65], [-7.31, 47.16], [27.42, 55.64], [31.58, 33.37], [-4.47, 31.91], [-38.05, 19.89]]
-    height: 34.0
-    notes: 10 storeys; white horizontal bands + ribbon glazing; sawtooth PV roof (top view)
+    height: 32.3                         # ESTIMATED from render-003: GF ≈ 1.9 x typical pitch + 7 x 3.45 + 1.6 parapet band;
+                                         # the iteration-1 camera fit had the 34.0 m model ~6 % taller than the client image
+    notes: 8 storeys (render-003 - 7 ribbon-glazed office floors over a tall recessed GF); white horizontal bands; sawtooth PV roof (top view)
+    setbacks:
+      - {facing: [N, E], distance: 3.0, from: 1, to: 1}   # ESTIMATED from render-003: upper floors overhang the recessed GF
     storeys:
-      - {name: GF, height: 4.5, use: Lobby}
-      - {name: L, count: 9, height: 3.3, use: Offices}
+      - {name: GF, height: 6.5, use: Lobby}               # ESTIMATED from render-003: ≈1.9 x typical storey
+      - {name: L, count: 7, height: 3.45, use: Offices}   # ESTIMATED from render-003: 7 ribbon-glazing rows
     facade:
       - {type: curtain, glass: Glass, mullion: 1.35, spandrel: 1.0}
       - {type: band, from: 2, depth: 0.7, thickness: 0.55, material: Aluminium white}
     roof:
-      parapet: 1.2
+      parapet: 1.6                         # ESTIMATED from render-003: tall white parapet band
       parapet_material: Aluminium white
       sawtooth: {azimuth: 180, tilt: 22, row: 3.6, gap: 0.3, material: PV}
 

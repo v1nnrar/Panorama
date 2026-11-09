@@ -43,9 +43,9 @@ Read `CLAUDE.md` first; its conventions and agent roles apply.
 - [x] A2. Set every matched camera's `resolution` to its client image's aspect ratio, then fine-tune location/target/lens
       for render-000 (aerial) with 50 % overlays (`overlays/overlay_*.jpg`) until silhouettes align.
 - [x] A3. Same fine-tuning for render-004, render-005, render-006.
-- [ ] A4. Verify storey counts and the C2 wing height (33.9 m vs PSG 25.1 m) against the tuned overlays; adjust.
+- [x] A4. Verify storey counts and the C2 wing height (33.9 m vs PSG 25.1 m) against the tuned overlays; adjust.
       (A tower done in iteration 4: 7 diagrid modules × 3 storeys, 83.8 m. C1/C2 → 11 storeys and B/B2 checked in
-      iteration 5. Remaining: D storey count against render-003.)
+      iteration 5. D → 8 storeys, 32.3 m in iteration 7.)
 - [x] A5. B tower: overhang / alignment over its base and the B2 terrace steps against render-004.
       (iteration 6, user request: B2 straight walls + balconies/timber piers/penthouse; render-004 camera moved to SW.)
 - [ ] A6. D butterfly: recessed joint with green balconies (render-003), wing lengths against the top view.
@@ -55,6 +55,7 @@ Read `CLAUDE.md` first; its conventions and agent roles apply.
 - [ ] A10. Landscape: courtyard paths, planting and trees against the top view.
 
 - [ ] A11. C2 east end hides B's timber base in render-004 (client shows the base): check C2 length / whether the client render omits it.
+- [ ] A13. Tower A shows above D in render-003 where the client image has sky: check A's position/height from the north.
 - [ ] A12. B2 roof terrace: green roof + planters around the PV penthouse (aerial render-000).
 
 ### B. Completeness of the plan

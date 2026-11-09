@@ -74,6 +74,34 @@ details[open] .chev::after { transform: rotate(0deg); }
 .facts dd { margin: 0; min-width: 0; }
 .num { font-family: var(--mono); font-size: 13.5px; background: var(--accent-soft); color: var(--ink); padding: 1px 5px; border-radius: 3px; white-space: nowrap; }
 
+[hidden] { display: none !important; }
+.choice { border: 1px solid var(--line); border-radius: 6px; background: var(--sheet); padding: 14px 16px 16px; margin: 0; display: grid; gap: 12px; min-width: 0; }
+.choice legend { font: 500 11px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding: 0 6px; }
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opts label { position: relative; cursor: pointer; }
+.opts input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.opts span { display: inline-block; padding: 9px 16px; border: 1px solid var(--line); border-radius: 999px; font-weight: 500; background: var(--paper); transition: background .15s, color .15s, border-color .15s; }
+.opts label:hover span { border-color: var(--accent); }
+.opts input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--sheet); }
+.opts input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.hint { color: var(--muted); font-size: 14px; }
+.fu-block { display: grid; gap: 6px; }
+.fu-block h4 { margin: 4px 0 0; font: 700 13px/1.3 var(--display); letter-spacing: .02em; text-transform: uppercase; color: var(--accent); }
+.fu { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.fu li { padding-left: 14px; border-left: 2px solid var(--accent-soft); max-width: 66ch; min-width: 0; }
+.fu li.key { border-left-color: var(--flag); background: var(--flag-soft); padding: 10px 12px 12px 14px; border-radius: 0 6px 6px 0; }
+.fu li.key .tbl { margin-block: 8px; }
+.fu strong { font-weight: 600; }
+.tbl { overflow-x: auto; }
+.tbl table { border-collapse: collapse; width: 100%; font-size: 14px; background: var(--sheet); border-radius: 4px; }
+.tbl th { font: 500 11px/1.3 var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.tbl td { padding: 7px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.tbl td:first-child { font: 600 15px var(--mono); }
+.tbl td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.tbl tr.ph td { font-weight: 600; color: var(--flag); }
+.tbl tr:last-child td { border-bottom: 0; }
+.note { color: var(--muted); font-size: 13px; }
+
 footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 
 @media (max-width: 560px) {
@@ -102,47 +130,97 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
 
   <section>
     <div class="sec-head"><span class="sec-no">1</span><h2>Brief and programme</h2>
-      <p>We have no written brief yet, so the building uses in our model are guesses.</p></div>
+      <p>We have no written brief yet, so the building uses in our model are guesses. Start with 1.1: the answers there decide which follow-up questions apply.</p></div>
     <div class="list">
-      <details data-start><summary><span class="qno">1.1</span><h3>Which buildings become the hotel?</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
+      <details data-start open><summary><span class="qno">1.1</span><h3>The existing hotel: demolish or refurbish? And is the new building a hotel or residential?</h3><span class="chip">Start here</span><span class="chev"></span></summary>
         <div class="more">
-          <p>Your scheme has nine buildings above ground. We need to know which of them, and which floors, are hotel. The rest could be residential, office or retail.</p>
-          <dl class="facts"><dt>Now assumed</dt><dd>Front slab C1/C2 = hotel / office, diagrid tower A = residential / hotel, B, B2, B3 = residential, D and E = office. All read from the renders.</dd>
-          <dt>Please confirm</dt><dd>That a hotel is definitely part of the project, and roughly how large it should be.</dd>
-          <dt>Please send</dt><dd>Use per building and per floor, even as a marked-up render.</dd></dl>
+          <p>The Panorama Hotel at Milevská 7 stands on the plot today. What happens to it, and what the new building is used for, decide almost everything else on this page. Pick the answers below to see the follow-up questions for each.</p>
+
+          <fieldset class="choice">
+            <legend>A · The existing hotel building</legend>
+            <div class="opts">
+              <label><input type="radio" name="existing" id="ex-demolish" value="demolish"><span>Demolish</span></label>
+              <label><input type="radio" name="existing" id="ex-refurbish" value="refurbish"><span>Refurbish</span></label>
+              <label><input type="radio" name="existing" id="ex-open" value="open"><span>Not decided</span></label>
+            </div>
+            <p class="hint" data-group="existing" data-show="none">Pick an answer to see the follow-up questions.</p>
+            <ul class="fu" data-group="existing" data-show="demolish" hidden>
+              <li><strong>Which buildings go?</strong> The hotel tower only, or other buildings on the plot as well? Our model currently keeps the corner office building E (parcel 1133/12).</li>
+              <li><strong>Demolition permit and timing.</strong> Has a demolition permit been applied for or issued? When does the hotel close?</li>
+              <li><strong>Hazardous materials survey.</strong> Buildings of this age often contain asbestos and other materials that need specialist removal. Is there a survey?</li>
+              <li><strong>Basement and foundations.</strong> Should we try to reuse the existing basement, foundations or utility connections?</li>
+            </ul>
+            <ul class="fu" data-group="existing" data-show="refurbish" hidden>
+              <li><strong>Existing drawings.</strong> Original and as-built plans, sections and structural drawings, in any format.</li>
+              <li><strong>Building survey.</strong> Condition of the structure, facade, building services and fire safety. Can the structure carry extra floors?</li>
+              <li><strong>How deep a refurbishment?</strong> Facade only, new interiors, new building services, or an extension with added floors or a new wing?</li>
+              <li><strong>Operation during works.</strong> Does the hotel stay open, fully or partly, while we build?</li>
+              <li><strong>Heritage protection.</strong> Is the building or its surroundings protected in any way?</li>
+            </ul>
+            <ul class="fu" data-group="existing" data-show="open" hidden>
+              <li><strong>We can compare both.</strong> We can model a refurbishment and a new building side by side, with areas and costs for each. For a realistic refurbishment option we still need the existing drawings and any building survey.</li>
+              <li><strong>What would tip the decision?</strong> Budget, timeline, keeping the hotel open, or the size of the new building?</li>
+            </ul>
+          </fieldset>
+
+          <fieldset class="choice">
+            <legend>B · The new building is…</legend>
+            <div class="opts">
+              <label><input type="radio" name="newuse" id="use-hotel" value="hotel"><span>Hotel</span></label>
+              <label><input type="radio" name="newuse" id="use-res" value="residential"><span>Residential</span></label>
+              <label><input type="radio" name="newuse" id="use-both" value="both"><span>Both</span></label>
+            </div>
+            <p class="hint" data-group="newuse" data-show="none">Pick an answer to see the follow-up questions.</p>
+            <div class="fu-block" data-group="newuse" data-show="both" hidden>
+              <h4>For a mix</h4>
+              <ul class="fu">
+                <li><strong>How is it split?</strong> Which buildings or floors are hotel and which are apartments, roughly in m² or number of keys and units?</li>
+                <li><strong>Shared or separate?</strong> Separate entrances, lifts and parking for hotel guests and residents, or shared services such as the gym or restaurant?</li>
+              </ul>
+            </div>
+            <div class="fu-block" data-group="newuse" data-show="hotel both" hidden>
+              <h4>Hotel</h4>
+              <ul class="fu">
+                <li><strong>Which buildings and floors are hotel?</strong> Our model now guesses the front slab C1/C2 and the diagrid tower A. A marked-up render is enough.</li>
+                <li><strong>What kind of hotel, and who runs it?</strong> How many stars (3★, 4★, 5★)? A chain such as Marriott or Accor, a local operator, or Property Solutions itself? A chain will give us a design manual we must follow. A classic hotel, an aparthotel or serviced apartments?</li>
+                <li class="key"><strong>Rooms and sizes.</strong> Total number of rooms, room types with target sizes in m² (for example standard 25–30 m², superior 30–35 m², suite 50 m² +), <strong>how many suites and penthouse suites</strong>, and the share of accessible rooms.</li>
+                <li><strong>What else should guests find in the hotel, besides their rooms?</strong> For example: a restaurant or bar (and for how many people), meeting or conference rooms (how big is the largest event), a spa or pool, a gym, a rooftop bar, shops on the ground floor. Tell us which you want and roughly how big.</li>
+                <li><strong>Back of house.</strong> Kitchen size, laundry in-house or outsourced, staff numbers, deliveries and waste.</li>
+              </ul>
+            </div>
+            <div class="fu-block" data-group="newuse" data-show="residential both" hidden>
+              <h4>Residential</h4>
+              <ul class="fu">
+                <li><strong>Sale or rent?</strong> Apartments for sale, build-to-rent, or a mix. This changes layouts, finishes and shared spaces.</li>
+                <li class="key"><strong>Apartment mix and sizes, please fill in.</strong> How many apartments of each layout, and how big?
+                  <div class="tbl"><table>
+                    <thead><tr><th>Layout</th><th>Typical size</th><th>Number or share</th><th>Your target m²</th></tr></thead>
+                    <tbody>
+                      <tr><td>1+kk</td><td class="n">30–40 m²</td><td>?</td><td>?</td></tr>
+                      <tr><td>2+kk</td><td class="n">50–65 m²</td><td>?</td><td>?</td></tr>
+                      <tr><td>3+kk</td><td class="n">75–95 m²</td><td>?</td><td>?</td></tr>
+                      <tr><td>4+kk</td><td class="n">100–130 m²</td><td>?</td><td>?</td></tr>
+                      <tr class="ph"><td>Penthouse</td><td class="n">150 m² +</td><td>How many?</td><td>?</td></tr>
+                    </tbody></table></div>
+                  <span class="note">Typical sizes are common Prague market ranges, for orientation only. For penthouses also tell us: top floor only or the top two floors, roof terrace size, private lift or pool.</span></li>
+                <li><strong>Market segment.</strong> Standard, premium or luxury, and the target sale price or rent per m².</li>
+                <li><strong>Outdoor space.</strong> A balcony, loggia or terrace for every apartment?</li>
+                <li><strong>Shared amenities.</strong> Reception or concierge, gym, co-working, storage rooms, bike rooms.</li>
+                <li><strong>Ground floor.</strong> Shops, café or services, or apartments down to the ground?</li>
+              </ul>
+            </div>
+          </fieldset>
         </div></details>
-      <details data-start><summary><span class="qno">1.2</span><h3>What kind of hotel, and who will run it?</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
-        <div class="more">
-          <p>A 3-star city hotel and a 5-star luxury hotel are very different buildings: room size, lobby, number of lifts, kitchens and staff areas all change. Hotel chains (for example Marriott, Hilton or Accor) also give the architect a design manual with their own minimum sizes, which we must follow.</p>
-          <dl class="facts"><dt>Please answer</dt><dd><strong>How many stars?</strong> For example 3★, 4★ or 5★.<br><strong>Which brand or operator?</strong> A chain, a local operator, or Property Solutions itself. If a chain is chosen, please send its design manual.<br><strong>What type?</strong> A classic hotel (short stays, reception, restaurant), an aparthotel (rooms with kitchenettes for longer stays) or serviced apartments.</dd>
-          <dt>Not decided yet?</dt><dd>That's fine. Tell us what you are considering and we will design for it and keep the other options open.</dd></dl>
-        </div></details>
-      <details data-start><summary><span class="qno">1.3</span><h3>Room mix and room sizes</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
-        <div class="more">
-          <p>The number of keys and the room types set the floor plate depth and the structural grid.</p>
-          <dl class="facts"><dt>Please send</dt><dd>Total keys, room types with target net areas (m²), number of suites, share of accessible rooms.</dd></dl>
-        </div></details>
-      <details><summary><span class="qno">1.4</span><h3>Guest facilities</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
-        <div class="more">
-          <p>Large rooms without columns (ballroom, pool) must sit where the structure allows them, usually in the podium.</p>
-          <dl class="facts"><dt>Please send</dt><dd>Restaurants and bars (seats), conference (largest room and total m²), spa / wellness / pool, fitness, rooftop use, ground-floor retail.</dd></dl>
-        </div></details>
-      <details><summary><span class="qno">1.5</span><h3>Back of house</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
-        <div class="more">
-          <p>Kitchen, laundry and deliveries take a lot of ground-floor and basement area and need a service entrance away from the guests.</p>
-          <dl class="facts"><dt>Please send</dt><dd>Main kitchen size, laundry in-house or outsourced, staff numbers per shift, delivery and waste requirements.</dd></dl>
-        </div></details>
-      <details><summary><span class="qno">1.6</span><h3>Parking and arrivals</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
+      <details><summary><span class="qno">1.2</span><h3>Parking and arrivals</h3><span class="chip later">Next stage</span><span class="chev"></span></summary>
         <div class="more">
           <dl class="facts"><dt>Now assumed</dt><dd>2 basement levels under parcels 1051/3, 1090/2 and 1051/16, about <span class="num">17,200 m²</span>. Ramp position read from the top-view photo.</dd>
           <dt>Please send</dt><dd>Required parking spaces, drop-off, coach parking, EV charging, number of basement levels in your scheme.</dd></dl>
         </div></details>
-      <details data-start><summary><span class="qno">1.7</span><h3>Scope: replace or adapt your scheme?</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
+      <details data-start><summary><span class="qno">1.3</span><h3>Scope: replace or adapt your scheme?</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
         <div class="more">
           <p>We need to know which parts of your scheme are fixed and which we may redesign.</p>
           <dl class="facts"><dt>Now assumed</dt><dd>The existing corner office E (parcel 1133/12) stays. Everything else is open.</dd>
-          <dt>Please confirm</dt><dd>Do the residential blocks B, B2, B3 and the office D stay as in your scheme? Is E kept?</dd>
-          <dt>Demolition</dt><dd>Which buildings stand on the plot today, and which of them will be demolished? Please send any demolition permit or survey of the existing buildings.</dd></dl>
+          <dt>Please confirm</dt><dd>Do the residential blocks B, B2, B3 and the office D stay as in your scheme? Is E kept?</dd></dl>
         </div></details>
     </div>
   </section>
@@ -253,7 +331,19 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
 
 <script>
 (function () {
-  const all = [...document.querySelectorAll('details')];
+  const all = [...document.querySelectorAll('.list > details')];
+
+  function showChoice(group) {
+    const picked = document.querySelector('input[name="' + group + '"]:checked');
+    const v = picked ? picked.value : 'none';
+    document.querySelectorAll('[data-group="' + group + '"]').forEach(el => {
+      el.hidden = !el.dataset.show.split(' ').includes(v);
+    });
+  }
+  ['existing', 'newuse'].forEach(g => {
+    document.querySelectorAll('input[name="' + g + '"]').forEach(i => i.addEventListener('change', () => showChoice(g)));
+    showChoice(g);
+  });
   const start = all.filter(d => d.hasAttribute('data-start'));
   document.getElementById('c-all').textContent = '(' + all.length + ')';
   document.getElementById('c-start').textContent = '(' + start.length + ')';
@@ -264,7 +354,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     filterBtns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
     all.forEach(d => { d.hidden = only && !d.hasAttribute('data-start'); });
     document.querySelectorAll('section').forEach(s => {
-      s.hidden = ![...s.querySelectorAll('details')].some(d => !d.hidden);
+      s.hidden = ![...s.querySelectorAll('.list > details')].some(d => !d.hidden);
     });
   }));
 

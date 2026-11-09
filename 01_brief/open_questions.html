@@ -129,6 +129,10 @@ details[open] .chev::after { transform: rotate(0deg); }
 .thumbs button[aria-current="true"] { border-color: var(--accent); opacity: 1; }
 .thumbs img { display: block; height: 58px; width: auto; }
 
+.pitch { background: var(--accent-soft); border-top: 1.5px solid var(--accent); padding: 16px 18px 18px; margin-bottom: 16px; display: grid; gap: 10px; }
+.pitch h4 { margin: 0; font: 700 18px/1.25 var(--display); color: var(--accent); }
+.pitch strong { font-weight: 600; }
+
 footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 
 @media (max-width: 560px) {
@@ -354,14 +358,27 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-no">6</span><h2>Your design</h2></div>
+    <div class="sec-head"><span class="sec-no">6</span><h2>Your design</h2>
+      <p>We would like to redesign the project, together with you.</p></div>
+    <div class="pitch">
+      <h4>How we would work with you</h4>
+      <ul class="pts">
+        <li><strong>You stay involved at every step</strong>, not only at the end.</li>
+        <li><strong>Options instead of one finished plan.</strong> We show you several designs and you choose the direction.</li>
+        <li>Every option shows its floor area, number of rooms or apartments, and height.</li>
+        <li>Every option is checked against the planning rules.</li>
+        <li>You can explore the 3D model yourself in a web browser.</li>
+        <li>Changes are fast: drawings, area tables and images all come from one model.</li>
+        <li>A cost estimate for each option, once we have your prices.</li>
+        <li>Your current design stays as the reference, so you can compare side by side.</li>
+      </ul>
+    </div>
     <div class="list">
-      <details data-start><summary><span class="qno">6.1</span><h3>Is this your final design, or may we come up with a new and better one?</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
+      <details data-start><summary><span class="qno">6.1</span><h3>Would you be open to a redesign?</h3><span class="chip">Needed to start</span><span class="chev"></span></summary>
         <div class="more"><ul class="pts">
-          <li>Is the design in your renderings (below) already decided?</li>
-          <li>Or are you open to our own proposal for the buildings?</li>
-          <li>If parts are fixed, which ones must stay?</li>
-          <li class="guess">We can also show both side by side: your design and our alternative.</li>
+          <li>Is the design in your renderings (below) already final, or can we rework it?</li>
+          <li>If some parts are fixed, which ones must stay?</li>
+          <li>How often would you like to meet to choose between options?</li>
         </ul></div></details>
     </div>
   </section>

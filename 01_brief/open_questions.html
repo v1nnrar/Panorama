@@ -321,7 +321,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
       <tr data-row="4+kk"><td>4+kk</td><td class="n">100–130 m²</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-3" aria-label="4+kk: how many"></td></tr>
       <tr class="ph" data-row="Penthouse"><td>Penthouse</td><td class="n">150 m² +</td><td><input type="text" inputmode="numeric" class="ans cell" id="apt-n-4" aria-label="Penthouse: how many"></td></tr>
     </tbody></table></div>
-  <span class="note">Typical sizes are for orientation only.</span>
+  <div class="opts"><label><input type="checkbox" class="ans" id="apt-unclear" value="Unclear"><span>Unclear</span></label></div>
 </div>
 <div class="q sub" data-q="Standard, premium or luxury?">
   <p class="q-label" id="q-11-l">Standard, premium or luxury?</p>
@@ -613,6 +613,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
             const v = [...r.querySelectorAll('input')].map(i => i.value.trim());
             return v[0] ? r.dataset.row + ': ' + v[0] : '';
           }).filter(Boolean).join('; ');
+          if (q.querySelector('#apt-unclear:checked')) a = a ? a + ' (unclear)' : 'Unclear';
         } else {
           const t = q.querySelector('textarea, input[type="text"]');
           a = t ? t.value.trim() : [...q.querySelectorAll('input:checked')].map(i => i.value).join(', ');

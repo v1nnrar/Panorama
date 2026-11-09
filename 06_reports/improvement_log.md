@@ -71,3 +71,19 @@ client's renders, higher is better).
   mean **0.4718 → 0.4725**. IFC 0 errors; test block 6/6. GFA changes are in metrics.json.
 - For A8: C1's roof core box (3.5 m) shows above the parapet in render-005 where the client image has none — lower or remove it.
 - A4 remaining: D storey count against render-003.
+
+## 2026-11-09 — iteration 6 (user request): B2 straight walls, missing facade elements, render-004 camera — KEPT
+- User review in Blender: the B/B2 block looked tilted and things were missing compared with render-004.
+- Cause: B2 stepped back 1 m per floor to S and E, which made a pyramid in front of tower B. render-000 and render-004
+  show straight walls with deep wrap-around balcony slabs.
+- B2 changes: setbacks removed (vertical walls); 2.2 m balcony slabs on S/E/W faces with planters + planting + glass
+  railing; timber piers (4.2 m spacing, full balcony depth); GF + 6 floors + **PV penthouse** in the SE corner of the L
+  (ESTIMATED from render-000) with planter/railing terrace edges around it. Tower B is unchanged and stands straight on its base.
+- render-004 camera was on the wrong side: the nearest corner of tower B in the client image is its **SW** corner, so the
+  camera stands SW of B (old SE camera only scored well by matching edges of the wrong buildings). New camera from a
+  corner fit (≈5 px residual) + cam_search: (−7.9, −115.7, 1.7) → (42.1, −70.9, 1.7), 41.5 mm, shift_y 0.479.
+  The overlay now puts tower B and B2 in the client's positions.
+- Score, Cycles: mean **0.4725 → 0.4487** (render-004 0.534 → 0.441, aerial 0.359 → 0.351, others ±0.02). Kept despite
+  the drop: requested by the user, and the old render-004 score came from a camera on the wrong side.
+  IFC 0 errors; test block 6/6.
+- Known gaps: C2's east end hides B's timber base in render-004 (A11); B2 roof terrace not green yet (A12).

@@ -46,12 +46,16 @@ Read `CLAUDE.md` first; its conventions and agent roles apply.
 - [ ] A4. Verify storey counts and the C2 wing height (33.9 m vs PSG 25.1 m) against the tuned overlays; adjust.
       (A tower done in iteration 4: 7 diagrid modules × 3 storeys, 83.8 m. C1/C2 → 11 storeys and B/B2 checked in
       iteration 5. Remaining: D storey count against render-003.)
-- [ ] A5. B tower: overhang / alignment over its base and the B2 terrace steps against render-004.
+- [x] A5. B tower: overhang / alignment over its base and the B2 terrace steps against render-004.
+      (iteration 6, user request: B2 straight walls + balconies/timber piers/penthouse; render-004 camera moved to SW.)
 - [ ] A6. D butterfly: recessed joint with green balconies (render-003), wing lengths against the top view.
 - [ ] A7. A diagrid: bay count and module height against render-006 (count diamonds per face).
 - [ ] A8. C front block: roof setbacks and terraces against render-000; rooftop units positions.
 - [ ] A9. A0 podium / courtyard link shape and timber fascia against render-000 and render-006.
 - [ ] A10. Landscape: courtyard paths, planting and trees against the top view.
+
+- [ ] A11. C2 east end hides B's timber base in render-004 (client shows the base): check C2 length / whether the client render omits it.
+- [ ] A12. B2 roof terrace: green roof + planters around the PV penthouse (aerial render-000).
 
 ### B. Completeness of the plan
 - [ ] B1. Floor plans per building: cores (stairs, lifts, shafts) at plausible positions, marked ASSUMED.

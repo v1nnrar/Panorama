@@ -85,22 +85,27 @@ buildings:
     use: Residential
     footprint: [[69.96, -75.24], [65.79, -52.87], [89.04, -48.54], [82.15, -11.58], [94.48, -9.26], [105.6, -68.59]]
     height: 26.9                         # PSG v3 estimate (top terrace level)
-    notes: 8 storeys stepping back 1.0 m per floor to the south and east (render-004, render-002)
-    setbacks:
-      - {facing: [S, E], per_storey: 1.0, from: 2}
+    notes: >-
+      8 storeys, straight walls (render-000 aerial, render-004): deep white balcony slabs with planters on every floor,
+      timber piers between bays, set-back penthouse with PV in the SE corner, roof terrace around it.
+      Was modelled stepping back 1 m per floor to S and E, which read as a tilted pyramid; not in the renders.
     storeys:
       - {name: GF, height: 4.5, use: Retail}
-      - {name: L, count: 7, height: 3.0, use: Apartments}
+      - {name: L, count: 6, start: 1, height: 3.0, use: Apartments}
+      # ESTIMATED from render-000: compact PV-roofed penthouse at the SE corner of the L, 3 m terrace to the street edges
+      - {name: PH, height: 3.0, use: Apartments, footprint: [[102.10, -66.19], [86.37, -69.13], [83.79, -55.37], [99.52, -52.43]]}
     facade:
       - {type: curtain, from: 1, to: 1, glass: Glass dark}
       - {type: curtain, from: 2, glass: Glass, mullion: 1.8}
-      - {type: fins, from: 2, spacing: 2.6, width: 0.32, depth: 0.32, material: Timber}
-      - {type: band, from: 2, depth: 0.25, thickness: 0.35, material: Concrete white}
+      # ESTIMATED from render-004 / render-000: ~2.2 m deep slabs wrapping the street faces, planters + glass railing
+      # (N faces are against tower B / B3, so not included)
+      - {type: balcony, from: 2, to: 7, facing: [S, E, W], depth: 2.2, thickness: 0.35, planter: true, railing: true, planter_material: Concrete white}
+      # ESTIMATED from render-004: timber piers between bays, full balcony depth
+      - {type: fins, from: 2, to: 7, facing: [S, E, W], spacing: 4.2, width: 0.45, depth: 2.2, offset: 0, material: Timber}
     terrace_edge: {planter: true, railing: true}
     roof:
-      parapet: 0.9
+      parapet: 0.6
       parapet_material: Concrete white
-      green: true
       pv: {azimuth: building, tilt: 12, row: 2.0, gap: 0.6}
 
   - id: B3
@@ -237,7 +242,8 @@ render:
     # (lens/position/target). Long lens from far SSW, as in the client aerial. Resolution = client aspect 1280x905.
     - {name: aerial_S_like_render000, location: [-140.8, -453.3, 372.8], target: [21.4, -11.3, 17], lens: 76, resolution: [1280, 905]}
     - {name: street_SW_like_render005, location: [-70, -86, 1.7], target: [8, -42, 37], lens: 36, shift_y: 0.075, resolution: [1400, 1448]}   # ESTIMATED from render-005: tools/cam_search.py (retuned after A height fix), client aspect 700x724
-    - {name: street_SE_like_render004, location: [116, -96, 1.7], target: [90, -56, 42], lens: 24, resolution: [1244, 1484]}   # ESTIMATED from render-004: tools/cam_search.py, client aspect 622x742
+    # ESTIMATED from render-004: corner fit of tower B (nearest corner = SW, so the camera stands SW of B, not SE)
+    - {name: street_SE_like_render004, location: [-7.9, -115.7, 1.7], target: [42.1, -70.9, 1.7], lens: 41.5, shift_y: 0.479, resolution: [1244, 1484]}   # refined with tools/cam_search.py; client aspect 622x742
     - {name: dusk_diagrid_like_render006, location: [-48, -15, 1.7], target: [11, 0, 42], lens: 21, resolution: [1086, 1742]}   # ESTIMATED from render-006: tools/cam_search.py, client aspect 543x871
     # ESTIMATED from render-003: least-squares fit of D's corners (NE/NW parapet + underside, joint, SE) at eye height,
     # level camera with vertical shift (client uses 2-point perspective); residuals ~10 px on 990x450. Camera stands NE of D.

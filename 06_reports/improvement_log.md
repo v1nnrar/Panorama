@@ -133,3 +133,11 @@ client's renders, higher is better).
   render-003 → `hide: [A]`; render-006 refined with cam_search.
 - Score, Cycles: mean **0.4236 → 0.4851** (diagrid 0.423 → 0.605, park 0.265 → 0.391, others unchanged).
   IFC 0 errors; test block 6/6.
+
+## 2026-11-09 — iteration 10: new regulations → compliance check (handled first, LOOP step 2)
+- New input on the branch: `02_regulations/rules.yaml` + `summary.md` (Metropolitan Plan of Prague, locality 058, [S],
+  storey range 27). Ran the compliance-checker step: `build.py … --no-blender --rules 02_regulations/rules.yaml` → **3/3 pass**.
+- Wrote `06_reports/compliance_existing.md`: height 83.8 m to parapet (≈85.1 m highest element) vs 100 m; 22 vs 27 storeys;
+  HPPreg not set in [S]. Open items: [S] confirmation, stabilised-area judgement, MPP floor-area counting below ground,
+  metro D corridor, PSP (distances/daylight/parking/green), any existing permit.
+- No model change; match score unchanged (0.4851). Footprint outside plot 9.1 m² = E 6.5 (OSM vs ČÚZK offset) + B2 2.7 (tolerance).

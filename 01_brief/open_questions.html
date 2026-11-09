@@ -187,6 +187,18 @@ button.primary:hover { filter: brightness(1.08); }
 .pick polygon:hover { fill: rgba(240, 140, 70, .30); }
 .pick polygon.on { fill: rgba(197, 86, 28, .55); stroke: #fff; stroke-dasharray: none; }
 
+.pick polygon.u-hotel { fill: rgba(197, 86, 28, .6); stroke: #fff; stroke-dasharray: none; }
+.pick polygon.u-apts { fill: rgba(240, 180, 90, .6); stroke: #fff; stroke-dasharray: none; }
+.pick polygon.u-other { fill: rgba(90, 80, 72, .7); stroke: #fff; stroke-dasharray: none; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.sw.hotel { background: rgb(197, 86, 28); } .sw.apts { background: rgb(240, 180, 90); } .sw.other { background: rgb(90, 80, 72); }
+.mixrows { display: grid; gap: 8px; }
+.mixrow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.mixname { min-width: 9.5em; font-weight: 500; }
+.mixrow .opts span { padding: 6px 12px; font-size: 13px; }
+
 footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 
 @media (max-width: 560px) {
@@ -289,9 +301,28 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
             </div>
             <div class="fu" data-group="newuse" data-show="Both" hidden>
               <h4>For a mix</h4>
-<div class="q sub" data-q="Which parts are hotel, which are apartments?">
-  <p class="q-label" id="q-6-l">Which parts are hotel, which are apartments?</p>
-  <textarea class="ans" id="q-6" rows="2" aria-labelledby="q-6-l" placeholder="Your answer"></textarea>
+<div class="q sub" data-q="Which parts are hotel, which are apartments?" data-mix="1">
+  <p class="q-label">Which parts are hotel, which are apartments? Tap a building to switch: hotel, apartments, other.</p>
+  <div class="pick">
+    <img src="img/top_scheme.jpg" alt="Top view of your current design" loading="lazy">
+    <svg viewBox="0 0 506 489" preserveAspectRatio="none" aria-hidden="true">
+      <polygon points="110,183 232,183 232,308 110,308" data-b="A"><title>Diagrid tower</title></polygon>
+      <polygon points="316,322 396,322 396,432 316,432" data-b="B"><title>Green tower</title></polygon>
+      <polygon points="278,305 398,305 398,322 316,322 316,432 300,446 278,440" data-b="B2"><title>Terraced block</title></polygon>
+      <polygon points="62,350 120,336 265,370 263,428 64,396" data-b="C"><title>Front block</title></polygon>
+      <polygon points="78,130 170,128 240,112 258,128 258,186 170,190 80,190" data-b="D"><title>Butterfly office</title></polygon>
+      <polygon points="390,262 495,265 490,300 420,420 398,405 398,300" data-b="E"><title>Corner office</title></polygon>
+    </svg>
+  </div>
+  <div class="legend"><span><i class="sw hotel"></i>Hotel</span><span><i class="sw apts"></i>Apartments</span><span><i class="sw other"></i>Other</span></div>
+  <div class="mixrows">
+    <div class="mixrow" data-b="A" data-name="Diagrid tower"><span class="mixname">Diagrid tower</span><div class="opts"><label><input type="radio" class="ans" name="mix-A" id="mix-A-0" value="Hotel"><span>Hotel</span></label><label><input type="radio" class="ans" name="mix-A" id="mix-A-1" value="Apartments"><span>Apartments</span></label><label><input type="radio" class="ans" name="mix-A" id="mix-A-2" value="Other"><span>Other</span></label></div></div>
+    <div class="mixrow" data-b="B" data-name="Green tower"><span class="mixname">Green tower</span><div class="opts"><label><input type="radio" class="ans" name="mix-B" id="mix-B-0" value="Hotel"><span>Hotel</span></label><label><input type="radio" class="ans" name="mix-B" id="mix-B-1" value="Apartments"><span>Apartments</span></label><label><input type="radio" class="ans" name="mix-B" id="mix-B-2" value="Other"><span>Other</span></label></div></div>
+    <div class="mixrow" data-b="B2" data-name="Terraced block"><span class="mixname">Terraced block</span><div class="opts"><label><input type="radio" class="ans" name="mix-B2" id="mix-B2-0" value="Hotel"><span>Hotel</span></label><label><input type="radio" class="ans" name="mix-B2" id="mix-B2-1" value="Apartments"><span>Apartments</span></label><label><input type="radio" class="ans" name="mix-B2" id="mix-B2-2" value="Other"><span>Other</span></label></div></div>
+    <div class="mixrow" data-b="C" data-name="Front block"><span class="mixname">Front block</span><div class="opts"><label><input type="radio" class="ans" name="mix-C" id="mix-C-0" value="Hotel"><span>Hotel</span></label><label><input type="radio" class="ans" name="mix-C" id="mix-C-1" value="Apartments"><span>Apartments</span></label><label><input type="radio" class="ans" name="mix-C" id="mix-C-2" value="Other"><span>Other</span></label></div></div>
+    <div class="mixrow" data-b="D" data-name="Butterfly office"><span class="mixname">Butterfly office</span><div class="opts"><label><input type="radio" class="ans" name="mix-D" id="mix-D-0" value="Hotel"><span>Hotel</span></label><label><input type="radio" class="ans" name="mix-D" id="mix-D-1" value="Apartments"><span>Apartments</span></label><label><input type="radio" class="ans" name="mix-D" id="mix-D-2" value="Other"><span>Other</span></label></div></div>
+    <div class="mixrow" data-b="E" data-name="Corner office"><span class="mixname">Corner office</span><div class="opts"><label><input type="radio" class="ans" name="mix-E" id="mix-E-0" value="Hotel"><span>Hotel</span></label><label><input type="radio" class="ans" name="mix-E" id="mix-E-1" value="Apartments"><span>Apartments</span></label><label><input type="radio" class="ans" name="mix-E" id="mix-E-2" value="Other"><span>Other</span></label></div></div>
+  </div>
 </div>
             </div>
             <div class="fu" data-group="newuse" data-show="Hotel|Both" hidden>
@@ -315,7 +346,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
 </div>
 <div class="q sub" data-q="Approximately how many rooms or flats in total?">
   <p class="q-label" id="q-9-l">Approximately how many rooms or flats in total?</p>
-  <input type="text" inputmode="numeric" class="ans" id="q-9" aria-labelledby="q-9-l" placeholder="e.g. 250">
+  <input type="text" inputmode="numeric" class="ans" id="q-9" aria-labelledby="q-9-l" placeholder="Your answer">
 </div>
             </div>
             <div class="fu" data-group="newuse" data-show="Residential|Both" hidden>
@@ -618,15 +649,34 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
 
 
   // Clickable buildings on the top view
-  document.querySelectorAll('.pick polygon').forEach(pg => {
+  document.querySelectorAll('.pick polygon[data-for]').forEach(pg => {
     const box = document.getElementById(pg.dataset.for);
     pg.addEventListener('click', () => { box.checked = !box.checked; box.dispatchEvent(new Event('change', { bubbles: true })); });
   });
   function syncPick() {
-    document.querySelectorAll('.pick polygon').forEach(pg => pg.classList.toggle('on', document.getElementById(pg.dataset.for).checked));
+    document.querySelectorAll('.pick polygon[data-for]').forEach(pg => pg.classList.toggle('on', document.getElementById(pg.dataset.for).checked));
   }
   document.querySelectorAll('input[name="bgo"]').forEach(i => i.addEventListener('change', syncPick));
   syncPick();
+
+
+  // Hotel / apartments per building on the design top view
+  const USES = ['Hotel', 'Apartments', 'Other'], CLS = { Hotel: 'u-hotel', Apartments: 'u-apts', Other: 'u-other' };
+  function syncMix() {
+    document.querySelectorAll('polygon[data-b]').forEach(pg => {
+      const c = document.querySelector('input[name="mix-' + pg.dataset.b + '"]:checked');
+      pg.classList.remove('u-hotel', 'u-apts', 'u-other');
+      if (c) pg.classList.add(CLS[c.value]);
+    });
+  }
+  document.querySelectorAll('polygon[data-b]').forEach(pg => pg.addEventListener('click', () => {
+    const radios = [...document.querySelectorAll('input[name="mix-' + pg.dataset.b + '"]')];
+    const i = radios.findIndex(r => r.checked);
+    if (i === radios.length - 1) radios[i].checked = false; else radios[i + 1].checked = true;
+    radios[0].dispatchEvent(new Event('change', { bubbles: true }));
+  }));
+  document.querySelectorAll('input[name^="mix-"]').forEach(i => i.addEventListener('change', syncMix));
+  syncMix();
 
   // Copy all answers as plain text
   function collect() {
@@ -637,7 +687,12 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
       d.querySelectorAll('[data-q]').forEach(q => {
         if (q.closest('[hidden]')) return;
         let a = '';
-        if (q.dataset.table) {
+        if (q.dataset.mix) {
+          a = [...q.querySelectorAll('.mixrow')].map(r => {
+            const c = r.querySelector('input:checked');
+            return c ? r.dataset.name + ' = ' + c.value : '';
+          }).filter(Boolean).join('; ');
+        } else if (q.dataset.table) {
           a = [...q.querySelectorAll('tr[data-row]')].map(r => {
             const v = [...r.querySelectorAll('input')].map(i => i.value.trim());
             return v[0] ? r.dataset.row + ': ' + v[0] : '';

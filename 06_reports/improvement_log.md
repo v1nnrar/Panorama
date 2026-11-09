@@ -31,3 +31,16 @@ client's renders, higher is better).
   park 0.304 unchanged). Workbench mean 0.169 → 0.260. IFC 0 errors; test block 6/6 pass. Params only, no geometry.
 - Observation for A4: with the aerial aligned, our tower A's roof sits clearly **above** the client's (about 2 storeys
   at this scale), and in render-003 A shows above D where the client has sky, so A at 88.2 m is probably too tall.
+
+## 2026-11-09 — iteration 3: A3 fine-tune street cameras render-004, -005, -006 — KEPT
+- New tool `tools/cam_search.py`: coordinate descent on the match score for one camera (Workbench at 50 % from
+  `model/model.blend`, ~9 s per render; prints the best camera as a params line, never edits params). Eye height fixed.
+- Results (2 sweeps, 32–38 renders each, three cameras run in parallel):
+  - render-005 SW: location (−70, −86, 1.7), target (5, −45, 37), lens 32, shift_y 0.075 (was 24 mm from (−62, −86)).
+  - render-004 SE: location (116, −96, 1.7), target (90, −56, 42), lens 24.
+  - render-006 diagrid: location (−48, −15, 1.7), target (11, 0, 42), lens 21.
+- Checked the 50 % overlays by eye so the score is not being gamed: tower A's diagrid and block C (005), tower B with
+  its terraces (004) and the diagrid shaft (006) now line up with the client images.
+- Score, Cycles: mean **0.3497 → 0.4723** (SW 0.394→0.672, SE 0.351→0.536, diagrid 0.341→0.491; aerial and park
+  unchanged). Workbench mean 0.260 → 0.445. IFC 0 errors; test block 6/6 pass. Params + new tool, no geometry.
+- All five matched cameras are now tuned, so geometry items (A4 onward) can be judged on the score.

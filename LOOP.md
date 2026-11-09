@@ -42,7 +42,7 @@ Read `CLAUDE.md` first; its conventions and agent roles apply.
       façade), set location/target/lens and `resolution` to the client image's aspect ratio.
 - [x] A2. Set every matched camera's `resolution` to its client image's aspect ratio, then fine-tune location/target/lens
       for render-000 (aerial) with 50 % overlays (`overlays/overlay_*.jpg`) until silhouettes align.
-- [ ] A3. Same fine-tuning for render-004, render-005, render-006.
+- [x] A3. Same fine-tuning for render-004, render-005, render-006.
 - [ ] A4. Verify storey counts and the C2 wing height (33.9 m vs PSG 25.1 m) against the tuned overlays; adjust.
 - [ ] A5. B tower: overhang / alignment over its base and the B2 terrace steps against render-004.
 - [ ] A6. D butterfly: recessed joint with green balconies (render-003), wing lengths against the top view.

@@ -452,6 +452,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     <label><input type="checkbox" class="ans" name="q-19" id="q-19-2" value="Building condition survey"><span>Building condition survey</span></label>
     <label><input type="checkbox" class="ans" name="q-19" id="q-19-3" value="None"><span>None</span></label>
   </div>
+  <textarea class="ans" id="q-19t" rows="2" aria-label="Other surveys or notes" placeholder="Other surveys or notes"></textarea>
 </div>
         </div></details>
     </div>
@@ -666,7 +667,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
           if (q.querySelector('#apt-unclear:checked')) a = a ? a + ' (unclear)' : 'Unclear';
         } else {
           const t = q.querySelector('textarea, input[type="text"]');
-          a = t ? t.value.trim() : [...q.querySelectorAll('input:checked')].map(i => i.value).join(', ');
+          a = [...q.querySelectorAll('input:checked')].map(i => i.value).concat(t && t.value.trim() ? [t.value.trim()] : []).join(', ');
         }
         if (a) part.push('  - ' + q.dataset.q.replace(/<[^>]+>/g, '') + ': ' + a);
       });

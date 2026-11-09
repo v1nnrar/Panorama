@@ -153,6 +153,10 @@ details[open] .chev::after { transform: rotate(0deg); }
 .sub summary:hover span:first-child { color: var(--accent); }
 .sub .pts { padding: 0 2px 14px; }
 
+.links { display: flex; flex-wrap: wrap; gap: 8px; }
+.links a { font: 500 13px/1 var(--body); color: var(--accent); text-decoration: none; padding: 10px 14px; border: 1px solid var(--accent); border-radius: 999px; background: var(--sheet); }
+.links a:hover { background: var(--accent); color: #fff; }
+
 footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 
 @media (max-width: 560px) {
@@ -418,6 +422,20 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
         <button data-src="img/c3.jpg" data-cap="Residential tower"><img src="img/c3.jpg" alt="Residential tower"></button>
         <button data-src="img/c4.jpg" data-cap="Office block and diagrid tower"><img src="img/c4.jpg" alt="Office block and diagrid tower"></button>
         <button data-src="img/c5.jpg" data-cap="Diagrid tower at dusk"><img src="img/c5.jpg" alt="Diagrid tower at dusk"></button>
+      </div>
+    </div>
+    <div class="slide" data-slides>
+      <div class="slide-head"><h3>The site today</h3><span>Aerial photos · land register · ČÚZK</span></div>
+      <div class="stage"><img alt=""><button class="nav prev" aria-label="Previous image">‹</button><button class="nav next" aria-label="Next image">›</button></div>
+      <div class="cap"><b></b><span></span></div>
+      <div class="thumbs">
+        <button data-src="img/s0.jpg" data-cap="Aerial photo of the area, north up (ČÚZK)"><img src="img/s0.jpg" alt="Aerial photo of the area"></button>
+        <button data-src="img/s1.jpg" data-cap="Close-up of the site with the existing hotel (ČÚZK)"><img src="img/s1.jpg" alt="Close-up aerial photo of the site"></button>
+        <button data-src="img/s2.jpg" data-cap="Land register map of the same area (ČÚZK)"><img src="img/s2.jpg" alt="Land register map"></button>
+      </div>
+      <div class="links">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=50.04919,14.43819" target="_blank" rel="noopener">Open in Google Maps ↗</a>
+        <a href="https://www.google.com/maps/@?api=1&amp;map_action=pano&amp;viewpoint=50.04919,14.43819" target="_blank" rel="noopener">Open Street View ↗</a>
       </div>
     </div>
   </section>

@@ -179,9 +179,13 @@ button.primary:hover { filter: brightness(1.08); }
 .seg .dot { width: 8px; height: 8px; margin-right: 4px; vertical-align: 1px; }
 .seg button[aria-pressed="true"] .dot { background: #fff; }
 
-.mini { margin: 0; display: grid; gap: 6px; max-width: 420px; }
-.mini img { width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--line); display: block; }
-.mini figcaption { font-size: 12.5px; color: var(--muted); }
+
+.pick { position: relative; max-width: 560px; width: 100%; }
+.pick img { display: block; width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--line); }
+.pick svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pick polygon { fill: rgba(255, 255, 255, 0.08); stroke: rgba(255, 255, 255, .9); stroke-width: 3; stroke-dasharray: 8 6; cursor: pointer; transition: fill .15s; }
+.pick polygon:hover { fill: rgba(240, 140, 70, .30); }
+.pick polygon.on { fill: rgba(197, 86, 28, .55); stroke: #fff; stroke-dasharray: none; }
 
 footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 
@@ -222,13 +226,26 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
             </div>
             <div class="fu" data-group="existing" data-show="Demolish" hidden>
 <div class="q sub" data-q="Which buildings go?">
-  <p class="q-label" id="q-1-l">Which buildings go?</p>
-  <div class="opts" role="group" aria-labelledby="q-1-l">
-    <label><input type="radio" class="ans" name="q-1" id="q-1-0" value="Only the hotel"><span>Only the hotel</span></label>
-    <label><input type="radio" class="ans" name="q-1" id="q-1-1" value="The hotel and others"><span>The hotel and others</span></label>
-    <label><input type="radio" class="ans" name="q-1" id="q-1-2" value="Not sure"><span>Not sure</span></label>
+  <p class="q-label" id="q-1-l">Which buildings go? Tap them on the photo or below.</p>
+  <div class="pick">
+    <img src="img/s3.jpg" alt="Top view of your land today, outlined in orange" loading="lazy">
+    <svg viewBox="0 0 900 759" preserveAspectRatio="none" aria-hidden="true">
+      <polygon points="235,215 385,218 402,300 398,440 258,442 240,300" data-for="bg-tower"><title>Hotel tower</title></polygon>
+      <polygon points="160,305 240,302 256,455 165,458" data-for="bg-wings"><title>Hotel low wings</title></polygon>
+      <polygon points="386,238 442,236 463,440 400,440" data-for="bg-wings"><title>Hotel low wings</title></polygon>
+      <polygon points="505,352 655,346 683,600 540,602" data-for="bg-garage"><title>Parking garage</title></polygon>
+      <polygon points="648,322 805,316 760,440 700,560 686,585 662,360" data-for="bg-office"><title>Corner office building</title></polygon>
+      <polygon points="165,460 512,448 518,612 150,600" data-for="bg-carpark"><title>Car park in front</title></polygon>
+    </svg>
   </div>
-  <figure class="mini"><img src="img/s3.jpg" alt="Top view of your land today, outlined in orange" loading="lazy"><figcaption>Your land today, outlined in orange (ČÚZK aerial photo)</figcaption></figure>
+  <div class="opts" role="group" aria-labelledby="q-1-l">
+    <label><input type="checkbox" class="ans" name="bgo" id="bg-tower" value="Hotel tower"><span>Hotel tower</span></label>
+    <label><input type="checkbox" class="ans" name="bgo" id="bg-wings" value="Hotel low wings"><span>Hotel low wings</span></label>
+    <label><input type="checkbox" class="ans" name="bgo" id="bg-garage" value="Parking garage"><span>Parking garage</span></label>
+    <label><input type="checkbox" class="ans" name="bgo" id="bg-office" value="Corner office building"><span>Corner office building</span></label>
+    <label><input type="checkbox" class="ans" name="bgo" id="bg-carpark" value="Car park in front"><span>Car park in front</span></label>
+    <label><input type="checkbox" class="ans" name="bgo" id="bg-unsure" value="Not sure"><span>Not sure</span></label>
+  </div>
 </div>
             </div>
             <div class="fu" data-group="existing" data-show="Refurbish" hidden>
@@ -598,6 +615,18 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
     document.querySelectorAll('input[name="' + g + '"]').forEach(i => i.addEventListener('change', () => showChoice(g)));
     showChoice(g);
   });
+
+
+  // Clickable buildings on the top view
+  document.querySelectorAll('.pick polygon').forEach(pg => {
+    const box = document.getElementById(pg.dataset.for);
+    pg.addEventListener('click', () => { box.checked = !box.checked; box.dispatchEvent(new Event('change', { bubbles: true })); });
+  });
+  function syncPick() {
+    document.querySelectorAll('.pick polygon').forEach(pg => pg.classList.toggle('on', document.getElementById(pg.dataset.for).checked));
+  }
+  document.querySelectorAll('input[name="bgo"]').forEach(i => i.addEventListener('change', syncPick));
+  syncPick();
 
   // Copy all answers as plain text
   function collect() {

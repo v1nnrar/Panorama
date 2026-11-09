@@ -1,0 +1,61 @@
+# Option C — mid-rise city blocks (no towers) — metrics & compliance
+
+Source: `params.yaml`
+
+## Site & totals
+
+| Metric | Value |
+|---|---|
+| buildings | 5 |
+| storeys_above_ground | 11 |
+| gfa_below_ground_m2 | 41363.9 |
+| height_top_of_parapet_m | 38.5 |
+| footprint_area_m2 | 6637.1 |
+| gfa_m2 | 70516.5 |
+| net_floor_area_m2 | 67005.5 |
+| rooms | 0 |
+| site_area_m2 | 16491.7 |
+| built_up_ratio | 0.402 |
+| plot_ratio_far | 4.276 |
+| unbuilt_ratio | 0.598 |
+| footprint_outside_plot_m2 | 9.1 |
+| min_setback_m | 0.0 |
+| parking_zone | 02 |
+| parking_required_min | 574 |
+| parking_required_max | 618 |
+| parking_capacity_est | 1171 |
+| parking_margin | 597 |
+| gfa_by_use_m2 | {'hotel': 28160.9, 'retail': 2271.5, 'residential': 22715.1, 'office': 11195.9} |
+| hotel_keys_est | 513 |
+| flats_est | 272 |
+| psp22_min_boundary_distance_m | 2.56 |
+| psp21_windows_checked | 699 |
+| psp21_windows_failing | 6 |
+| psp21_fail_ratio | 0.009 |
+| psp21_failing_neighbours | [('-58,-26', 4), ('-15,-103', 1), ('54,48', 1)] |
+| daylight_proxy_windows | 296 |
+| daylight_proxy_fail_ratio | 0.135 |
+| courtyard_sun_hours_mean_mar21 | 1.3 |
+| courtyard_area_2h_sun_ratio | 0.258 |
+| open_ground_m2 | 8934.8 |
+
+## Buildings
+
+| ID | Name | Use | Storeys | Height (m) | Target (m) | Footprint (m²) | GFA (m²) | NFA (m²) |
+|---|---|---|---|---|---|---|---|---|
+| HW | West block — hotel | Hotel | 11 | 38.5 |  | 2560.1 | 28160.9 | 26811.1 |
+| RE | East block — apartments | Residential | 11 | 36.8 |  | 2271.5 | 24986.6 | 23775.4 |
+| O | North office wing | Office | 10 | 38.4 |  | 1119.6 | 11195.9 | 10598.8 |
+| E | Existing corner office (parcel 1133/12) | Office (existing, kept) | 9 | 32.0 | 32.0 | 685.9 | 6173.1 | 5820.2 |
+| U | Underground parking | Parking / technical | 0 | 0.3 |  | 13788.0 | 0 | 0 |
+
+## Compliance
+
+| Rule | Limit | Value | Status | Source |
+|---|---|---|---|---|
+| Max regulated building height (storey range 27) | ≤ 100 | 38.5 | ✅ PASS | MPP text čl. 98 odst. 3 (range 27: >21 RNP, max 100 m); Z 02 / KLZ 058 map — squares over the plot read 27 |
+| Max regulated above-ground storeys (range 27) | ≤ 27 | 11 | ✅ PASS | MPP čl. 98 odst. 3 — INTERPRETATION: range label 27 = maximum RNP (ranges 21 = 13–21, 15 = 10–15 …) |
+| Regulated floor area (HPPreg) — not set in stabilised areas |  | 70516.5 | ℹ️ | MPP čl. 96 odst. 2: HPPreg/Zmax apply only to [T] and [R] areas; plot is [S] (KLZ 058 map, no T hatch) |
+| PSP §21: neighbour windows failing the 45°/45° distance angle | ≤ 0 | 6 | ❌ FAIL | PSP §21 odst. 1 + příloha 1 bod II (sampled windows on neighbour façades facing the plot; pipeline/psp.py) |
+| PSP §22: min distance to private neighbouring plots (m) | ≥ 2.0 | 2.56 | ✅ PASS | PSP §22 odst. 2 — ASSUMED: plot edges facing S (Milevská) and E (street/metro) are public space |
+| PSP §25: parking capacity minus required minimum (spaces) | ≥ 0 | 597 | ✅ PASS | PSP §25 + příloha 2 (HPP per space by use) + příloha 3 — ASSUMED zone 02 (bound 80 %, visitor 15–55 %), 30 m²/space at 85 % basement efficiency |

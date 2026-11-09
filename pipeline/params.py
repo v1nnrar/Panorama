@@ -95,6 +95,7 @@ def _building(b: dict, scheme_defaults: dict) -> dict:
         "facade": b.get("facade", []),
         "material": b.get("material", "Render white"),
         "below_ground": float(b.get("ground_elevation", 0.0)) < 0,
+        "existing": bool(b.get("existing", False)),        # existing building kept (excluded from new-build checks)
     }
 
 
@@ -133,5 +134,6 @@ def load(path: str | Path) -> dict:
         "buildings": buildings,
         "materials": raw.get("materials", {}),
         "landscape": raw.get("landscape", {}),
+        "parking_zone": str(raw.get("parking_zone", "02")),
         "render": raw.get("render", {}),
     }

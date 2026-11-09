@@ -66,6 +66,11 @@ def metrics(design: dict) -> dict:
         if sp.geom_type == "Polygon":
             m["min_setback_m"] = round(min(sp.exterior.distance(Polygon(b["storeys"][0]["footprint"]))
                                            for b in design["buildings"]), 2)
+    try:
+        from . import psp
+        m.update({k: v for k, v in psp.run_all(design, design.get("parking_zone", "02")).items()})
+    except Exception as e:  # checks must never break a build
+        m["psp_error"] = repr(e)
     m["per_building"] = per
     return m
 

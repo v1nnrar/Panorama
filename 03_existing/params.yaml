@@ -205,6 +205,7 @@ buildings:
   # ---------------------------------------------------------------- E: existing corner office on 1133/12 (kept)
   - id: E
     name: Existing corner office (parcel 1133/12)
+    existing: true
     use: Office (existing, kept)
     # AUDIT: OSM polygon trimmed at y ≈ -6.9. Its 45 m wedge south to (106.73, -53.17) is ramp/greenery on the ČÚZK
     # orthophoto (00_site/survey/grid_ortho.jpg), not building; render-002 shows a compact block.

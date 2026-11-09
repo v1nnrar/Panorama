@@ -17,3 +17,19 @@ rules:
     label: Regulated floor area (HPPreg) — not set in stabilised areas
     metric: gfa_m2
     source: "MPP čl. 96 odst. 2: HPPreg/Zmax apply only to [T] and [R] areas; plot is [S] (KLZ 058 map, no T hatch)"
+  # --- Prague building regulations (PSP, nař. 12/2024, consolidated text 2025/01 in raw/PSP_souhrnne_zneni.pdf) ---
+  - id: psp21_distance_angle
+    label: "PSP §21: neighbour windows failing the 45°/45° distance angle"
+    metric: psp21_windows_failing
+    max: 0
+    source: "PSP §21 odst. 1 + příloha 1 bod II (sampled windows on neighbour façades facing the plot; pipeline/psp.py)"
+  - id: psp22_boundary
+    label: "PSP §22: min distance to private neighbouring plots (m)"
+    metric: psp22_min_boundary_distance_m
+    min: 2.0
+    source: "PSP §22 odst. 2 — ASSUMED: plot edges facing S (Milevská) and E (street/metro) are public space"
+  - id: psp25_parking
+    label: "PSP §25: parking capacity minus required minimum (spaces)"
+    metric: parking_margin
+    min: 0
+    source: "PSP §25 + příloha 2 (HPP per space by use) + příloha 3 — ASSUMED zone 02 (bound 80 %, visitor 15–55 %), 30 m²/space at 85 % basement efficiency"

@@ -37,7 +37,43 @@ Read `CLAUDE.md` first; its conventions and agent roles apply.
   useful remains without user input, write that in the log and stop.
 - If two iterations in a row fail on the same item, mark it **blocked** with the reason and move on.
 
+## Section D iterations (capacity study) — different steps 4–7
+Section D is the **top priority** (user request, 9 Nov 2026). For a D item:
+- **Change** `SPECS` / `PRESETS` in `tools/make_options.py` (or add a new option key), then
+  `.venv/bin/python tools/make_options.py <key>` and `.venv/bin/python build.py 04_proposed/options/<key>/params.yaml --no-blender`.
+- **Score** with `.venv/bin/python tools/score_options.py` (writes `06_reports/capacity_study.md`). Score = above-ground
+  GFA (k m²) if every hard rule in `02_regulations/rules.yaml` passes, −10 % per missed quality floor.
+- **Keep** the change if that option's score went up (or a failing option now passes); otherwise revert.
+  Useful helpers: the tower-position grid search pattern (vary a block's rect, call `psp.distance_angle_neighbours`,
+  keep only footprints 2 m inside the plot and not overlapping other blocks).
+- **Renders** for kept changes: `build.py 04_proposed/options/<key>/params.yaml --render --engine WORKBENCH --only aerial_S top_view`;
+  re-run `score_options.py` so `06_reports/capacity_study_aerials.jpg` updates. Cycles renders of the top 2 options
+  every 4th kept D iteration (`--render --only aerial_S aerial_SE`).
+- **Never relax a rule to make an option pass.** Rules change only with a cited source (regulations-analyst role).
+  Keep the existing office E and the official plot. Footprints stay ≥ 2 m inside private plot edges.
+
 ## Backlog (ranked)
+### D. Capacity study for OUR design (priority)
+- [ ] D1. Option B: make it pass §21 (failing: panel blocks south of Milevská, three-wing building north) — move/slim/rotate
+      the towers or step the podium; then grow GFA.
+- [ ] D2. Option C: pass §21 (drum SE west, three-wing north) and the courtyard-sun floor (1.3 h → ≥ 2 h): open the
+      courtyards to the south-west, step heights down toward the park.
+- [ ] D3. Option A: grow GFA while passing — rectangular tower floorplate (e.g. 28×36), taller bars where §21 allows,
+      use the north wing better; re-run the tower-position search after each change.
+- [ ] D4. New option D "client-like, compliant": start from the client's footprints (03_existing) and fix §21 + parking
+      with the smallest changes — shows how much of the client's 91,500 m² can be kept legally.
+- [ ] D5. New option E "max yield": parametric search (tower count 1–3, positions, bar heights 6–12 storeys) maximising
+      the score; write the search as `tools/search_options.py` and keep the best result as option E.
+- [ ] D6. Basement sizing: choose `basement_levels` per option so parking capacity ≥ required minimum with the fewest
+      levels (cost); report levels in capacity_study.md.
+- [ ] D7. Daylight proxy refinement: replace the own-façade 45° test with a vertical-sky-component estimate
+      (ČSN 73 0580 / EN 17037 logic) and re-score all options.
+- [ ] D8. Hotel programme per option: lobby / restaurant / conference / spa areas on the lower floors, keys by room type;
+      flag options outside 300–450 keys (typical 4* city hotel, ASSUMED until the brief arrives).
+- [ ] D9. Presentation: Cycles aerials of the top 2 options + client scheme side by side, and a one-page comparison
+      in `06_reports/capacity_study.md` (no new hosts, no paid services).
+- [ ] D10. Verify parking zone 02 (Atlas Prahy zone map) — mark **blocked** if the map needs a token.
+
 ### A. Fidelity of the existing scheme (measurable with `score_match.py`)
 - [x] A1. Camera match render-003 (park view, score 0.02): find the viewpoint (north park, looking at D's north
       façade), set location/target/lens and `resolution` to the client image's aspect ratio.

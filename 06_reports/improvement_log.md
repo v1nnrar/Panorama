@@ -58,3 +58,16 @@ client's renders, higher is better).
 - Kept despite the flat score because the module count is now right in both views. Render-006 dropped, so tower A's
   width or diagrid offset may still be off: check under A7 (diagrid bays). Full Cycles presentation renders made
   (4th kept iteration). A4 stays open for C1/C2, B and D storey counts.
+
+## 2026-11-09 — iteration 5: A4 (part 2) storey counts for B, B2, C1, C2 — KEPT
+- **B tower** (render-004): 6-storey timber base + 8 two-storey band intervals = 22 storeys, same as the model. No change.
+  **B2**: ~8 stepped levels, same as the model. No change.
+- **C1** (render-005): 10 window rows over a tall glazed GF = **11 storeys** (model had GF + 9). The total height already
+  matched the overlay, so it stays 33.9 m: GF 4.4 m (≈1.5 × typical) + 10 × 2.85 m + 1.0 parapet.
+- **C2**: same levels as C1 (window rows run continuously across the joint) → 11 storeys, the 4 m north setback moved to
+  storey 11. PSG's 25.1 m is not supported by render-005 or render-000; 33.9 m stays.
+- Overlay check: the doubled/offset window rows on C1 are gone and the rows coincide.
+- Score: Workbench mean 0.4392 → 0.4392 (SW 0.7246→0.7292, aerial 0.2947→0.2899). Cycles (aerial + SW re-rendered):
+  mean **0.4718 → 0.4725**. IFC 0 errors; test block 6/6. GFA changes are in metrics.json.
+- For A8: C1's roof core box (3.5 m) shows above the parapet in render-005 where the client image has none — lower or remove it.
+- A4 remaining: D storey count against render-003.

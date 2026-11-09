@@ -125,10 +125,10 @@ buildings:
     use: Hotel / office
     footprint: [[-32.57, -39.21], [-11.26, -35.24], [-12.67, -59.62], [-28.08, -58.73]]
     height: 33.9
-    notes: 10 storeys; double-height glazed GF, light grey fins + horizontal bands, green roof with rooftop units
+    notes: 11 storeys (render-005 - 10 window rows over a tall glazed GF); light grey fins + horizontal bands, green roof with rooftop units
     storeys:
-      - {name: GF, height: 5.0, use: Lobby}
-      - {name: L, count: 9, height: 3.1, use: Rooms}
+      - {name: GF, height: 4.4, use: Lobby}            # ESTIMATED from render-005: GF ≈ 1.5 x typical storey
+      - {name: L, count: 10, height: 2.85, use: Rooms}  # ESTIMATED from render-005: 10 window rows; height kept at 33.9 m
     windows: {width: 1.4, height: 2.0, sill: 0.7, spacing: 2.7, edge_margin: 1.0}
     material: Render light grey
     facade:
@@ -151,12 +151,12 @@ buildings:
     use: Hotel / office
     footprint: [[-11.26, -35.24], [37.83, -48.86], [36.23, -62.45], [-12.67, -59.62]]
     height: 33.9                         # renders: continuous cornice with C1 (PSG v3 had 25.1 m) — VERIFY
-    notes: 10 storeys; top floor set back 4 m on the north (roof terraces, render-000)
+    notes: 11 storeys, window rows continuous with C1 (render-005); top floor set back 4 m on the north (roof terraces, render-000)
     setbacks:
-      - {facing: N, distance: 4.0, from: 10, to: 10}
+      - {facing: N, distance: 4.0, from: 11, to: 11}
     storeys:
-      - {name: GF, height: 5.0, use: Lobby / retail}
-      - {name: L, count: 9, height: 3.1, use: Rooms}
+      - {name: GF, height: 4.4, use: Lobby / retail}   # ESTIMATED from render-005, same levels as C1
+      - {name: L, count: 10, height: 2.85, use: Rooms}
     windows: {width: 1.4, height: 2.0, sill: 0.7, spacing: 2.7, edge_margin: 1.0}
     material: Render light grey
     facade:

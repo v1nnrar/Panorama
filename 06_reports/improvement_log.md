@@ -97,3 +97,13 @@ client's renders, higher is better).
 - Score: Workbench mean ≈0.4156 → 0.4165 (park 0.140→0.145). Cycles (park + aerial re-rendered): mean **0.4487 → 0.4486**
   (aerial 0.351→0.359, park 0.323→0.315). IFC 0 errors; test block 6/6. A4 closed.
 - New item A13: tower A appears above D in our park view, but the client image shows sky there.
+
+## 2026-11-09 — iteration 8: A6 D butterfly recessed joint with green balconies — KEPT
+- render-003 shows a recessed vertical slot where D's two wings meet on the north face, with planted balconies on every
+  floor. Footprint now has a ~7 m wide, 3 m deep slot at the joint vertex (−7.31, 47.16) (ESTIMATED).
+- Pipeline: facade rules can now target single edges with `near: [[x, y], …]` (edge with the closest midpoint) as well as
+  compass `facing` (`pipeline/geom.py::rule_edges`, used by balconies/bands and fins; documented in CLAUDE.md). Used for
+  2 m planted balconies on the back wall of the slot, storeys 2–8. Close-up render checked: slot + stacked green balconies.
+- Wing lengths: outline already coincides with render-003 after iteration 7; PSG footprint kept.
+- Score: Workbench mean 0.4165 → 0.4170. Cycles (park + aerial re-rendered): mean **0.4486 → 0.4488**. In the park view the
+  slot is mostly behind one of our generated courtyard trees. IFC 0 errors; test block 6/6.

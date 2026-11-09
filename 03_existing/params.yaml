@@ -175,7 +175,9 @@ buildings:
   - id: D
     name: Butterfly office (T1 bow-tie)
     use: Office
-    footprint: [[-42.29, 42.65], [-7.31, 47.16], [27.42, 55.64], [31.58, 33.37], [-4.47, 31.91], [-38.05, 19.89]]
+    # ESTIMATED from render-003: recessed vertical slot at the joint of the two wings on the north face
+    # (~7 m wide, 3 m deep: 3.5 m each side of the joint vertex (-7.31, 47.16)), with green balconies inside
+    footprint: [[-42.29, 42.65], [-10.78, 46.71], [-10.78, 43.71], [-3.91, 44.99], [-3.91, 47.99], [27.42, 55.64], [31.58, 33.37], [-4.47, 31.91], [-38.05, 19.89]]
     height: 32.3                         # ESTIMATED from render-003: GF ≈ 1.9 x typical pitch + 7 x 3.45 + 1.6 parapet band;
                                          # the iteration-1 camera fit had the 34.0 m model ~6 % taller than the client image
     notes: 8 storeys (render-003 - 7 ribbon-glazed office floors over a tall recessed GF); white horizontal bands; sawtooth PV roof (top view)
@@ -187,6 +189,8 @@ buildings:
     facade:
       - {type: curtain, glass: Glass, mullion: 1.35, spandrel: 1.0}
       - {type: band, from: 2, depth: 0.7, thickness: 0.55, material: Aluminium white}
+      # ESTIMATED from render-003: planted balconies stacked in the joint recess (back wall of the slot only)
+      - {type: balcony, from: 2, near: [-7.3, 44.35], depth: 2.0, planter: true, railing: true, planter_material: Aluminium white}
     roof:
       parapet: 1.6                         # ESTIMATED from render-003: tall white parapet band
       parapet_material: Aluminium white

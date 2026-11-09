@@ -36,6 +36,7 @@ Schemes use `buildings:` (list) and `site: {file: ../00_site/site.yaml}`.
     - {facing: W, distance: -4.0, from: 1, to: 6}    # fixed (negative = outward)
   terrace_edge: {planter: true, railing: true}       # on slab edges exposed by setbacks
   facade:                     # rules apply to storeys from..to (1-based, inclusive), facing = compass list
+                              # or near: [[x,y], ...] = the single edge whose midpoint is closest (recesses)
     - {type: curtain, glass: Glass, mullion: 1.5, spandrel: 1.0}   # replaces walls + windows
     - {type: balcony, depth: 1.6, planter: true, railing: true}
     - {type: band, depth: 0.5, thickness: 0.4, every: 2}           # slab-edge band

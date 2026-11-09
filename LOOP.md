@@ -48,7 +48,8 @@ Read `CLAUDE.md` first; its conventions and agent roles apply.
       iteration 5. D → 8 storeys, 32.3 m in iteration 7.)
 - [x] A5. B tower: overhang / alignment over its base and the B2 terrace steps against render-004.
       (iteration 6, user request: B2 straight walls + balconies/timber piers/penthouse; render-004 camera moved to SW.)
-- [ ] A6. D butterfly: recessed joint with green balconies (render-003), wing lengths against the top view.
+- [x] A6. D butterfly: recessed joint with green balconies (render-003), wing lengths against the top view.
+      (iteration 8: joint slot + planted balconies; wing lengths left as the PSG footprint, the outline matches render-003.)
 - [ ] A7. A diagrid: bay count and module height against render-006 (count diamonds per face).
 - [ ] A8. C front block: roof setbacks and terraces against render-000; rooftop units positions.
 - [ ] A9. A0 podium / courtyard link shape and timber fascia against render-000 and render-006.

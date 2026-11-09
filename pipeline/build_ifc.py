@@ -25,7 +25,7 @@ from shapely.geometry import LineString, MultiPolygon, Point, Polygon
 from shapely.geometry.polygon import orient
 from shapely.ops import unary_union
 
-from .geom import edges, facing_edges, in_range, inset, local_frame, offset_edges, outward_normal, rect_world
+from .geom import edges, facing_edges, rule_edges, in_range, inset, local_frame, offset_edges, outward_normal, rect_world
 
 API = ifcopenshell.api
 
@@ -202,7 +202,7 @@ def _band_or_balcony(C, st, s, slab, rule, kind):
     f, z, fp = C.f, s["elevation"], s["footprint"]
     d = rule.get("depth", 1.5)
     th = rule.get("thickness", slab)
-    idx = facing_edges(fp, rule.get("facing"))
+    idx = rule_edges(fp, rule)
     if len(idx) == len(fp):
         outer = offset_edges(fp, [-d] * len(fp))
         solids = [plan_solid(f, outer, z, th, holes=[fp])]
@@ -253,7 +253,7 @@ def _fins(C, st, s, rule):
     sp, w, d, off = rule.get("spacing", 1.2), rule.get("width", 0.1), rule.get("depth", 0.4), rule.get("offset", 0.0)
     h = s["height"]
     solids = []
-    for i in facing_edges(fp, rule.get("facing")):
+    for i in rule_edges(fp, rule):
         a, b = fp[i], fp[(i + 1) % len(fp)]
         n = outward_normal(a, b)
         L = math.hypot(b[0] - a[0], b[1] - a[1])

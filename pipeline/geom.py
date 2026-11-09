@@ -32,6 +32,23 @@ def facing_edges(pts, facing) -> list[int]:
     return out
 
 
+def rule_edges(pts, rule) -> list[int]:
+    """Edges a facade rule applies to: `near: [[x, y], ...]` picks, for each point, the edge whose midpoint is
+    closest (for single edges such as a recess); otherwise compass `facing` (see facing_edges)."""
+    near = rule.get("near")
+    if not near:
+        return facing_edges(pts, rule.get("facing"))
+    if isinstance(near[0], (int, float)):
+        near = [near]
+    out = []
+    for q in near:
+        d = [math.hypot((a[0] + b[0]) / 2 - q[0], (a[1] + b[1]) / 2 - q[1]) for a, b in edges(pts)]
+        i = min(range(len(d)), key=d.__getitem__)
+        if i not in out:
+            out.append(i)
+    return sorted(out)
+
+
 def offset_edges(pts, dist):
     """Move each edge i of a CCW polygon inward by dist[i] (negative = outward); vertices re-intersected."""
     n = len(pts)

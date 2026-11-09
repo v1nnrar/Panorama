@@ -4,53 +4,40 @@
     "storeys_above_ground": 27,
     "gfa_below_ground_m2": 41363.9,
     "height_top_of_parapet_m": 95.2,
-    "footprint_area_m2": 5733.3,
-    "gfa_m2": 67325.6,
-    "net_floor_area_m2": 64002.1,
+    "footprint_area_m2": 5733.5,
+    "gfa_m2": 62850.5,
+    "net_floor_area_m2": 59765.7,
     "rooms": 0,
     "site_area_m2": 16491.7,
     "built_up_ratio": 0.348,
-    "plot_ratio_far": 4.082,
+    "plot_ratio_far": 3.811,
     "unbuilt_ratio": 0.653,
     "footprint_outside_plot_m2": 6.5,
     "min_setback_m": 0.0,
     "parking_zone": "02",
-    "parking_required_min": 533,
-    "parking_required_max": 596,
+    "parking_required_min": 467,
+    "parking_required_max": 527,
     "parking_capacity_est": 1171,
-    "parking_margin": 638,
+    "parking_margin": 704,
     "gfa_by_use_m2": {
       "hotel": 23400.9,
       "congress": 3143.8,
-      "retail": 3027.8,
-      "residential": 20384.1,
-      "office": 11195.9
+      "retail": 3027.9,
+      "residential": 20387.3,
+      "office": 6717.5
     },
     "hotel_keys_est": 426,
     "flats_est": 244,
     "psp22_min_boundary_distance_m": 2.56,
     "psp21_windows_checked": 699,
-    "psp21_windows_failing": 7,
-    "psp21_fail_ratio": 0.01,
-    "psp21_failing_neighbours": [
-      [
-        "35,-110",
-        3
-      ],
-      [
-        "54,48",
-        3
-      ],
-      [
-        "32,-128",
-        1
-      ]
-    ],
-    "daylight_proxy_windows": 272,
-    "daylight_proxy_fail_ratio": 0.077,
-    "courtyard_sun_hours_mean_mar21": 2.82,
-    "courtyard_area_2h_sun_ratio": 0.642,
-    "open_ground_m2": 9971.8,
+    "psp21_windows_failing": 0,
+    "psp21_fail_ratio": 0.0,
+    "psp21_failing_neighbours": [],
+    "daylight_proxy_windows": 240,
+    "daylight_proxy_fail_ratio": 0.121,
+    "courtyard_sun_hours_mean_mar21": 3.23,
+    "courtyard_area_2h_sun_ratio": 0.651,
+    "open_ground_m2": 9971.7,
     "per_building": [
       {
         "id": "H",
@@ -71,9 +58,9 @@
         "storeys": 27,
         "height_parapet_m": 89.1,
         "target_height_m": null,
-        "footprint_m2": 784.0,
-        "gfa_m2": 21168.1,
-        "nfa_m2": 20123.0,
+        "footprint_m2": 784.1,
+        "gfa_m2": 21171.4,
+        "nfa_m2": 20126.1,
         "rooms": 0
       },
       {
@@ -92,12 +79,12 @@
         "id": "O",
         "name": "North office wing",
         "use": "Office",
-        "storeys": 10,
-        "height_parapet_m": 38.4,
+        "storeys": 6,
+        "height_parapet_m": 24.0,
         "target_height_m": null,
         "footprint_m2": 1119.6,
-        "gfa_m2": 11195.9,
-        "nfa_m2": 10598.8,
+        "gfa_m2": 6717.5,
+        "nfa_m2": 6359.3,
         "rooms": 0
       },
       {
@@ -152,7 +139,7 @@
       "label": "Regulated floor area (HPPreg) — not set in stabilised areas",
       "metric": "gfa_m2",
       "source": "MPP čl. 96 odst. 2: HPPreg/Zmax apply only to [T] and [R] areas; plot is [S] (KLZ 058 map, no T hatch)",
-      "value": 67325.6,
+      "value": 62850.5,
       "limit": "",
       "status": "INFO"
     },
@@ -162,9 +149,9 @@
       "metric": "psp21_windows_failing",
       "max": 0,
       "source": "PSP §21 odst. 1 + příloha 1 bod II (sampled windows on neighbour façades facing the plot; pipeline/psp.py)",
-      "value": 7,
+      "value": 0,
       "limit": "≤ 0",
-      "status": "FAIL"
+      "status": "PASS"
     },
     {
       "id": "psp22_boundary",
@@ -182,7 +169,7 @@
       "metric": "parking_margin",
       "min": 0,
       "source": "PSP §25 + příloha 2 (HPP per space by use) + příloha 3 — ASSUMED zone 02 (bound 80 %, visitor 15–55 %), 30 m²/space at 85 % basement efficiency",
-      "value": 638,
+      "value": 704,
       "limit": "≥ 0",
       "status": "PASS"
     }

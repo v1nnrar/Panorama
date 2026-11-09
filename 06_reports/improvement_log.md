@@ -141,3 +141,15 @@ client's renders, higher is better).
   HPPreg not set in [S]. Open items: [S] confirmation, stabilised-area judgement, MPP floor-area counting below ground,
   metro D corridor, PSP (distances/daylight/parking/green), any existing permit.
 - No model change; match score unchanged (0.4851). Footprint outside plot 9.1 m² = E 6.5 (OSM vs ČÚZK offset) + B2 2.7 (tolerance).
+
+## 2026-11-09 — iteration 11: D1 option B passes PSP §21 — KEPT
+- Option B failed §21 at 7 sampled neighbour windows (panel blocks south of Milevská ×4, three-wing building north ×3).
+- Search over tower positions/heights + north-wing height using `psp.distance_angle_neighbours` directly (0.1 s per
+  layout): ~11,000 random layouts + local refinement; constraints: footprints inside the plot, no overlaps, 1 m clear of
+  E, §22 ≥ 2 m, §21 = 0. Rules unchanged.
+- Result (in `tools/make_options.py` SPECS B): hotel tower rect(−8, −26, 22, 4) 27 storeys (4 m E, 10 m N), residential
+  tower rect(44, −34, 72, −6) 27 storeys (18 m W, 4 m N), north office wing 10 → **6 storeys**; podium unchanged.
+- Score: option B **0 → 62.85** (6/6 hard rules pass, quality floors met; GFA 62,850 m², 426 keys + 244 flats est.,
+  parking 467 / 1171). Now rank 1, ahead of option A (62.02). Workbench aerial + top view rendered.
+- Next lever for B (later): the north wing lost 4 storeys for the three-wing building; a shorter or stepped wing
+  could win some of it back.

@@ -54,7 +54,7 @@ Section D is the **top priority** (user request, 9 Nov 2026). For a D item:
 
 ## Backlog (ranked)
 ### D. Capacity study for OUR design (priority)
-- [ ] D1. Option B: make it pass §21 (failing: panel blocks south of Milevská, three-wing building north) — move/slim/rotate
+- [x] D1. Option B: make it pass §21 (failing: panel blocks south of Milevská, three-wing building north) — move/slim/rotate
       the towers or step the podium; then grow GFA.
 - [ ] D2. Option C: pass §21 (drum SE west, three-wing north) and the courtyard-sun floor (1.3 h → ≥ 2 h): open the
       courtyards to the south-west, step heights down toward the park.

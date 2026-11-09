@@ -113,17 +113,20 @@ SPECS = {
     "B": {
         "name": "Option B — twin towers on a podium",
         "intent": "Hotel tower and residential tower (27 storeys each, ≈95 m) on a 2-storey retail/conference podium "
-                  "along Milevská; offices in the north wing; large central park.",
+                  "along Milevská, placed to keep the 45° distance angle of the neighbours (PSP §21); 6-storey offices "
+                  "in the north wing; large central park.",
         "basement_levels": 3,
         "blocks": [
-            {"id": "H", "name": "Hotel tower", "use": "Hotel", "preset": "hotel_tower", "poly": rect(-12, -36, 18, -6),
+            # D1 (loop 2026-11-09): towers re-positioned by a §21 search (random + local, psp.distance_angle_neighbours):
+            # hotel tower 4 m E / 10 m N, residential tower 18 m W / 4 m N, north wing 10 → 6 storeys (three-wing building).
+            {"id": "H", "name": "Hotel tower", "use": "Hotel", "preset": "hotel_tower", "poly": rect(-8, -26, 22, 4),
              "storeys": storeys(27, 6.0, 3.3, "Hotel lobby / restaurant", "Hotel rooms", 5.0, "Conference / spa")},
-            {"id": "T", "name": "Residential tower", "use": "Residential", "preset": "resi_tower", "poly": rect(62, -38, 90, -10),
+            {"id": "T", "name": "Residential tower", "use": "Residential", "preset": "resi_tower", "poly": rect(44, -34, 72, -6),
              "storeys": storeys(27, 4.5, 3.2, "Retail", "Apartments")},
             {"id": "P", "name": "Podium (retail + conference)", "use": "Retail", "preset": "podium", "poly": rect(-28, -61, 104, -44),
              "storeys": storeys(2, 5.0, 4.5, "Retail", "Conference")},
             {"id": "O", "name": "North office wing", "use": "Office", "preset": "office", "poly": rect(-48, 16, 22, 32),
-             "storeys": storeys(10, 4.5, 3.6, "Office lobby", "Offices")},
+             "storeys": storeys(6, 4.5, 3.6, "Office lobby", "Offices")},
         ],
     },
     "C": {

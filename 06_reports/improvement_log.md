@@ -202,3 +202,16 @@ client's renders, higher is better).
   668 / 730. Two quality floors missed (−20 %), both inherited from the client's design: daylight proxy 0.201 and
   built-up ratio 0.488.
 - 4th kept D iteration → Cycles aerials (S + SE) of the top two options A and D.
+
+## 2026-11-10 — iteration 16: D5 option E "max yield" via tools/search_options.py — KEPT
+- New tool `tools/search_options.py`: random local search over a layout family (street bar, east bar, north wing,
+  1–3 towers; bars 6–12 storeys, towers ≤ 27 storeys), towers can be added/removed/moved/resized; every candidate
+  checked with pipeline/psp.py (§21, §22, parking, daylight proxy, courtyard sun) — rules never relaxed. Writes
+  `04_proposed/options/<key>/spec.json`; `tools/make_options.py` now loads such specs as options.
+- Run 1 (towers up to 40 × 40 m) reached a 40 × 40 m hotel floorplate — too deep for hotel rooms; tower sides capped
+  at **22–36 m** and re-run (seed 2, 1,751 layouts).
+- Finding: **adding a 2nd or 3rd tower never passed §21** — on this plot one tower is the yield maximum.
+- Result: hotel tower 34 × 36 m, 27 storeys, rect(28, −39, 62, −3); street bar rect(−20, −61, 86, −45) 10 storeys;
+  east bar to v = −4, 12 storeys; north wing rect(−50, 8, 22, 34) 7 storeys.
+- Score: option E **79.85** (79,854 m², 580 keys + 299 flats est., parking 654 / 1171), rank 1, +1 % over option A.
+  Courtyard sun exactly **2.0 h** (at the floor) and daylight proxy 0.148 — E is at the edge of the quality floors.

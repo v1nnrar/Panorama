@@ -62,7 +62,7 @@ Section D is the **top priority** (user request, 9 Nov 2026). For a D item:
       use the north wing better; re-run the tower-position search after each change.
 - [x] D4. New option D "client-like, compliant": start from the client's footprints (03_existing) and fix §21 + parking
       with the smallest changes — shows how much of the client's 91,500 m² can be kept legally.
-- [ ] D5. New option E "max yield": parametric search (tower count 1–3, positions, bar heights 6–12 storeys) maximising
+- [x] D5. New option E "max yield": parametric search (tower count 1–3, positions, bar heights 6–12 storeys) maximising
       the score; write the search as `tools/search_options.py` and keep the best result as option E.
 - [ ] D6. Basement sizing: choose `basement_levels` per option so parking capacity ≥ required minimum with the fewest
       levels (cost); report levels in capacity_study.md.

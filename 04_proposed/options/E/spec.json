@@ -1,0 +1,203 @@
+{
+ "layout": {
+  "S": [
+   -20,
+   86,
+   10
+  ],
+  "R": [
+   -4,
+   12
+  ],
+  "O": [
+   -50,
+   22,
+   8,
+   34,
+   7
+  ],
+  "T": [
+   [
+    28,
+    -39,
+    34,
+    36,
+    27
+   ]
+  ]
+ },
+ "estimate": {
+  "score": 73.6811032,
+  "gfa": 73681.1032,
+  "sun": 2.0,
+  "daylight": 0.148,
+  "built": 0.3855492342444984
+ },
+ "samples": 1751,
+ "seed": 2,
+ "seconds": 520.0,
+ "spec": {
+  "name": "Option E \u2014 max yield (search)",
+  "intent": "Max-yield layout from tools/search_options.py: 1 tower(s), street bar, east bar and north wing, every PSP / MPP check passing.",
+  "basement_levels": 3,
+  "blocks": [
+   {
+    "id": "H",
+    "name": "Hotel tower",
+    "use": "Hotel",
+    "preset": "hotel_tower",
+    "poly": [
+     [
+      28,
+      -39
+     ],
+     [
+      62,
+      -39
+     ],
+     [
+      62,
+      -3
+     ],
+     [
+      28,
+      -3
+     ]
+    ],
+    "storeys": [
+     {
+      "name": "GF",
+      "height": 6.0,
+      "use": "Hotel lobby / restaurant"
+     },
+     {
+      "name": "L2",
+      "height": 5.0,
+      "use": "Conference / spa"
+     },
+     {
+      "name": "L",
+      "count": 25,
+      "start": 3,
+      "height": 3.3,
+      "use": "Hotel rooms"
+     }
+    ]
+   },
+   {
+    "id": "S",
+    "name": "Street bar (Milevsk\u00e1)",
+    "use": "Residential",
+    "preset": "resi",
+    "poly": [
+     [
+      -20,
+      -61
+     ],
+     [
+      86,
+      -61
+     ],
+     [
+      86,
+      -45
+     ],
+     [
+      -20,
+      -45
+     ]
+    ],
+    "storeys": [
+     {
+      "name": "GF",
+      "height": 4.5,
+      "use": "Retail"
+     },
+     {
+      "name": "L",
+      "count": 9,
+      "start": 2,
+      "height": 3.1,
+      "use": "Apartments"
+     }
+    ]
+   },
+   {
+    "id": "R",
+    "name": "East bar",
+    "use": "Residential",
+    "preset": "resi",
+    "poly": [
+     [
+      88,
+      -59
+     ],
+     [
+      104,
+      -59
+     ],
+     [
+      104,
+      -4
+     ],
+     [
+      88,
+      -4
+     ]
+    ],
+    "storeys": [
+     {
+      "name": "GF",
+      "height": 4.5,
+      "use": "Retail"
+     },
+     {
+      "name": "L",
+      "count": 11,
+      "start": 2,
+      "height": 3.1,
+      "use": "Apartments"
+     }
+    ]
+   },
+   {
+    "id": "O",
+    "name": "North office wing",
+    "use": "Office",
+    "preset": "office",
+    "poly": [
+     [
+      -50,
+      8
+     ],
+     [
+      22,
+      8
+     ],
+     [
+      22,
+      34
+     ],
+     [
+      -50,
+      34
+     ]
+    ],
+    "storeys": [
+     {
+      "name": "GF",
+      "height": 4.5,
+      "use": "Office lobby"
+     },
+     {
+      "name": "L",
+      "count": 6,
+      "start": 2,
+      "height": 3.6,
+      "use": "Offices"
+     }
+    ]
+   }
+  ]
+ }
+}

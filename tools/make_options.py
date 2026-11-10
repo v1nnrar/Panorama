@@ -259,6 +259,12 @@ def build_option(key, spec):
     return d / "params.yaml"
 
 
+# Options found by tools/search_options.py are stored as JSON next to their params (spec.json) and added here.
+for _f in sorted(OUT.glob("*/spec.json")):
+    if _f.parent.name not in SPECS and not _f.parent.name.startswith("_"):
+        SPECS[_f.parent.name] = json.loads(_f.read_text())["spec"]
+
+
 if __name__ == "__main__":
     keys = sys.argv[1:] or list(SPECS)
     for k in keys:

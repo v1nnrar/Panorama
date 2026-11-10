@@ -26,8 +26,9 @@ Source: `params.yaml`
 | parking_capacity_est | 781 |
 | parking_margin | 127 |
 | gfa_by_use_m2 | {'hotel': 31830.2, 'congress': 1224.2, 'retail': 2576.2, 'residential': 24946.5, 'office': 13104.0} |
-| hotel_keys_est | 580 |
 | flats_est | 299 |
+| hotel_keys_est | 592 |
+| hotel_programme | {'keys': 592, 'keys_by_type': {'standard': 414, 'superior': 118, 'suite': 59}, 'areas_m2': {'lobby_fnb': 1224, 'meeting': 735, 'spa': 490, 'rooms': 30606}, 'm2_per_key': {'lobby_fnb': 2.07, 'meeting': 1.24, 'spa': 0.83}, 'flags': ['592 keys > 450: convert ≈7 top room floors (≈23 keys each) to serviced apartments / offices', 'meeting 1.24 m²/key < 1.5'], 'assumptions': '4* city hotel mix 70/20/10 (28/34/56 m² net), 62 % room-floor efficiency; ASSUMED'} |
 | psp22_min_boundary_distance_m | 2.9 |
 | psp21_windows_checked | 699 |
 | psp21_windows_failing | 0 |

@@ -235,3 +235,14 @@ client's renders, higher is better).
   fail ratio 0.096), C 61.68 → **55.52** (0.156, just over). Ranking unchanged: E, A, D, B, C. Client baseline 0.251.
 - `02_regulations/summary.md` §20 row updated. `tools/search_options.py` uses the same function, so later searches
   optimise against VSC automatically. Next lever for A/E: pull the tower away from the street bar / thin the bars.
+
+## 2026-11-10 — iteration 19: D8 hotel programme per option — KEPT (completeness)
+- `pipeline/psp.py::hotel_programme()`: splits hotel storeys by use into lobby + F&B, meeting, spa and room floors;
+  keys from **room floors only** (mix 70 % standard 28 m² / 20 % superior 34 m² / 10 % suites 56 m² net, 62 %
+  efficiency); per-key public areas vs 4* benchmarks (lobby + F&B ≥ 2.0, meeting ≥ 1.5, spa ≥ 0.8 m²/key); flags
+  outside 300–450 keys, with the number of top room floors to convert. All ASSUMED until the brief arrives.
+  `hotel_keys_est` now comes from this (before: all hotel GFA incl. lobby floors at 34 m²/key).
+- `06_reports/capacity_study.md` has a new "Hotel programme" table. Keys: E 592, A 581 (both > 450 → convert ≈6–7 top
+  floors), B 435 (in range), C 357 (in range, no meeting/spa), D 214 and client 257 (< 300, no meeting/spa). Meeting
+  space is short in every option (1.24 m²/key where present).
+- Scores unchanged (GFA-based). New backlog item **D11**: apply these flags to the options and re-score.

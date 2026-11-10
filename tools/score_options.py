@@ -69,6 +69,20 @@ def main():
                  f"{m['storeys_above_ground']} | {m.get('hotel_keys_est')} | {m.get('flats_est')} | "
                  f"{m.get('parking_required_min')} / {m.get('parking_capacity_est')} | {r['levels']} | {m.get('psp21_windows_failing')} | "
                  f"{m.get('daylight_proxy_fail_ratio')} | {m.get('courtyard_sun_hours_mean_mar21')} | {m['built_up_ratio']} |")
+    L += ["", "## Hotel programme (D8)", "",
+          "Keys from room floors only; mix 70 % standard 28 m² / 20 % superior 34 m² / 10 % suites 56 m² (net), 62 % room-floor",
+          "efficiency; benchmarks for a 4* city hotel: 300–450 keys, lobby + F&B ≥ 2.0, meeting ≥ 1.5, spa ≥ 0.8 m² per key",
+          "(all ASSUMED until the client brief arrives).", "",
+          "| Scheme | Keys | Standard / superior / suites | Lobby + F&B m² | Meeting m² | Spa m² | Flags |",
+          "|---|---|---|---|---|---|---|"]
+    for r in rows:
+        hp = r["m"].get("hotel_programme")
+        if not hp:
+            L.append(f"| {r['title']} | — | — | — | — | — | no hotel floors |")
+            continue
+        kt, ar = hp["keys_by_type"], hp["areas_m2"]
+        L.append(f"| {r['title']} | {hp['keys']} | {kt['standard']} / {kt['superior']} / {kt['suite']} | {ar['lobby_fnb']:,} | "
+                 f"{ar['meeting']:,} | {ar['spa']:,} | {'; '.join(hp['flags']) or 'OK'} |")
     L += ["", "## Notes per scheme", ""]
     for r in rows:
         L.append(f"- **{r['title']}** — " + ("all hard rules pass" if not r["hard_fail"] else "FAILS: " + "; ".join(r["hard_fail"]))

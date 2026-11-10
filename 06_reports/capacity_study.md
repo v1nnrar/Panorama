@@ -8,12 +8,27 @@ Basement levels: fewest 3.5 m levels whose capacity covers the PSP §25 minimum 
 
 | Rank | Scheme | Score | GFA above ground m² | FAR | Max height m | Storeys | Hotel keys | Flats | Parking need / capacity | Basement levels | §21 failing windows | Daylight proxy fail | Courtyard sun h | Built-up |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Option E — max yield (search) | **71.87** | 79,854 | 4.842 | 95.2 | 27 | 580 | 299 | 654 / 781 | 2 | 0 | 0.201 | 2.0 | 0.386 |
-| 2 | Option A — hotel tower + residential blocks | **71.13** | 79,030 | 4.792 | 95.2 | 27 | 568 | 316 | 637 / 781 | 2 | 0 | 0.194 | 2.01 | 0.377 |
-| 3 | Option D — client scheme, made compliant | **68.74** | 85,928 | 5.21 | 83.8 | 22 | 201 | 626 | 668 / 730 | 3 | 0 | 0.262 | 3.38 | 0.488 |
-| 4 | Option B — twin towers on a podium | **62.85** | 62,850 | 3.811 | 95.2 | 27 | 426 | 244 | 467 / 781 | 2 | 0 | 0.096 | 3.23 | 0.348 |
-| 5 | Option C — mid-rise city blocks (no towers) | **55.52** | 61,684 | 3.74 | 38.4 | 10 | 373 | 257 | 507 / 781 | 2 | 0 | 0.156 | 2.02 | 0.378 |
-| 6 | Client scheme (baseline) | **0.0** | 91,483 | 5.547 | 83.8 | 22 | 242 | 632 | 728 / 487 | 2 | 10 | 0.251 | 3.33 | 0.502 |
+| 1 | Option E — max yield (search) | **71.87** | 79,854 | 4.842 | 95.2 | 27 | 592 | 299 | 654 / 781 | 2 | 0 | 0.201 | 2.0 | 0.386 |
+| 2 | Option A — hotel tower + residential blocks | **71.13** | 79,030 | 4.792 | 95.2 | 27 | 581 | 316 | 637 / 781 | 2 | 0 | 0.194 | 2.01 | 0.377 |
+| 3 | Option D — client scheme, made compliant | **68.74** | 85,928 | 5.21 | 83.8 | 22 | 214 | 626 | 668 / 730 | 3 | 0 | 0.262 | 3.38 | 0.488 |
+| 4 | Option B — twin towers on a podium | **62.85** | 62,850 | 3.811 | 95.2 | 27 | 435 | 244 | 467 / 781 | 2 | 0 | 0.096 | 3.23 | 0.348 |
+| 5 | Option C — mid-rise city blocks (no towers) | **55.52** | 61,684 | 3.74 | 38.4 | 10 | 357 | 257 | 507 / 781 | 2 | 0 | 0.156 | 2.02 | 0.378 |
+| 6 | Client scheme (baseline) | **0.0** | 91,483 | 5.547 | 83.8 | 22 | 257 | 632 | 728 / 487 | 2 | 10 | 0.251 | 3.33 | 0.502 |
+
+## Hotel programme (D8)
+
+Keys from room floors only; mix 70 % standard 28 m² / 20 % superior 34 m² / 10 % suites 56 m² (net), 62 % room-floor
+efficiency; benchmarks for a 4* city hotel: 300–450 keys, lobby + F&B ≥ 2.0, meeting ≥ 1.5, spa ≥ 0.8 m² per key
+(all ASSUMED until the client brief arrives).
+
+| Scheme | Keys | Standard / superior / suites | Lobby + F&B m² | Meeting m² | Spa m² | Flags |
+|---|---|---|---|---|---|---|
+| Option E — max yield (search) | 592 | 414 / 118 / 59 | 1,224 | 735 | 490 | 592 keys > 450: convert ≈7 top room floors (≈23 keys each) to serviced apartments / offices; meeting 1.24 m²/key < 1.5 |
+| Option A — hotel tower + residential blocks | 581 | 407 / 116 / 58 | 1,200 | 720 | 480 | 581 keys > 450: convert ≈6 top room floors (≈23 keys each) to serviced apartments / offices; meeting 1.24 m²/key < 1.5 |
+| Option D — client scheme, made compliant | 214 | 150 / 43 / 21 | 2,484 | 0 | 0 | 214 keys < 300: below a typical 4* city hotel; meeting 0.0 m²/key < 1.5; spa 0.0 m²/key < 0.8 |
+| Option B — twin towers on a podium | 435 | 304 / 87 / 44 | 900 | 540 | 360 | meeting 1.24 m²/key < 1.5 |
+| Option C — mid-rise city blocks (no towers) | 357 | 250 / 71 / 36 | 2,048 | 0 | 0 | meeting 0.0 m²/key < 1.5; spa 0.0 m²/key < 0.8 |
+| Client scheme (baseline) | 257 | 180 / 51 / 26 | 2,520 | 0 | 0 | 257 keys < 300: below a typical 4* city hotel; meeting 0.0 m²/key < 1.5; spa 0.0 m²/key < 0.8 |
 
 ## Notes per scheme
 

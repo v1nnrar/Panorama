@@ -79,8 +79,74 @@ def parking(design, zone="02", m2_per_space=30.0, basement_efficiency=0.85):
 
 def unit_estimates(design, hotel_eff=0.62, m2_per_key=34.0, resi_eff=0.78, m2_per_flat=65.0):
     uses = gfa_by_use(design)
-    return {"hotel_keys_est": int(uses.get("hotel", 0) * hotel_eff / m2_per_key),
-            "flats_est": int(uses.get("residential", 0) * resi_eff / m2_per_flat)}
+    out = {"flats_est": int(uses.get("residential", 0) * resi_eff / m2_per_flat)}
+    out.update(hotel_programme(design))          # keys from room floors only (D8); public floors are not keys
+    return out
+
+
+# ----------------------------------------------------------------------------------------------- hotel programme (D8)
+# ASSUMED until the client brief arrives (01_brief/programme.yaml): typical 4* city hotel.
+HOTEL_KEYS_RANGE = (300, 450)
+ROOM_MIX = {"standard": (0.70, 28.0), "superior": (0.20, 34.0), "suite": (0.10, 56.0)}   # share, net m² per key
+ROOM_FLOOR_EFF = 0.62                                                                     # net rooms / gross room floor
+PUBLIC_M2_PER_KEY = {"lobby_fnb": 2.0, "meeting": 1.5, "spa": 0.8}                        # minimum gross m² per key
+
+
+def _hotel_storey_kind(use):
+    t = (use or "").lower()
+    if any(k in t for k in ("conference", "congress", "meeting", "ballroom")) and any(k in t for k in ("spa", "wellness")):
+        return "meeting+spa"
+    if any(k in t for k in ("conference", "congress", "meeting", "ballroom")):
+        return "meeting"
+    if any(k in t for k in ("spa", "wellness", "fitness")):
+        return "spa"
+    if any(k in t for k in ("lobby", "restaurant", "bar", "dining")):
+        return "lobby_fnb"
+    if any(k in t for k in ("room", "key", "suite")):
+        return "rooms"
+    return "other"
+
+
+def hotel_programme(design):
+    """Per-scheme hotel programme from storey uses: public areas, keys by room type, flags (D8)."""
+    areas = {"lobby_fnb": 0.0, "meeting": 0.0, "spa": 0.0, "rooms": 0.0}
+    room_floor_area = []
+    for b in design["buildings"]:
+        if b.get("below_ground") or b.get("existing") or classify_use(b.get("use")) != "hotel":
+            continue
+        for s in b["storeys"]:
+            if s["elevation"] < 0:
+                continue
+            a = Polygon(s["footprint"]).area
+            k = _hotel_storey_kind(s.get("use"))
+            if k == "meeting+spa":                      # ASSUMED split of a combined conference / spa floor
+                areas["meeting"] += 0.6 * a
+                areas["spa"] += 0.4 * a
+            elif k in areas:
+                areas[k] += a
+            if k == "rooms":
+                room_floor_area.append(a)
+    if not areas["rooms"]:
+        return {"hotel_keys_est": 0, "hotel_programme": None}
+    avg_key = sum(sh * m2 for sh, m2 in ROOM_MIX.values())
+    keys = int(areas["rooms"] * ROOM_FLOOR_EFF / avg_key)
+    by_type = {t: int(round(keys * sh)) for t, (sh, _) in ROOM_MIX.items()}
+    per_key = {k: round(areas[k] / keys, 2) for k in PUBLIC_M2_PER_KEY}
+    flags = []
+    lo, hi = HOTEL_KEYS_RANGE
+    if keys > hi:
+        per_floor = max(1, int(sum(room_floor_area) / len(room_floor_area) * ROOM_FLOOR_EFF / avg_key))
+        flags.append(f"{keys} keys > {hi}: convert ≈{math.ceil((keys - hi) / per_floor)} top room floors "
+                     f"(≈{per_floor} keys each) to serviced apartments / offices")
+    elif keys < lo:
+        flags.append(f"{keys} keys < {lo}: below a typical 4* city hotel")
+    for k, need in PUBLIC_M2_PER_KEY.items():
+        if per_key[k] < need:
+            flags.append(f"{k} {per_key[k]} m²/key < {need}")
+    return {"hotel_keys_est": keys,
+            "hotel_programme": {"keys": keys, "keys_by_type": by_type,
+                                "areas_m2": {k: round(v) for k, v in areas.items()}, "m2_per_key": per_key,
+                                "flags": flags, "assumptions": "4* city hotel mix 70/20/10 (28/34/56 m² net), 62 % room-floor efficiency; ASSUMED"}}
 
 
 # ----------------------------------------------------------------------------------------------- obstacles

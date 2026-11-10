@@ -109,14 +109,16 @@ SPECS = {
                   "holding the Milevská street line and the east edge, low office wing to the north, park kept.",
         "basement_levels": 3,
         "blocks": [
-            {"id": "H", "name": "Hotel tower", "use": "Hotel", "preset": "hotel_tower", "poly": rect(30, -39, 58, -11),
+            # D3 (loop 2026-11-10): grown by a local search with the pipeline's own §21/§22/parking/daylight/sun checks:
+            # 30 x 40 m hotel floorplate, longer 10-storey street bar, east bar +4 m north, deeper 7-storey north wing.
+            {"id": "H", "name": "Hotel tower", "use": "Hotel", "preset": "hotel_tower", "poly": rect(30, -41, 60, -1),
              "storeys": storeys(27, 6.0, 3.3, "Hotel lobby / restaurant", "Hotel rooms", 5.0, "Conference / spa")},
-            {"id": "S", "name": "Street bar (Milevská)", "use": "Residential", "preset": "resi", "poly": rect(-16, -61, 84, -45),
-             "storeys": storeys(9, 4.5, 3.1, "Retail", "Apartments")},
-            {"id": "R", "name": "East bar", "use": "Residential", "preset": "resi", "poly": rect(88, -59, 104, 0),
+            {"id": "S", "name": "Street bar (Milevská)", "use": "Residential", "preset": "resi", "poly": rect(-20, -61, 86, -45),
+             "storeys": storeys(10, 4.5, 3.1, "Retail", "Apartments")},
+            {"id": "R", "name": "East bar", "use": "Residential", "preset": "resi", "poly": rect(88, -59, 104, 4),
              "storeys": storeys(12, 4.5, 3.1, "Retail", "Apartments")},
-            {"id": "O", "name": "North office wing", "use": "Office", "preset": "office", "poly": rect(-48, 16, 22, 32),
-             "storeys": storeys(8, 4.5, 3.6, "Office lobby", "Offices")},
+            {"id": "O", "name": "North office wing", "use": "Office", "preset": "office", "poly": rect(-52, 12, 22, 34),
+             "storeys": storeys(7, 4.5, 3.6, "Office lobby", "Offices")},
         ],
     },
     "B": {

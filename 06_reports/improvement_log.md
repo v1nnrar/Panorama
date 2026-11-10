@@ -165,3 +165,14 @@ client's renders, higher is better).
 - Score: option C **0 → 61.68** (GFA 61,684 m², 373 keys + 257 flats est.; 6/6 hard rules; quality floors met). Rank 3
   (B 62.85, A 62.02). Thin margins: courtyard sun **2.02 h** (floor 2.0) and daylight proxy **0.145** (floor 0.15) — any
   later growth of C must re-check both.
+
+## 2026-11-10 — iteration 13: D3 grow option A while passing — KEPT
+- Local search (1,608 layouts, 15 parameters) with the pipeline's own §21/§22/parking/daylight/courtyard-sun checks,
+  scored like `score_options.py`; rules unchanged.
+- Result (SPECS A): hotel tower **30 × 40 m** floorplate, 27 storeys, rect(30, −41, 60, −1); street bar rect(−20, −61,
+  86, −45) **10** storeys (was 9, 4 m longer each end); east bar to v = 4 (+4 m); north wing rect(−52, 12, 22, 34)
+  deeper, **7** storeys (was 8).
+- Score: option A **62.02 → 79.03** (GFA 79,030 m², FAR 4.79; 568 keys + 316 flats est.; parking 637 / 1171; 6/6 hard
+  rules; floors met). Rank 1. Thin margins: courtyard sun **2.01 h**, daylight proxy **0.145**.
+- Flag for D8: 568 estimated keys exceeds the 300–450 range assumed for a 4* city hotel — part of the tower may become
+  serviced apartments / offices.

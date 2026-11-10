@@ -58,7 +58,7 @@ Section D is the **top priority** (user request, 9 Nov 2026). For a D item:
       the towers or step the podium; then grow GFA.
 - [x] D2. Option C: pass §21 (drum SE west, three-wing north) and the courtyard-sun floor (1.3 h → ≥ 2 h): open the
       courtyards to the south-west, step heights down toward the park.
-- [ ] D3. Option A: grow GFA while passing — rectangular tower floorplate (e.g. 28×36), taller bars where §21 allows,
+- [x] D3. Option A: grow GFA while passing — rectangular tower floorplate (e.g. 28×36), taller bars where §21 allows,
       use the north wing better; re-run the tower-position search after each change.
 - [ ] D4. New option D "client-like, compliant": start from the client's footprints (03_existing) and fix §21 + parking
       with the smallest changes — shows how much of the client's 91,500 m² can be kept legally.

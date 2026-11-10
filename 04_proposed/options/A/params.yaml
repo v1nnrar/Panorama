@@ -16,14 +16,14 @@ buildings:
   name: Hotel tower
   use: Hotel
   footprint:
-  - - 24.5
-    - -42.67
-  - - 52.25
-    - -46.42
-  - - 56.0
-    - -18.67
-  - - 28.26
-    - -14.92
+  - - 24.24
+    - -44.65
+  - - 53.97
+    - -48.67
+  - - 59.33
+    - -9.03
+  - - 29.6
+    - -5.01
   storeys:
   - name: GF
     height: 6.0
@@ -73,20 +73,20 @@ buildings:
   name: Street bar (Milevská)
   use: Residential
   footprint:
-  - - -24.03
-    - -58.31
-  - - 75.07
-    - -71.7
-  - - 77.21
-    - -55.85
-  - - -21.89
-    - -42.45
+  - - -27.99
+    - -57.77
+  - - 77.05
+    - -71.97
+  - - 79.2
+    - -56.12
+  - - -25.85
+    - -41.91
   storeys:
   - name: GF
     height: 4.5
     use: Retail
   - name: L
-    count: 8
+    count: 9
     start: 2
     height: 3.1
     use: Apartments
@@ -134,10 +134,10 @@ buildings:
     - -70.26
   - - 95.16
     - -72.4
-  - - 103.06
-    - -13.93
-  - - 87.21
-    - -11.79
+  - - 103.6
+    - -9.97
+  - - 87.74
+    - -7.83
   storeys:
   - name: GF
     height: 4.5
@@ -187,20 +187,20 @@ buildings:
   name: North office wing
   use: Office
   footprint:
-  - - -45.42
-    - 22.29
-  - - 23.95
-    - 12.91
-  - - 26.09
-    - 28.76
-  - - -43.28
-    - 38.14
+  - - -49.92
+    - 18.86
+  - - 23.41
+    - 8.94
+  - - 26.36
+    - 30.75
+  - - -46.98
+    - 40.66
   storeys:
   - name: GF
     height: 4.5
     use: Office lobby
   - name: L
-    count: 7
+    count: 6
     start: 2
     height: 3.6
     use: Offices

@@ -153,3 +153,15 @@ client's renders, higher is better).
   parking 467 / 1171). Now rank 1, ahead of option A (62.02). Workbench aerial + top view rendered.
 - Next lever for B (later): the north wing lost 4 storeys for the three-wing building; a shorter or stepped wing
   could win some of it back.
+
+## 2026-11-10 — iteration 12: D2 option C passes §21 and the courtyard-sun floor — KEPT
+- Option C failed §21 at 6 sampled windows (drum SE ×4, panel block across Milevská ×1, three-wing ×1) and its open
+  ground had 1.3 h of sun on 21 March (both courtyards opened north).
+- `tools/make_options.py`: `cshape()` can now open a courtyard to S, W or E (plot frame), not only N.
+- Search (random 8,455 layouts + local refinement) over block extents, open side, wing depth, block heights and the
+  north-wing height, scored like `score_options.py` with the pipeline's own §21/§22/daylight/courtyard-sun functions.
+  Result: hotel block cshape(−14, −61, 36, −6, wing 16, open **S**) 10 storeys; apartment block cshape(42, −61, 104, −4,
+  wing 16, open **E**) 10 storeys; north wing 10 storeys unchanged. West block pulled 14 m off the drum side.
+- Score: option C **0 → 61.68** (GFA 61,684 m², 373 keys + 257 flats est.; 6/6 hard rules; quality floors met). Rank 3
+  (B 62.85, A 62.02). Thin margins: courtyard sun **2.02 h** (floor 2.0) and daylight proxy **0.145** (floor 0.15) — any
+  later growth of C must re-check both.

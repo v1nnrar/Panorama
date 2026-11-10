@@ -36,10 +36,19 @@ def rect(u0, v0, u1, v1):
 
 
 def cshape(u0, v0, u1, v1, wing, open_side="N"):
-    """C-shaped perimeter block (courtyard open to one side), wing depth `wing`."""
+    """C-shaped perimeter block (courtyard open to side N, S, W or E — in the plot frame), wing depth `wing`."""
     if open_side == "N":
         return [[u0, v0], [u1, v0], [u1, v1], [u1 - wing, v1], [u1 - wing, v0 + wing], [u0 + wing, v0 + wing],
                 [u0 + wing, v1], [u0, v1]]
+    if open_side == "S":
+        return [[u0, v0], [u0 + wing, v0], [u0 + wing, v1 - wing], [u1 - wing, v1 - wing], [u1 - wing, v0], [u1, v0],
+                [u1, v1], [u0, v1]]
+    if open_side == "W":
+        return [[u0, v0], [u1, v0], [u1, v1], [u0, v1], [u0, v1 - wing], [u1 - wing, v1 - wing], [u1 - wing, v0 + wing],
+                [u0, v0 + wing]]
+    if open_side == "E":
+        return [[u0, v0], [u1, v0], [u1, v0 + wing], [u0 + wing, v0 + wing], [u0 + wing, v1 - wing], [u1, v1 - wing],
+                [u1, v1], [u0, v1]]
     raise ValueError(open_side)
 
 
@@ -131,14 +140,16 @@ SPECS = {
     },
     "C": {
         "name": "Option C — mid-rise city blocks (no towers)",
-        "intent": "Two courtyard blocks of 11 storeys (≤40 m) open to the park; hotel in the west block, apartments in "
-                  "the east block, offices to the north. Lower visual impact, no tower debate.",
+        "intent": "Two courtyard blocks of 10 storeys (≤36 m), the hotel courtyard open to the south (sun) and the "
+                  "apartment courtyard open to the east; offices to the north. Lower visual impact, no tower debate.",
         "basement_levels": 3,
         "blocks": [
+            # D2 (loop 2026-11-10): search over block extents, open side, wing depth and heights with the pipeline's own
+            # §21 / §22 / daylight / courtyard-sun checks. West block opens SOUTH, east block opens EAST, both 10 storeys.
             {"id": "HW", "name": "West block — hotel", "use": "Hotel", "preset": "office",
-             "poly": cshape(-28, -61, 38, 2, 16), "storeys": storeys(11, 5.0, 3.2, "Hotel lobby / restaurant", "Hotel rooms")},
+             "poly": cshape(-14, -61, 36, -6, 16, "S"), "storeys": storeys(10, 5.0, 3.2, "Hotel lobby / restaurant", "Hotel rooms")},
             {"id": "RE", "name": "East block — apartments", "use": "Residential", "preset": "resi",
-             "poly": cshape(48, -61, 104, -2, 16), "storeys": storeys(11, 4.5, 3.1, "Retail", "Apartments")},
+             "poly": cshape(42, -61, 104, -4, 16, "E"), "storeys": storeys(10, 4.5, 3.1, "Retail", "Apartments")},
             {"id": "O", "name": "North office wing", "use": "Office", "preset": "office", "poly": rect(-48, 16, 22, 32),
              "storeys": storeys(10, 4.5, 3.6, "Office lobby", "Offices")},
         ],

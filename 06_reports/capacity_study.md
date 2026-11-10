@@ -9,12 +9,12 @@ built-up ratio ≤ 0.45). Estimates: hotel 62 % net / 34 m² per key; flats 78 %
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | Option B — twin towers on a podium | **62.85** | 62,850 | 3.811 | 95.2 | 27 | 426 | 244 | 467 / 1171 | 0 | 0.121 | 3.23 | 0.348 |
 | 2 | Option A — hotel tower + residential blocks | **62.02** | 62,024 | 3.761 | 95.2 | 27 | 371 | 278 | 492 / 1171 | 0 | 0.107 | 2.34 | 0.311 |
-| 3 | Client scheme (baseline) | **0.0** | 91,483 | 5.547 | 83.8 | 22 | 242 | 632 | 728 / 487 | 10 | 0.184 | 3.33 | 0.502 |
-| 4 | Option C — mid-rise city blocks (no towers) | **0.0** | 70,516 | 4.276 | 38.5 | 11 | 513 | 272 | 574 / 1171 | 6 | 0.135 | 1.3 | 0.402 |
+| 3 | Option C — mid-rise city blocks (no towers) | **61.68** | 61,684 | 3.74 | 38.4 | 10 | 373 | 257 | 507 / 1171 | 0 | 0.145 | 2.02 | 0.378 |
+| 4 | Client scheme (baseline) | **0.0** | 91,483 | 5.547 | 83.8 | 22 | 242 | 632 | 728 / 487 | 10 | 0.184 | 3.33 | 0.502 |
 
 ## Notes per scheme
 
 - **Option B — twin towers on a podium** — all hard rules pass; quality floors met
 - **Option A — hotel tower + residential blocks** — all hard rules pass; quality floors met
+- **Option C — mid-rise city blocks (no towers)** — all hard rules pass; quality floors met
 - **Client scheme (baseline)** — FAILS: PSP §21: neighbour windows failing the 45°/45° distance angle; PSP §25: parking capacity minus required minimum (spaces); quality misses: daylight_proxy_fail_ratio 0.184 (want ≤ 0.15); built_up_ratio 0.502 (want ≤ 0.45); §21 neighbours: [['54,48', 7], ['-58,-26', 3]]
-- **Option C — mid-rise city blocks (no towers)** — FAILS: PSP §21: neighbour windows failing the 45°/45° distance angle; quality misses: courtyard_sun_hours_mean_mar21 1.3 (want ≥ 2.0); §21 neighbours: [['-58,-26', 4], ['-15,-103', 1], ['54,48', 1]]

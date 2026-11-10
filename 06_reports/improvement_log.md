@@ -190,3 +190,15 @@ client's renders, higher is better).
   failure; best seen = 1 failing window (drum) at 70,837 m².
 - Next attempt: add levers — C1 west-end trim (drum side), A moved **south only** (toward the courtyard, away from both
   neighbours), D east trim > 8 m; search by cheapest GFA loss first. If attempt 2 fails too, mark D4 blocked (LOOP rule).
+
+## 2026-11-10 — iteration 15: D4 option D "client scheme, made compliant" — KEPT (attempt 2)
+- Added the two levers from attempt 1 (C1 west-end trim, A moved south only) and ran a local search that first
+  minimises §21 failing windows, then maximises GFA, starting from attempt 1's best layout.
+- Result (`tools/make_options.py` SPECS D, new `build_from_existing()` = client params + per-building edits):
+  tower **A moved 8 m south at full height** (22 storeys, 83.8 m); **D** east end 10 m shorter, 8 → 7 storeys;
+  **C1** 11 → 6 storeys and 4 m shorter on the drum side; **B3** 5 → 4 storeys; basement 2 → **3 levels**.
+  B, B2, C2, A0, E unchanged.
+- Score: option D **68.74**, rank 2 — 6/6 hard rules pass, GFA **85,928 m² = 94 % of the client's 91,483 m²**, parking
+  668 / 730. Two quality floors missed (−20 %), both inherited from the client's design: daylight proxy 0.201 and
+  built-up ratio 0.488.
+- 4th kept D iteration → Cycles aerials (S + SE) of the top two options A and D.

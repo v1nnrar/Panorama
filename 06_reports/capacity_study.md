@@ -8,13 +8,15 @@ built-up ratio ≤ 0.45). Estimates: hotel 62 % net / 34 m² per key; flats 78 %
 | Rank | Scheme | Score | GFA above ground m² | FAR | Max height m | Storeys | Hotel keys | Flats | Parking need / capacity | §21 failing windows | Daylight proxy fail | Courtyard sun h | Built-up |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | Option A — hotel tower + residential blocks | **79.03** | 79,030 | 4.792 | 95.2 | 27 | 568 | 316 | 637 / 1171 | 0 | 0.145 | 2.01 | 0.377 |
-| 2 | Option B — twin towers on a podium | **62.85** | 62,850 | 3.811 | 95.2 | 27 | 426 | 244 | 467 / 1171 | 0 | 0.121 | 3.23 | 0.348 |
-| 3 | Option C — mid-rise city blocks (no towers) | **61.68** | 61,684 | 3.74 | 38.4 | 10 | 373 | 257 | 507 / 1171 | 0 | 0.145 | 2.02 | 0.378 |
-| 4 | Client scheme (baseline) | **0.0** | 91,483 | 5.547 | 83.8 | 22 | 242 | 632 | 728 / 487 | 10 | 0.184 | 3.33 | 0.502 |
+| 2 | Option D — client scheme, made compliant | **68.74** | 85,928 | 5.21 | 83.8 | 22 | 201 | 626 | 668 / 730 | 0 | 0.201 | 3.38 | 0.488 |
+| 3 | Option B — twin towers on a podium | **62.85** | 62,850 | 3.811 | 95.2 | 27 | 426 | 244 | 467 / 1171 | 0 | 0.121 | 3.23 | 0.348 |
+| 4 | Option C — mid-rise city blocks (no towers) | **61.68** | 61,684 | 3.74 | 38.4 | 10 | 373 | 257 | 507 / 1171 | 0 | 0.145 | 2.02 | 0.378 |
+| 5 | Client scheme (baseline) | **0.0** | 91,483 | 5.547 | 83.8 | 22 | 242 | 632 | 728 / 487 | 10 | 0.184 | 3.33 | 0.502 |
 
 ## Notes per scheme
 
 - **Option A — hotel tower + residential blocks** — all hard rules pass; quality floors met
+- **Option D — client scheme, made compliant** — all hard rules pass; quality misses: daylight_proxy_fail_ratio 0.201 (want ≤ 0.15); built_up_ratio 0.488 (want ≤ 0.45)
 - **Option B — twin towers on a podium** — all hard rules pass; quality floors met
 - **Option C — mid-rise city blocks (no towers)** — all hard rules pass; quality floors met
 - **Client scheme (baseline)** — FAILS: PSP §21: neighbour windows failing the 45°/45° distance angle; PSP §25: parking capacity minus required minimum (spaces); quality misses: daylight_proxy_fail_ratio 0.184 (want ≤ 0.15); built_up_ratio 0.502 (want ≤ 0.45); §21 neighbours: [['54,48', 7], ['-58,-26', 3]]

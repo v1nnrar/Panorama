@@ -60,7 +60,7 @@ Section D is the **top priority** (user request, 9 Nov 2026). For a D item:
       courtyards to the south-west, step heights down toward the park.
 - [x] D3. Option A: grow GFA while passing — rectangular tower floorplate (e.g. 28×36), taller bars where §21 allows,
       use the north wing better; re-run the tower-position search after each change.
-- [ ] D4. New option D "client-like, compliant": start from the client's footprints (03_existing) and fix §21 + parking
+- [x] D4. New option D "client-like, compliant": start from the client's footprints (03_existing) and fix §21 + parking
       with the smallest changes — shows how much of the client's 91,500 m² can be kept legally.
 - [ ] D5. New option E "max yield": parametric search (tower count 1–3, positions, bar heights 6–12 storeys) maximising
       the score; write the search as `tools/search_options.py` and keep the best result as option E.

@@ -64,7 +64,7 @@ Section D is the **top priority** (user request, 9 Nov 2026). For a D item:
       with the smallest changes — shows how much of the client's 91,500 m² can be kept legally.
 - [x] D5. New option E "max yield": parametric search (tower count 1–3, positions, bar heights 6–12 storeys) maximising
       the score; write the search as `tools/search_options.py` and keep the best result as option E.
-- [ ] D6. Basement sizing: choose `basement_levels` per option so parking capacity ≥ required minimum with the fewest
+- [x] D6. Basement sizing: choose `basement_levels` per option so parking capacity ≥ required minimum with the fewest
       levels (cost); report levels in capacity_study.md.
 - [ ] D7. Daylight proxy refinement: replace the own-façade 45° test with a vertical-sky-component estimate
       (ČSN 73 0580 / EN 17037 logic) and re-score all options.

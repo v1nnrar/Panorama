@@ -248,13 +248,13 @@ buildings:
     - 43.14
   - - -51.67
     - 24.54
-  ground_elevation: -10.5
+  ground_elevation: -7.0
   windows: false
   material: Concrete grey
-  notes: ASSUMED 3 basement levels under the plot (parking + technical)
+  notes: ASSUMED 2 basement levels under the plot (parking + technical)
   storeys:
   - name: B
-    count: 3
+    count: 2
     height: 3.5
     use: Parking
   roof:

@@ -107,7 +107,7 @@ SPECS = {
         "name": "Option A — hotel tower + residential blocks",
         "intent": "One slender 27-storey hotel tower as the landmark (≈95 m, under the 100 m cap), residential bars "
                   "holding the Milevská street line and the east edge, low office wing to the north, park kept.",
-        "basement_levels": 3,
+        "basement_levels": "auto",
         "blocks": [
             # D3 (loop 2026-11-10): grown by a local search with the pipeline's own §21/§22/parking/daylight/sun checks:
             # 30 x 40 m hotel floorplate, longer 10-storey street bar, east bar +4 m north, deeper 7-storey north wing.
@@ -126,7 +126,7 @@ SPECS = {
         "intent": "Hotel tower and residential tower (27 storeys each, ≈95 m) on a 2-storey retail/conference podium "
                   "along Milevská, placed to keep the 45° distance angle of the neighbours (PSP §21); 6-storey offices "
                   "in the north wing; large central park.",
-        "basement_levels": 3,
+        "basement_levels": "auto",
         "blocks": [
             # D1 (loop 2026-11-09): towers re-positioned by a §21 search (random + local, psp.distance_angle_neighbours):
             # hotel tower 4 m E / 10 m N, residential tower 18 m W / 4 m N, north wing 10 → 6 storeys (three-wing building).
@@ -144,7 +144,7 @@ SPECS = {
         "name": "Option C — mid-rise city blocks (no towers)",
         "intent": "Two courtyard blocks of 10 storeys (≤36 m), the hotel courtyard open to the south (sun) and the "
                   "apartment courtyard open to the east; offices to the north. Lower visual impact, no tower debate.",
-        "basement_levels": 3,
+        "basement_levels": "auto",
         "blocks": [
             # D2 (loop 2026-11-10): search over block extents, open side, wing depth and heights with the pipeline's own
             # §21 / §22 / daylight / courtyard-sun checks. West block opens SOUTH, east block opens EAST, both 10 storeys.
@@ -162,7 +162,7 @@ SPECS = {
                   "moved 8 m south at full height, D's east end 10 m shorter and 7 storeys, C1 6 storeys and 4 m "
                   "shorter on the drum side, B3 4 storeys, a third basement level.",
         "from_existing": "03_existing/params.yaml",
-        "basement_levels": 3,
+        "basement_levels": "auto",
         # Found by a search with the pipeline's own §21 check (log 2026-11-10, iterations 14-15). Typical storey
         # heights are frozen at the client model's values where a storey count changes.
         "edits": {
@@ -196,7 +196,7 @@ def existing_E():
             "roof": {"parapet": 1.6, "parapet_material": "Bronze"}}
 
 
-def build_from_existing(key, spec):
+def _build_from_existing(key, spec):
     """Option derived from an existing scheme's params (client scheme) by per-building edits."""
     raw = yaml.safe_load((ROOT / spec["from_existing"]).read_text())
     for b in raw["buildings"]:
@@ -231,8 +231,23 @@ CAMERAS = [
 
 
 def build_option(key, spec):
-    if "from_existing" in spec:
-        return build_from_existing(key, spec)
+    """Write an option's params.yaml. basement_levels: "auto" = fewest levels whose parking capacity covers the
+    PSP §25 minimum (pipeline/psp.py::parking), checked level by level (D6)."""
+    writer = _build_from_existing if "from_existing" in spec else _build_blocks
+    if spec.get("basement_levels") != "auto":
+        return writer(key, spec)
+    sys.path.insert(0, str(ROOT))
+    from pipeline import psp
+    from pipeline.params import load
+    for lv in range(1, 7):
+        p = writer(key, {**spec, "basement_levels": lv})
+        d = load(p)
+        if psp.parking(d, d.get("parking_zone", "02"))["parking_margin"] >= 0:
+            return p
+    return p
+
+
+def _build_blocks(key, spec):
     blds = []
     for blk in spec["blocks"]:
         pre = json.loads(json.dumps(PRESETS[blk["preset"]]))

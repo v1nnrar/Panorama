@@ -39,7 +39,7 @@
  "spec": {
   "name": "Option E \u2014 max yield (search)",
   "intent": "Max-yield layout from tools/search_options.py: 1 tower(s), street bar, east bar and north wing, every PSP / MPP check passing.",
-  "basement_levels": 3,
+  "basement_levels": "auto",
   "blocks": [
    {
     "id": "H",

@@ -215,3 +215,12 @@ client's renders, higher is better).
   east bar to v = −4, 12 storeys; north wing rect(−50, 8, 22, 34) 7 storeys.
 - Score: option E **79.85** (79,854 m², 580 keys + 299 flats est., parking 654 / 1171), rank 1, +1 % over option A.
   Courtyard sun exactly **2.0 h** (at the floor) and daylight proxy 0.148 — E is at the edge of the quality floors.
+
+## 2026-11-10 — iteration 17: D6 basement sizing — KEPT
+- `tools/make_options.py`: `basement_levels: "auto"` (now used by every option) writes the option with 1, 2, 3 … levels
+  and keeps the first whose PSP §25 parking margin (pipeline/psp.py::parking) is ≥ 0. `tools/score_options.py` reports a
+  **Basement levels** column in `06_reports/capacity_study.md`.
+- Result: options **A, B, C, E → 2 levels** (were 3; capacity 781 vs need 467–654), option **D → 3 levels** (client's
+  smaller U footprint: 730 vs 668). Each of A/B/C/E saves one level ≈ 13,800 m² of basement.
+- Scores unchanged (score counts above-ground GFA; parking still passes 6/6 for all). Renders not redone — the change
+  is below ground; model.blend files of A–E still show 3 basement levels until the next render build.

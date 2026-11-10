@@ -2,7 +2,7 @@
   "metrics": {
     "buildings": 6,
     "storeys_above_ground": 27,
-    "gfa_below_ground_m2": 41363.9,
+    "gfa_below_ground_m2": 27575.9,
     "height_top_of_parapet_m": 95.2,
     "footprint_area_m2": 5733.5,
     "gfa_m2": 62850.5,
@@ -17,8 +17,8 @@
     "parking_zone": "02",
     "parking_required_min": 467,
     "parking_required_max": 527,
-    "parking_capacity_est": 1171,
-    "parking_margin": 704,
+    "parking_capacity_est": 781,
+    "parking_margin": 314,
     "gfa_by_use_m2": {
       "hotel": 23400.9,
       "congress": 3143.8,
@@ -169,7 +169,7 @@
       "metric": "parking_margin",
       "min": 0,
       "source": "PSP §25 + příloha 2 (HPP per space by use) + příloha 3 — ASSUMED zone 02 (bound 80 %, visitor 15–55 %), 30 m²/space at 85 % basement efficiency",
-      "value": 704,
+      "value": 314,
       "limit": "≥ 0",
       "status": "PASS"
     }

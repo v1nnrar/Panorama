@@ -38,7 +38,7 @@ Note: MPP gross floor area also counts underground floors except garages and ser
 | §21 + příloha 1/II | No new building above 45° within a contiguous horizontal sector ≥45° (counted from 25° off the façade) in front of habitable-room windows of existing neighbours | `psp.py`: windows sampled every 8 m / 3 floors on neighbour façades facing the plot (OSM footprints + heights) |
 | §22 odst. 2 | ≥ 2 m from boundaries with neighbouring plots (not public space) | ASSUMED: plot edges facing S (Milevská) and E (street/metro) are public |
 | §25 + přílohy 2, 3 | parking min/max = base count (HPP m² per space: hotel 100, housing 85, office 50, retail 70, restaurant 40) × zone % | ASSUMED zone 02 (bound 80 %, visitor 15–55 %) — verify on the Atlas Prahy zone map |
-| §20 | daylight per ČSN 73 0580 / EN 17037; direct-sunlight requirement for flats excluded in Prague | design proxy only (45° test from own façades); needs a proper daylight study later |
+| §20 | daylight per ČSN 73 0580 / EN 17037; direct-sunlight requirement for flats excluded in Prague | design proxy: vertical sky component (CIE overcast) on sampled own-façade windows, fail < 15 % (BRE 209 rule of thumb, ASSUMED); needs a proper daylight-factor study later |
 
 ## Open points
 - Confirm with IPR/building authority that the plot is entirely [S] (the official GIS layers need an access token;

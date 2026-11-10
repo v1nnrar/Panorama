@@ -224,3 +224,14 @@ client's renders, higher is better).
   smaller U footprint: 730 vs 668). Each of A/B/C/E saves one level ≈ 13,800 m² of basement.
 - Scores unchanged (score counts above-ground GFA; parking still passes 6/6 for all). Renders not redone — the change
   is below ground; model.blend files of A–E still show 3 basement levels until the next render build.
+
+## 2026-11-10 — iteration 18: D7 daylight proxy → vertical sky component — KEPT (method change)
+- `pipeline/psp.py`: `daylight_proxy_own` now computes the **vertical sky component** (CIE overcast sky, analytic
+  integration per azimuth over the window's half-sky, obstruction angle per 10° ray) for the same sampled windows;
+  a window fails below **VSC 15 %** (BRE 209 rule of thumb, ASSUMED, proxy for ČSN 73 0580 / EN 17037). Also reports
+  `vsc_mean`. Checks: unobstructed window 0.3967 (BRE 39.6 %); continuous 25° obstruction 0.273 (BRE 27 %).
+- Re-scored all schemes (the floor "fail ratio ≤ 0.15" is unchanged; only the method is):
+  E 79.85 → **71.87**, A 79.03 → **71.13**, D 68.74 (already missed), B 62.85 (now the only option meeting every floor,
+  fail ratio 0.096), C 61.68 → **55.52** (0.156, just over). Ranking unchanged: E, A, D, B, C. Client baseline 0.251.
+- `02_regulations/summary.md` §20 row updated. `tools/search_options.py` uses the same function, so later searches
+  optimise against VSC automatically. Next lever for A/E: pull the tower away from the street bar / thin the bars.

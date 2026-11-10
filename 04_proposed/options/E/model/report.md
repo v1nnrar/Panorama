@@ -34,7 +34,9 @@ Source: `params.yaml`
 | psp21_fail_ratio | 0.0 |
 | psp21_failing_neighbours | [] |
 | daylight_proxy_windows | 298 |
-| daylight_proxy_fail_ratio | 0.148 |
+| daylight_proxy_fail_ratio | 0.201 |
+| vsc_mean | 0.271 |
+| daylight_method | VSC < 15 % (CIE overcast) |
 | courtyard_sun_hours_mean_mar21 | 2.0 |
 | courtyard_area_2h_sun_ratio | 0.463 |
 | open_ground_m2 | 9327.6 |

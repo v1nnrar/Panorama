@@ -212,9 +212,49 @@ def distance_angle_neighbours(design, ctx):
             "psp21_failing_neighbours": sorted(by_n.items(), key=lambda kv: -kv[1])[:6]}
 
 
+VSC_FAIL = 0.15   # ASSUMED: BRE 209 (3rd ed.) — below ~15 % VSC adequate daylight needs very large windows; used as a
+                  # design proxy for ČSN 73 0580 / EN 17037 until a real daylight-factor study is made (D7).
+_EH = 2 * math.pi * 7 / 18          # unobstructed horizontal illuminance of the CIE overcast sky (Lz = 1)
+
+
+def _vertical_band(t0):
+    """∫_{t0}^{π/2} L(θ) cos²θ dθ for the CIE overcast sky L(θ) = (1 + 2 sinθ)/3 (vertical plane, unit azimuth)."""
+    F = lambda t: (t / 2 + math.sin(2 * t) / 4) - 2 * math.cos(t) ** 3 / 3  # noqa: E731
+    return (F(math.pi / 2) - F(t0)) / 3
+
+
+def _obstruction_tan(p, d, z, obs, max_len=200.0):
+    """Highest obstruction elevation (as tan) along horizontal direction d from p at height z."""
+    ray = LineString([p, (p[0] + d[0] * max_len, p[1] + d[1] * max_len)])
+    best = 0.0
+    for poly, z0, z1, _ in obs:
+        if z1 <= z or not ray.intersects(poly):
+            continue
+        dist = Point(p).distance(ray.intersection(poly))
+        if dist < 0.05:
+            continue
+        best = max(best, (z1 - z) / dist)
+    return best
+
+
+def vsc(p, t, n, z, obs, step=10.0):
+    """Vertical sky component (0..0.396) of a window at p (façade tangent t, outward normal n, height z)."""
+    tot = 0.0
+    a = -90.0 + step / 2
+    while a < 90.0:
+        r = math.radians(a)
+        d = (math.cos(r) * n[0] + math.sin(r) * t[0], math.cos(r) * n[1] + math.sin(r) * t[1])
+        t0 = math.atan(_obstruction_tan(p, d, z, obs))
+        tot += _vertical_band(t0) * math.cos(r) * math.radians(step)
+        a += step
+    return tot / _EH
+
+
 def daylight_proxy_own(design, ctx):
-    """Design proxy: same 45°/45° test from our own new façades against all other buildings (ours + neighbours)."""
+    """Daylight proxy on our own new façades (D7): vertical sky component per sampled window against all other
+    buildings (ours + neighbours); a window fails below VSC_FAIL. Same sampling as before (every 3rd storey, 10 m)."""
     total = fails = 0
+    acc = 0.0
     ctx_obs = [{"poly": c["poly"], "h": c["h"]} for c in ctx]
     for b in design["buildings"]:
         if b.get("below_ground") or b.get("existing"):
@@ -224,10 +264,14 @@ def daylight_proxy_own(design, ctx):
             if s["elevation"] < 0:
                 continue
             for p, t, n, _ in _facade_samples(Polygon(s["footprint"]), 1, 0, spacing=10.0):
+                z = s["elevation"] + 1.0
+                near = [o for o in obs if o[2] > z]
+                v = vsc(p, t, n, z, near)
                 total += 1
-                if not angle_ok(p, t, n, s["elevation"] + 1.0, obs, step=5.0):
-                    fails += 1
-    return {"daylight_proxy_windows": total, "daylight_proxy_fail_ratio": round(fails / total, 3) if total else 0.0}
+                acc += v
+                fails += v < VSC_FAIL
+    return {"daylight_proxy_windows": total, "daylight_proxy_fail_ratio": round(fails / total, 3) if total else 0.0,
+            "vsc_mean": round(acc / total, 3) if total else 0.0, "daylight_method": "VSC < 15 % (CIE overcast)"}
 
 
 # ----------------------------------------------------------------------------------------------- sun

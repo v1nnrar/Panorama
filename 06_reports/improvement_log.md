@@ -176,3 +176,17 @@ client's renders, higher is better).
   rules; floors met). Rank 1. Thin margins: courtyard sun **2.01 h**, daylight proxy **0.145**.
 - Flag for D8: 568 estimated keys exceeds the 300–450 range assumed for a 4* city hotel — part of the tower may become
   serviced apartments / offices.
+
+## 2026-11-10 — iteration 14: D4 option D "client-like, compliant" — NOT DONE (attempt 1, nothing changed)
+- Goal: keep as much of the client's scheme (85,310 m² new above-ground GFA) as possible while passing §21 and parking.
+- Parking is easy: 2 → 3 basement levels under the client's U footprint (+~240 spaces covers the 728 – 487 gap).
+- §21 diagnosis (pipeline's own check, buildings removed one at a time from the client scheme, 10 failing windows):
+  - three-wing building (54, 48), 7 windows: tower **A** (84 m, ~25 m away) is the main cause; **D**'s east end (only
+    ~10 m from the west wing, fails even at 4 storeys) and **B3** (19 m, 15 m south of the wing's south end — blocks the
+    ground-floor window at (60, 14)) cause the rest. Trimming D's east end 8 m + B3 to 3 storeys removes those.
+  - drum towers (−58, −26), 3 windows: **C1** and **A** together.
+- Searched (≈1,800 layouts): A 14–20 typical storeys and shifts W/S ≤ 8 m, D 4–7 storeys + east-end trim 0–8 m,
+  C1 6–10 storeys, B3 2–4 storeys. **No layout passes**: shifting A west clears the three-wing building but adds a drum
+  failure; best seen = 1 failing window (drum) at 70,837 m².
+- Next attempt: add levers — C1 west-end trim (drum side), A moved **south only** (toward the courtyard, away from both
+  neighbours), D east trim > 8 m; search by cheapest GFA loss first. If attempt 2 fails too, mark D4 blocked (LOOP rule).

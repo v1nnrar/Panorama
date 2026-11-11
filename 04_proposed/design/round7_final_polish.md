@@ -82,3 +82,11 @@ User marked: correct BOTTOM = round 7 #7 `560c6bc9…` (low lattice buildings, c
 `6c9c83cf…` (taller left tower, lattice ribbon). Identified by pixel match of the screenshots. Images aligned (scale 1.0,
 offset −2/+6 px); towers + ribbon pasted from 6c9c83cf onto 560c6bc9 → `refs/final_cohesive_guide.png` (media
 `67dc0c60…`); seamless render **`d390ed4d-ba06-4bf2-aec0-7f37c194219e`** — matches the composite, seams gone.
+
+## Edits on the final image (user markings 11 Nov 2026), 0.5 credit — checked
+From `d390ed4d`: pink = front building higher toward its left peak; black = modern glass facade on its courtyard side;
+blue = remove the lake; green = round building bigger + forward, nature roof without shrubs; yellow = back-left block:
+no pool → spa / wellness. Result **`ea3cf223-abb1-463a-85e6-bc27f11c0c22`**:
+done — lake removed; round building bigger, further forward, meadow roof; front building rises toward the left.
+not achieved — glass facade on the courtyard side not readable; back-left block still shows some water, no clear spa;
+round building lost part of its lattice crown ring. Towers unchanged.

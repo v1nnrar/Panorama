@@ -21,14 +21,14 @@ Source: `params.yaml`
 | footprint_outside_plot_m2 | 9.1 |
 | min_setback_m | 0.0 |
 | parking_zone | 02 |
-| parking_required_min | 668 |
-| parking_required_max | 763 |
+| parking_required_min | 664 |
+| parking_required_max | 765 |
 | parking_capacity_est | 730 |
-| parking_margin | 62 |
-| gfa_by_use_m2 | {'retail': 7006.6, 'residential': 52238.5, 'restaurant': 2704.6, 'hotel': 11067.9, 'office': 6737.2} |
+| parking_margin | 66 |
+| gfa_by_use_m2 | {'retail': 7006.6, 'residential': 52238.5, 'restaurant': 2704.6, 'hotel': 10125.4, 'congress': 942.5, 'office': 6737.2} |
 | flats_est | 626 |
-| hotel_keys_est | 214 |
-| hotel_programme | {'keys': 214, 'keys_by_type': {'standard': 150, 'superior': 43, 'suite': 21}, 'areas_m2': {'lobby_fnb': 2484, 'meeting': 0, 'spa': 0, 'rooms': 11068}, 'm2_per_key': {'lobby_fnb': 11.61, 'meeting': 0.0, 'spa': 0.0}, 'flags': ['214 keys < 300: below a typical 4* city hotel', 'meeting 0.0 m²/key < 1.5', 'spa 0.0 m²/key < 0.8'], 'assumptions': '4* city hotel mix 70/20/10 (28/34/56 m² net), 62 % room-floor efficiency; ASSUMED'} |
+| hotel_keys_est | 196 |
+| hotel_programme | {'keys': 196, 'keys_by_type': {'standard': 137, 'superior': 39, 'suite': 20}, 'areas_m2': {'lobby_fnb': 2484, 'meeting': 566, 'spa': 377, 'rooms': 10125}, 'm2_per_key': {'lobby_fnb': 12.67, 'meeting': 2.89, 'spa': 1.92}, 'flags': ['196 keys < 300: below a typical 4* city hotel'], 'assumptions': '4* city hotel mix 70/20/10 (28/34/56 m² net), 62 % room-floor efficiency; ASSUMED'} |
 | psp22_min_boundary_distance_m | 6.77 |
 | psp21_windows_checked | 699 |
 | psp21_windows_failing | 0 |
@@ -66,4 +66,4 @@ Source: `params.yaml`
 | Regulated floor area (HPPreg) — not set in stabilised areas |  | 85928.0 | ℹ️ | MPP čl. 96 odst. 2: HPPreg/Zmax apply only to [T] and [R] areas; plot is [S] (KLZ 058 map, no T hatch) |
 | PSP §21: neighbour windows failing the 45°/45° distance angle | ≤ 0 | 0 | ✅ PASS | PSP §21 odst. 1 + příloha 1 bod II (sampled windows on neighbour façades facing the plot; pipeline/psp.py) |
 | PSP §22: min distance to private neighbouring plots (m) | ≥ 2.0 | 6.77 | ✅ PASS | PSP §22 odst. 2 — ASSUMED: plot edges facing S (Milevská) and E (street/metro) are public space |
-| PSP §25: parking capacity minus required minimum (spaces) | ≥ 0 | 62 | ✅ PASS | PSP §25 + příloha 2 (HPP per space by use) + příloha 3 — ASSUMED zone 02 (bound 80 %, visitor 15–55 %), 30 m²/space at 85 % basement efficiency |
+| PSP §25: parking capacity minus required minimum (spaces) | ≥ 0 | 66 | ✅ PASS | PSP §25 + příloha 2 (HPP per space by use) + příloha 3 — ASSUMED zone 02 (bound 80 %, visitor 15–55 %), 30 m²/space at 85 % basement efficiency |

@@ -36,9 +36,12 @@ buildings:
   - name: GF
     height: 5.0
     use: Hotel lobby / restaurant
+  - name: L2
+    height: 3.2
+    use: Conference / spa
   - name: L
-    count: 9
-    start: 2
+    count: 8
+    start: 3
     height: 3.2
     use: Hotel rooms
   material: Aluminium white

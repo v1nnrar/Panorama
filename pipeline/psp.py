@@ -112,13 +112,16 @@ def hotel_programme(design):
     areas = {"lobby_fnb": 0.0, "meeting": 0.0, "spa": 0.0, "rooms": 0.0}
     room_floor_area = []
     for b in design["buildings"]:
-        if b.get("below_ground") or b.get("existing") or classify_use(b.get("use")) != "hotel":
+        if b.get("below_ground") or b.get("existing"):
             continue
+        is_hotel = classify_use(b.get("use")) == "hotel"
         for s in b["storeys"]:
             if s["elevation"] < 0:
                 continue
             a = Polygon(s["footprint"]).area
             k = _hotel_storey_kind(s.get("use"))
+            if not is_hotel and k not in ("meeting", "spa", "meeting+spa"):
+                continue          # other buildings contribute only conference / spa floors (shared hotel facilities)
             if k == "meeting+spa":                      # ASSUMED split of a combined conference / spa floor
                 areas["meeting"] += 0.6 * a
                 areas["spa"] += 0.4 * a

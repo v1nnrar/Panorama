@@ -28,7 +28,7 @@ Source: `params.yaml`
 | gfa_by_use_m2 | {'hotel': 23400.9, 'congress': 3143.8, 'retail': 3027.9, 'residential': 20387.3, 'office': 6717.5} |
 | flats_est | 244 |
 | hotel_keys_est | 435 |
-| hotel_programme | {'keys': 435, 'keys_by_type': {'standard': 304, 'superior': 87, 'suite': 44}, 'areas_m2': {'lobby_fnb': 900, 'meeting': 540, 'spa': 360, 'rooms': 22501}, 'm2_per_key': {'lobby_fnb': 2.07, 'meeting': 1.24, 'spa': 0.83}, 'flags': ['meeting 1.24 m²/key < 1.5'], 'assumptions': '4* city hotel mix 70/20/10 (28/34/56 m² net), 62 % room-floor efficiency; ASSUMED'} |
+| hotel_programme | {'keys': 435, 'keys_by_type': {'standard': 304, 'superior': 87, 'suite': 44}, 'areas_m2': {'lobby_fnb': 900, 'meeting': 2784, 'spa': 360, 'rooms': 22501}, 'm2_per_key': {'lobby_fnb': 2.07, 'meeting': 6.4, 'spa': 0.83}, 'flags': [], 'assumptions': '4* city hotel mix 70/20/10 (28/34/56 m² net), 62 % room-floor efficiency; ASSUMED'} |
 | psp22_min_boundary_distance_m | 2.56 |
 | psp21_windows_checked | 699 |
 | psp21_windows_failing | 0 |

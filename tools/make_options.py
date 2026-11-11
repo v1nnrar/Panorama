@@ -93,6 +93,27 @@ PRESETS = {
 }
 
 
+def cap_keys(groups, poly, cap):
+    """D11: turn the top hotel-room floors into serviced apartments so the room floors give ≤ `cap` keys
+    (same mix / efficiency as pipeline/psp.py::hotel_programme)."""
+    sys.path.insert(0, str(ROOT))
+    from shapely.geometry import Polygon
+    from pipeline.psp import ROOM_FLOOR_EFF, ROOM_MIX
+    per_floor = Polygon(poly).area * ROOM_FLOOR_EFF / sum(sh * m2 for sh, m2 in ROOM_MIX.values())
+    out = []
+    for g in groups:
+        if "room" in g.get("use", "").lower() and int(g.get("count", 1)) > 1:
+            n = int(g["count"])
+            keep = min(n, int(cap // per_floor))
+            out.append({**g, "count": keep})
+            if n - keep:
+                out.append({**g, "name": "SA", "count": n - keep, "start": g.get("start", 1) + keep,
+                            "use": "Serviced apartments"})
+        else:
+            out.append(g)
+    return out
+
+
 def storeys(n, gf, typ, gf_use, use, gf2=None, gf2_use=None):
     s = [{"name": "GF", "height": gf, "use": gf_use}]
     if gf2:
@@ -112,6 +133,7 @@ SPECS = {
             # D3 (loop 2026-11-10): grown by a local search with the pipeline's own §21/§22/parking/daylight/sun checks:
             # 30 x 40 m hotel floorplate, longer 10-storey street bar, east bar +4 m north, deeper 7-storey north wing.
             {"id": "H", "name": "Hotel tower", "use": "Hotel", "preset": "hotel_tower", "poly": rect(30, -41, 60, -1),
+             "key_cap": 450,   # D11: top room floors → serviced apartments
              "storeys": storeys(27, 6.0, 3.3, "Hotel lobby / restaurant", "Hotel rooms", 5.0, "Conference / spa")},
             {"id": "S", "name": "Street bar (Milevská)", "use": "Residential", "preset": "resi", "poly": rect(-20, -61, 86, -45),
              "storeys": storeys(10, 4.5, 3.1, "Retail", "Apartments")},
@@ -149,7 +171,9 @@ SPECS = {
             # D2 (loop 2026-11-10): search over block extents, open side, wing depth and heights with the pipeline's own
             # §21 / §22 / daylight / courtyard-sun checks. West block opens SOUTH, east block opens EAST, both 10 storeys.
             {"id": "HW", "name": "West block — hotel", "use": "Hotel", "preset": "office",
-             "poly": cshape(-14, -61, 36, -6, 16, "S"), "storeys": storeys(10, 5.0, 3.2, "Hotel lobby / restaurant", "Hotel rooms")},
+             "poly": cshape(-14, -61, 36, -6, 16, "S"),
+             # D11: conference / spa floor above the lobby (replaces one room floor; same storey count)
+             "storeys": storeys(10, 5.0, 3.2, "Hotel lobby / restaurant", "Hotel rooms", 3.2, "Conference / spa")},
             {"id": "RE", "name": "East block — apartments", "use": "Residential", "preset": "resi",
              "poly": cshape(42, -61, 104, -4, 16, "E"), "storeys": storeys(10, 4.5, 3.1, "Retail", "Apartments")},
             {"id": "O", "name": "North office wing", "use": "Office", "preset": "office", "poly": rect(-48, 16, 22, 32),
@@ -173,6 +197,8 @@ SPECS = {
             "C1": {"footprint": [[-11.26, -35.24], [-12.67, -59.62], [-28.08, -58.73], [-28.57, -56.6], [-28.57, -38.46]],
                    "typical_count": 5, "typical_height": 2.82},
             "B3": {"typical_count": 3, "typical_height": 3.375},
+            # D11: hotel conference / spa on C2's first upper floor (one room floor fewer)
+            "C2": {"first_typical_use": "Conference / spa"},
         },
     },
 }
@@ -208,6 +234,11 @@ def _build_from_existing(key, spec):
             rep["count"] = e["typical_count"]
             rep["height"] = e["typical_height"]
             b.pop("height", None)          # storey heights are explicit now (no rescaling to the old total)
+        if "first_typical_use" in e:
+            i = next(k for k, g in enumerate(b["storeys"]) if int(g.get("count", 1)) > 1)
+            g = b["storeys"][i]
+            b["storeys"][i:i + 1] = [{**g, "name": "L1", "count": 1, "use": e["first_typical_use"]},
+                                     {**g, "count": int(g["count"]) - 1, "start": g.get("start", 1) + 1}]
         if b["id"] == "U":
             lv = spec.get("basement_levels", 2)
             b["storeys"] = [{"name": "B", "count": lv, "height": 3.5, "use": "Parking"}]
@@ -251,8 +282,9 @@ def _build_blocks(key, spec):
     blds = []
     for blk in spec["blocks"]:
         pre = json.loads(json.dumps(PRESETS[blk["preset"]]))
+        st = cap_keys(blk["storeys"], blk["poly"], blk["key_cap"]) if blk.get("key_cap") else blk["storeys"]
         b = {"id": blk["id"], "name": blk["name"], "use": blk["use"], "footprint": to_survey(blk["poly"]),
-             "storeys": blk["storeys"], **pre}
+             "storeys": st, **pre}
         for k in ("height", "setbacks", "terrace_edge"):
             if k in blk:
                 b[k] = blk[k]

@@ -32,10 +32,15 @@ buildings:
     height: 5.0
     use: Conference / spa
   - name: L
-    count: 25
+    count: 19
     start: 3
     height: 3.3
     use: Hotel rooms
+  - name: SA
+    count: 6
+    start: 22
+    height: 3.3
+    use: Serviced apartments
   material: Concrete white
   facade:
   - type: curtain

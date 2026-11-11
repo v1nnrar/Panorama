@@ -469,10 +469,15 @@ buildings:
   - name: GF
     height: 4.4
     use: Lobby / retail
+  - name: L1
+    count: 1
+    height: 2.85
+    use: Conference / spa
   - name: L
-    count: 10
+    count: 9
     height: 2.85
     use: Rooms
+    start: 2
   windows:
     width: 1.4
     height: 2.0

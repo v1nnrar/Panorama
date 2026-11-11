@@ -246,3 +246,15 @@ client's renders, higher is better).
   floors), B 435 (in range), C 357 (in range, no meeting/spa), D 214 and client 257 (< 300, no meeting/spa). Meeting
   space is short in every option (1.24 m²/key where present).
 - Scores unchanged (GFA-based). New backlog item **D11**: apply these flags to the options and re-score.
+
+## 2026-11-11 — iteration 20: D11 apply the hotel-programme flags — KEPT
+- `tools/make_options.py`: block option **`key_cap`** (`cap_keys()`) turns the top hotel-room floors into serviced
+  apartments until room floors give ≤ cap keys (same mix/efficiency as `psp.hotel_programme`); used for the hotel
+  tower of A and E (also in `tools/search_options.py`). `build_from_existing` edit **`first_typical_use`**.
+- `pipeline/psp.py::hotel_programme`: conference / spa floors in any new building count as hotel facilities (B's
+  podium conference floor).
+- Changes: A 581 → **441** keys (+86 serviced flats), E 592 → **426** keys; C gets a conference/spa floor above the lobby
+  (3.2 m, same envelope — a 3.6 m version broke §21 by one window and was rejected) → 317 keys; D: C2's first upper
+  floor becomes conference/spa → 196 keys (still < 300: the client's hotel is small).
+- Hotel programme flags: A, B, C, E **OK**; D only "keys < 300". Scores unchanged (E 71.87, A 71.13, D 68.74,
+  B 62.85, C 55.52), all hard rules pass; parking re-sized automatically (still 2 levels for A/B/C/E).

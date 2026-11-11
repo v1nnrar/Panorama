@@ -70,7 +70,7 @@ Section D is the **top priority** (user request, 9 Nov 2026). For a D item:
       (ČSN 73 0580 / EN 17037 logic) and re-score all options.
 - [x] D8. Hotel programme per option: lobby / restaurant / conference / spa areas on the lower floors, keys by room type;
       flag options outside 300–450 keys (typical 4* city hotel, ASSUMED until the brief arrives).
-- [ ] D11. Apply the D8 hotel flags: A/E convert the top ≈6–7 room floors to serviced apartments (keys ≤ 450);
+- [x] D11. Apply the D8 hotel flags: A/E convert the top ≈6–7 room floors to serviced apartments (keys ≤ 450);
       B/C/D add meeting space (≥ 1.5 m²/key) and, for C/D, a spa floor; re-score (parking need changes with use).
 - [ ] D9. Presentation: Cycles aerials of the top 2 options + client scheme side by side, and a one-page comparison
       in `06_reports/capacity_study.md` (no new hosts, no paid services).

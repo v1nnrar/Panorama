@@ -48,7 +48,7 @@ def spec_of(lay, name="Option E — max yield (search)"):
     blocks = []
     for i, (u, v, w, d, n) in enumerate(lay["T"]):
         if i == 0:
-            blocks.append({"id": "H", "name": "Hotel tower", "use": "Hotel", "preset": "hotel_tower",
+            blocks.append({"id": "H", "name": "Hotel tower", "use": "Hotel", "preset": "hotel_tower", "key_cap": 450,
                            "poly": mo.rect(u, v, u + w, v + d),
                            "storeys": mo.storeys(n, 6.0, 3.3, "Hotel lobby / restaurant", "Hotel rooms", 5.0, "Conference / spa")})
         else:

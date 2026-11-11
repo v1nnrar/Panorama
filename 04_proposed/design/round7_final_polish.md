@@ -26,3 +26,13 @@ User: #2 okay, but the bridge junction is still wrong; wants a serpentine path u
 |---|---|---|---|
 | A (recommended) | one clean glazed walkway framed by lattice, symmetric, smooth into both crowns | open lawns, few trees, winding path from the right end, mini amphitheatre, kiosk pavilion, pool | 695c0635-3669-4c79-9137-7682d13c8609 |
 | B | lattice bridge with an oval opening, symmetric | serpentine promenade along the roof, reflecting pool, lawns | aa343d73-4738-4f5c-8b69-c4d690972ce0 |
+
+## Follow-up 2 (from B `aa343d73…`), medium 1k, 2 × 0.5 = 1.0 credit — both downloaded and checked
+User: B liked; pond larger and clearly very shallow; LEFT tower taller than the right (so no crown-to-crown bridge →
+new connection idea); L-building rises more with stairs (more floor area).
+| # | Connection | Job ID |
+|---|---|---|
+| A | glazed lattice skywalk rising from the right tower's crown into a sky lobby on the taller left tower | 245eb155-094f-4e47-9ab3-17f4584e9558 |
+| B | lattice ribbon from the right crown wraps round the left tower as a ring terrace below its crown | c68674b6-a2c4-4b2f-b27f-56853997157b |
+Both: bigger shallow pond with people wading, taller stepped L. Note: the camera zoomed in slightly in both.
+Regulation note: left tower at most 27 storeys / 100 m (MPP range 27), so the right tower ends ~6 floors lower.

@@ -22,4 +22,4 @@ Not reviewed by Claude: the Higgsfield CDN is blocked in this session, so fit to
 height must be checked by eye in the gallery.
 
 ## Picks
-_(user's pick goes here)_
+**Favourite (user, 11 Nov 2026): concept 2 "Dancers", aerial N — job 31b7b9fb-1fa0-4b62-a43b-60eb4213d474** (connected towers). Round 3 develops it.

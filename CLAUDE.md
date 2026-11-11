@@ -96,3 +96,15 @@ Mark kept existing buildings with `existing: true`. Options are ranked by `tools
 | design-reviewer | `06_reports/review_*.md` | changes files outside reports |
 
 Only **bim-modeler** changes geometry. Run **compliance-checker** after every model change.
+
+## Visual skills (account skills, synced into every session — invoke with the Skill tool)
+Redesign brief: `04_proposed/design/intent.md` (blank canvas, existing hotel tower demolished; client renders = scale reference only).
+| Need | Skill |
+|---|---|
+| Many design options cheaply (2×2 contact sheets) | `immagetokens` |
+| Photoreal reference / keyframe stills | `higgsfield-reference-stills` |
+| Fly-through of the real site (clay blockout → Seedance/Kling) | `clay-blockout-flythrough-video` |
+| Impossible one-take shots | `3djutsu`, `higgsfield-3d-jutsu-workflow`, `higgsfield-3d-blocked-oneshot` |
+| Multi-clip film plan / cutting clips | `kling-keyframe-film-plan`, `ai-clip-splice-edit` |
+| Web 3D viewer / scroll film | `real-place-3d-reconstruction`, `scroll-driven-3d-sequences` |
+Always quote the price (`get_cost: true`) and get a "go" before any paid Higgsfield generation.

@@ -99,3 +99,21 @@ plaza meet the ground with no edge.
 |---|---|
 | `07_park_A.png` | calmer: one clear main serpentine with a few loops, larger lawns |
 | `07_park_B.png` | freer: more interwoven loops, more seating niches, the back of the tail slopes into the ground behind the café |
+
+## Iteration 8: natural roof park, merged into the ground behind (base: 07_park_A)
+
+The earlier iteration 8 attempt was reverted at the client's request. This iteration starts again from `07_park_A.png`
+(jobs d49fd146-d4e0-459d-9eb2-3b4901a71226, 48f39d6a-e035-46be-af80-c4c1a8397bd1). Building shape, café and front plaza unchanged.
+
+- Roof park: the repetitive round tree islands are replaced by a natural landscape: soft hills and dips,
+  mixed tree groups (shade trees, birches, flowering trees), drifts of grasses and perennials, a small stream and pond,
+  timber seating platforms, open lawn clearings. Serpentine paths kept; planting stays on the roof.
+- Back: the roof slopes down with no edge into a park at ground level behind the building, and the roof paths continue into it.
+
+| File | Notes |
+|---|---|
+| `08_natural_park_A.png` | the back lattice edge is still visible at the high end; separate lawn, stream and seating deck |
+| `08_natural_park_B.png` | more complete merge: the roof and the park behind read as one landscape; cherry trees, pond with deck |
+
+Caution: the ground-level park behind fills the whole background. On the real site that area holds the tower plaza
+and podium (block A0), so the merge zone has to be designed within the site boundary.

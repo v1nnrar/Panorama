@@ -352,3 +352,14 @@ client's renders, higher is better).
   the far references 125/126 fell on our towers A and B. Result 4.95 px ≈ 1.4 m with one-sided coverage, roll
   unstable (−8.8° when free) → **not adopted** (no camera added, model unchanged, score unchanged 0.4848).
 - Next attempt (LOOP P2): free-height references (office E, three-wing 133) to constrain the right half of render-002.
+
+## 2026-11-11 — iteration 27: P2 attempt 2 (render-002 second view) — FAILED → P2 BLOCKED
+- Tried to constrain the right half of render-002: (a) office E and the three-wing building 133 as references with a
+  surveyed outline but free height — rejected: the client's CG E has a deep glazed inset not in the RÚIAN outline,
+  133's roof carries CG fan structures, so no vertex can be matched with confidence; (b) the height-independent
+  vertical silhouette of tower 131 (surveyed outline): the left edge has no contrast against the haze, the right edge
+  (sub-pixel, 15 rows) plus the 7 slab corners gives 4.6 px corner RMS and a systematic ±1.6 px tilt along the edge.
+- Conclusion: the CG context of render-002 is not consistent with the survey at ±1 m from what is visible → no camera
+  adopted; model and score unchanged (0.4848). P2 marked BLOCKED after two attempts.
+- Found on the way (P4): RÚIAN puts office E's west wall at x ≈ 91–92, the model at 94.8–98.3 (3–4 m).
+- To unblock: the client's camera data for render-002 or their context model, or another photo-based view.

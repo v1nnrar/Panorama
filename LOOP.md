@@ -65,15 +65,20 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       Done 2026-11-11: `--points` (sub-pixel corner detector) + 16 visually checked corners of 11 references
       (03_existing/overlays/calib_render000_points.json), 14 kept → **1.64 px = 0.42 m** at the site. Slightly short of
       20 points / 1.5 px: the far references are hazy and two NW slab corners disagree with RÚIAN by 5–7 px.
-- [ ] P2. Same for render-001 (aerial, other angle) and render-002 (from the SE).
+- [~] P2. (BLOCKED) Same for render-001 (aerial, other angle) and render-002 (from the SE).
       Attempt 1 (2026-11-11): render-001 is the SAME frame as render-000 (pixel difference = JPEG noise) → same camera,
       no second view. render-002 (CG, white context massing, from (≈150, −145, ≈85) looking NW): only the slab row
       53/54/61/63 is a surveyed reference (left 30 % of the frame) → 4.95 px ≈ 1.4 m, roll unstable; not adopted.
-      Next attempt: add references with a RÚIAN outline but UNKNOWN height (office E kod 96272635, three-wing 133,
-      twin towers if in RÚIAN) as free-height parameters (`--free-height`), so the right half is constrained.
+      Attempt 2 (2026-11-11): E and 133 cannot serve as free-height references — the client's CG massing of E has a deep
+      glazed inset that the RÚIAN outline does not have, and 133's roof carries CG fan structures. Height-free
+      silhouette of tower 131: only its right edge has contrast; slab corners + that edge → 4.6 px corners and a
+      systematic ±1.6 px tilt on the edge (CG context not survey-consistent at ±1 m). **BLOCKED** (2 failed attempts).
+      Unblocks with: the client's camera for render-002 (3ds Max / Lumion scene export) or their context model, or a
+      second PHOTO-based client view. Meanwhile P3 uses the calibrated render-000 + known heights (single view).
 - [ ] P3. `tools/triangulate.py`: pick each client building's roof corners in 2–3 calibrated views, least-squares 3D
       points with covariance; update footprints/heights where the shift > 1 m; keep single-view items flagged.
-- [ ] P4. Office E from RÚIAN (kod 96272635, 12 storeys in the register, terrain ≈ 7 m below site GF on the east;
+- [ ] P4. Office E from RÚIAN (kod 96272635 = reference 154; its west wall is at x ≈ 91–92, the model's at 94.8–98.3 →
+      3–4 m off; 12 storeys in the register, terrain ≈ 7 m below site GF on the east;
       the trimmed southern wedge is in the cadastral outline — model it as a low podium at its true level).
 - [ ] P5. `06_reports/accuracy.md`: per building the achieved ± (plan, height), method and number of views.
 

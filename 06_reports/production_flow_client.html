@@ -1,0 +1,156 @@
+<title>Panorama Project Roadmap</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: the client's sketch turned vertical. Heavy-outlined rounded checkpoint boxes in one column,
+   hollow block arrows between them; small step boxes on the left feed each checkpoint through a small arrow. */
+:root {
+  --bg: #ffffff;
+  --ink: #111417;
+  --muted: #5d666e;
+  --soft: #f1f3f4;
+  --you: #c2410c;
+  --ok: #17803d;
+  --now: #1f4fd1;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --stroke: 4px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121518; --ink: #eef1f3; --muted: #9ba6af; --soft: #1c2125; --you: #ff9a62; --ok: #4ccb78; --now: #8aa6ff; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #121518; --ink: #eef1f3; --muted: #9ba6af; --soft: #1c2125; --you: #ff9a62; --ok: #4ccb78; --now: #8aa6ff; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.5 var(--font-body); }
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 40px 80px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2 { font-family: var(--font-display); margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(30px, 5.5vw, 46px); font-weight: 800; line-height: 1.05; letter-spacing: -0.01em; }
+p { margin: 0; }
+.eyebrow { font: 500 12px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+header { display: grid; gap: 12px; margin-bottom: 20px; }
+.lede { color: var(--muted); font-size: 16px; max-width: 62ch; }
+.key { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: var(--muted); margin-bottom: 36px; }
+.key span { display: inline-flex; align-items: center; gap: 7px; }
+.mini { width: 22px; height: 14px; border: 2px solid var(--ink); border-radius: 5px; display: inline-block; }
+.big { width: 26px; height: 18px; border: var(--stroke) solid var(--ink); border-radius: 7px; display: inline-block; }
+
+/* rows */
+.row { display: grid; grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1.25fr); align-items: center; }
+.feeders { display: grid; gap: 10px; position: relative; padding-right: 22px; }
+.feeders::after { content: ""; position: absolute; right: 0; top: 22px; bottom: 22px; border-right: 2px solid var(--ink); }
+.feed { position: relative; border: 2px solid var(--ink); border-radius: 10px; padding: 8px 12px; font-size: 14px; line-height: 1.35; background: var(--bg); }
+.feed::after { content: ""; position: absolute; left: 100%; top: 50%; width: 22px; border-top: 2px solid var(--ink); }
+.feed.you { border-color: var(--you); }
+.feed .tag { display: inline-block; font: 500 10px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--you); margin-left: 6px; vertical-align: 1px; }
+.small-arrow { display: flex; justify-content: center; color: var(--ink); }
+.small-arrow svg { width: 52px; height: 34px; }
+
+.box { border: var(--stroke) solid var(--ink); border-radius: 26px; padding: 22px 24px; background: var(--bg); display: grid; gap: 8px; }
+.box .top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.box h2 { font-size: clamp(20px, 3vw, 25px); font-weight: 800; line-height: 1.15; }
+.box p { color: var(--muted); }
+.box .out { font-size: 14px; color: var(--ink); background: var(--soft); border-radius: 10px; padding: 8px 12px; }
+.box .out b { font-weight: 600; }
+.box.done { border-color: var(--ok); }
+.box.now { border-color: var(--now); box-shadow: 0 0 0 6px color-mix(in srgb, var(--now) 15%, transparent); }
+.badge { font: 500 11px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 5px 9px; border-radius: 99px; border: 1.5px solid currentColor; white-space: nowrap; }
+.b-done { color: var(--ok); } .b-now { color: var(--now); } .b-later { color: var(--muted); }
+.loop { font-size: 13px; color: var(--muted); }
+
+.down { display: grid; grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1.25fr); }
+.down .a { grid-column: 3; display: flex; justify-content: center; color: var(--ink); padding: 6px 0; }
+.down svg { width: 70px; height: 74px; }
+.finish { text-align: center; }
+
+footer { margin-top: 44px; font-size: 13px; color: var(--muted); max-width: 70ch; }
+
+@media (max-width: 720px) {
+  .row, .down { grid-template-columns: 1fr; }
+  .feeders { padding-right: 0; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+  .feeders::after, .feed::after { display: none; }
+  .small-arrow svg { transform: rotate(90deg); width: 40px; height: 30px; margin: 8px 0; }
+  .down .a { grid-column: 1; }
+  .box { border-radius: 22px; padding: 18px; }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Panorama Hotel · Horní Pankrác, Prague</span>
+    <h1>Panorama Project Roadmap</h1>
+    <p class="lede">The path from today to opening, in twelve checkpoints. The small boxes on the left are the steps that lead into each checkpoint. Steps marked “Your input” need a decision or documents from you.</p>
+  </header>
+  <div class="key">
+    <span><i class="big"></i>Checkpoint</span>
+    <span><i class="mini"></i>Step leading into it</span>
+    <span><i class="mini" style="border-color:var(--you)"></i>Your input needed</span>
+    <span class="badge b-done">Complete</span>
+    <span class="badge b-now">In progress</span>
+  </div>
+  <main id="flow"></main>
+  <footer>Status as of 11 November 2026. Permit steps follow the Czech Building Act 283/2021 Sb. as currently amended; the exact authority and whether an environmental (EIA) screening is required will be confirmed at the pre-application consultation.</footer>
+</div>
+
+<script>
+const CP = [
+  { t: "Site and brief confirmed", st: "now", d: "We fix the legal plot, the survey and what you want built.",
+    out: "Agreed plot boundary (16,487 m²) and room programme",
+    f: [["Plot survey and land registry parcels"], ["Your current renders and drawings", 1], ["Hotel brief: room mix, budget, opening date", 1]] },
+  { t: "Planning rules mapped", st: "now", d: "Every limit from the Metropolitan Plan and Prague building regulations, each with its source.",
+    out: "Rules summary: height up to 100 m, up to 27 storeys, distances, parking",
+    f: [["Metropolitan Plan limits"], ["Prague building regulations"], ["Open points verified (parking zone, plot edges)"]] },
+  { t: "Current scheme documented", st: "now", d: "A 3D model of your existing scheme, rebuilt from your renders and checked against the rules.",
+    out: "3D model and compliance report of the current scheme",
+    f: [["3D model matched to your renders"], ["Compliance check"]] },
+  { t: "Design direction chosen", st: "later", d: "Several building options compared on rooms, floor area and planning rules.",
+    out: "Your chosen option, in writing", loop: "Repeats with new options until one direction is agreed",
+    f: [["Options generated and tested"], ["Comparison and recommendation"], ["Presentation and your decision", 1]] },
+  { t: "Project team appointed", st: "later", d: "A Prague authorised architect who signs the permit documents, plus the engineers.",
+    out: "Signed contracts and an agreed way of sharing the model",
+    f: [["Architects contacted and shortlisted"], ["Fee proposals and interviews", 1], ["Engineers: structure, services, fire, traffic, daylight"]] },
+  { t: "Concept design approved", st: "later", d: "The chosen option developed into a full concept, checked against the rules after every change.",
+    out: "Approved concept, renders and area schedule", loop: "Review rounds with you until approved",
+    f: [["Floor plans and façade concept"], ["Rule check after each change"], ["Independent design review"], ["Your review rounds", 1]] },
+  { t: "Authorities consulted", st: "later", d: "We find out what the authorities, utilities and neighbours will ask for before drawing the permit set.",
+    out: "Written positions, all answered or built into the design",
+    f: [["Pre-application meeting with the building office"], ["Fire, hygiene, transport, heritage, metro"], ["Utility capacities"], ["Neighbour meetings", 1]] },
+  { t: "Permit documents signed", st: "later", d: "The full permit documentation (DPZ), coordinated between architect and engineers.",
+    out: "Signed permit set, ready to submit",
+    f: [["Drawings from the model"], ["Engineers' reports"], ["Coordination check"], ["Your sign-off", 1]] },
+  { t: "Building permit granted", st: "later", d: "The building office reviews the application and decides.",
+    out: "Permit decision in legal force", loop: "Supplements answered if the office asks",
+    f: [["Online submission"], ["Completeness check"], ["Proceedings and objections"], ["Appeal period"]] },
+  { t: "Contractor appointed", st: "later", d: "Construction drawings, quantities and a tender to price the building.",
+    out: "Signed construction contract", loop: "Value engineering if bids exceed budget",
+    f: [["Construction documentation"], ["Bill of quantities from the model"], ["Tender and bid comparison", 1]] },
+  { t: "Building completed", st: "later", d: "Construction with the architect supervising on site.",
+    out: "Finished building and as-built model",
+    f: [["Construction works"], ["Site supervision"], ["Change requests", 1], ["Inspections by the building office"]] },
+  { t: "Hotel open", st: "later", d: "Tests, certificates and the occupancy permit.",
+    out: "Occupancy permit (kolaudace) and handover to the operator",
+    f: [["Tests and certificates"], ["Final inspection"], ["Handover and manuals", 1]] },
+];
+
+const small = `<svg viewBox="0 0 52 34" aria-hidden="true"><path d="M3 11 H28 V3 L49 17 L28 31 V23 H3 Z" fill="var(--bg)" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/></svg>`;
+const big = `<svg viewBox="0 0 70 74" aria-hidden="true"><path d="M22 3 H48 V38 H65 L35 71 L5 38 H22 Z" fill="var(--bg)" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round"/></svg>`;
+const badge = { done: '<span class="badge b-done">Complete</span>', now: '<span class="badge b-now">In progress</span>', later: '<span class="badge b-later">Upcoming</span>' };
+
+document.getElementById("flow").innerHTML = CP.map((c, i) => `
+  <div class="row">
+    <div class="feeders">${c.f.map(([t, you]) => `<div class="feed${you ? " you" : ""}">${t}${you ? '<span class="tag">Your input</span>' : ""}</div>`).join("")}</div>
+    <div class="small-arrow">${small}</div>
+    <section class="box ${c.st}">
+      <div class="top"><span class="eyebrow">Checkpoint ${i + 1}</span>${badge[c.st]}</div>
+      <h2>${c.t}</h2>
+      <p>${c.d}</p>
+      <div class="out"><b>Result:</b> ${c.out}</div>
+      ${c.loop ? `<div class="loop">↺ ${c.loop}</div>` : ""}
+    </section>
+  </div>
+  ${i < CP.length - 1 ? `<div class="down"><div class="a">${big}</div></div>` : ""}`).join("");
+</script>

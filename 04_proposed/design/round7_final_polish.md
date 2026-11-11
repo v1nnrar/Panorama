@@ -63,3 +63,8 @@ from the right end, café pavilion, small rectangular water at the left corner. 
   shortened → walkway from the street into the plaza past the round building. Towers unchanged.
   **`6c9c83cf-df2d-44e1-87ee-be0e67e2b18b`**. Side effect: a small water strip now sits at the L's front-left corner by
   the street.
+- User rejected `6c9c83cf` (extra water, image changed). Redone from `3ab7da27` via guide `refs/final_preview_guide3.png`
+  (media `43a79c38…`: L trimmed at the back and right end, plaza pixels from 6c9c83cf, everything else pixel-identical),
+  clean render 0.5 credit: **`f7888507-38ad-4174-bc79-8711b7315f40`** — checked: towers, ribbon, back block, round building,
+  railings and the L design kept; no new water; open plaza between L and towers; walkway between L's right end and the
+  round building; roof reached by the path/stairs at the L's bottom-right end.

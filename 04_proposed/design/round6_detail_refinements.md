@@ -30,3 +30,9 @@ Same camera as the pick (client render-000 aerial). One reference: the pick.
   skirt down the outer face; the right crown is a level ring whose lattice flows down the INNER side into the bridge.
   Precise edit prompt (mirror the right crown onto the left, everything else unchanged), medium 1k, 0.5 credits:
   `78db025f-cd5a-44cf-a915-481b7510d55f`
+- Correction: the user's favourite is actually **#4 `e351e11d-f595-4ae7-a9fe-e5d78a5d488d`** (matched pixel-wise against
+  the screenshot after the image host was allowed); the left tower was a MIRROR of the right one (band and crown
+  flowing the other way). Two AI-only edits failed (`573408cc…` band still mirrored). Final method: pixel copy of the
+  right tower onto the left as a layout guide (`refs/symmetric_towers_guide.png`, media `96f3a926…`), then one clean
+  Higgsfield render from [guide + original], medium 1k, 0.5 credits — **`5d3ef4fd-982d-4f51-9543-33ad460c55bf`**
+  (checked: both towers identical, rest of the scene kept). Follow-up spend in total: 4 × 0.5 = 2.0 credits.

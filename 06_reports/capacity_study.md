@@ -13,7 +13,7 @@ Basement levels: fewest 3.5 m levels whose capacity covers the PSP §25 minimum 
 | 3 | Option D — client scheme, made compliant | **68.74** | 85,928 | 5.21 | 83.8 | 22 | 196 | 626 | 664 / 730 | 3 | 0 | 0.262 | 3.38 | 0.488 |
 | 4 | Option B — twin towers on a podium | **62.85** | 62,850 | 3.811 | 95.2 | 27 | 435 | 244 | 467 / 781 | 2 | 0 | 0.096 | 3.23 | 0.348 |
 | 5 | Option C — mid-rise city blocks (no towers) | **55.52** | 61,684 | 3.74 | 38.4 | 10 | 317 | 257 | 500 / 781 | 2 | 0 | 0.156 | 2.02 | 0.378 |
-| 6 | Client scheme (baseline) | **0.0** | 91,483 | 5.547 | 83.8 | 22 | 257 | 632 | 728 / 487 | 2 | 10 | 0.251 | 3.33 | 0.502 |
+| 6 | Client scheme (baseline) | **0.0** | 91,026 | 5.52 | 83.8 | 22 | 257 | 632 | 725 / 487 | 2 | 10 | 0.249 | 3.01 | 0.474 |
 
 ## One-page comparison — client scheme vs the two best options (D9)
 
@@ -23,22 +23,22 @@ Basement levels: fewest 3.5 m levels whose capacity covers the PSP §25 minimum 
 |---|---|---|---|
 | Score (GFA k m² × quality) | **0.0** | **71.87** | **71.13** |
 | Hard rules (MPP + PSP) | 2 fail | all pass | all pass |
-| Above-ground GFA m² | 91,483 | 79,854 | 79,030 |
-| … share of the client's GFA | 100% | 87% | 86% |
-| FAR | 5.547 | 4.842 | 4.792 |
+| Above-ground GFA m² | 91,026 | 79,854 | 79,030 |
+| … share of the client's GFA | 100% | 88% | 87% |
+| FAR | 5.52 | 4.842 | 4.792 |
 | Max height m / storeys | 83.8 / 22 | 95.2 / 27 | 95.2 / 27 |
 | Hotel keys / flats (est.) | 257 / 632 | 426 / 402 | 441 / 402 |
-| Parking need / capacity | 728 / 487 | 665 / 781 | 646 / 781 |
+| Parking need / capacity | 725 / 487 | 665 / 781 | 646 / 781 |
 | Basement levels | 2 | 2 | 2 |
 | §21 failing neighbour windows | 10 | 0 | 0 |
 | Daylight: windows below VSC 15 % | 25% | 20% | 19% |
-| Courtyard sun 21 March h | 3.33 | 2.0 | 2.01 |
-| Built-up ratio | 0.502 | 0.386 | 0.377 |
+| Courtyard sun 21 March h | 3.01 | 2.0 | 2.01 |
+| Built-up ratio | 0.474 | 0.386 | 0.377 |
 
 Reading:
 - The client scheme is not permittable as drawn: PSP §21: neighbour windows failing the 45°/45° distance angle; PSP §25: parking capacity minus required minimum (spaces).
-- **Option E — max yield (search)** passes every hard rule with 87% of the client's floor area; quality floors missed: daylight_proxy_fail_ratio.
-- **Option A — hotel tower + residential blocks** passes every hard rule with 86% of the client's floor area; quality floors missed: daylight_proxy_fail_ratio.
+- **Option E — max yield (search)** passes every hard rule with 88% of the client's floor area; quality floors missed: daylight_proxy_fail_ratio.
+- **Option A — hotel tower + residential blocks** passes every hard rule with 87% of the client's floor area; quality floors missed: daylight_proxy_fail_ratio.
 - Largest legal floor area: **Option D — client scheme, made compliant** with 85,928 m² (94% of the client's), score 68.74 because it misses quality floors (daylight_proxy_fail_ratio, built_up_ratio).
 - All numbers are capacity-study estimates from the parametric model (see assumptions above); they rank options, they are not a permit check.
 
@@ -64,4 +64,4 @@ efficiency; benchmarks for a 4* city hotel: 300–450 keys, lobby + F&B ≥ 2.0,
 - **Option D — client scheme, made compliant** — all hard rules pass; quality misses: daylight_proxy_fail_ratio 0.262 (want ≤ 0.15); built_up_ratio 0.488 (want ≤ 0.45)
 - **Option B — twin towers on a podium** — all hard rules pass; quality floors met
 - **Option C — mid-rise city blocks (no towers)** — all hard rules pass; quality misses: daylight_proxy_fail_ratio 0.156 (want ≤ 0.15)
-- **Client scheme (baseline)** — FAILS: PSP §21: neighbour windows failing the 45°/45° distance angle; PSP §25: parking capacity minus required minimum (spaces); quality misses: daylight_proxy_fail_ratio 0.251 (want ≤ 0.15); built_up_ratio 0.502 (want ≤ 0.45); §21 neighbours: [['54,48', 7], ['-58,-26', 3]]
+- **Client scheme (baseline)** — FAILS: PSP §21: neighbour windows failing the 45°/45° distance angle; PSP §25: parking capacity minus required minimum (spaces); quality misses: daylight_proxy_fail_ratio 0.249 (want ≤ 0.15); built_up_ratio 0.474 (want ≤ 0.45); §21 neighbours: [['54,48', 7], ['-58,-26', 3]]

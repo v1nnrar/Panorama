@@ -45,8 +45,10 @@ buildings:
   - id: A0
     name: Diagrid tower podium + courtyard link
     use: Lobby / restaurant
-    # MEASURED (audit): podium re-drawn around the moved tower A (+3 m) plus the original link strip to the east
-    footprint: [[-12.5, -13.62], [-11.99, -13.53], [-19.52, 25.46], [-15.47, 26.91], [9.38, 31.47], [19.57, 31.88], [26.68, -7.32], [26.28, -7.39], [30.0, -29.3], [26.68, -29.44], [48.0, -32.0], [46.5, -41.0], [-9.5, -31.0]]
+    # MEASURED (A9, calibrated render-000 back-projected at podium-roof level, ±3 m): green-roofed podium wraps tower A,
+    # a west wing to x ≈ -30…-36 (toward the drum towers) and an east link along A's south side to x ≈ 41 ending in the
+    # timber-fascia element. No podium strip between A and block C (paved plaza in the client image).
+    footprint: [[-30.0, -7.0], [-30.0, 7.0], [-35.47, 19.75], [-30.42, 21.56], [-18.98, 22.7], [-19.52, 25.46], [-15.47, 26.91], [9.38, 31.47], [19.57, 31.88], [25.62, -1.5], [41.5, -1.5], [41.5, -11.5], [20.0, -11.5], [20.0, -8.49], [-11.89, -14.08], [-12.89, -8.9]]
     notes: ESTIMATED glazed single-storey base with green roof and timber fascia (render-006, render-000 link)
     storeys:
       - {name: GF, height: 5.0, use: Lobby / restaurant}

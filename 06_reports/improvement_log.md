@@ -303,3 +303,13 @@ client's renders, higher is better).
   `02_regulations/raw/psp_parking_zones_plot.geojson`.
 - `rules.yaml` (psp25 source), `summary.md` §25 row and `pipeline/psp.py` comment now cite the verified zone instead of
   ASSUMED. No numbers change: every parking figure already used zone 02.
+
+## 2026-11-11 — iteration 24: A9 podium A0 shape — KEPT
+- Back-projected the client's podium edges through the context-calibrated render-000 camera at podium-roof level
+  (±3 m): a **west wing** reaching x ≈ −30…−36 toward the drum towers, and an **east link** along A's south side to
+  x ≈ 41 ending in the timber-fascia element; the area between A and block C is a paved plaza (no podium).
+- New A0 footprint = A + 3 m ∪ west wing ∪ east link, clipped to the plot and 1 m clear of D, B, B3, C1, C2
+  (16 vertices, 2,248 m²). The old southern connector/link strip along C's north side is gone.
+- Overlay: west podium and the east link with its fascia coincide with the client image.
+- Score: Workbench 0.4656 → 0.4659; Cycles (aerial + render-006) **0.4855 → 0.4859**. Client-scheme GFA 91,483 → 91,026 m².
+  IFC 0 errors; test block 6/6. Capacity study re-scored (baseline only changes its GFA; still fails §21 + §25).

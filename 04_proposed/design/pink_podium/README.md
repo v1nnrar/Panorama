@@ -31,3 +31,21 @@ Edited from `01_extract_A.png` (Higgsfield `gpt_image_2_6`, jobs ce7b8cd6-fb14-4
 |---|---|
 | `02_wide_ramp_A.png` | bigger, bulbous back-left wing with amphitheatre; ramp side has an open edge |
 | `02_wide_ramp_B.png` | more even width along the whole crescent; central lawn + pavilion; continuous lattice edge |
+
+## Iteration 3 — real Panorama scale, slim back-left, straight descent
+
+Iteration 2 was drawn about 3× too large. The wing sits where the existing front slab (C1 + C2) is:
+71 × 24 m footprint, 1,348 m² (03_existing/params.yaml, PSG v3 fit); the whole plot is about 190 × 150 m (00_site/site.yaml).
+Scale given to the model (ASSUMED: design intent, not yet modelled): about 90 m long incl. the descent, 20–24 m deep,
+4 storeys (5 m GF + 3 × 3.7 m ≈ 17 m), linear roof garden about 18 m wide with one 3 m path, small 5–7 m trees.
+References: the pink wing cropped from the client image at its own perspective + `01_extract_A.png`.
+Jobs b5b7f9e2-5dd7-4787-801b-706cb29050a4, be642092-cc3d-4985-87b4-c8926c72729b, 50ba8cc0-2ad0-4249-9d18-81336286c001.
+
+| File | Notes |
+|---|---|
+| `03_to_scale_A.png` | slim even width, simple rounded back-left end, garden stairs straight down at the right end |
+| `03_to_scale_B.png` | same, sharper tip at back-left, wider stair flight |
+| `03_in_context.png` | attempt at placing the wing in the client image; edit is weak (wing too small, descent not readable) |
+
+Note: 17 m of height over ~35 m of length is about 1:2. That is a stair garden, not a step-free ramp.
+A step-free 1:12 ramp would need about 200 m, so step-free access to the roof needs lifts.

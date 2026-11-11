@@ -86,3 +86,16 @@ Edits of `05_melt_B.png` (amphitheatre) and `05_melt_A.png` (café) (jobs 2e0373
 |---|---|---|
 | `06_amphitheatre.png` | open-air amphitheatre: curved grass and timber seating terraces down to a round stage plaza at ground level | tail meets the ground with no edge on the front, back and tip, so it can be entered from any direction. **Preferred.** |
 | `06_cafe_plaza.png` | glazed café pavilion under the lattice, opening onto a round café plaza | promenade reads well, but the lattice lifts back up over the café, so the tip does not merge with the ground as fully |
+
+## Iteration 7: café end (idea B), serpentine park paths, coherent on all sides
+
+Edited from `06_cafe_plaza.png` (jobs 7b13d1aa-957c-4369-9ec8-9ab17fdd4574, 006057fa-e263-4bd5-a779-e4145a1b2229).
+The single promenade is replaced by a network of ~2–2.5 m serpentine paths: one main path winds from the high end down
+to the ground, with loops and side paths that branch off and rejoin it. Between the paths: lawns, picnic and seating
+areas, benches/loungers, tree groups, meadow beds. The lattice edge runs along front and back; the tail and the café
+plaza meet the ground with no edge.
+
+| File | Notes |
+|---|---|
+| `07_park_A.png` | calmer: one clear main serpentine with a few loops, larger lawns |
+| `07_park_B.png` | freer: more interwoven loops, more seating niches, the back of the tail slopes into the ground behind the café |

@@ -49,3 +49,15 @@ Jobs b5b7f9e2-5dd7-4787-801b-706cb29050a4, be642092-cc3d-4985-87b4-c8926c72729b,
 
 Note: 17 m of height over ~35 m of length is about 1:2. That is a stair garden, not a step-free ramp.
 A step-free 1:12 ramp would need about 200 m, so step-free access to the roof needs lifts.
+
+## Iteration 4: original design, refined (current base)
+
+Back to the wing as the client image shows it (shape, curve, ends, storeys unchanged), only cleaned up:
+regular fin rhythm, a consistent lattice, clear floor slabs, an ordered roof garden, people for scale.
+Reference: the pink wing cropped from the client image only. Jobs 5b45ef2e-ad54-49e4-95ee-c2c74ce4cf66,
+8c0cbd5c-8de5-4733-b932-517a31c90fa7.
+
+| File | Notes |
+|---|---|
+| `04_original_refined_A.png` | denser fin rhythm, more lattice openings, planted pavement edge |
+| `04_original_refined_B.png` | calmer: fewer, more slender fins, smoother lattice, clearer roof path with benches |

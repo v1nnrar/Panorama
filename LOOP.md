@@ -93,7 +93,7 @@ Section D is the **top priority** (user request, 9 Nov 2026). For a D item:
       (iteration 8: joint slot + planted balconies; wing lengths left as the PSG footprint, the outline matches render-003.)
 - [x] A7. A diagrid: bay count and module height against render-006 (count diamonds per face).
       (iteration 9: 5 bays/face + 7 modules confirmed; render-006 camera re-solved, client omits block C there.)
-- [ ] A8. C front block: roof setbacks and terraces against render-000; rooftop units positions.
+- [x] A8. C front block: roof setbacks and terraces against render-000; rooftop units positions.
 - [ ] A9. A0 podium / courtyard link shape and timber fascia against render-000 and render-006.
 - [ ] A10. Landscape: courtyard paths, planting and trees against the top view.
 

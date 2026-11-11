@@ -284,3 +284,14 @@ client's renders, higher is better).
   The client scheme fails in every zone; in zone 03 option D would need a 4th basement level and A/E become tight.
 - To unblock: the user reads the zone for the plot (Milevská / Na Pankráci) off the public Atlas map, or allows
   gs-pub.praha.eu for this environment. No model change; scores unchanged.
+
+## 2026-11-11 — iteration 23: A8 block C roof — KEPT
+- Section D items are done or blocked (D10), so the loop is back on section A.
+- Client roof features back-projected through the context-calibrated render-000 camera at roof level: C1's dark core
+  box ≈ 7.5 × 9.4 m near the roof centre (ours was 4 m nearer the street and too pale — that is why it showed above the
+  parapet in our street view), 7 rooftop units in two rows; C2 is a planted roof garden.
+- Params: C1 core `dx 1.4, dy −0.4, 7.5 × 9.4 m, h 3.0, Roof metal`; 7 units 2.4 × 2.4 × 1.6 m at the measured spots;
+  C2 roof gets three raised green planters. The roof subdivision walls in the client image are only low walls — no
+  footprint change (C1/C2 massing already matched the calibrated aerial).
+- Score: Workbench mean 0.4644 → 0.4656 (aerial +0.004, SW +0.002); Cycles (aerial + SW re-rendered) **0.4851 → 0.4855**.
+  IFC 0 errors; test block 6/6.

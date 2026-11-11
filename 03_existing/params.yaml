@@ -150,12 +150,17 @@ buildings:
       parapet: 1.0
       parapet_material: Render grey
       green: true
-      structures:                        # render-000: dark core box + rooftop units
-        - {name: core, dx: -2, dy: 3, w: 7, d: 6, h: 3.5, material: Render grey}
-        - {name: plant, dx: -7, dy: -3, w: 2.5, d: 2.5, h: 1.8, material: Aluminium}
-        - {name: plant, dx: -3, dy: -4, w: 2.5, d: 2.5, h: 1.8, material: Aluminium}
-        - {name: plant, dx: 2, dy: -4, w: 2.5, d: 2.5, h: 1.8, material: Aluminium}
-        - {name: plant, dx: 6, dy: -2, w: 2.5, d: 2.5, h: 1.8, material: Aluminium}
+      # MEASURED (A8, calibrated render-000 back-projected at roof level): dark core box ≈ 7.5 x 9.4 m near the roof
+      # centre, kept back from the street face (it does not show from the street in render-005); 7 rooftop units in two rows.
+      structures:
+        - {name: core, dx: 1.4, dy: -0.4, w: 7.5, d: 9.4, h: 3.0, material: Roof metal}
+        - {name: plant, dx: 2.0, dy: 10.2, w: 2.4, d: 2.4, h: 1.6, material: Aluminium}
+        - {name: plant, dx: 1.8, dy: 6.6, w: 2.4, d: 2.4, h: 1.6, material: Aluminium}
+        - {name: plant, dx: -4.3, dy: 4.7, w: 2.4, d: 2.4, h: 1.6, material: Aluminium}
+        - {name: plant, dx: -5.1, dy: 0.8, w: 2.4, d: 2.4, h: 1.6, material: Aluminium}
+        - {name: plant, dx: -4.6, dy: 8.6, w: 2.4, d: 2.4, h: 1.6, material: Aluminium}
+        - {name: plant, dx: -8.6, dy: 1.0, w: 2.4, d: 2.4, h: 1.6, material: Aluminium}
+        - {name: plant, dx: -3.1, dy: -7.6, w: 2.4, d: 2.4, h: 1.6, material: Aluminium}
 
   - id: C2
     name: Front slab — wing (T5)
@@ -175,7 +180,14 @@ buildings:
       - {type: fins, from: 2, spacing: 2.7, width: 0.35, depth: 0.45, material: Aluminium white}
       - {type: band, from: 2, depth: 0.45, thickness: 0.3, material: Aluminium white}
     terrace_edge: {planter: true, railing: true}
-    roof: {parapet: 1.0, parapet_material: Render grey, green: true}
+    roof:
+      parapet: 1.0
+      parapet_material: Render grey
+      green: true
+      structures:     # ESTIMATED from render-000: roof garden — raised planters with shrubs/trees in the middle and east parts
+        - {name: planter, dx: -12, dy: 0, w: 9, d: 5, h: 0.9, green: true, material: Concrete grey}
+        - {name: planter, dx: 0, dy: 1, w: 10, d: 4, h: 0.9, green: true, material: Concrete grey}
+        - {name: planter, dx: 13, dy: -1, w: 9, d: 5, h: 0.9, green: true, material: Concrete grey}
 
   # ---------------------------------------------------------------- D: butterfly office (render-003, top view)
   - id: D

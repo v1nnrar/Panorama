@@ -19,4 +19,4 @@ Model `gpt_image_2_5` (low, 1k), **20 × 0.25 = 5.0 credits** (user's 5-credit b
 | 10 | Graphite & white — dark glass, crisp white spiral bands | a39f472b-8bc5-47d4-b9a4-44a59938718d | f066747e-839b-4b6d-a80f-87b3e01e4189 |
 
 ## Picks
-_(user's pick goes here)_
+User (11 Nov 2026): towers from #10 Graphite & white (f066747e…, identification by Claude from a screenshot), open roof from #9 Sail crowns (feec5796…) → round 5.

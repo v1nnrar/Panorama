@@ -326,3 +326,19 @@ client's renders, higher is better).
   below site GF, and the cadastral outline includes the southern wedge (likely a low podium, not ramp only).
 - Edge-only calibration of render-000 is too weak (48 % inliers, median 6.4 px ≈ 1.7 m) → P1 adds hand-picked corner
   correspondences; P2–P5 follow. No model change in this step.
+
+## 2026-11-11 — iteration 25: P1 point-mode calibration of render-000 — KEPT
+- `tools/calibrate_camera.py --points`: per reference roof corner, a sub-pixel corner detector (two half-edges along
+  the projected roof edges, ±4° rotation, max. edge response) finds the image corner; the camera (position, yaw, pitch,
+  roll, lens) is solved by least squares on the corners with 3 px outlier rejection. `--manual/--only-manual` reads
+  checked correspondences; `--exclude` skips references changed since the survey (133 = three-wing site).
+- Reference height = **main roof plane** (median of DMP 1G inside the outline, new `survey_heights.roof_edge_z`), not the
+  90th percentile: on the 8-storey slabs rooftop plant lifted p90 by 1.2 m (≈ 3 px in this view).
+- Automatic detections were checked tile by tile; 16 of 28 sit on true roof corners (the rest: crosswalks, trees,
+  hazy far roofs) → `03_existing/overlays/calib_render000_points.json` (11 buildings, near and far, x 40–1040 px).
+- Result: **1.64 px RMS on 14 corners = 0.42 m at the site** (0.254 m/px; audit camera: 4.4 px on hand-read points).
+  Two NW corners of slab blocks are 5–7 px off the RÚIAN outline (rejected; likely a gable/entrance detail).
+  New camera (−90.37, −246.31, 208.68), 35.24 mm (was (−93.67, −255.78, 218.91), 36.86 mm).
+- Score (Cycles): aerial 0.3466 → 0.3409, mean **0.4859 → 0.4848** (−0.0011, within the 0.005 tolerance) — kept because
+  the camera is now tied to surveyed points instead of our own judgement. Overlays regenerated.
+- Next: P2 (render-001 / -002), then P3 triangulates our buildings in the calibrated views.

@@ -60,8 +60,11 @@ building. Tools: `tools/survey_heights.py` (ČÚZK DMP 1G / DMR 5G, z = 0 = site
 `tools/calibrate_camera.py` (edge-based fit; too weak alone: 48 % inliers, 6.4 px median on render-000).
 Note: the surface model predates the drum towers, the three-wing building and office E — use only references that
 exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer ones.
-- [ ] P1. Point-mode calibration: add correspondences (≥ 20 hand-picked roof/base corners of `usable` references,
+- [x] P1. Point-mode calibration: add correspondences (≥ 20 hand-picked roof/base corners of `usable` references,
       spread over the image) to `tools/calibrate_camera.py`; recalibrate render-000 to ≤ 1.5 px RMS (≈ 0.4 m at the site).
+      Done 2026-11-11: `--points` (sub-pixel corner detector) + 16 visually checked corners of 11 references
+      (03_existing/overlays/calib_render000_points.json), 14 kept → **1.64 px = 0.42 m** at the site. Slightly short of
+      20 points / 1.5 px: the far references are hazy and two NW slab corners disagree with RÚIAN by 5–7 px.
 - [ ] P2. Same for render-001 (aerial, other angle) and render-002 (from the SE).
 - [ ] P3. `tools/triangulate.py`: pick each client building's roof corners in 2–3 calibrated views, least-squares 3D
       points with covariance; update footprints/heights where the shift > 1 m; keep single-view items flagged.

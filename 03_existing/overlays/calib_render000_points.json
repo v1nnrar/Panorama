@@ -1,0 +1,146 @@
+[
+{
+"id": 46,
+"vertex": 0,
+"px": [
+187.6,
+814.2
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 53,
+"vertex": 1,
+"px": [
+402.6,
+766.9
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 53,
+"vertex": 2,
+"px": [
+462.8,
+752.7
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 54,
+"vertex": 2,
+"px": [
+664.5,
+710.3
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 54,
+"vertex": 3,
+"px": [
+712.5,
+700.6
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 61,
+"vertex": 0,
+"px": [
+901.7,
+660.6
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 61,
+"vertex": 1,
+"px": [
+943.9,
+651.6
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 63,
+"vertex": 10,
+"px": [
+1158.8,
+603.0
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 102,
+"vertex": 0,
+"px": [
+966.3,
+34.1
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 102,
+"vertex": 3,
+"px": [
+953.9,
+45.2
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 112,
+"vertex": 2,
+"px": [
+1037.1,
+49.5
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 115,
+"vertex": 2,
+"px": [
+856.6,
+28.2
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 123,
+"vertex": 0,
+"px": [
+54.3,
+95.5
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 123,
+"vertex": 11,
+"px": [
+34.9,
+89.7
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 124,
+"vertex": 1,
+"px": [
+171.6,
+45.6
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+},
+{
+"id": 128,
+"vertex": 11,
+"px": [
+39.0,
+196.1
+],
+"note": "detected by refine_corner, checked visually 2026-11-11"
+}
+]

@@ -82,6 +82,15 @@ def roof_and_base(poly, roof_pct=90, inset=1.5):
     return round(base, 2), round(roof, 2)
 
 
+def roof_edge_z(poly, inset=1.5):
+    """Height of the main roof plane (where the roof meets the facade) relative to the site GF: median of the surface
+    model inside the outline. Rooftop plant rooms lift the 90th percentile (roof_and_base) by ~1 m on slab blocks;
+    the parapet line in an image sits on the main plane, so camera calibration uses this value."""
+    inner = poly.buffer(-inset)
+    xs, ys = grid_in(inner if not inner.is_empty else poly, 1.0)
+    return round(float(np.median(sample("dmp1g", xs, ys))) - site_ground(), 2) if len(xs) else float("nan")
+
+
 if __name__ == "__main__":
     from shapely.geometry import Polygon
     ctx = json.loads((ROOT / "00_site" / "context.json").read_text())["buildings"]

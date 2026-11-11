@@ -99,6 +99,7 @@ Only **bim-modeler** changes geometry. Run **compliance-checker** after every mo
 
 ## Visual skills (account skills, synced into every session — invoke with the Skill tool)
 Redesign brief: `04_proposed/design/intent.md` (blank canvas, existing hotel tower demolished; client renders = scale reference only).
+**Current state / next step: `04_proposed/design/HANDOVER.md`** (part-by-part refinement of the final image; user starts with "go").
 | Need | Skill |
 |---|---|
 | Many design options cheaply (2×2 contact sheets) | `immagetokens` |

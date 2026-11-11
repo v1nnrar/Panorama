@@ -61,3 +61,18 @@ Reference: the pink wing cropped from the client image only. Jobs 5b45ef2e-ad54-
 |---|---|
 | `04_original_refined_A.png` | denser fin rhythm, more lattice openings, planted pavement edge |
 | `04_original_refined_B.png` | calmer: fewer, more slender fins, smoother lattice, clearer roof path with benches |
+
+## Iteration 5: B lowers to the right and melts into the ground
+
+Edited from `04_original_refined_B.png` (jobs b837d03b-43bf-4f93-85b5-0281c72b6c02, 80bc1096-a387-401e-8c5f-2f19cbddb876).
+From about mid-length the roof drops steadily (4 → 3 → 2 → 1 storeys) and the right end merges into the
+ground on all sides (front, back, end) as a landscaped hill: no end wall, no stairs, one continuous walkable surface.
+
+| File | Notes |
+|---|---|
+| `05_melt_A.png` | wider landscaped tail, several winding paths, more trees on the slope |
+| `05_melt_B.png` | slimmer tail, the lattice edge runs further down, one main path along the street side |
+
+Check when this is modelled: about 17 m of descent over about half the length is steep for a step-free walk.
+The winding paths make the walking route longer; a real gradient (≤ 1:12 step-free, ≤ 1:8 with landings)
+needs to be checked against the actual length.

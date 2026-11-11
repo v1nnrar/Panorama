@@ -36,3 +36,9 @@ Same camera as the pick (client render-000 aerial). One reference: the pick.
   right tower onto the left as a layout guide (`refs/symmetric_towers_guide.png`, media `96f3a926…`), then one clean
   Higgsfield render from [guide + original], medium 1k, 0.5 credits — **`5d3ef4fd-982d-4f51-9543-33ad460c55bf`**
   (checked: both towers identical, rest of the scene kept). Follow-up spend in total: 4 × 0.5 = 2.0 credits.
+- User: towers must be MIRROR OPPOSITES (left band down to the left, right band down to the right); right tower and
+  everything else unchanged from `5d3ef4fd…`. Guide: left tower of `5d3ef4fd` mirrored about its axis (x = 611),
+  `refs/mirrored_towers_guide.png` (Higgsfield media `45b05f82-8290-4dab-a62a-ccad60b5d8c6`) — verified: 0 changed pixels
+  in the right tower, changes only inside the left tower (x 506–715, y 126–474); small rough patch left of the left crown.
+  Higgsfield render from [guide + 5d3ef4fd], 0.5 credits: `bde70a28-604c-4e5b-8727-65ced8792c8b` — REJECTED by Claude's
+  check: the right tower's crown and pool changed.

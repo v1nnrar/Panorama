@@ -68,3 +68,6 @@ from the right end, café pavilion, small rectangular water at the left corner. 
   clean render 0.5 credit: **`f7888507-38ad-4174-bc79-8711b7315f40`** — checked: towers, ribbon, back block, round building,
   railings and the L design kept; no new water; open plaza between L and towers; walkway between L's right end and the
   round building; roof reached by the path/stairs at the L's bottom-right end.
+- From `f7888507`, 0.5 credit, checked: **`21506b4e-fa2e-45ce-b08e-04d5bac17a86`** — L is a separate, shallower block with
+  a crisp back edge and open plaza all round (no longer merging into the back-left block), right end stepped with a
+  visible stair path from street level; towers, ribbon, back block, round building and city unchanged in design.

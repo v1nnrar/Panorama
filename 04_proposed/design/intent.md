@@ -25,3 +25,6 @@ Decisions by the user, 11 Nov 2026. Every later design step starts from this fil
 - Office E (existing, parcel 1133/12): keep or include in the redesign? The capacity study keeps it.
 - Programme: hotel category and keys (ASSUMED 4*, 300–450 keys), share of flats / offices, F&B, conference, spa.
 - Design direction and references (materials, character, landmark ambition).
+
+## Image budget rule (user, 11 Nov 2026)
+All Higgsfield budgets are approved. Single images only, high quality: `gpt_image_2_5`, quality high, 2k (2.75 credits).

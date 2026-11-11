@@ -90,3 +90,9 @@ no pool → spa / wellness. Result **`ea3cf223-abb1-463a-85e6-bc27f11c0c22`**:
 done — lake removed; round building bigger, further forward, meadow roof; front building rises toward the left.
 not achieved — glass facade on the courtyard side not readable; back-left block still shows some water, no clear spa;
 round building lost part of its lattice crown ring. Towers unchanged.
+- **From now on (user, 11 Nov 2026): all budgets approved; single images only, high quality — `gpt_image_2_5` quality high,
+  2k = 2.75 credits each** (closest to the requested 2.5; checked with get_cost).
+- High-quality fix from `ea3cf223` (2.75 credits, 2336×1744), checked: **`7bc3ead0-6cbf-498f-ba8d-2b8a07e2c1da`** —
+  spa on the back-left block (sauna cabins, timber deck, loungers, no water) ✓; lattice ring back on the round building's
+  meadow roof ✓; front building now a full glass curtain wall rising to its left peak ✓ — but on the street side most of
+  its white lattice fins were replaced by glass (fins remain only as a cluster at the left end).

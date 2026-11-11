@@ -52,3 +52,10 @@ Read as: keep #2's towers, only make the L realistic. Result **`133dd2d6-f2d5-43
 rectangular water at the left corner kept. Prepared but not used: `refs/final_preview_guide.png` (#2 + left tower and
 skywalk from `245eb155…`, Higgsfield media `359806f4…`) in case the user meant that tower.
 Open: the user's sentence "the building which you have created in the other …" was cut off.
+
+## Final preview (0.5 credit) — checked
+User: towers from "the second image" = scarf version `c68674b6…`; L must be clear, not morphed.
+Guide `refs/final_preview_guide2.png` (media `458b0bdd…`): scarf image as base + stepped L from `b393d035…` pasted in.
+Render from [guide + scarf original]: **`3ab7da27-ce09-4eda-9234-ea4a7f6b524c`** — towers + scarf ribbon match the scarf
+version; L = crisp stepped building with straight slabs, curtain walls, white fins, glass railings, stairs, promenade
+from the right end, café pavilion, small rectangular water at the left corner. Credits in this follow-up chain: 6 × 0.5 = 3.0.

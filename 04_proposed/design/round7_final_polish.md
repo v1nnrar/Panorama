@@ -71,3 +71,8 @@ from the right end, café pavilion, small rectangular water at the left corner. 
 - From `f7888507`, 0.5 credit, checked: **`21506b4e-fa2e-45ce-b08e-04d5bac17a86`** — L is a separate, shallower block with
   a crisp back edge and open plaza all round (no longer merging into the back-left block), right end stepped with a
   visible stair path from street level; towers, ribbon, back block, round building and city unchanged in design.
+- User: `21506b4e` wrong (L split, back part merged into the landscape); previous version better. Redone from
+  `f7888507`, 0.5 credit, checked: **`0e2a03dd-e31b-4bdc-be9f-e7c502c93c40`** — one continuous L incl. its back part,
+  glass railing all round, roof rising from the low right end (path into the complex + stairs up) to the highest point at
+  the left end, courtyard behind at ground level. Towers, ribbon, back block, round building unchanged. Small pool on the
+  L's back part no longer visible.

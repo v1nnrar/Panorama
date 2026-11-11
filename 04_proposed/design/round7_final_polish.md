@@ -113,3 +113,10 @@ Prices: upscale (bytedance) 4k = 2 credits.
   wellness = dark timber sauna with warm interior light, rectangular pool, timber deck, loungers, planting ✓ (very good).
   Side effects: front building lost its white lattice fins (plain glass now) and reaches further left toward the drums;
   round building's roof turned from meadow to a grey plaza; camera slightly closer.
+- From `091ea4eb` (+ `d0a30bf3` for the left end), Nano Banana 2.1 4k, 3 credits, checked:
+  **`ea98761a-95a4-464d-a8bf-84de205c907e`** — left end back to a rounded head with white lattice running down as
+  column-like fins, lattice continues along the whole street facade ✓; roof = fewer, subtle levels hidden in meadow,
+  shrubs and trees with a winding stone path ✓; central park with lawn, parasols and a glass bar pavilion at the top ✓.
+  Problems: the separate round building at the right tower's base is gone — the front building now runs on to the right
+  tower and swallows it (gap/walkway lost); the head sits very close to the drum towers; no visible ground-level ramp at
+  the right end (only arches in the facade). Wellness roof and towers unchanged.

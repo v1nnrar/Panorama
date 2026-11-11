@@ -127,3 +127,9 @@ Prices: upscale (bytedance) 4k = 2 credits.
   end, roof park with glass bar pavilion at the top; round building and towers kept; wellness kept. Weak points: the right
   end slopes down but its stair is not clearly readable; the L's back arm runs close along the drum towers; camera a bit
   closer than before.
+- User: `338a12c8` rejected ("staircase at the front completely wrong; it is an L-shaped building"). Back to the user's
+  reference `ea3cf223` (matched by pixels) + empty plot `afafc2b0`, "redo as a professional, realistic, architecturally
+  sound render that fits the plot", Nano Banana 2.1 4k, 3 credits, checked: **`07657871-9301-4e50-8b4a-f5f4621bbe85`** —
+  same design as ea3cf223 (towers, ribbon, lattice block, curved L with lattice fins and green roof, round meadow-roof
+  building), separate volumes with walkways, realistic glass/aluminium/planting, sits within the plot at the empty-plot
+  camera. Note: the back-left lattice block shows a small pool again (as in ea3cf223), not the spa.

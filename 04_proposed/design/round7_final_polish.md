@@ -44,3 +44,11 @@ serpentine path; L rises higher, keeps its white lattice fin edges, clearly a bu
 |---|---|---|
 | A | taller crisp volume, lattice fins all round, small modern oval water table with jets (left part of the roof), path winding up from the right end | f78cb063-0079-476a-81e5-735613caaf5b |
 | B | terraces stepping up with lattice-fin edges, small rectangular water mirror at the far left corner, promenade with stairs between levels | b393d035-370a-42dc-8ac8-f2b69c860b25 |
+
+## Final preview candidate (0.5 credit) — checked
+User likes the new L (follow-up 3, #2 `b393d035…`), wants the tower "like the second building" and a more realistic L.
+Read as: keep #2's towers, only make the L realistic. Result **`133dd2d6-f2d5-43b3-943d-490f05f8b0b9`** — towers kept
+(same design, minor detail drift), L with realistic curtain walls, glass railings, finer fins; promenade, café and small
+rectangular water at the left corner kept. Prepared but not used: `refs/final_preview_guide.png` (#2 + left tower and
+skywalk from `245eb155…`, Higgsfield media `359806f4…`) in case the user meant that tower.
+Open: the user's sentence "the building which you have created in the other …" was cut off.

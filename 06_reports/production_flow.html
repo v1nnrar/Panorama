@@ -1,0 +1,530 @@
+<title>Panorama Production Flow</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one vertical "rail" through 12 phases, like a section line through the building;
+   steps sit on the rail, gates are diamonds with explicit pass / loop-back branches. */
+:root {
+  --bg: #f2f4f5;
+  --surface: #ffffff;
+  --ink: #18212a;
+  --muted: #5b6873;
+  --line: #d5dce1;
+  --rail: #9aa7b1;
+  --accent: #1f4fd1;
+  --ok: #17803d;
+  --warn: #b45309;
+  --o-team: #1f4fd1;  --o-agent: #7340c9; --o-client: #c2410c; --o-arch: #0d7f62;
+  --o-spec: #8a6100;  --o-auth: #b0214f;  --o-contr: #4b5563;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #12171c; --surface: #1a2128; --ink: #e6ebef; --muted: #9aa8b3; --line: #2c3640; --rail: #4d5a66;
+  --accent: #7d9cff; --ok: #4ccb78; --warn: #f0a24a;
+  --o-team: #7d9cff; --o-agent: #b393f5; --o-client: #ff9a62; --o-arch: #4fd1a8;
+  --o-spec: #e3b54a; --o-auth: #ff7aa3; --o-contr: #a5b0bc; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #12171c; --surface: #1a2128; --ink: #e6ebef; --muted: #9aa8b3; --line: #2c3640; --rail: #4d5a66;
+  --accent: #7d9cff; --ok: #4ccb78; --warn: #f0a24a;
+  --o-team: #7d9cff; --o-agent: #b393f5; --o-client: #ff9a62; --o-arch: #4fd1a8;
+  --o-spec: #e3b54a; --o-auth: #ff7aa3; --o-contr: #a5b0bc; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--font-body); }
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 32px 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 800; letter-spacing: -0.01em; line-height: 1.1; }
+h2 { font-size: 22px; font-weight: 700; }
+h3 { font-size: 16px; font-weight: 700; }
+p { margin: 0; }
+code, .mono { font-family: var(--font-mono); font-size: 0.86em; }
+.eyebrow { font: 500 12px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.lede { color: var(--muted); max-width: 66ch; font-size: 16px; }
+header.top { display: grid; gap: 12px; margin-bottom: 28px; }
+
+/* overview strip */
+.strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; margin-bottom: 28px; }
+.strip a { display: grid; gap: 4px; padding: 10px 12px; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 6px; color: var(--ink); text-decoration: none; font-size: 13px; line-height: 1.3; }
+.strip a:hover, .strip a:focus-visible { border-color: var(--accent); outline: none; }
+.strip .n { font: 500 11px/1 var(--font-mono); color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+
+/* legend / filter */
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 14px; margin-bottom: 36px; }
+.legend-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.legend-row > .eyebrow { min-width: 92px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px 3px 7px; border-radius: 99px; font-size: 12px; font-weight: 500;
+  border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); color: var(--c); background: color-mix(in srgb, var(--c) 9%, transparent); white-space: nowrap; }
+.chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--c); }
+button.chip { cursor: pointer; font-family: inherit; }
+button.chip[aria-pressed="true"] { background: var(--c); color: var(--surface); }
+button.chip[aria-pressed="true"]::before { background: var(--surface); }
+button.chip:focus-visible, .node-head:focus-visible, .tool:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tool { font: 500 12px/1 var(--font-body); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
+.tool:hover { border-color: var(--accent); }
+.status { display: inline-flex; align-items: center; gap: 5px; font: 500 11px/1 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.status i { width: 9px; height: 9px; border-radius: 50%; border: 2px solid currentColor; display: inline-block; }
+.st-done { color: var(--ok); } .st-done i { background: currentColor; }
+.st-active { color: var(--accent); } .st-active i { background: currentColor; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+.st-waiting { color: var(--warn); } .st-waiting i { border-style: dashed; }
+.st-next { color: var(--ink); }
+.st-later { color: var(--muted); } .st-later i { border-width: 1px; }
+.shape { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.shape .sq { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--rail); background: var(--surface); }
+.shape .dm { width: 10px; height: 10px; transform: rotate(45deg); border: 2px solid var(--ink); background: var(--surface); }
+
+/* phases + rail */
+.phase { position: relative; padding-left: 40px; padding-bottom: 36px; scroll-margin-top: 16px; }
+.phase::before { content: ""; position: absolute; left: 13px; top: 6px; bottom: 0; width: 2px; background: var(--rail); }
+.phase:last-of-type::before { bottom: 40px; }
+.phase-badge { position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 6px; background: var(--ink); color: var(--bg);
+  font: 700 12px/28px var(--font-mono); text-align: center; }
+.phase-head { display: grid; gap: 6px; margin-bottom: 14px; padding-top: 2px; }
+.phase-head .row { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: baseline; }
+.phase-head .goal { color: var(--muted); max-width: 70ch; }
+.exit { font-size: 13px; color: var(--muted); }
+.exit b { color: var(--ink); font-weight: 600; }
+
+ol.flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.node { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; transition: opacity .15s; scroll-margin-top: 24px; }
+.node::before { content: ""; position: absolute; left: -32px; top: 16px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--surface); border: 2px solid var(--rail); }
+.node.gate { border-color: color-mix(in srgb, var(--ink) 40%, var(--line)); }
+.node.gate::before { border-radius: 1px; transform: rotate(45deg); border-color: var(--ink); left: -31px; }
+.node.dim { opacity: .28; }
+.node.flash { animation: flash 1.4s ease-out; }
+@keyframes flash { 0% { box-shadow: 0 0 0 4px var(--accent); } 100% { box-shadow: 0 0 0 0 transparent; } }
+.node-head { all: unset; box-sizing: border-box; width: 100%; cursor: pointer; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px;
+  align-items: start; padding: 10px 14px; border-radius: 8px; }
+.node-head .code { font: 500 12px/22px var(--font-mono); color: var(--muted); min-width: 34px; }
+.node-head .t { font-weight: 600; line-height: 22px; min-width: 0; }
+.node-head .t small { display: block; font-weight: 400; color: var(--muted); font-size: 13px; line-height: 1.45; margin-top: 2px; }
+.node-head .side { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; align-items: center; max-width: 260px; }
+.node-head .caret { font: 500 12px/22px var(--font-mono); color: var(--muted); }
+.gate .node-head .t::before { content: "GATE · "; font: 500 11px var(--font-mono); letter-spacing: .06em; color: var(--muted); }
+.outcomes { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 0 14px 10px 60px; font-size: 13px; }
+.outcomes a { color: inherit; text-decoration: none; border-bottom: 1px dashed currentColor; }
+.oc-yes { color: var(--ok); } .oc-no { color: var(--warn); }
+.node-body { padding: 4px 14px 14px 60px; display: grid; gap: 10px; font-size: 14px; border-top: 1px dashed var(--line); margin-top: 2px; padding-top: 12px; }
+.node-body dl { display: grid; grid-template-columns: 96px 1fr; gap: 6px 12px; margin: 0; }
+.node-body dt { font: 500 11px/1.9 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.node-body dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.node-body ul { margin: 0; padding-left: 18px; }
+
+/* loops */
+section.block { margin-top: 20px; display: grid; gap: 14px; }
+.loops { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; }
+.loop { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: grid; gap: 8px; align-content: start; }
+.loop .path { font: 13px/1.6 var(--font-mono); color: var(--ink); }
+.loop .path b { color: var(--warn); font-weight: 500; }
+.loop p { font-size: 14px; color: var(--muted); }
+.pipe { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+.pipe-row { display: flex; align-items: center; gap: 0; min-width: 760px; }
+.pipe-box { padding: 8px 10px; border: 1.5px solid var(--o-agent); border-radius: 6px; font: 12px/1.35 var(--font-mono); text-align: center; flex: 1; }
+.pipe-box b { display: block; font: 600 12px var(--font-body); color: var(--o-agent); }
+.pipe-box.y { border-color: var(--o-team); } .pipe-box.y b { color: var(--o-team); }
+.pipe-arr { width: 22px; text-align: center; color: var(--muted); flex: none; }
+.pipe-back { min-width: 760px; margin: 8px 0 0; font: 12px var(--font-mono); color: var(--warn); border-top: 1.5px dashed var(--warn); padding-top: 6px; text-align: center; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 8px; align-content: start; }
+.card ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 14px; }
+table.rev { border-collapse: collapse; font-size: 13px; width: 100%; }
+table.rev th, table.rev td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.rev th { font: 500 11px var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+footer { margin-top: 40px; font-size: 13px; color: var(--muted); }
+
+@media (max-width: 640px) {
+  .node-head { grid-template-columns: auto 1fr; }
+  .node-head .side { grid-column: 1 / -1; justify-content: flex-start; max-width: none; padding-left: 46px; }
+  .node-head .caret { display: none; }
+  .node-body, .outcomes { padding-left: 14px; }
+  .node-body dl { grid-template-columns: 1fr; gap: 2px; }
+  .node-body dd { margin-bottom: 6px; }
+}
+@media (prefers-reduced-motion: reduce) { .node.flash { animation: none; outline: 2px solid var(--accent); } html { scroll-behavior: auto; } }
+html { scroll-behavior: smooth; }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">Panorama Hotel · Horní Pankrác · plot 16,487 m²</span>
+    <h1>Panorama Production Flow</h1>
+    <p class="lede">The whole job from survey to occupancy permit: who owns each step, where the model is checked, and where work loops back. Click a step to see its inputs, outputs and files. Statuses come from the repository as of 11 Nov 2026.</p>
+  </header>
+
+  <nav class="strip" id="strip" aria-label="Phases"></nav>
+
+  <div class="panel" role="region" aria-label="Legend and filter">
+    <div class="legend-row" id="owners"><span class="eyebrow">Owner</span></div>
+    <div class="legend-row"><span class="eyebrow">Status</span>
+      <span class="status st-done"><i></i>Done</span>
+      <span class="status st-active"><i></i>In progress</span>
+      <span class="status st-waiting"><i></i>Waiting for input</span>
+      <span class="status st-next"><i></i>Next</span>
+      <span class="status st-later"><i></i>Later</span>
+    </div>
+    <div class="legend-row"><span class="eyebrow">Shape</span>
+      <span class="shape"><span class="sq"></span>Step</span>
+      <span class="shape"><span class="dm"></span>Gate: a decision with a pass branch and a loop-back branch</span>
+      <span style="flex:1"></span>
+      <button class="tool" id="expand" type="button">Expand all steps</button>
+      <button class="tool" id="clear" type="button" hidden>Clear filter</button>
+    </div>
+  </div>
+
+  <main id="phases"></main>
+
+  <section class="block" id="loops-sec">
+    <span class="eyebrow">Revision loops</span>
+    <h2>Six ways work comes back</h2>
+    <p class="lede">Every loop that changes geometry goes through loop 1: only bim-modeler edits <code>params.yaml</code>, then the model is rebuilt and compliance-checker runs again.</p>
+    <div class="pipe" aria-label="Model change loop">
+      <div class="pipe-row">
+        <div class="pipe-box y"><b>Request</b>review, client, authority</div><div class="pipe-arr">→</div>
+        <div class="pipe-box"><b>bim-modeler</b>params.yaml</div><div class="pipe-arr">→</div>
+        <div class="pipe-box"><b>build.py</b>build_ifc → model.ifc</div><div class="pipe-arr">→</div>
+        <div class="pipe-box"><b>blender_scene</b>.blend · .glb · renders</div><div class="pipe-arr">→</div>
+        <div class="pipe-box"><b>analysis + psp</b>metrics · schedule · DXF</div><div class="pipe-arr">→</div>
+        <div class="pipe-box"><b>compliance-checker</b>rules.yaml pass/fail</div><div class="pipe-arr">→</div>
+        <div class="pipe-box y"><b>Commit</b>git + log</div>
+      </div>
+      <div class="pipe-back">↺ any rule fails, or the renders look wrong → back to bim-modeler</div>
+    </div>
+    <div class="loops" id="loops"></div>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow">Proposed convention · needs your OK</span>
+    <h2>Revision codes for issued sets</h2>
+    <div class="pipe" style="padding:8px 12px">
+      <table class="rev">
+        <thead><tr><th>Code</th><th>Meaning</th><th>Where</th><th>Trigger</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">S01, S02…</td><td>Study / concept issues to the client</td><td class="mono">05_drawings/S01/</td><td>Gate 5.7 passed or client round</td></tr>
+          <tr><td class="mono">P01, P02…</td><td>Permit (DPZ) issues, incl. responses to výzva k doplnění</td><td class="mono">05_drawings/P01/</td><td>Gate 7.7 or authority comments</td></tr>
+          <tr><td class="mono">C01, C02…</td><td>Construction (DPS) and tender issues</td><td class="mono">05_drawings/C01/</td><td>Gate 9.2, change orders</td></tr>
+          <tr><td class="mono">AB</td><td>As-built (dokumentace skutečného provedení)</td><td class="mono">05_drawings/AB/</td><td>Phase 11</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede">Each issue gets a matching git tag (for example <code>issue/P02</code>) so any drawing set can be rebuilt from the exact <code>params.yaml</code> that produced it.</p>
+  </section>
+
+  <section class="block">
+    <span class="eyebrow">Check before relying on this chart</span>
+    <h2>Assumptions to confirm</h2>
+    <div class="cols">
+      <div class="card"><h3>Permitting</h3><ul>
+        <li>Procedure follows the Building Act 283/2021 Sb. as amended (single <i>povolení záměru</i>, DPZ per vyhláška 131/2024 Sb.). Confirm with the local architect.</li>
+        <li>Which office decides: district building office (Praha 4) or a MHMP department. Ask at the pre-application consultation.</li>
+        <li>Whether EIA screening applies (parking count, built-up area). The answer changes the timeline the most.</li>
+        <li>MPP court review MS Praha 11 A 24/2026 is pending. If the plan is annulled, the rules in <code>rules.yaml</code> change.</li>
+      </ul></div>
+      <div class="card"><h3>Project data</h3><ul>
+        <li>Parking zone 02 is ASSUMED in <code>rules.yaml</code>. Verify it on the Atlas Prahy zone map.</li>
+        <li>The S and E plot edges are ASSUMED to face public space (PSP §22).</li>
+        <li>No client brief in <code>01_brief/</code> yet. Room mix, budget and dates are open.</li>
+        <li>Metro C/D protection zone and the heritage-reserve view impact are flagged as consultations, not yet checked.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <footer>Source: <code>06_reports/production_flow.html</code> in the Panorama repository. Edit the <code>PHASES</code> data at the bottom of the file to update steps or statuses.</footer>
+</div>
+
+<script>
+const OWNERS = {
+  team:   { label: "Our team",          c: "--o-team" },
+  agent:  { label: "Pipeline agents",   c: "--o-agent" },
+  client: { label: "Client",            c: "--o-client" },
+  arch:   { label: "Local architect (ČKA)", c: "--o-arch" },
+  spec:   { label: "Specialist engineers", c: "--o-spec" },
+  auth:   { label: "Authorities & utilities", c: "--o-auth" },
+  contr:  { label: "Contractor",        c: "--o-contr" },
+};
+const STATUS = { done: "Done", active: "In progress", waiting: "Waiting", next: "Next", later: "Later" };
+
+/* Each step: id, t(itle), s(ummary), o(wners), st(atus), gate, yes/no {to, label}, d(etail): {in, out, files, how} */
+const PHASES = [
+ { n: "00", key: "site", title: "Site & brief", st: "active",
+   goal: "Fix the ground truth: legal plot, survey frame, the client's renders and what they want built.",
+   exit: "Plot geometry, survey frame and the programme are fixed.",
+   steps: [
+   { id: "0.1", t: "Site survey & parcels", s: "11 ČÚZK parcels, survey grid, orthophoto, control points", o: ["team","agent"], st: "done",
+     d: { in: "ČÚZK WFS, orthophoto, cadastre sheets, PSG context model", out: "site.yaml (16,487 m²), survey frame (aeqd at Milevská 7), context.json", files: "00_site/site.yaml · 00_site/survey/", how: "tools/site_survey.py; S-JTSK conversion helpers" } },
+   { id: "0.2", t: "Client renders received", s: "Images of the client's existing scheme", o: ["client"], st: "done",
+     d: { in: "Client handover", out: "Reference images for the reconstruction", files: "03_existing/renders/ (never edit)" } },
+   { id: "0.3", t: "Client brief → programme", s: "Room mix, area targets, budget, key dates", o: ["client","agent"], st: "waiting",
+     d: { in: "Client brief (not yet in 01_brief/)", out: "programme.yaml with room mix and area targets", files: "01_brief/programme.yaml", how: "brief-analyst agent; ask the client for budget and target opening date" } },
+ ]},
+ { n: "01", key: "regs", title: "Regulations", st: "active",
+   goal: "Turn every limit into a machine-checkable rule with a source, so every build is checked automatically.",
+   exit: "rules.yaml complete; every ASSUMED value verified or accepted.",
+   steps: [
+   { id: "1.1", t: "Collect MPP + PSP limits", s: "MPP (in force 1 Sep 2026), KLZ 058, height range 27 (100 m), PSP nař. 12/2024", o: ["agent"], st: "done",
+     d: { in: "MPP OOP 001/2026, KLZ 058 sheet, PSP consolidated text", out: "rules.yaml with source per rule; summary.md", files: "02_regulations/rules.yaml · summary.md · raw/", how: "regulations-analyst agent" } },
+   { id: "1.2", t: "Verify assumptions", s: "Parking zone 02, public plot edges (§22), MPP court review status", o: ["team","agent"], st: "active",
+     d: { in: "Atlas Prahy zone map, cadastre ownership of edge parcels", out: "ASSUMED tags replaced with sources", files: "02_regulations/rules.yaml" } },
+   { id: "1.3", t: "Pre-application consultation", s: "Předprojektová konzultace with the building office and IPR Praha", o: ["arch","team","auth"], st: "later",
+     d: { in: "Chosen option (gate 3.5), massing images, rules summary", out: "Minutes: which office decides, how čl. 70/1 'existing character' will be judged, EIA view", how: "Book after the local architect is appointed (4.3). The stabilised-area condition is decided by the authority, so ask early." } },
+ ]},
+ { n: "02", key: "existing", title: "Existing scheme model", st: "active",
+   goal: "Rebuild the client's scheme from their renders as the baseline we compare against.",
+   exit: "Match score stable and compliance report for the existing scheme issued.",
+   steps: [
+   { id: "2.1", t: "Reconstruct from renders", s: "Footprint, storey heights, window rhythm, massing", o: ["agent"], st: "active",
+     d: { in: "Client renders, camera matches", out: "03_existing/params.yaml", files: "03_existing/params.yaml · observations.md", how: "render-reconstructor agent; improvement loop (LOOP.md), one item per run" } },
+   { id: "2.2", t: "Build model", s: "IFC, Blender scene, GLB, renders", o: ["agent"], st: "active",
+     d: { in: "params.yaml", out: "model.ifc, model.blend, model.glb, render_*.png", files: "03_existing/model/", how: "build.py 03_existing/params.yaml --render --engine WORKBENCH" } },
+   { id: "2.3", t: "Render match check", s: "Overlay score must not drop more than 0.005", o: ["agent"], st: "active", gate: true,
+     yes: { to: "2.4", label: "Keep the change" }, no: { to: "2.1", label: "Revert, log the attempt" },
+     d: { in: "New renders vs client renders", out: "match_score.json, improvement_log.md entry", files: "06_reports/match_score.json · improvement_log.md", how: "tools/score_match.py, tools/compare_renders.py" } },
+   { id: "2.4", t: "Compliance of existing scheme", s: "83.8 m vs 100 m limit, FAR 5.55, PSP checks", o: ["agent"], st: "done",
+     d: { out: "compliance_existing.md", files: "06_reports/compliance_existing.md", how: "compliance-checker agent" } },
+ ]},
+ { n: "03", key: "options", title: "Capacity study & options", st: "active",
+   goal: "Test several massing options against the rules and the brief, then let the client pick one direction.",
+   exit: "Client has chosen one option in writing.",
+   steps: [
+   { id: "3.1", t: "Generate options", s: "Parametric variants of massing and storeys", o: ["agent"], st: "done",
+     d: { out: "04_proposed/options/<key>/params.yaml", how: "tools/make_options.py (generated, do not hand-edit)" } },
+   { id: "3.2", t: "Build & check each option", s: "IFC, metrics, PSP distance angle, parking, courtyard sun", o: ["agent"], st: "done",
+     d: { how: "build.py <option>/params.yaml --rules 02_regulations/rules.yaml", out: "metrics.json, report.md per option" } },
+   { id: "3.3", t: "Rank options", s: "Score keys, GFA, compliance margins", o: ["agent"], st: "done",
+     d: { out: "capacity_study.md, comparison images", files: "06_reports/capacity_study.md · capacity_comparison.jpg", how: "tools/score_options.py" } },
+   { id: "3.4", t: "Design review", s: "Massing, views, efficiency, buildability", o: ["agent","team"], st: "next",
+     d: { out: "review_options.md", files: "06_reports/review_*.md", how: "design-reviewer agent, then our team's own read" } },
+   { id: "3.5", t: "Client selects option", s: "Presentation of 2–3 shortlisted options", o: ["client","team"], st: "next", gate: true,
+     yes: { to: "4.1", label: "Option chosen" }, no: { to: "3.1", label: "New constraints → regenerate" },
+     d: { in: "Capacity study, renders, web viewer", out: "Written option choice with any client conditions", how: "visualizer agent for presentation images" } },
+ ]},
+ { n: "04", key: "team", title: "Team assembly", st: "later",
+   goal: "Appoint the Czech authorised architect who signs the permit documents, plus the specialist engineers.",
+   exit: "Architect and specialists under contract; BIM exchange agreed.",
+   steps: [
+   { id: "4.1", t: "Define architect scope", s: "Who signs DPZ, liaises with authorities, does autorský dozor", o: ["team","client"], st: "later",
+     d: { out: "Scope of services and split: our model and design vs their stamp, permit liaison and site supervision", how: "Decide who holds the contract: client directly or us" } },
+   { id: "4.2", t: "Contact & shortlist architects", s: "3–5 Prague practices with hotel or high-rise permit experience", o: ["team"], st: "later",
+     d: { in: "ČKA register (authorised architects), references", out: "RFP pack: capacity study, rules summary, model.glb viewer link, programme, timeline, scope", how: "Send RFP, hold first calls" } },
+   { id: "4.3", t: "Fee proposals & interview", s: "Compare fee, team, availability, permit record", o: ["team","client","arch"], st: "later", gate: true,
+     yes: { to: "4.4", label: "Architect appointed" }, no: { to: "4.2", label: "Widen the shortlist" },
+     d: { out: "Signed contract, power of attorney (plná moc) for permit submission" } },
+   { id: "4.4", t: "Appoint specialists", s: "Structure, MEP, fire safety, transport, geotechnics, surveyor, daylight, acoustics, energy", o: ["arch","team","spec"], st: "later",
+     d: { out: "Contracts for: statika, TZB (MEP), PBŘ (fire safety), traffic & parking study, IG průzkum (geotechnical survey), geodet, insolation & daylight (ČSN 73 4301), acoustics, PENB; EIA consultant if 6.1 says so" } },
+   { id: "4.5", t: "BIM execution plan", s: "IFC4 exchange, model ownership, naming, level of detail", o: ["team","arch","spec"], st: "later",
+     d: { out: "BEP: our params → IFC is the architectural model; specialists return IFC/DWG; clash check cadence", files: "04_proposed/design/bep.md (new)" } },
+ ]},
+ { n: "05", key: "concept", title: "Concept design (studie)", st: "later",
+   goal: "Develop the chosen option into a coordinated concept that passes every rule and the client approves.",
+   exit: "Concept frozen and tagged; drawing set S0x issued.",
+   steps: [
+   { id: "5.1", t: "Design intent", s: "Sketches, room layouts, façade concept", o: ["team","arch"], st: "later",
+     d: { files: "04_proposed/design/", out: "Intent notes and sketches that bim-modeler turns into parameters" } },
+   { id: "5.2", t: "Update model parameters", s: "Only bim-modeler changes geometry", o: ["agent"], st: "later",
+     d: { files: "04_proposed/params.yaml · pipeline/*.py", how: "bim-modeler agent; new element types are added to the pipeline, never hand-edited in outputs" } },
+   { id: "5.3", t: "Build model & outputs", s: "IFC, renders, area schedule, DXF plans", o: ["agent"], st: "later",
+     d: { how: "build.py 04_proposed/params.yaml --render", out: "model.ifc, model.glb, area_schedule.xlsx, drawings/*.dxf" } },
+   { id: "5.4", t: "Compliance check", s: "Runs after every model change", o: ["agent"], st: "later", gate: true,
+     yes: { to: "5.5", label: "All rules pass" }, no: { to: "5.2", label: "Fix parameters" },
+     d: { out: "compliance_proposed.md with margins", files: "06_reports/compliance_*.md", how: "compliance-checker agent" } },
+   { id: "5.5", t: "Design review", s: "Circulation, structure grid, room efficiency, operations", o: ["agent","arch"], st: "later", gate: true,
+     yes: { to: "5.6", label: "No blocking issues" }, no: { to: "5.1", label: "Rework the intent" },
+     d: { out: "review_*.md", how: "design-reviewer agent + local architect's comments" } },
+   { id: "5.6", t: "Presentation visuals", s: "Cycles renders, web viewer, comparison with existing", o: ["agent"], st: "later",
+     d: { how: "visualizer agent", out: "Renders, Three.js viewer of model.glb, existing vs proposed comparison" } },
+   { id: "5.7", t: "Client approval", s: "Concept review meeting", o: ["client","team"], st: "later", gate: true,
+     yes: { to: "6.1", label: "Freeze concept, issue S0x" }, no: { to: "5.1", label: "Client changes → next round" },
+     d: { out: "Approval minutes; git tag issue/S0x" } },
+ ]},
+ { n: "06", key: "consult", title: "Authorities & stakeholders", st: "later",
+   goal: "Find out what the authorities and neighbours will demand before the permit set is drawn.",
+   exit: "All consultation comments either built into the model or answered in writing.",
+   steps: [
+   { id: "6.1", t: "EIA screening check", s: "Zákon 100/2001 Sb.: does the project need zjišťovací řízení?", o: ["spec","arch"], st: "later", gate: true,
+     yes: { to: "6.2", label: "Not needed, continue" }, no: { to: "6.2", label: "Needed → run screening in parallel (adds months)" },
+     d: { in: "Parking count from psp.py, GFA, built-up area", out: "EIA consultant's opinion" } },
+   { id: "6.2", t: "Consult dotčené orgány", s: "Fire (HZS), hygiene (KHS), transport, environment, heritage view impact, metro protection zone", o: ["arch","auth"], st: "later",
+     d: { out: "Written positions from: HZS hl. m. Prahy, KHS, MHMP transport & environment departments, heritage (view from the Prague Heritage Reserve), DPP metro protection zone (lines C/D), IPR Praha" } },
+   { id: "6.3", t: "Utility capacity requests", s: "Power, water, sewer, heat, gas, telecom", o: ["spec","auth"], st: "later",
+     d: { out: "Capacity statements from PRE, PVK, Pražská plynárenská, heat supplier, CETIN" } },
+   { id: "6.4", t: "Neighbour engagement", s: "City Tower, V Tower, City Empiria and residents", o: ["client","arch"], st: "later",
+     d: { in: "PSP §21 distance-angle results from psp.py, shadow studies", out: "Meeting notes; known objections before the formal procedure" } },
+   { id: "6.5", t: "Do comments change the design?", s: "Collect and sort all comments", o: ["team","arch"], st: "later", gate: true,
+     yes: { to: "7.1", label: "No geometry change" }, no: { to: "5.2", label: "Change → model loop" },
+     d: { out: "Comment log with response per item" } },
+ ]},
+ { n: "07", key: "dpz", title: "Permit documentation (DPZ)", st: "later",
+   goal: "Produce the documentation for povolení záměru, coordinated, stamped and signed off.",
+   exit: "Signed DPZ issue P01 ready for submission.",
+   steps: [
+   { id: "7.1", t: "DPZ structure & text", s: "Parts A–E per vyhláška 131/2024 Sb.", o: ["arch","team"], st: "later",
+     d: { out: "A průvodní list · B souhrnná technická zpráva · C situační výkresy · D dokumentace objektů · E dokladová část" } },
+   { id: "7.2", t: "Drawings from the model", s: "Site plan, floor plans, sections, elevations", o: ["agent","arch"], st: "later",
+     d: { files: "05_drawings/P0x/", how: "drawings-producer agent; architect red-lines go back to bim-modeler, never edited in the DXF" } },
+   { id: "7.3", t: "Specialist reports", s: "PBŘ, structural concept, MEP, traffic, insolation, acoustics, PENB, geotechnics", o: ["spec"], st: "later",
+     d: { out: "Reports and drawings for part D, specialists' IFC models" } },
+   { id: "7.4", t: "Coordination & clash check", s: "Architecture vs structure vs MEP", o: ["team","arch","spec"], st: "later", gate: true,
+     yes: { to: "7.5", label: "Coordinated" }, no: { to: "5.2", label: "Clash → model loop or specialist fix" },
+     d: { how: "Combine IFC models per the BEP" } },
+   { id: "7.5", t: "Binding opinions & statements", s: "Závazná stanoviska and utility vyjádření for part E", o: ["arch","auth"], st: "later",
+     d: { out: "Complete part E (dokladová část)" } },
+   { id: "7.6", t: "Final QA", s: "Compliance re-run, design review, drawing check", o: ["agent","team"], st: "later",
+     d: { how: "compliance-checker + design-reviewer on the frozen model" } },
+   { id: "7.7", t: "Client sign-off & stamp", s: "Authorised architect's electronic signature", o: ["client","arch"], st: "later", gate: true,
+     yes: { to: "8.1", label: "Issue P01, tag issue/P01" }, no: { to: "7.1", label: "Fix and re-issue" },
+     d: {} },
+ ]},
+ { n: "08", key: "permit", title: "Permit procedure", st: "later",
+   goal: "Get a legally binding decision on povolení záměru.",
+   exit: "Decision in legal force (právní moc).",
+   steps: [
+   { id: "8.1", t: "Submit application", s: "Via Portál stavebníka, on the client's behalf", o: ["arch"], st: "later",
+     d: { in: "DPZ P01, power of attorney, fees", out: "Application reference number" } },
+   { id: "8.2", t: "Completeness check", s: "Authority may send výzva k doplnění", o: ["auth"], st: "later", gate: true,
+     yes: { to: "8.3", label: "Complete" }, no: { to: "7.1", label: "Supplement → issue P02" },
+     d: { how: "Answer each point in a response letter; geometry changes go through the model loop" } },
+   { id: "8.3", t: "Proceedings", s: "Participants notified, objections, hearing if needed", o: ["auth","arch","client"], st: "later",
+     d: { out: "Objections answered; possible request for further documents" } },
+   { id: "8.4", t: "Decision", s: "Rozhodnutí o povolení záměru", o: ["auth"], st: "later", gate: true,
+     yes: { to: "8.5", label: "Granted (note all conditions)" }, no: { to: "5.1", label: "Refused → redesign" },
+     d: { out: "Decision with conditions; conditions logged as rules where measurable" } },
+   { id: "8.5", t: "Appeal period & legal force", s: "Appeals go to the appellate authority", o: ["auth","client"], st: "later",
+     d: { out: "Decision in legal force; appeal handled with the architect and lawyer if filed" } },
+ ]},
+ { n: "09", key: "dps", title: "Construction docs & tender", st: "later",
+   goal: "Detail the building for construction, price it, and pick a contractor.",
+   exit: "Contract signed and construction start notified.",
+   steps: [
+   { id: "9.1", t: "Construction documentation (DPS)", s: "Details, specifications, higher model detail", o: ["arch","spec","agent"], st: "later",
+     d: { how: "bim-modeler extends the pipeline (interiors, details); specialists detail their parts", files: "05_drawings/C0x/" } },
+   { id: "9.2", t: "DPS vs permit check", s: "Any deviation from the permitted záměr?", o: ["team","arch"], st: "later", gate: true,
+     yes: { to: "9.3", label: "Matches permit" }, no: { to: "8.1", label: "Substantial change → change of záměr" },
+     d: { how: "compliance-checker against rules + permit conditions" } },
+   { id: "9.3", t: "Tender documents", s: "Bill of quantities from IFC, specs, draft contract", o: ["team","arch"], st: "later",
+     d: { out: "Výkaz výměr (BoQ) from model quantities, specifications, contract terms" } },
+   { id: "9.4", t: "Tender & evaluation", s: "Shortlist, bids, clarifications", o: ["client","team","contr"], st: "later", gate: true,
+     yes: { to: "9.5", label: "Within budget" }, no: { to: "9.1", label: "Value engineering" },
+     d: { out: "Bid comparison, recommendation" } },
+   { id: "9.5", t: "Contract & start notice", s: "Oznámení zahájení stavby to the building office", o: ["client","contr","auth"], st: "later",
+     d: { out: "Signed contract, site handover, start notice" } },
+ ]},
+ { n: "10", key: "build", title: "Construction", st: "later",
+   goal: "Build what was permitted, keep the model in step with the site.",
+   exit: "Works complete; as-built model updated.",
+   steps: [
+   { id: "10.1", t: "Construction works", s: "Workshop drawings reviewed by the architect", o: ["contr"], st: "later",
+     d: { out: "Dílenská dokumentace (shop drawings) approved" } },
+   { id: "10.2", t: "Site supervision", s: "Autorský dozor (architect), TDS (client), safety coordinator", o: ["arch","team","client"], st: "later",
+     d: { out: "Site meeting minutes, site diary entries" } },
+   { id: "10.3", t: "Change requests", s: "Contractor or client proposes a change", o: ["contr","client","arch"], st: "later", gate: true,
+     yes: { to: "10.4", label: "Minor → update model" }, no: { to: "8.1", label: "Substantial → změna záměru před dokončením" },
+     d: { how: "Every accepted change goes through the model loop so as-built stays true" } },
+   { id: "10.4", t: "Stage inspections", s: "Kontrolní prohlídky by the building office", o: ["auth"], st: "later", d: {} },
+   { id: "10.5", t: "As-built model", s: "Params updated to as-built", o: ["agent","contr"], st: "later",
+     d: { out: "As-built IFC, dokumentace skutečného provedení", files: "05_drawings/AB/" } },
+ ]},
+ { n: "11", key: "occupancy", title: "Completion & occupancy", st: "later",
+   goal: "Prove the building is safe to use and hand it over to the operator.",
+   exit: "Kolaudační rozhodnutí in force; hotel handed over.",
+   steps: [
+   { id: "11.1", t: "Tests & certificates", s: "Revisions, fire systems, lifts, PENB", o: ["contr","spec"], st: "later", d: {} },
+   { id: "11.2", t: "Apply for occupancy permit", s: "Kolaudační rozhodnutí via Portál stavebníka", o: ["arch","client"], st: "later", d: {} },
+   { id: "11.3", t: "Final inspection", s: "Závěrečná kontrolní prohlídka", o: ["auth"], st: "later", gate: true,
+     yes: { to: "11.4", label: "No defects" }, no: { to: "10.1", label: "Fix defects → re-inspect" }, d: {} },
+   { id: "11.4", t: "Handover", s: "Operator gets as-built IFC, O&M manuals", o: ["client","team","contr"], st: "later",
+     d: { out: "Kolaudační rozhodnutí, handover protocol, archive tag in git" } },
+ ]},
+];
+
+const LOOPS = [
+  { t: "1 · Model change loop", path: "5.2 → 5.3 → 5.4 <b>↺ 5.2</b>", o: ["agent"], p: "Every geometry change, whatever its source. Exit when every rule in rules.yaml passes." },
+  { t: "2 · Design review loop", path: "5.5 <b>↺ 5.1</b>", o: ["agent","arch"], p: "Blocking critique from design-reviewer or the local architect sends the intent back." },
+  { t: "3 · Client loop", path: "3.5 <b>↺ 3.1</b> · 5.7 <b>↺ 5.1</b>", o: ["client"], p: "Client changes start a new round. Each round is an S0x issue so rounds stay countable." },
+  { t: "4 · Coordination loop", path: "7.4 <b>↺ 5.2</b> or specialist", o: ["spec","arch"], p: "Clashes between our IFC and the specialists' models. Our side is fixed through params, theirs in their models." },
+  { t: "5 · Authority loop", path: "6.5 · 8.2 · 8.4 <b>↺ 5 / 7</b>", o: ["auth","arch"], p: "Consultation comments, výzva k doplnění, or refusal. Each response is a P0x issue." },
+  { t: "6 · Construction change loop", path: "9.2 · 10.3 <b>↺ 8.1</b>", o: ["contr","client"], p: "Minor changes update the model; substantial ones need a change of the permitted záměr." },
+];
+
+const $ = (s, r = document) => r.querySelector(s);
+const chip = k => `<span class="chip" style="--c:var(${OWNERS[k].c})">${OWNERS[k].label}</span>`;
+const st = k => `<span class="status st-${k}"><i></i>${STATUS[k]}</span>`;
+const link = (to, label, cls) => `<span class="${cls}">${cls === "oc-yes" ? "✓" : "↺"} ${label} → <a href="#s-${to.replace(".", "-")}" data-jump="${to}">${to}</a></span>`;
+
+$("#strip").innerHTML = PHASES.map(p => `<a href="#p-${p.key}"><span class="n"><span>${p.n}</span>${st(p.st).replace(/>[^<]*<\/span>$/, "></span>")}</span>${p.title}</a>`).join("");
+
+$("#owners").insertAdjacentHTML("beforeend", Object.entries(OWNERS).map(([k, v]) =>
+  `<button type="button" class="chip" aria-pressed="false" data-owner="${k}" style="--c:var(${v.c})">${v.label}</button>`).join(""));
+
+$("#phases").innerHTML = PHASES.map(p => `
+  <section class="phase" id="p-${p.key}">
+    <span class="phase-badge">${p.n}</span>
+    <div class="phase-head">
+      <div class="row"><h2>${p.title}</h2>${st(p.st)}</div>
+      <p class="goal">${p.goal}</p>
+      <p class="exit"><b>Exit:</b> ${p.exit}</p>
+    </div>
+    <ol class="flow">${p.steps.map(s => {
+      const d = s.d || {};
+      const rows = [["Inputs", d.in], ["Outputs", d.out], ["Files", d.files && `<code>${d.files}</code>`], ["How", d.how]].filter(r => r[1]);
+      const body = rows.length ? `<div class="node-body" hidden><dl>${rows.map(r => `<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join("")}</dl></div>` : "";
+      return `<li class="node${s.gate ? " gate" : ""}" id="s-${s.id.replace(".", "-")}" data-owners="${s.o.join(" ")}">
+        <button class="node-head" type="button" aria-expanded="false"${body ? "" : " disabled"}>
+          <span class="code">${s.id}</span>
+          <span class="t">${s.t}<small>${s.s}</small></span>
+          <span class="side">${s.o.map(chip).join("")}${st(s.st)}${body ? '<span class="caret">+</span>' : ""}</span>
+        </button>
+        ${s.gate ? `<div class="outcomes">${link(s.yes.to, s.yes.label, "oc-yes")}${link(s.no.to, s.no.label, "oc-no")}</div>` : ""}
+        ${body}
+      </li>`; }).join("")}
+    </ol>
+  </section>`).join("");
+
+$("#loops").innerHTML = LOOPS.map(l => `<div class="loop"><h3>${l.t}</h3><div class="path">${l.path}</div><div class="legend-row" style="gap:6px">${l.o.map(chip).join("")}</div><p>${l.p}</p></div>`).join("");
+
+function toggle(li, open) {
+  const head = $(".node-head", li), body = $(".node-body", li);
+  if (!body) return;
+  open = open ?? body.hidden;
+  body.hidden = !open; head.setAttribute("aria-expanded", open);
+  const c = $(".caret", li); if (c) c.textContent = open ? "−" : "+";
+}
+document.addEventListener("click", e => {
+  const head = e.target.closest(".node-head");
+  if (head) { toggle(head.parentElement); return; }
+  const j = e.target.closest("[data-jump]");
+  if (j) {
+    e.preventDefault();
+    const el = document.getElementById("s-" + j.dataset.jump.replace(".", "-"));
+    if (el) { el.scrollIntoView({ block: "center" }); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); }
+  }
+});
+let allOpen = false;
+$("#expand").addEventListener("click", () => {
+  allOpen = !allOpen;
+  document.querySelectorAll(".node").forEach(li => toggle(li, allOpen));
+  $("#expand").textContent = allOpen ? "Collapse all steps" : "Expand all steps";
+});
+const active = new Set();
+function applyFilter() {
+  document.querySelectorAll(".node").forEach(li => {
+    const os = li.dataset.owners.split(" ");
+    li.classList.toggle("dim", active.size > 0 && !os.some(o => active.has(o)));
+  });
+  $("#clear").hidden = active.size === 0;
+}
+$("#owners").addEventListener("click", e => {
+  const b = e.target.closest("[data-owner]"); if (!b) return;
+  const k = b.dataset.owner;
+  active.has(k) ? active.delete(k) : active.add(k);
+  b.setAttribute("aria-pressed", active.has(k));
+  applyFilter();
+});
+$("#clear").addEventListener("click", () => {
+  active.clear(); document.querySelectorAll("[data-owner]").forEach(b => b.setAttribute("aria-pressed", "false")); applyFilter();
+});
+</script>

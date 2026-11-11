@@ -99,3 +99,17 @@ plaza meet the ground with no edge.
 |---|---|
 | `07_park_A.png` | calmer: one clear main serpentine with a few loops, larger lawns |
 | `07_park_B.png` | freer: more interwoven loops, more seating niches, the back of the tail slopes into the ground behind the café |
+
+## Iteration 8: natural roof park (base: 07_park_A, surroundings stay empty)
+
+Two earlier iteration 8 attempts were reverted at the client's request (shape change; a park added behind the building).
+Edited from `07_park_A.png` (jobs 3556ffdc-eeff-4ae8-9b43-aa3f210134a1, 919a6421-ced5-43b9-bac1-963e9aa07c70).
+Building, café, plaza and the plain ground all around are unchanged; only the roof park changed. The repetitive tree
+islands are replaced by soft hills and dips, mixed tree groups (shade trees, birches, flowering trees), grasses and
+perennials, a small pond, timber seating decks and lawn clearings; serpentine paths kept; planting stays within the roof.
+The tail meets the plain ground where it did before.
+
+| File | Notes |
+|---|---|
+| `08_park_A.png` | pond with lily pads in the middle, round timber decks, more trees across the roof |
+| `08_park_B.png` | lookout deck at the high end, stream through grasses, open picnic lawn near the café end |

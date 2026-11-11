@@ -36,3 +36,11 @@ new connection idea); L-building rises more with stairs (more floor area).
 | B | lattice ribbon from the right crown wraps round the left tower as a ring terrace below its crown | c68674b6-a2c4-4b2f-b27f-56853997157b |
 Both: bigger shallow pond with people wading, taller stepped L. Note: the camera zoomed in slightly in both.
 Regulation note: left tower at most 27 storeys / 100 m (MPP range 27), so the right tower ends ~6 floors lower.
+
+## Follow-up 3 (towers from `245eb155…` + L path/fins from `aa343d73…`), medium 1k, 2 × 0.5 = 1.0 credit — checked
+User: keep version-1 towers; pond must be very small, modern (not natural), at the left/front end of the L; restore the
+serpentine path; L rises higher, keeps its white lattice fin edges, clearly a building.
+| # | L-building | Job ID |
+|---|---|---|
+| A | taller crisp volume, lattice fins all round, small modern oval water table with jets (left part of the roof), path winding up from the right end | f78cb063-0079-476a-81e5-735613caaf5b |
+| B | terraces stepping up with lattice-fin edges, small rectangular water mirror at the far left corner, promenade with stairs between levels | b393d035-370a-42dc-8ac8-f2b69c860b25 |

@@ -83,7 +83,7 @@ footer { margin-top: 44px; font-size: 13px; color: var(--muted); max-width: 70ch
   <header>
     <span class="eyebrow">Panorama Hotel · Horní Pankrác, Prague</span>
     <h1>Panorama Project Roadmap</h1>
-    <p class="lede">The path from today to opening, in twelve checkpoints. The small boxes on the left are the steps that lead into each checkpoint. Steps marked “Your input” need a decision or documents from you.</p>
+    <p class="lede">From today to the final architectural drawing package, in eight checkpoints. The small boxes on the left are the steps that lead into each checkpoint. Steps marked “Your input” need a decision or documents from you.</p>
   </header>
   <div class="key">
     <span><i class="big"></i>Checkpoint</span>
@@ -93,14 +93,14 @@ footer { margin-top: 44px; font-size: 13px; color: var(--muted); max-width: 70ch
     <span class="badge b-now">In progress</span>
   </div>
   <main id="flow"></main>
-  <footer>Status as of 11 November 2026. Permit steps follow the Czech Building Act 283/2021 Sb. as currently amended; the exact authority and whether an environmental (EIA) screening is required will be confirmed at the pre-application consultation.</footer>
+  <footer>Status as of 11 November 2026. Permit drawings follow the Czech Building Act 283/2021 Sb. and vyhláška 131/2024 Sb. as currently amended; the deciding authority will be confirmed at the pre-application meeting.</footer>
 </div>
 
 <script>
 const CP = [
   { t: "Site and brief confirmed", st: "now", d: "We fix the legal plot, the survey and what you want built.",
     out: "Agreed plot boundary (16,487 m²) and room programme",
-    f: [["Plot survey and land registry parcels"], ["Your current renders and drawings", 1], ["Hotel brief: room mix, budget, opening date", 1]] },
+    f: [["Plot survey and land registry parcels"], ["Your current renders and drawings", 1], ["Hotel brief: room mix, budget, key dates", 1]] },
   { t: "Planning rules mapped", st: "now", d: "Every limit from the Metropolitan Plan and Prague building regulations, each with its source.",
     out: "Rules summary: height up to 100 m, up to 27 storeys, distances, parking",
     f: [["Metropolitan Plan limits"], ["Prague building regulations"], ["Open points verified (parking zone, plot edges)"]] },
@@ -110,30 +110,18 @@ const CP = [
   { t: "Design direction chosen", st: "later", d: "Several building options compared on rooms, floor area and planning rules.",
     out: "Your chosen option, in writing", loop: "Repeats with new options until one direction is agreed",
     f: [["Options generated and tested"], ["Comparison and recommendation"], ["Presentation and your decision", 1]] },
-  { t: "Project team appointed", st: "later", d: "A Prague authorised architect who signs the permit documents, plus the engineers.",
-    out: "Signed contracts and an agreed way of sharing the model",
-    f: [["Architects contacted and shortlisted"], ["Fee proposals and interviews", 1], ["Engineers: structure, services, fire, traffic, daylight"]] },
   { t: "Concept design approved", st: "later", d: "The chosen option developed into a full concept, checked against the rules after every change.",
-    out: "Approved concept, renders and area schedule", loop: "Review rounds with you until approved",
+    out: "Approved concept drawings, renders and area schedule", loop: "Review rounds with you until approved",
     f: [["Floor plans and façade concept"], ["Rule check after each change"], ["Independent design review"], ["Your review rounds", 1]] },
-  { t: "Authorities consulted", st: "later", d: "We find out what the authorities, utilities and neighbours will ask for before drawing the permit set.",
-    out: "Written positions, all answered or built into the design",
-    f: [["Pre-application meeting with the building office"], ["Fire, hygiene, transport, heritage, metro"], ["Utility capacities"], ["Neighbour meetings", 1]] },
-  { t: "Permit documents signed", st: "later", d: "The full permit documentation (DPZ), coordinated between architect and engineers.",
-    out: "Signed permit set, ready to submit",
-    f: [["Drawings from the model"], ["Engineers' reports"], ["Coordination check"], ["Your sign-off", 1]] },
-  { t: "Building permit granted", st: "later", d: "The building office reviews the application and decides.",
-    out: "Permit decision in legal force", loop: "Supplements answered if the office asks",
-    f: [["Online submission"], ["Completeness check"], ["Proceedings and objections"], ["Appeal period"]] },
-  { t: "Contractor appointed", st: "later", d: "Construction drawings, quantities and a tender to price the building.",
-    out: "Signed construction contract", loop: "Value engineering if bids exceed budget",
-    f: [["Construction documentation"], ["Bill of quantities from the model"], ["Tender and bid comparison", 1]] },
-  { t: "Building completed", st: "later", d: "Construction with the architect supervising on site.",
-    out: "Finished building and as-built model",
-    f: [["Construction works"], ["Site supervision"], ["Change requests", 1], ["Inspections by the building office"]] },
-  { t: "Hotel open", st: "later", d: "Tests, certificates and the occupancy permit.",
-    out: "Occupancy permit (kolaudace) and handover to the operator",
-    f: [["Tests and certificates"], ["Final inspection"], ["Handover and manuals", 1]] },
+  { t: "Design checked with authorities", st: "later", d: "We test the concept with the building office before the permit drawings are drawn.",
+    out: "Authority comments built into the design",
+    f: [["Pre-application meeting with the building office"], ["Fire, transport, heritage and metro requirements"], ["Comments built into the model"]] },
+  { t: "Permit drawing set delivered", st: "later", d: "The architectural drawings for the building permit application (DPZ).",
+    out: "Signed permit drawing set and technical report", loop: "Revised if the building office asks for supplements",
+    f: [["Site plan, floor plans, sections, elevations"], ["Engineers' input coordinated"], ["Final rule check"], ["Your sign-off", 1]] },
+  { t: "Construction drawing set delivered", st: "later", d: "Detailed architectural drawings that a contractor can price and build from.",
+    out: "Final drawing package and 3D model (IFC) handed over to you",
+    f: [["Detailed plans and construction details"], ["Door, window and finishes schedules"], ["Quantities taken from the model"], ["Your sign-off", 1]] },
 ];
 
 const small = `<svg viewBox="0 0 52 34" aria-hidden="true"><path d="M3 11 H28 V3 L49 17 L28 31 V23 H3 Z" fill="var(--bg)" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/></svg>`;

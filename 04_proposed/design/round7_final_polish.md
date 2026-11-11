@@ -59,3 +59,7 @@ Guide `refs/final_preview_guide2.png` (media `458b0bdd…`): scarf image as base
 Render from [guide + scarf original]: **`3ab7da27-ce09-4eda-9234-ea4a7f6b524c`** — towers + scarf ribbon match the scarf
 version; L = crisp stepped building with straight slabs, curtain walls, white fins, glass railings, stairs, promenade
 from the right end, café pavilion, small rectangular water at the left corner. Credits in this follow-up chain: 6 × 0.5 = 3.0.
+- Repositioned L (0.5 credit, checked): L moved toward the street, open plaza strip between L and towers, right end
+  shortened → walkway from the street into the plaza past the round building. Towers unchanged.
+  **`6c9c83cf-df2d-44e1-87ee-be0e67e2b18b`**. Side effect: a small water strip now sits at the L's front-left corner by
+  the street.

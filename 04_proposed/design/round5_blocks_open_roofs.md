@@ -24,4 +24,4 @@ Compliance note: the client's block layout failed PSP §21 (three-wing building 
 the chosen design will likely shift/trim the north-east and street blocks.
 
 ## Picks
-_(user's pick goes here)_
+User (11 Nov 2026): round 5 #2 lattice canopies (south `90c490da…`; screenshot crop in refs/round5_pick_style.jpg) → round 6. A to-scale 3D massing was built (04_proposed/concept_dancers, all 6 rules pass) but the user wants to stay with images for now — parked.

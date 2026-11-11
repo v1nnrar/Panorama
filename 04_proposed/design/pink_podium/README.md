@@ -99,16 +99,3 @@ plaza meet the ground with no edge.
 |---|---|
 | `07_park_A.png` | calmer: one clear main serpentine with a few loops, larger lawns |
 | `07_park_B.png` | freer: more interwoven loops, more seating niches, the back of the tail slopes into the ground behind the café |
-
-## Iteration 8: varied roof park, back edge per client markup, park on top only
-
-Edit of `07_park_A.png`, with the client's markup (`07_client_markup.png`: blue = repetitive tree islands to remove,
-yellow = required back roof edge) as a second reference. Job 1cc46d78-61a5-463b-b867-dc1aef4e1b7a
-(the second variant, 0157dd7c-…, was discarded: the lattice broke off and floated in the air).
-
-`08_varied_park_A.png`:
-- Back edge: one smooth line that sweeps down from the high end, runs calmly along the back and descends to the ground behind the café.
-- Planting stays on the roof inside the lattice edge; the facades are clean.
-- Distinct zones from high to low: viewpoint terrace with seating, hammock grove, picnic/sunbathing lawn,
-  reflecting pool with stepping stones, wisteria pergola walk, timber play area, sun deck with loungers, wildflower meadow.
-- One serpentine main path with secondary branches; nothing runs over the café roof.

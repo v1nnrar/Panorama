@@ -28,7 +28,8 @@ PARKING_USES = {
     "retail": (70, 0.10, 0.90), "restaurant": (40, 0.10, 0.90), "congress": (60, 0.10, 0.90),
     "wellness": (40, 0.10, 0.90),
 }
-# zone (příloha 3): bound %, visitor min %, visitor max %   — values per IPR consolidated text (to verify)
+# zone (příloha 3): bound %, visitor min %, visitor max %   — values per IPR consolidated text (to verify).
+# The plot lies entirely in zone 02 (official PSP zone layer, IPR, checked 2026-11-11).
 PARKING_ZONES = {"00": (0.50, 0.0, 0.15), "01": (0.70, 0.10, 0.35), "02": (0.80, 0.15, 0.55),
                  "03": (0.90, 0.30, 0.75), "04": (0.90, 0.50, 0.90), "05": (1.00, 0.65, 0.65),
                  "06": (1.00, 0.80, 1.10), "07": (1.20, 0.90, 0.90)}

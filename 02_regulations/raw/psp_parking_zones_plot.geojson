@@ -1,0 +1,1 @@
+{"type": "FeatureCollection", "crs": {"type": "name", "properties": {"name": "EPSG:5514"}}, "features": [{"type": "Feature", "id": 23, "geometry": null, "properties": {"OBJECTID": 23, "ZONA": "02", "POSKYT": "HMP-IPR", "TID_DOP_ZPS_ZONYPARK_P": null}}]}

@@ -74,9 +74,8 @@ Section D is the **top priority** (user request, 9 Nov 2026). For a D item:
       B/C/D add meeting space (≥ 1.5 m²/key) and, for C/D, a spa floor; re-score (parking need changes with use).
 - [x] D9. Presentation: Cycles aerials of the top 2 options + client scheme side by side, and a one-page comparison
       in `06_reports/capacity_study.md` (no new hosts, no paid services).
-- [ ] D10. Verify parking zone 02 (Atlas Prahy zone map) — mark **blocked** if the map needs a token.
-      **BLOCKED** (2026-11-11): the zone layer is served from gs-pub.praha.eu, which this environment's network policy
-      refuses (LOOP: no new hosts). Needs the user to read the zone off the public map, or the host allowed.
+- [x] D10. Verify parking zone 02 (Atlas Prahy zone map) — mark **blocked** if the map needs a token.
+      (2026-11-11: user allowed gs-pub.praha.eu; official PSP zone layer → whole plot in **zone 02**.)
 
 ### A. Fidelity of the existing scheme (measurable with `score_match.py`)
 - [x] A1. Camera match render-003 (park view, score 0.02): find the viewpoint (north park, looking at D's north

@@ -295,3 +295,11 @@ client's renders, higher is better).
   footprint change (C1/C2 massing already matched the calibrated aerial).
 - Score: Workbench mean 0.4644 → 0.4656 (aerial +0.004, SW +0.002); Cycles (aerial + SW re-rendered) **0.4851 → 0.4855**.
   IFC 0 errors; test block 6/6.
+
+## 2026-11-11 — D10 unblocked (user allowed gs-pub.praha.eu) — parking zone 02 VERIFIED
+- User granted the same network access as other chats in this project; gs-pub.praha.eu added to the environment's
+  allowed hosts. Queried `dop/psp_zony_parkovani/MapServer/0` (Zóny parkování města (PSP), HMP-IPR) with the official
+  plot polygon in S-JTSK: one feature, OBJECTID 23, **ZONA 02** — the whole plot is in zone 02. Saved as
+  `02_regulations/raw/psp_parking_zones_plot.geojson`.
+- `rules.yaml` (psp25 source), `summary.md` §25 row and `pipeline/psp.py` comment now cite the verified zone instead of
+  ASSUMED. No numbers change: every parking figure already used zone 02.

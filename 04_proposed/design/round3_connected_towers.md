@@ -24,4 +24,4 @@ over the 27-storey limit; the 3D model must hold ≤ 27 storeys / ≤ 100 m. Two
 PSP §21 against the three-wing building (north-east) — the capacity study's passing tower sat in the south-east.
 
 ## Picks
-_(user's pick goes here)_
+User (11 Nov 2026): none of these — keep the original favourite (31b7b9fb…) and redesign only its look → round 4.

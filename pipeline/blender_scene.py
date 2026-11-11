@@ -267,6 +267,9 @@ def _trees(trees, col):
 def _bbox():
     pts = [o.matrix_world @ Vector(c) for o in bpy.data.objects if o.type == "MESH" and not o.get("context")
            and o.get("ifc_class") not in ("IfcSite", "IfcSpace", None) for c in o.bound_box]
+    if not pts:  # empty scheme (blank canvas): frame the site / ground meshes instead
+        pts = [o.matrix_world @ Vector(c) for o in bpy.data.objects if o.type == "MESH" and not o.get("context")
+               for c in o.bound_box]
     lo = Vector((min(p.x for p in pts), min(p.y for p in pts), min(p.z for p in pts)))
     hi = Vector((max(p.x for p in pts), max(p.y for p in pts), max(p.z for p in pts)))
     return lo, hi

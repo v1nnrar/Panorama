@@ -123,7 +123,7 @@ def load(path: str | Path) -> dict:
     path = Path(path)
     raw = yaml.safe_load(path.read_text())
     scheme_defaults = _merge(DEFAULTS, {k: raw[k] for k in DEFAULTS if k in raw})
-    blist = raw.get("buildings") or [raw["building"]]
+    blist = raw["buildings"] if "buildings" in raw else [raw["building"]]
     buildings = [_building(b, scheme_defaults) for b in blist]
     site = load_site(raw.get("site", {}), path.parent)
     return {

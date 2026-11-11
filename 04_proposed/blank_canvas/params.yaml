@@ -1,0 +1,23 @@
+# BLANK CANVAS — the official plot with every building removed (existing hotel tower demolished, client scheme ignored).
+# Starting point for the redesign (04_proposed/design/intent.md). Context = real surroundings (00_site/context.glb).
+# Cameras = the calibrated cameras of the client renders (03_existing/params.yaml), so views compare 1:1.
+name: Panorama Pankrác — blank canvas
+output_dir: model
+site: {file: ../../00_site/site.yaml}
+rules: ../../02_regulations/rules.yaml
+
+buildings: []
+
+landscape:
+  edge_paving: 1.5
+  context_tree_radius: 450
+
+render:
+  samples: 32
+  sun_azimuth: 200
+  sun_altitude: 42
+  cameras:
+    - {name: aerial_S_like_render000, location: [-93.67, -255.78, 218.91], target: [14.88, -5.5, 20], lens: 36.86, resolution: [1280, 905]}
+    - {name: street_SW_like_render005, location: [-74, -86, 1.7], target: [3.5, -37.5, 37], lens: 32.5, shift_y: 0.075, resolution: [1400, 1448]}
+    - {name: park_N_like_render003, location: [20.1, 108.6, 1.7], target: [1.4, 51.6, 1.7], lens: 19.6, shift_y: 0.153, resolution: [1980, 900]}
+    - {name: top_view, location: [40, -10, 600], target: [40, -9.99, 0], lens: 35}

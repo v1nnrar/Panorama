@@ -45,10 +45,10 @@ def metrics(design: dict) -> dict:
                           if not b.get("below_ground")])
     m = {
         "buildings": len(per),
-        "storeys_above_ground": max(p["storeys"] for p in per),
+        "storeys_above_ground": max((p["storeys"] for p in per), default=0),
         "gfa_below_ground_m2": round(sum(Polygon(s["footprint"]).area for b in design["buildings"]
                                          for s in b["storeys"] if s["elevation"] < 0), 1),
-        "height_top_of_parapet_m": max(p["height_parapet_m"] for p in per),
+        "height_top_of_parapet_m": max((p["height_parapet_m"] for p in per), default=0.0),
         "footprint_area_m2": round(ground.area, 1),
         "gfa_m2": round(sum(p["gfa_m2"] for p in per), 1),
         "net_floor_area_m2": round(sum(p["nfa_m2"] for p in per), 1),
@@ -63,7 +63,7 @@ def metrics(design: dict) -> dict:
             "unbuilt_ratio": round(1 - ground.intersection(sp).area / sp.area, 3),
             "footprint_outside_plot_m2": round(ground.difference(sp).area, 1),
         })
-        if sp.geom_type == "Polygon":
+        if sp.geom_type == "Polygon" and design["buildings"]:
             m["min_setback_m"] = round(min(sp.exterior.distance(Polygon(b["storeys"][0]["footprint"]))
                                            for b in design["buildings"]), 2)
     try:
@@ -124,6 +124,8 @@ def _windows_on(fp, w):
 
 
 def schedule(design, out_dir: Path):
+    if not design["buildings"]:  # empty scheme (e.g. the blank canvas): nothing to schedule
+        return None
     rows = []
     for b in design["buildings"]:
         for s in b["storeys"]:

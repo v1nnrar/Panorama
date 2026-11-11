@@ -267,3 +267,20 @@ client's renders, higher is better).
   reading lines (client fails §21 + §25; E / A pass every hard rule with 87 % / 86 % of the client's GFA; option D is
   the largest legal floor area, 94 %, but misses two quality floors).
 - No geometry change; scores unchanged.
+
+## 2026-11-11 — iteration 22: D10 verify parking zone 02 — BLOCKED
+- PSP §25 odst. 2 + příloha 3 point to the Atlas Prahy layer "Zóny města – parkovací stání"
+  (app.iprpraha.cz/apl/app/atlas-prahy/?&service[]=zony-mesta-parkovaci-stani). app.iprpraha.cz is reachable, but the
+  layer itself is an ArcGIS MapServer on **gs-pub.praha.eu** (also gs-mep.mepnet.cz / gs-prv.praha.eu), and the
+  environment's egress proxy refuses those hosts (403 on CONNECT). LOOP forbids adding hosts → item marked blocked.
+- Sensitivity of the ASSUMED zone (spaces of margin = capacity − required minimum, current basement levels):
+
+  | Zone | Client | A | B | C | D | E |
+  |---|---|---|---|---|---|---|
+  | 01 | −142 | +220 | +377 | +348 | +157 | +203 |
+  | 02 (assumed) | −241 | +135 | +314 | +281 | +66 | +116 |
+  | 03 | −364 | +36 | +236 | +202 | **−50** | +14 |
+
+  The client scheme fails in every zone; in zone 03 option D would need a 4th basement level and A/E become tight.
+- To unblock: the user reads the zone for the plot (Milevská / Na Pankráci) off the public Atlas map, or allows
+  gs-pub.praha.eu for this environment. No model change; scores unchanged.

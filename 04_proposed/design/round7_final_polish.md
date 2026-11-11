@@ -19,4 +19,10 @@ All 10 downloaded and checked by Claude (tower drift = mean abs RGB diff vs the 
 | 10 | minimal ramp flanked by steps | 33.7 | 1cfd6e1e-5d3d-42d1-9423-87a4081d4b33 |
 
 ## Picks
-_(user's pick goes here)_
+User: #2 okay, but the bridge junction is still wrong; wants a serpentine path up the L-building from its right end, open (few trees) and attractive. → follow-up below.
+
+## Follow-up (from #2 `9b00d879…`), medium 1k, 2 × 0.5 = 1.0 credit — both downloaded and checked
+| # | Bridge | L-roof | Job ID |
+|---|---|---|---|
+| A (recommended) | one clean glazed walkway framed by lattice, symmetric, smooth into both crowns | open lawns, few trees, winding path from the right end, mini amphitheatre, kiosk pavilion, pool | 695c0635-3669-4c79-9137-7682d13c8609 |
+| B | lattice bridge with an oval opening, symmetric | serpentine promenade along the roof, reflecting pool, lawns | aa343d73-4738-4f5c-8b69-c4d690972ce0 |

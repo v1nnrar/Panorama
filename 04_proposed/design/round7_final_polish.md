@@ -120,3 +120,10 @@ Prices: upscale (bytedance) 4k = 2 credits.
   Problems: the separate round building at the right tower's base is gone — the front building now runs on to the right
   tower and swallows it (gap/walkway lost); the head sits very close to the drum towers; no visible ground-level ramp at
   the right end (only arches in the facade). Wellness roof and towers unchanged.
+- User: `ea98761a` wrong (L merged with everything); wants ONE separate L, stair-like access going up/down at both ends,
+  aesthetic edge; use the empty-plot reference. Base realistic A `d0a30bf3` + empty plot `afafc2b0` + wellness from
+  `091ea4eb`, Nano Banana 2.1 4k, 3 credits, checked: **`338a12c8-7e43-48e8-afe2-6bde9b1c80a3`** — L separate (walkways to
+  the round building and towers), lattice edge as railing on both long sides, wide stairs down to the ground at the left
+  end, roof park with glass bar pavilion at the top; round building and towers kept; wellness kept. Weak points: the right
+  end slopes down but its stair is not clearly readable; the L's back arm runs close along the drum towers; camera a bit
+  closer than before.

@@ -76,3 +76,13 @@ ground on all sides (front, back, end) as a landscaped hill: no end wall, no sta
 Check when this is modelled: about 17 m of descent over about half the length is steep for a step-free walk.
 The winding paths make the walking route longer; a real gradient (≤ 1:12 step-free, ≤ 1:8 with landings)
 needs to be checked against the actual length.
+
+## Iteration 6: one promenade, open edges, a purpose for the end
+
+Edits of `05_melt_B.png` (amphitheatre) and `05_melt_A.png` (café) (jobs 2e037374-d026-441e-93ad-c33985e3e6fb,
+6df0c72a-07d5-4f32-9d7f-c17e5357e203). Both have one continuous ~4 m stone promenade from the high end down to the ground.
+
+| File | End use | Notes |
+|---|---|---|
+| `06_amphitheatre.png` | open-air amphitheatre: curved grass and timber seating terraces down to a round stage plaza at ground level | tail meets the ground with no edge on the front, back and tip, so it can be entered from any direction. **Preferred.** |
+| `06_cafe_plaza.png` | glazed café pavilion under the lattice, opening onto a round café plaza | promenade reads well, but the lattice lifts back up over the café, so the tip does not merge with the ground as fully |

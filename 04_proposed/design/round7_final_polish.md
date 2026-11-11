@@ -96,3 +96,13 @@ round building lost part of its lattice crown ring. Towers unchanged.
   spa on the back-left block (sauna cabins, timber deck, loungers, no water) ✓; lattice ring back on the round building's
   meadow roof ✓; front building now a full glass curtain wall rising to its left peak ✓ — but on the street side most of
   its white lattice fins were replaced by glass (fins remain only as a cluster at the left end).
+
+## Realism pass (user: images look too "AI") — 3 + 2.75 credits, checked
+Causes: edit-of-edit chains smooth textures; GPT Image "flare" variant + "photoreal render" wording → CGI look; no real
+photo references. Fix: one clean pass from the final image with a "real drone photograph" prompt (real materials,
+weathering, natural trees, haze, muted colours, sensor noise; "no CGI look").
+| Model | Result | Job ID |
+|---|---|---|
+| Nano Banana 2.1, 4k (4800×3584), 3 credits | most photographic: haze, real glass, muted colours; framing slightly wider | d0a30bf3-2e22-41fb-b5cf-869eb5eb2ec4 |
+| GPT Image 2.5 **sunburst**, high 2k, 2.75 credits | realistic trees/cars/roofs, closest framing to the original | 183f20fb-d86a-4d4e-955e-27f266b746c6 |
+Prices: upscale (bytedance) 4k = 2 credits.

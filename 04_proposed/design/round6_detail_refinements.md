@@ -20,4 +20,8 @@ Same camera as the pick (client render-000 aerial). One reference: the pick.
 | 10 | spiral bands curl into a bow-shaped crown pavilion | three pavilions under one canopy / crescent with lattice loggias | 806a7f05-b650-4678-b7ca-9820baf21cf5 |
 
 ## Picks
-_(user's pick goes here)_
+**User favourite (11 Nov 2026): #1 `d79d1467-e379-4183-99a7-e4a2c8a29a52`** (double-ring crowns).
+
+## Follow-up
+- Symmetrical towers (left tower = mirror twin of the right one, everything else kept), medium 1k, 0.5 credits:
+  `a2b9baac-ad8e-4c0f-b79f-5cb88feaf263`

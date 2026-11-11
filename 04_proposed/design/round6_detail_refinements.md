@@ -42,3 +42,7 @@ Same camera as the pick (client render-000 aerial). One reference: the pick.
   in the right tower, changes only inside the left tower (x 506–715, y 126–474); small rough patch left of the left crown.
   Higgsfield render from [guide + 5d3ef4fd], 0.5 credits: `bde70a28-604c-4e5b-8727-65ced8792c8b` — REJECTED by Claude's
   check: the right tower's crown and pool changed.
+- User: the left tower must be an identical twin of the right one (the lattice running down into the bridge looked
+  altered). Made from `5d3ef4fd`: the RIGHT tower mirrored about x = 722 (between the towers), lifted 19 px to the left
+  tower's height, base from the flipped original → `refs/twin_towers_final.png`. Verified: 0 changed pixels in the right
+  tower; left tower = exact mirror of the right one (crown funnel, lattice into the bridge, spiral band down to the left).

@@ -76,3 +76,9 @@ from the right end, café pavilion, small rectangular water at the left corner. 
   glass railing all round, roof rising from the low right end (path into the complex + stairs up) to the highest point at
   the left end, courtyard behind at ground level. Towers, ribbon, back block, round building unchanged. Small pool on the
   L's back part no longer visible.
+
+## FINAL cohesive image (user, 11 Nov 2026) — 0.5 credit, checked
+User marked: correct BOTTOM = round 7 #7 `560c6bc9…` (low lattice buildings, cascade + pool front right); correct TOP =
+`6c9c83cf…` (taller left tower, lattice ribbon). Identified by pixel match of the screenshots. Images aligned (scale 1.0,
+offset −2/+6 px); towers + ribbon pasted from 6c9c83cf onto 560c6bc9 → `refs/final_cohesive_guide.png` (media
+`67dc0c60…`); seamless render **`d390ed4d-ba06-4bf2-aec0-7f37c194219e`** — matches the composite, seams gone.

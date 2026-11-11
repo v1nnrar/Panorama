@@ -69,6 +69,7 @@ def main():
                  f"{m['storeys_above_ground']} | {m.get('hotel_keys_est')} | {m.get('flats_est')} | "
                  f"{m.get('parking_required_min')} / {m.get('parking_capacity_est')} | {r['levels']} | {m.get('psp21_windows_failing')} | "
                  f"{m.get('daylight_proxy_fail_ratio')} | {m.get('courtyard_sun_hours_mean_mar21')} | {m['built_up_ratio']} |")
+    L += comparison(rows)
     L += ["", "## Hotel programme (D8)", "",
           "Keys from room floors only; mix 70 % standard 28 m² / 20 % superior 34 m² / 10 % suites 56 m² (net), 62 % room-floor",
           "efficiency; benchmarks for a 4* city hotel: 300–450 keys, lobby + F&B ≥ 2.0, meeting ≥ 1.5, spa ≥ 0.8 m² per key",
@@ -113,6 +114,79 @@ def main():
             dr.text((x + 10, y + 10), f"{r['title'][:60]}  |  score {r['score']}  |  {r['m']['gfa_m2']:,.0f} m²", fill="black", font=font)
         sheet.save(ROOT / "06_reports" / "capacity_study_aerials.jpg", quality=88)
     print(out.read_text())
+
+
+def comparison(rows):
+    """D9: one-page comparison of the client scheme and the two best options (+ side-by-side aerial image)."""
+    client = next((r for r in rows if r["key"] == "Client scheme (baseline)"), None)
+    top = [r for r in rows if r is not client][:2]
+    if not client or not top:
+        return []
+    cols = [client] + top
+    def keys(r):
+        hp = r["m"].get("hotel_programme") or {}
+        return hp.get("keys", r["m"].get("hotel_keys_est"))
+    items = [
+        ("Score (GFA k m² × quality)", lambda r: f"**{r['score']}**"),
+        ("Hard rules (MPP + PSP)", lambda r: "all pass" if not r["hard_fail"] else f"{len(r['hard_fail'])} fail"),
+        ("Above-ground GFA m²", lambda r: f"{r['m']['gfa_m2']:,.0f}"),
+        ("… share of the client's GFA", lambda r: f"{r['m']['gfa_m2'] / client['m']['gfa_m2']:.0%}"),
+        ("FAR", lambda r: r["m"]["plot_ratio_far"]),
+        ("Max height m / storeys", lambda r: f"{r['m']['height_top_of_parapet_m']} / {r['m']['storeys_above_ground']}"),
+        ("Hotel keys / flats (est.)", lambda r: f"{keys(r)} / {r['m'].get('flats_est')}"),
+        ("Parking need / capacity", lambda r: f"{r['m'].get('parking_required_min')} / {r['m'].get('parking_capacity_est')}"),
+        ("Basement levels", lambda r: r["levels"]),
+        ("§21 failing neighbour windows", lambda r: r["m"].get("psp21_windows_failing")),
+        ("Daylight: windows below VSC 15 %", lambda r: f"{r['m'].get('daylight_proxy_fail_ratio', 0):.0%}"),
+        ("Courtyard sun 21 March h", lambda r: r["m"].get("courtyard_sun_hours_mean_mar21")),
+        ("Built-up ratio", lambda r: r["m"]["built_up_ratio"]),
+    ]
+    L = ["", "## One-page comparison — client scheme vs the two best options (D9)", "",
+         "![Client scheme and the two best options from the same calibrated aerial camera](capacity_comparison.jpg)", "",
+         "| | " + " | ".join(r["title"] for r in cols) + " |", "|---|" + "---|" * len(cols)]
+    for label, f in items:
+        L.append(f"| {label} | " + " | ".join(str(f(r)) for r in cols) + " |")
+    L += ["", "Reading:"]
+    if client["hard_fail"]:
+        L.append(f"- The client scheme is not permittable as drawn: {'; '.join(client['hard_fail'])}.")
+    for r in top:
+        share = r["m"]["gfa_m2"] / client["m"]["gfa_m2"]
+        miss = ", ".join(m.split(" ")[0] for m in r["misses"]) or "none"
+        L.append(f"- **{r['title']}** passes every hard rule with {share:.0%} of the client's floor area; "
+                 f"quality floors missed: {miss}.")
+    legal = [r for r in rows if r is not client and not r["hard_fail"]]
+    big = max(legal, key=lambda r: r["m"]["gfa_m2"]) if legal else None
+    if big and big not in top:
+        L.append(f"- Largest legal floor area: **{big['title']}** with {big['m']['gfa_m2']:,.0f} m² "
+                 f"({big['m']['gfa_m2'] / client['m']['gfa_m2']:.0%} of the client's), score {big['score']} because it "
+                 f"misses quality floors ({', '.join(m.split(' ')[0] for m in big['misses']) or 'none'}).")
+    L.append("- All numbers are capacity-study estimates from the parametric model (see assumptions above); "
+             "they rank options, they are not a permit check.")
+    # side-by-side image
+    ims = []
+    for r in cols:
+        for cand in ("render_aerial_S.png", "render_aerial_S_like_render000.png"):
+            p = r["dir"] / "model" / cand
+            if p.exists():
+                ims.append((r, Image.open(p).convert("RGB").resize((800, 566))))
+                break
+    if ims:
+        W, H = 800, 566 + 70
+        sheet = Image.new("RGB", (W * len(ims), H), "white")
+        dr = ImageDraw.Draw(sheet)
+        try:
+            f1 = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 22)
+            f2 = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 18)
+        except Exception:
+            f1 = f2 = None
+        for k, (r, im) in enumerate(ims):
+            sheet.paste(im, (k * W, 70))
+            dr.text((k * W + 12, 8), r["title"][:58], fill="black", font=f1)
+            dr.text((k * W + 12, 40), f"score {r['score']}  ·  {r['m']['gfa_m2']:,.0f} m²  ·  "
+                    + ("all hard rules pass" if not r["hard_fail"] else f"{len(r['hard_fail'])} hard rules fail"),
+                    fill="black", font=f2)
+        sheet.save(ROOT / "06_reports" / "capacity_comparison.jpg", quality=90)
+    return L
 
 
 if __name__ == "__main__":

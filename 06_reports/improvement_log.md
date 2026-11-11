@@ -258,3 +258,12 @@ client's renders, higher is better).
   floor becomes conference/spa → 196 keys (still < 300: the client's hotel is small).
 - Hotel programme flags: A, B, C, E **OK**; D only "keys < 300". Scores unchanged (E 71.87, A 71.13, D 68.74,
   B 62.85, C 55.52), all hard rules pass; parking re-sized automatically (still 2 levels for A/B/C/E).
+
+## 2026-11-11 — iteration 21: D9 presentation — client vs the two best options — KEPT (completeness)
+- Cycles aerials (S + SE) of option E (A's from iteration 15 still current; the later D6/D11 changes are below ground
+  or use-only). All aerials use the context-calibrated client camera, so the three images are directly comparable.
+- `tools/score_options.py` now generates a **one-page comparison** at the top of `06_reports/capacity_study.md`:
+  side-by-side image `06_reports/capacity_comparison.jpg` (client | #1 | #2), a metric-by-metric table and derived
+  reading lines (client fails §21 + §25; E / A pass every hard rule with 87 % / 86 % of the client's GFA; option D is
+  the largest legal floor area, 94 %, but misses two quality floors).
+- No geometry change; scores unchanged.

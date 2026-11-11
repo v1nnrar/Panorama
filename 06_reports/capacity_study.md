@@ -15,6 +15,33 @@ Basement levels: fewest 3.5 m levels whose capacity covers the PSP §25 minimum 
 | 5 | Option C — mid-rise city blocks (no towers) | **55.52** | 61,684 | 3.74 | 38.4 | 10 | 317 | 257 | 500 / 781 | 2 | 0 | 0.156 | 2.02 | 0.378 |
 | 6 | Client scheme (baseline) | **0.0** | 91,483 | 5.547 | 83.8 | 22 | 257 | 632 | 728 / 487 | 2 | 10 | 0.251 | 3.33 | 0.502 |
 
+## One-page comparison — client scheme vs the two best options (D9)
+
+![Client scheme and the two best options from the same calibrated aerial camera](capacity_comparison.jpg)
+
+| | Client scheme (baseline) | Option E — max yield (search) | Option A — hotel tower + residential blocks |
+|---|---|---|---|
+| Score (GFA k m² × quality) | **0.0** | **71.87** | **71.13** |
+| Hard rules (MPP + PSP) | 2 fail | all pass | all pass |
+| Above-ground GFA m² | 91,483 | 79,854 | 79,030 |
+| … share of the client's GFA | 100% | 87% | 86% |
+| FAR | 5.547 | 4.842 | 4.792 |
+| Max height m / storeys | 83.8 / 22 | 95.2 / 27 | 95.2 / 27 |
+| Hotel keys / flats (est.) | 257 / 632 | 426 / 402 | 441 / 402 |
+| Parking need / capacity | 728 / 487 | 665 / 781 | 646 / 781 |
+| Basement levels | 2 | 2 | 2 |
+| §21 failing neighbour windows | 10 | 0 | 0 |
+| Daylight: windows below VSC 15 % | 25% | 20% | 19% |
+| Courtyard sun 21 March h | 3.33 | 2.0 | 2.01 |
+| Built-up ratio | 0.502 | 0.386 | 0.377 |
+
+Reading:
+- The client scheme is not permittable as drawn: PSP §21: neighbour windows failing the 45°/45° distance angle; PSP §25: parking capacity minus required minimum (spaces).
+- **Option E — max yield (search)** passes every hard rule with 87% of the client's floor area; quality floors missed: daylight_proxy_fail_ratio.
+- **Option A — hotel tower + residential blocks** passes every hard rule with 86% of the client's floor area; quality floors missed: daylight_proxy_fail_ratio.
+- Largest legal floor area: **Option D — client scheme, made compliant** with 85,928 m² (94% of the client's), score 68.74 because it misses quality floors (daylight_proxy_fail_ratio, built_up_ratio).
+- All numbers are capacity-study estimates from the parametric model (see assumptions above); they rank options, they are not a permit check.
+
 ## Hotel programme (D8)
 
 Keys from room floors only; mix 70 % standard 28 m² / 20 % superior 34 m² / 10 % suites 56 m² (net), 62 % room-floor

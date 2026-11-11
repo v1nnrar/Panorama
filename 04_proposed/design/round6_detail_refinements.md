@@ -25,3 +25,8 @@ Same camera as the pick (client render-000 aerial). One reference: the pick.
 ## Follow-up
 - Symmetrical towers (left tower = mirror twin of the right one, everything else kept), medium 1k, 0.5 credits:
   `a2b9baac-ad8e-4c0f-b79f-5cb88feaf263`
+- User: the first try drifted; wants the favourite image exactly, only the left tower's top changed (it "flows the other
+  way"). Seen in the user's screenshot: left crown rises into a swept lattice wing on its OUTER left edge with a lattice
+  skirt down the outer face; the right crown is a level ring whose lattice flows down the INNER side into the bridge.
+  Precise edit prompt (mirror the right crown onto the left, everything else unchanged), medium 1k, 0.5 credits:
+  `78db025f-cd5a-44cf-a915-481b7510d55f`

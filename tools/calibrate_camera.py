@@ -125,16 +125,24 @@ def refine_corner(G, c, d1, d2, R=12, L=14, ang=4):
     return np.array([cu, cv]), float(r0), float(r0 / (np.median(allv) + 1e-6))
 
 
+FIX_ROLL = False                                              # --fix-roll: renders with level verticals (CG)
+
+
 def solve_points(p0, X, uv_obs, W, H):
+    def full(q):
+        return np.array([*q[:5], 0.0, q[5]]) if FIX_ROLL else q
+
     def res(p):
         return (project(p, X, W, H)[0] - uv_obs).ravel()
     keep = np.ones(len(X), bool)
+    q0 = np.delete(np.asarray(p0, float), 5) if FIX_ROLL else np.asarray(p0, float)
     for _ in range(3):
-        sol = least_squares(lambda p: res(p).reshape(-1, 2)[keep].ravel(), p0, loss="soft_l1", f_scale=2.0, x_scale="jac")
-        e = np.linalg.norm(res(sol.x).reshape(-1, 2), axis=1)
+        sol = least_squares(lambda q: res(full(q)).reshape(-1, 2)[keep].ravel(), q0, loss="soft_l1", f_scale=2.0,
+                            x_scale="jac")
+        e = np.linalg.norm(res(full(sol.x)).reshape(-1, 2), axis=1)
         keep = e < max(3.0, 2.5 * np.median(e))
-        p0 = sol.x
-    return sol.x, e, keep
+        q0 = sol.x
+    return full(sol.x), e, keep
 
 
 def point_mode(a, cam, img, D, W, H, plot, refs, p0):
@@ -189,11 +197,17 @@ def main():
     ap.add_argument("--manual", help="JSON list of hand-picked correspondences")
     ap.add_argument("--only-manual", dest="only_manual", action="store_true", help="solve on the --manual points only")
     ap.add_argument("--min-resp", dest="min_resp", type=float, default=40.0, help="minimum corner edge response")
+    ap.add_argument("--fix-roll", dest="fix_roll", action="store_true", help="keep roll = 0 (level camera)")
+    ap.add_argument("--init", help="JSON [x, y, z, yaw, pitch, roll, lens] start pose (camera not yet in params.yaml)")
+    ap.add_argument("--image", help="client image (default: renders/render-NNN.jpg from the camera name)")
     ap.add_argument("--exclude", default="", help="comma list of RÚIAN ids to skip (changed since the survey)")
     a = ap.parse_args()
+    global FIX_ROLL
+    FIX_ROLL = a.fix_roll
     d = Path(a.scheme)
-    cam = next(c for c in yaml.safe_load((d / "params.yaml").read_text())["render"]["cameras"] if c["name"] == a.camera)
-    ref_img = d / "renders" / f"render-{re.search(r'like_render-?(\d{3})', a.camera).group(1)}.jpg"
+    cams = yaml.safe_load((d / "params.yaml").read_text())["render"]["cameras"]
+    cam = next((c for c in cams if c["name"] == a.camera), None)
+    ref_img = Path(a.image) if a.image else d / "renders" / f"render-{re.search(r'like_render-?(\d{3})', a.camera).group(1)}.jpg"
     img = Image.open(ref_img).convert("RGB")
     W, H = img.size
     D = edge_distance(img)
@@ -202,9 +216,12 @@ def main():
     plot = unary_union([Polygon(p["ring"]) for p in des["site"]["parcels"]])
     refs = json.loads((ROOT / "00_site/survey/reference_buildings.json").read_text())["buildings"]
     P = sample_outlines(refs, plot)
-    loc, tgt = np.array(cam["location"], float), np.array(cam["target"], float)
-    v = tgt - loc
-    p0 = [*loc, math.atan2(v[1], v[0]), math.atan2(v[2], math.hypot(v[0], v[1])), 0.0, cam.get("lens", 35)]
+    if a.init:
+        p0 = list(json.loads(Path(a.init).read_text()))
+    else:
+        loc, tgt = np.array(cam["location"], float), np.array(cam["target"], float)
+        v = tgt - loc
+        p0 = [*loc, math.atan2(v[1], v[0]), math.atan2(v[2], math.hypot(v[0], v[1])), 0.0, cam.get("lens", 35)]
 
     if a.points:
         p, X, obs, e, keep, tags = point_mode(a, cam, img, D, W, H, plot, refs, p0)

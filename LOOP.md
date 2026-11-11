@@ -66,6 +66,11 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       (03_existing/overlays/calib_render000_points.json), 14 kept → **1.64 px = 0.42 m** at the site. Slightly short of
       20 points / 1.5 px: the far references are hazy and two NW slab corners disagree with RÚIAN by 5–7 px.
 - [ ] P2. Same for render-001 (aerial, other angle) and render-002 (from the SE).
+      Attempt 1 (2026-11-11): render-001 is the SAME frame as render-000 (pixel difference = JPEG noise) → same camera,
+      no second view. render-002 (CG, white context massing, from (≈150, −145, ≈85) looking NW): only the slab row
+      53/54/61/63 is a surveyed reference (left 30 % of the frame) → 4.95 px ≈ 1.4 m, roll unstable; not adopted.
+      Next attempt: add references with a RÚIAN outline but UNKNOWN height (office E kod 96272635, three-wing 133,
+      twin towers if in RÚIAN) as free-height parameters (`--free-height`), so the right half is constrained.
 - [ ] P3. `tools/triangulate.py`: pick each client building's roof corners in 2–3 calibrated views, least-squares 3D
       points with covariance; update footprints/heights where the shift > 1 m; keep single-view items flagged.
 - [ ] P4. Office E from RÚIAN (kod 96272635, 12 storeys in the register, terrain ≈ 7 m below site GF on the east;

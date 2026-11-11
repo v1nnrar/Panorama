@@ -342,3 +342,13 @@ client's renders, higher is better).
 - Score (Cycles): aerial 0.3466 → 0.3409, mean **0.4859 → 0.4848** (−0.0011, within the 0.005 tolerance) — kept because
   the camera is now tied to surveyed points instead of our own judgement. Overlays regenerated.
 - Next: P2 (render-001 / -002), then P3 triangulates our buildings in the calibrated views.
+
+## 2026-11-11 — iteration 26: P2 calibrate render-001 / render-002 — PARTIAL (attempt 1, no model change)
+- render-001 = render-000 (identical frame, mean pixel difference 0.9 = JPEG noise): it shares the calibrated aerial
+  camera and gives no second view for triangulation.
+- render-002 (client CG, white context massing): start pose from hand picks, then `calibrate_camera.py --points` with
+  new options `--init` (start pose), `--image`, `--fix-roll` (level camera). Camera ≈ (160, −152, 95) looking NW,
+  25 mm. Only the slab row 53/54/61/63 is a surveyed reference in view (x < 310 px of 1012); the detector's corners on
+  the far references 125/126 fell on our towers A and B. Result 4.95 px ≈ 1.4 m with one-sided coverage, roll
+  unstable (−8.8° when free) → **not adopted** (no camera added, model unchanged, score unchanged 0.4848).
+- Next attempt (LOOP P2): free-height references (office E, three-wing 133) to constrain the right half of render-002.

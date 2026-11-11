@@ -106,3 +106,10 @@ weathering, natural trees, haze, muted colours, sensor noise; "no CGI look").
 | Nano Banana 2.1, 4k (4800×3584), 3 credits | most photographic: haze, real glass, muted colours; framing slightly wider | d0a30bf3-2e22-41fb-b5cf-869eb5eb2ec4 |
 | GPT Image 2.5 **sunburst**, high 2k, 2.75 credits | realistic trees/cars/roofs, closest framing to the original | 183f20fb-d86a-4d4e-955e-27f266b746c6 |
 Prices: upscale (bytedance) 4k = 2 credits.
+- From realistic version A `d0a30bf3` (user markings: blue = front building too high; pink = both ends down to the
+  ground, accessible; yellow = round building extends forward; red = wellness with one pool + one modern sauna, dim LEDs),
+  Nano Banana 2.1 4k, 3 credits, checked: **`091ea4eb-01db-4351-9a5e-7ad578509ce5`** — front building much lower, roof of
+  large stepped platforms with lawns and a stone path + stairs, both ends near ground level ✓; round building larger ✓;
+  wellness = dark timber sauna with warm interior light, rectangular pool, timber deck, loungers, planting ✓ (very good).
+  Side effects: front building lost its white lattice fins (plain glass now) and reaches further left toward the drums;
+  round building's roof turned from meadow to a grey plaza; camera slightly closer.

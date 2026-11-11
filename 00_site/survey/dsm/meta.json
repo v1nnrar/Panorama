@@ -1,0 +1,30 @@
+{
+ "dmp1g": {
+  "service": "ags.cuzk.gov.cz/arcgis2/rest/services/dmp1g/ImageServer",
+  "bbox_sjtsk": [
+   -742582.7186564389,
+   -1047789.6649608098,
+   -741794.0350134994,
+   -1047000.9813070672
+  ],
+  "size": [
+   788,
+   788
+  ],
+  "res_m": 1.0
+ },
+ "dmr5g": {
+  "service": "ags.cuzk.gov.cz/arcgis2/rest/services/dmr5g/ImageServer",
+  "bbox_sjtsk": [
+   -742582.7186564389,
+   -1047789.6649608098,
+   -741794.0350134994,
+   -1047000.9813070672
+  ],
+  "size": [
+   788,
+   788
+  ],
+  "res_m": 1.0
+ }
+}

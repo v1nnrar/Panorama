@@ -53,6 +53,22 @@ Section D is the **top priority** (user request, 9 Nov 2026). For a D item:
   Keep the existing office E and the official plot. Footprints stay ≥ 2 m inside private plot edges.
 
 ## Backlog (ranked)
+### P. Precision to ±1 m (user request 2026-11-11 — TOP PRIORITY, before the rest)
+Goal: every client-scheme position and height known to ±1 m where the images allow it, with an error estimate per
+building. Tools: `tools/survey_heights.py` (ČÚZK DMP 1G / DMR 5G, z = 0 = site GF 267.70 m a.s.l.),
+`tools/reference_buildings.py` (RÚIAN footprints + surveyed heights → 00_site/survey/reference_buildings.json),
+`tools/calibrate_camera.py` (edge-based fit; too weak alone: 48 % inliers, 6.4 px median on render-000).
+Note: the surface model predates the drum towers, the three-wing building and office E — use only references that
+exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer ones.
+- [ ] P1. Point-mode calibration: add correspondences (≥ 20 hand-picked roof/base corners of `usable` references,
+      spread over the image) to `tools/calibrate_camera.py`; recalibrate render-000 to ≤ 1.5 px RMS (≈ 0.4 m at the site).
+- [ ] P2. Same for render-001 (aerial, other angle) and render-002 (from the SE).
+- [ ] P3. `tools/triangulate.py`: pick each client building's roof corners in 2–3 calibrated views, least-squares 3D
+      points with covariance; update footprints/heights where the shift > 1 m; keep single-view items flagged.
+- [ ] P4. Office E from RÚIAN (kod 96272635, 12 storeys in the register, terrain ≈ 7 m below site GF on the east;
+      the trimmed southern wedge is in the cadastral outline — model it as a low podium at its true level).
+- [ ] P5. `06_reports/accuracy.md`: per building the achieved ± (plan, height), method and number of views.
+
 ### D. Capacity study for OUR design (priority)
 - [x] D1. Option B: make it pass §21 (failing: panel blocks south of Milevská, three-wing building north) — move/slim/rotate
       the towers or step the podium; then grow GFA.

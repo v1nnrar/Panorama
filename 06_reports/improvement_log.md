@@ -313,3 +313,16 @@ client's renders, higher is better).
 - Overlay: west podium and the east link with its fascia coincide with the client image.
 - Score: Workbench 0.4656 → 0.4659; Cycles (aerial + render-006) **0.4855 → 0.4859**. Client-scheme GFA 91,483 → 91,026 m².
   IFC 0 errors; test block 6/6. Capacity study re-scored (baseline only changes its GFA; still fails §21 + §25).
+
+## 2026-11-11 — precision to ±1 m (user request): survey references — STARTED (section P added to LOOP.md)
+- New sources (hosts already allowed): ČÚZK **DMP 1G** surface and **DMR 5G** terrain (1 m grid, 788 × 788 m tile,
+  00_site/survey/dsm/) and **RÚIAN** cadastral building outlines (161 buildings within 320 m).
+- New tools: `tools/survey_heights.py` (heights in the local frame; site GF = 267.70 m a.s.l.),
+  `tools/reference_buildings.py` (→ 00_site/survey/reference_buildings.json, 131 usable height references),
+  `tools/calibrate_camera.py` (edge-distance calibration on the references).
+- Findings: the surface model predates the drum towers (≈ 0 m there) and the three-wing building (9 m, under
+  construction) — the OSM heights used so far for those are estimates only; the 104 m tower is **99.25 m**, City Tower
+  **114.1 m**; slab blocks agree with OSM within 3 m. Office E: RÚIAN gives **12 storeys** (model 9), terrain ≈ 7 m
+  below site GF, and the cadastral outline includes the southern wedge (likely a low podium, not ramp only).
+- Edge-only calibration of render-000 is too weak (48 % inliers, median 6.4 px ≈ 1.7 m) → P1 adds hand-picked corner
+  correspondences; P2–P5 follow. No model change in this step.

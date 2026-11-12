@@ -39,3 +39,22 @@ Shifts are vs. the model **before** iteration 28 (B, B3, B2 PH then moved).
 - **A**: south crown corners 5–7 m north of the model, NW corner −2 m: inconsistent → crown size / corner identity to re-check.
 - **C1**: the detected 'v0' has a south facade below it, so it is not the NW corner → identity wrong; re-pick.
 - **E**: inconsistent; the client's E differs from the RÚIAN outline — handled in P4.
+
+## Iteration 29 (2026-11-12): hand-read corners and a vertical edge
+| Item | image px | result | vs model |
+|---|---|---|---|
+| A NW crown (v3) | 449.5, 193.7 | (−20.83, 24.74) at 83.5 m | along −1.5, across −2.1 m |
+| A SE crown (v1) | 674.8, 198.7 | (26.89, 0.77) at 83.5 m | along **+7.2**, across −1.5 m |
+| D NW roof (v0) | 380.0, 362.5 | (−39.89, 40.95) at 32.0 m | across +2.9 m |
+| D SW parapet (v1) | 400.8, 408.3 | (−40.48, 17.47) at 32.0 m | across −1.3 m |
+| **C1 SW vertical edge** | base 540.4, 689.0 / roof 531.7, 595.0 | base on DMR 5G terrain (−0.45 m) → **(−31.89, −57.07)**; roof on the same vertical → **28.2–28.6 m** | 3.8 m W, 1.7 m N; roof **5.2 m lower** than 33.6 |
+| C1 NW roof (v0) | 497.3, 551.7 | at 28.4 m → (−34.67, −40.90) | (−2.1, −1.7) m |
+
+- **C1 height**: at 28.4 m the SW roof corner falls 0.6 m from its own base; at the model's 33.6 m it would be 6 m off —
+  geometry alone says ≈ 28.4 m. Brightness profile down the SW edge: 9 window rows at 9.4 px (≈ 2.85 m) + a dark
+  ground-floor band → 10 storeys. **Conflicts with render-005** (10 window rows over a tall glazed GF = 11 storeys,
+  iteration 5). C2 shares C1's levels. → Re-count render-005 before changing (next P3 step).
+- **A**: near (SE) and far (NW) crown corners disagree along the view by 8.7 m → a crown-size or height difference that
+  one view cannot separate; across the view both agree on ≈ −1.8 m. Kept; needs a second view.
+- **D**: the measured west wing edge runs almost N–S (1.4°), the model's at 10.5° → a rotation of D's west wing, 2 points
+  only. Kept.

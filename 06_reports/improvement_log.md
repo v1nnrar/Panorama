@@ -375,3 +375,12 @@ client's renders, higher is better).
   D (one corner, 1.7 m), E (P4). Details: 06_reports/measure_render000.md.
 - Score (Cycles, all cameras): **0.4848 → 0.4854** (aerial 0.3409 → 0.3428, render-004 0.4199 → 0.4293, render-005
   0.6663 → 0.6618, -006 0.6056 → 0.6040, -003 0.3913 → 0.3892). Overlay: B's roof outline now sits on the client's roof.
+
+## 2026-11-12 — iteration 29: P3 continued (A, C1, D) — MEASURED, model unchanged
+- Hand-read corners on 6× crops (with grid) instead of the detector. A: near and far crown corners disagree by 8.7 m
+  along the view (size vs height not separable in one view). D: west wing edge measured almost N–S vs 10.5° in the model.
+- **C1 south-west vertical edge** (base on the pavement + roof on the same vertical, base height from DMR 5G): plan
+  (−31.89, −57.07), roof **≈ 28.4 m** (model 33.6 m). Self-consistent only at that height (6 m mismatch at 33.6).
+  Facade profile: 9 window rows at ≈ 2.85 m + ground floor = 10 storeys — conflicts with the 11 counted in render-005.
+- No change this iteration (conflicting client images); next: re-count render-005, then update C1/C2 together.
+  Score unchanged 0.4854. Details: 06_reports/measure_render000.md.

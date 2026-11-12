@@ -79,6 +79,8 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       points with covariance; update footprints/heights where the shift > 1 m; keep single-view items flagged.
       Iteration 28 (single view, P2 blocked): tool done; B (+B3, B2 inner edge) moved (−3.93, −0.23), B2 PH (−1.16, −1.62);
       06_reports/measure_render000.md. Still open: A (inconsistent crown corners), C1 (re-pick, wrong vertex), D (1 corner).
+      Iteration 29: C1 SW vertical edge → roof ≈ 28.4 m (model 33.6) and west edge (−34.67, −40.90)→(−31.89, −57.07);
+      NEXT: re-count C1/C2 storeys in render-005 against this (11 vs 10), then update C1 (+C2 levels) together.
 - [ ] P4. Office E from RÚIAN (kod 96272635 = reference 154; its west wall is at x ≈ 91–92, the model's at 94.8–98.3 →
       3–4 m off; 12 storeys in the register, terrain ≈ 7 m below site GF on the east;
       the trimmed southern wedge is in the cadastral outline — model it as a low podium at its true level).

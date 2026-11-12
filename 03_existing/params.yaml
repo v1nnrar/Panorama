@@ -279,7 +279,9 @@ render:
     - {name: aerial_S_like_render000, location: [-90.37, -246.31, 208.68], target: [-57.91, -172.27, 149.83], lens: 35.244, resolution: [1280, 905]}
     - {name: street_SW_like_render005, location: [-74, -86, 1.7], target: [3.5, -37.5, 37], lens: 32.5, shift_y: 0.075, resolution: [1400, 1448]}   # cam_search after the audit geometry fix; client aspect 700x724
     # ESTIMATED from render-004: corner fit of tower B (nearest corner = SW, so the camera stands SW of B, not SE)
-    - {name: street_SE_like_render004, location: [-7.9, -119.7, 1.7], target: [42.1, -70.9, 4.7], lens: 40.5, shift_y: 0.454, resolution: [1244, 1484]}   # cam_search after the audit; client aspect 622x742
+    # A11 (2026-11-12): the client render omits block C here as in render-006 — no white C slab in the image while B's base,
+    # B2 and the trees show; from a camera SW of B (B's near corner = roof high point) C2 would hide B's lower half.
+    - {name: street_SE_like_render004, location: [-7.9, -119.7, 1.7], target: [39.1, -70.9, 4.7], lens: 41.5, shift_y: 0.454, hide: [C1, C2], resolution: [1244, 1484]}   # cam_search with C hidden; client aspect 622x742
     # Corner fit on tower A (front = SW corner, 5 points, 14 px RMS). The client render omits block C (C1 would hide A's base
     # from here), so C1/C2 are hidden for this camera only.
     - {name: dusk_diagrid_like_render006, location: [-56.0, -88.2, 1.7], target: [-22.4, -33.7, 22.8], lens: 34.4, shift_y: -0.013, hide: [C1, C2], resolution: [1086, 1742]}   # + cam_search; client aspect 543x871

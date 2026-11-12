@@ -141,7 +141,10 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       (iteration 34: paved forecourt between A0 and C + two north-park paths from the registered board; the board's
       smaller lawn outline cost 0.019 on render-003 → reverted to the old lawn.)
 
-- [ ] A11. C2 east end hides B's timber base in render-004 (client shows the base): check C2 length / whether the client render omits it.
+- [x] A11. C2 east end hides B's timber base in render-004 (client shows the base): check C2 length / whether the client render omits it.
+      (iteration 35: the client render omits block C, as in render-006 → `hide: [C1, C2]`, camera re-searched.)
+- [ ] A15. render-004 framing: the client's B is larger and further left than ours → corner-fit the camera on B's roof
+      corners and base (the cam_search optimum is local).
 - [x] A13. Tower A shows above D in render-003 where the client image has sky: the client render omits A (audit 2026-11-09).
 - [~] A14. (BLOCKED, = P2/P3b) Calibrate render-002 (SE) on context and triangulate A and B2 with render-000.
 - [ ] A12. B2 roof terrace: green roof + planters around the PV penthouse (aerial render-000).

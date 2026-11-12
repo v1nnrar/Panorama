@@ -433,3 +433,12 @@ client's renders, higher is better).
   aerial 0.3572 → 0.3529, render-005 0.6398 → 0.6349, render-006 0.6050 → 0.5981, render-003 0.3897 → 0.3906)
   → kept: the forecourt is documented on the board, the edge score partly rewards generic trees.
 - A14 marked blocked (same as P2/P3b).
+
+## 2026-11-12 — iteration 35: A11 render-004 omits block C — KEPT
+- Our render-004 showed C2's white slab over the left third; the client image has no C block at all while B's timber
+  base, B2's terraces and the street trees are visible. From a camera SW of B (B's near corner is the roof's highest
+  point at x ≈ 330 px) C2 would hide B's lower half → the client render leaves block C out, as already found for
+  render-006. Camera `hide: [C1, C2]` + `tools/cam_search.py` (Workbench 0.4628 → 0.4732: target x 42.1 → 39.1,
+  lens 40.5 → 41.5).
+- Score (Cycles): render-004 **0.4385 → 0.4906**, mean **0.4830 → 0.4934**. Framing still differs (client's B larger and
+  further left) → new item A15 (corner fit).

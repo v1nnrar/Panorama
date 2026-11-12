@@ -58,3 +58,15 @@ Shifts are vs. the model **before** iteration 28 (B, B3, B2 PH then moved).
   one view cannot separate; across the view both agree on ≈ −1.8 m. Kept; needs a second view.
 - **D**: the measured west wing edge runs almost N–S (1.4°), the model's at 10.5° → a rotation of D's west wing, 2 points
   only. Kept.
+
+## Iteration 31 (2026-11-12): D west wing
+| Item | image px | result at roof 32.0 m (±0.5) | vs model |
+|---|---|---|---|
+| D NW parapet corner (v0) | 371.3, 376.3 | (−43.66, 35.17), σ 1.1 m | cross +1.75, along −7.40 m |
+| D SW parapet corner (v1) | 401.3, 410.5 | (−40.62, 16.46), σ 1.0 m | cross −0.98, along −4.18 m |
+- The earlier D v0 read (380, 362.5) was the top of the sloping butterfly roof, not the parapet corner.
+- West edge: bearing −9.2° (model −10.6°), length 19.0 m (model 23.2 m).
+- D's SW vertical edge: with the roof at 32 m the lowest visible facade point lies at z ≈ 10.9 m — the GF and the first
+  floor are hidden by the A0 podium and trees; the 6 visible bands at 3.45 m fit, so the roof height is consistent.
+- Along-view offsets of 4–7 m change by 1.48 m per metre of assumed roof height, and a butterfly roof's parapet height
+  varies → **not separable in one view; D unchanged.** A likewise (crown size vs height). Both → LOOP P3b.

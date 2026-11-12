@@ -75,7 +75,7 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       systematic ±1.6 px tilt on the edge (CG context not survey-consistent at ±1 m). **BLOCKED** (2 failed attempts).
       Unblocks with: the client's camera for render-002 (3ds Max / Lumion scene export) or their context model, or a
       second PHOTO-based client view. Meanwhile P3 uses the calibrated render-000 + known heights (single view).
-- [ ] P3. `tools/triangulate.py`: pick each client building's roof corners in 2–3 calibrated views, least-squares 3D
+- [x] P3. `tools/triangulate.py`: pick each client building's roof corners in 2–3 calibrated views, least-squares 3D
       points with covariance; update footprints/heights where the shift > 1 m; keep single-view items flagged.
       Iteration 28 (single view, P2 blocked): tool done; B (+B3, B2 inner edge) moved (−3.93, −0.23), B2 PH (−1.16, −1.62);
       06_reports/measure_render000.md. Still open: A (inconsistent crown corners), C1 (re-pick, wrong vertex), D (1 corner).
@@ -83,6 +83,11 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       NEXT: re-count C1/C2 storeys in render-005 against this (11 vs 10), then update C1 (+C2 levels) together.
       Iteration 30: done — C1/C2 = GF + 9 (10 storeys, 31.05 m); C1 SW vertex 4.1 m west. Remaining P3: A (crown size
       vs height, needs a 2nd view or the client's section), D west-wing rotation (2 corners; add 2 more first).
+      Iteration 31: D re-measured (correct NW parapet corner): west edge bearing −9.2° = model (−10.6°), but 19.0 m long
+      (model 23.2) and 4–7 m along the view — inseparable from the butterfly roof's varying parapet height. Closed for the
+      single view; A and D move to P3b.
+- [~] P3b. (BLOCKED on P2 / client data) A crown size vs height and D's position along the render-000 line of sight need
+      a second calibrated view or the client's plans/sections.
 - [ ] P4. Office E from RÚIAN (kod 96272635 = reference 154; its west wall is at x ≈ 91–92, the model's at 94.8–98.3 →
       3–4 m off; 12 storeys in the register, terrain ≈ 7 m below site GF on the east;
       the trimmed southern wedge is in the cadastral outline — model it as a low podium at its true level).

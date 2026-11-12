@@ -398,3 +398,11 @@ client's renders, higher is better).
 - Score (Cycles): **0.4854 → 0.4855** (aerial 0.3428 → 0.3564, render-004 0.4293 → 0.4384, render-005 0.6618 → 0.6398 —
   that camera was tuned on the 11-storey model). GFA 91,282 m²; §21 failing windows 10 → 9, §25 −249 → −241.
   Capacity study baseline (client scheme) not re-scored yet (it fails §21/§25 either way).
+
+## 2026-11-12 — iteration 31: P3 D west wing — MEASURED, model unchanged; P3 closed (A, D → P3b, needs a 2nd view)
+- D's SW vertical edge cannot give a base: with the 32 m roof the lowest visible facade point is at ≈ 10.9 m (GF and first
+  floor hidden by the A0 podium and trees) — consistent with 6 visible 3.45 m bands, so D's height is confirmed.
+- Corrected NW parapet corner (the earlier pick was the butterfly roof's slope). West edge orientation matches the model
+  (−9.2° vs −10.6°); its length (19.0 vs 23.2 m) and a 4–7 m along-view offset depend on the varying parapet height
+  of the butterfly roof → no change. Single-view P3 is complete: B, B2 PH, C1, C2 updated; A and D need a second
+  view or the client's drawings (P3b, blocked with P2). Score unchanged 0.4855.

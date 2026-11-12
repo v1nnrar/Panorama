@@ -221,10 +221,12 @@ buildings:
     name: Existing corner office (parcel 1133/12)
     existing: true
     use: Office (existing, kept)
-    # AUDIT: OSM polygon trimmed at y ≈ -6.9. Its 45 m wedge south to (106.73, -53.17) is ramp/greenery on the ČÚZK
-    # orthophoto (00_site/survey/grid_ortho.jpg), not building; render-002 shows a compact block.
-    footprint: [[94.76, 12.3], [125.82, 18.02], [126.85, 12.26], [125.39, 12.02], [125.78, 10.41], [131.87, 11.17], [125.83, -4.35], [120.4, -5.47], [120.42, -6.96], [119.35, -7.83], [117.94, -7.24], [117.57, -5.99], [110.95, -6.87], [98.27, -6.87]]
-    height: 32.0                         # OSM / archiMap
+    # P4 (2026-11-12): footprint = official RÚIAN building outline (kod 96272635, 00_site/survey/reference_buildings.json
+    # #154), tower part cut at y = -7.5 on its west edge. The RÚIAN outline continues as a 45 m wedge south to
+    # (101.2, -53.4): on the ČÚZK orthophoto that area is ramp/greenery at grade → ASSUMED underground (not modelled).
+    # (Was the trimmed OSM polygon, whose west wall sat 3–4 m too far east.)
+    footprint: [[90.8, 3.7], [92.4, 4.0], [91.0, 11.4], [125.3, 17.7], [126.3, 12.2], [124.6, 11.8], [125.0, 10.0], [132.0, 11.0], [124.7, -4.6], [118.3, -5.8], [118.4, -7.2], [117.2, -8.2], [115.9, -7.9], [115.2, -6.4], [107.3, -7.5], [92.84, -7.5]]
+    height: 29.2                         # MEASURED P4: calibrated render-000, roof edge on the verticals of the RÚIAN NE / SE corners = 30.0 / 28.3 m (miss 3–4 px); OSM had 32.0. RÚIAN: 12 storeys incl. lower levels; ground level unknown (terrain model predates E)
     notes: Existing building kept in the client scheme (render-002); dark glass, white frame, bronze crown
     storeys:
       - {name: GF, height: 4.5, use: Lobby}

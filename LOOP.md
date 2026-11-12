@@ -88,9 +88,12 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       single view; A and D move to P3b.
 - [~] P3b. (BLOCKED on P2 / client data) A crown size vs height and D's position along the render-000 line of sight need
       a second calibrated view or the client's plans/sections.
-- [ ] P4. Office E from RÚIAN (kod 96272635 = reference 154; its west wall is at x ≈ 91–92, the model's at 94.8–98.3 →
+- [x] P4. Office E from RÚIAN (kod 96272635 = reference 154; its west wall is at x ≈ 91–92, the model's at 94.8–98.3 →
       3–4 m off; 12 storeys in the register, terrain ≈ 7 m below site GF on the east;
       the trimmed southern wedge is in the cadastral outline — model it as a low podium at its true level).
+      Done 2026-11-12: tower = RÚIAN outline (wedge = ramp/greenery at grade → ASSUMED underground), roof edge 29.2 m
+      measured on the RÚIAN NE/SE verticals in render-000 (30.0 / 28.3 m). Ground level stays unknown (terrain model
+      shows a construction pit there).
 - [ ] P5. `06_reports/accuracy.md`: per building the achieved ± (plan, height), method and number of views.
 
 ### D. Capacity study for OUR design (priority)

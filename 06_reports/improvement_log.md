@@ -406,3 +406,13 @@ client's renders, higher is better).
   (−9.2° vs −10.6°); its length (19.0 vs 23.2 m) and a 4–7 m along-view offset depend on the varying parapet height
   of the butterfly roof → no change. Single-view P3 is complete: B, B2 PH, C1, C2 updated; A and D need a second
   view or the client's drawings (P3b, blocked with P2). Score unchanged 0.4855.
+
+## 2026-11-12 — iteration 32: P4 office E from the cadastre — KEPT
+- Footprint = official RÚIAN outline (kod 96272635) of the tower, cut at y = −7.5 on its west edge; the outline's 45 m
+  southern wedge is ramp/greenery at grade on the orthophoto → ASSUMED underground, not modelled. The west wall moves
+  from x ≈ 94.8–98.3 (OSM) to 90.8–92.8 m; the east side shifts < 1 m; footprint 768 m².
+- Height: the surface model predates E, so the roof edge was measured in the calibrated render-000 on the verticals of
+  the surveyed NE and SE corners: 30.0 / 28.3 m (3–4 px miss) → **29.2 m** (OSM had 32.0). The terrain model shows a
+  construction pit around E (−7 … −11 m on three sides, 0 on the east), so E's ground level stays at the site GF (unknown).
+- Score (Cycles): **0.4855 → 0.4860** (aerial 0.3564 → 0.3572, render-006 0.6037 → 0.6050). Compliance unchanged
+  (4/6; §21 9 windows, §25 −241).

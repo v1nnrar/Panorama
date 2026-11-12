@@ -396,5 +396,5 @@ client's renders, higher is better).
   the NW corner is within 0.5 m → only the SW vertex moved, to (−32.02, −57.57); the west edge now runs nearer N–S
   (as measured for D's west wing).
 - Score (Cycles): **0.4854 → 0.4855** (aerial 0.3428 → 0.3564, render-004 0.4293 → 0.4384, render-005 0.6618 → 0.6398 —
-  that camera was tuned on the 11-storey model). GFA None m²; §21 failing windows 10 → 9, §25 −249 → −241.
+  that camera was tuned on the 11-storey model). GFA 91,282 m²; §21 failing windows 10 → 9, §25 −249 → −241.
   Capacity study baseline (client scheme) not re-scored yet (it fails §21/§25 either way).

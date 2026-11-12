@@ -257,9 +257,11 @@ buildings:
 landscape:
   edge_paving: 1.5
   building_paving: 3.0
-  paths:                                 # ESTIMATED from the top view
-    - [[40, -70], [47, -71], [52, 30], [45, 31]]
-    - [[-45, -20], [55, -36], [56, -31], [-44, -15]]
+  paths:                                 # ESTIMATED from the top view (board registered to the survey grid, ±2.4 m; ground features do not lean)
+    - [[40, -70], [47, -71], [52, 30], [45, 31]]             # path along B's west side
+    - [[-41.1, -19.1], [39.5, -7.7], [41.6, -22.5], [-39.0, -33.9]]   # A10: paved forecourt / drop-off between A0 and block C (cars parked on the board)
+    - [[18.2, 103.5], [-2.7, 69.6], [-5.3, 71.2], [15.6, 105.1]]   # A10: north park diagonal path, 3 m (board px 245,22 → 182,98)
+    - [[-49.8, 80.7], [-25.3, 100.5], [-23.5, 98.1], [-48.0, 78.3]]   # A10: north park NW path, 3 m (board px 75,60 → 142,20)
   lawns:
     - [[-51.0, 93.7], [18.2, 106.6], [27.3, 57.7], [-43.8, 44.5]]
   courtyard_trees: {spacing: 12, height: [6, 11], seed: 7, clear: 5}

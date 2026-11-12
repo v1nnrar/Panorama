@@ -423,3 +423,13 @@ client's renders, higher is better).
   Not yet: **A** (±4 m along the view, ±2.5 m height), **D** plan along the view (±5 m), A0, B3, B2 terrace block,
   C2 plan, U. Closing them needs the client's drawings or a second calibrated view.
 - Section P is complete apart from the blocked P2/P3b. Score unchanged 0.4860.
+
+## 2026-11-12 — iteration 34: A10 landscape from the top view — KEPT (partly)
+- Traced on the client board (registered to the survey grid, ±2.4 m; ground features do not lean like roofs):
+  **paved forecourt / drop-off** between the A0 podium and block C (cars parked there on the board; replaces the old
+  diagonal path, no trees there now), **north-park diagonal path** and **NW path** (3 m strips).
+- Variant 1 also redrew the park lawn to the board's smaller open lawn: mean 0.4860 → 0.4788 (render-003 0.3897 →
+  0.3705) → beyond tolerance. Variant 2 (old lawn kept): **0.4860 → 0.4830** (−0.0030, within the 0.005 tolerance;
+  aerial 0.3572 → 0.3529, render-005 0.6398 → 0.6349, render-006 0.6050 → 0.5981, render-003 0.3897 → 0.3906)
+  → kept: the forecourt is documented on the board, the edge score partly rewards generic trees.
+- A14 marked blocked (same as P2/P3b).

@@ -339,36 +339,44 @@ def build():
     def hw(s):
         return lerp_table(WIDTH, s) / 2 - 2.2
 
-    def ribbon(name, m, s0, s1, offset, width, dz, step=0.004):
+    def ribbon(name, m, s0, s1, offset, width, dz, step=0.004, hf=None):
+        hf = hf or H
         vs, fs = [], []
         ss_ = np.arange(s0, s1, step)
         for s in ss_:
             p, tg, nrm = frame(s)
+            if s > 1:                               # continue straight through the tip cap
+                p = p + tg * (s - 1) * L
             c = p + nrm * offset(s)
             for side in (-1, 1):
                 x, y = c + nrm * side * width / 2
-                vs.append((x, y, H(x, y) + dz))
+                vs.append((x, y, hf(x, y) + dz))
         for i in range(len(ss_) - 1):
             fs.append([2 * i, 2 * i + 1, 2 * i + 3, 2 * i + 2])
         add_obj(name, vs, fs, [m])
 
-    def main_path(s):       # serpentine from the lookout deck; swings to the back at the tail and runs out to the ground
-        w2 = ss((s - 0.60) / 0.15)
-        return (1 - w2) * 0.55 * hw(s) * math.sin(2 * math.pi * 2.3 * s + 0.6) + w2 * 0.55 * hw(s)
-    ribbon("path main", M["path"], 0.10, 1.0, main_path, 2.2, 0.10)
+    def path_h(x, y):       # the main path rides over the cafe arch ("the hill")
+        s, t = st(x, y)
+        return max(h_roof(s, t), h_cafe(s, t)) if s > S_CAFE and t < 0.1 else h_roof(s, t)
+
+    def main_path(s):       # ONE continuous serpentine: lookout deck -> down the roof -> up over the cafe arch -> ground at the tip
+        w2 = ss((s - 0.56) / 0.14)
+        cap = math.sqrt(max(0.0, 1 - (max(0.0, s - 1) * L / (lerp_table(WIDTH, 1.0) / 2)) ** 2))
+        return (1 - w2) * 0.55 * hw(s) * math.sin(2 * math.pi * 2.3 * s + 0.6) - w2 * 0.62 * lerp_table(WIDTH, s) / 2 * cap
+    ribbon("path main", M["path"], 0.12, S_END + 0.03, main_path, 2.2, 0.12, hf=path_h)
     ribbon("path loop", M["path"], 0.20, 0.47, lambda s: -main_path(s) * 0.9, 1.6, 0.10)
     ribbon("stream", M["water"], 0.34, 0.60, lambda s: 0.30 * hw(s) * math.cos(2 * math.pi * 2.3 * s + 0.6) + 1.0, 1.5, 0.07)
-    ribbon("picnic lawn", M["lawn"], 0.63, 0.86, lambda s: 0.0, 5.5, 0.05)
+    ribbon("picnic lawn", M["lawn"], 0.63, 0.86, lambda s: 2.5, 5.5, 0.05)
 
     deck = Batch("decks", M["wood"])
-    for s, off, r in ((0.03, 1.0, 5.6), (0.40, -3.6, 2.3)):       # lookout deck at the head, small deck mid
+    for s, off, r in ((0.04, 0.5, 7.6), (0.40, -3.6, 2.3)):       # lookout deck at the head, small deck mid
         x, y, z = on_roof(s, off)
         deck.add(*cylinder(x, y, z, z + 0.35, r, r, seg=28))
     deck.done()
 
     tree_b = {k: Batch(f"trees {k}", M[k]) for k in ("crown", "bloom", "birch")}
     trunks = Batch("trunks", M["trunk"])
-    spots = [(0.00, 7.5, 4.6, "crown"), (0.03, -7.5, 1.8, "bloom"), (0.20, 5.5, 2.6, "birch"), (0.27, 5.0, 2.8, "birch"),
+    spots = [(0.00, 9.4, 4.6, "crown"), (0.03, -9.3, 1.8, "bloom"), (0.20, 5.5, 2.6, "birch"), (0.27, 5.0, 2.8, "birch"),
              (0.33, 4.5, 2.4, "birch"), (0.24, -5.0, 2.0, "crown"), (0.47, 5.2, 3.0, "crown"), (0.56, 0.5, 2.6, "bloom"),
              (0.62, 5.6, 3.6, "crown"), (0.72, 5.8, 2.2, "bloom"), (0.80, 6.0, 2.4, "crown"), (0.88, 5.0, 1.8, "birch")]
     for s, off, r, kind in spots:
@@ -423,6 +431,7 @@ VIEWS = [  # name, azimuth offset from the reference front view (deg), elevation
     ("view3_back_left_135", -135, 35), ("view4_back_180", 180, 35), ("view5_back_right_225", 135, 35),
     ("view6_cafe_end_270", 90, 35), ("view7_front_right_315", 45, 35),
     ("view8_top", 0, 89.9), ("view9_low_front", 0, 10),
+    ("viewA_low_cafe_side", 60, 12), ("viewB_low_back", 180, 12),
 ]
 FRONT_AZ = 280.0      # reference camera: in front, slightly from the cafe side, as in 08_park_B.png
 LENS = 40.0

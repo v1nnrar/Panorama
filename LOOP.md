@@ -81,6 +81,8 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       06_reports/measure_render000.md. Still open: A (inconsistent crown corners), C1 (re-pick, wrong vertex), D (1 corner).
       Iteration 29: C1 SW vertical edge → roof ≈ 28.4 m (model 33.6) and west edge (−34.67, −40.90)→(−31.89, −57.07);
       NEXT: re-count C1/C2 storeys in render-005 against this (11 vs 10), then update C1 (+C2 levels) together.
+      Iteration 30: done — C1/C2 = GF + 9 (10 storeys, 31.05 m); C1 SW vertex 4.1 m west. Remaining P3: A (crown size
+      vs height, needs a 2nd view or the client's section), D west-wing rotation (2 corners; add 2 more first).
 - [ ] P4. Office E from RÚIAN (kod 96272635 = reference 154; its west wall is at x ≈ 91–92, the model's at 94.8–98.3 →
       3–4 m off; 12 storeys in the register, terrain ≈ 7 m below site GF on the east;
       the trimmed southern wedge is in the cadastral outline — model it as a low podium at its true level).

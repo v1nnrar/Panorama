@@ -136,12 +136,12 @@ buildings:
   - id: C1
     name: Front slab — west head (T5)
     use: Hotel / office
-    footprint: [[-32.57, -39.21], [-11.26, -35.24], [-12.67, -59.62], [-28.08, -58.73]]
-    height: 33.9
-    notes: 11 storeys (render-005 - 10 window rows over a tall glazed GF); light grey fins + horizontal bands, green roof with rooftop units
+    footprint: [[-32.57, -39.21], [-11.26, -35.24], [-12.67, -59.62], [-32.02, -57.57]]   # SW vertex MEASURED P3 (calibrated render-000, SW vertical edge, base + roof): 4.1 m west across the view (was [-28.08, -58.73])
+    height: 31.05                        # GF 4.4 + 9 x 2.85 + parapet 1.0; render-000 roof edge→soffit 86 px = 25.7 m at 3.34 px/m
+    notes: 10 storeys (render-005 re-counted on a zoom - 9 window rows over a tall recessed glazed GF; render-000 shows the same 9 rows); light grey fins + horizontal bands, green roof with rooftop units
     storeys:
       - {name: GF, height: 4.4, use: Lobby}            # ESTIMATED from render-005: GF ≈ 1.5 x typical storey
-      - {name: L, count: 10, height: 2.85, use: Rooms}  # ESTIMATED from render-005: 10 window rows; height kept at 33.9 m
+      - {name: L, count: 9, height: 2.85, use: Rooms}   # ESTIMATED from render-005 + render-000: 9 window rows (iteration 5 counted the parapet band as a 10th)
     windows: {width: 1.4, height: 2.0, sill: 0.7, spacing: 2.7, edge_margin: 1.0}
     material: Render light grey
     facade:
@@ -168,13 +168,13 @@ buildings:
     name: Front slab — wing (T5)
     use: Hotel / office
     footprint: [[-11.26, -35.24], [37.83, -48.86], [36.23, -62.45], [-12.67, -59.62]]
-    height: 33.9                         # renders: continuous cornice with C1 (PSG v3 had 25.1 m) — VERIFY
-    notes: 11 storeys, window rows continuous with C1 (render-005); top floor set back 4 m on the north (roof terraces, render-000)
+    height: 31.05                        # same levels as C1 (continuous cornice and window rows, render-005)
+    notes: 10 storeys, window rows continuous with C1 (render-005); top floor set back 4 m on the north (roof terraces, render-000)
     setbacks:
-      - {facing: N, distance: 4.0, from: 11, to: 11}
+      - {facing: N, distance: 4.0, from: 10, to: 10}
     storeys:
       - {name: GF, height: 4.4, use: Lobby / retail}   # ESTIMATED from render-005, same levels as C1
-      - {name: L, count: 10, height: 2.85, use: Rooms}
+      - {name: L, count: 9, height: 2.85, use: Rooms}
     windows: {width: 1.4, height: 2.0, sill: 0.7, spacing: 2.7, edge_margin: 1.0}
     material: Render light grey
     facade:

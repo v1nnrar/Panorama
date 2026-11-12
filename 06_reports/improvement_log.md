@@ -384,3 +384,17 @@ client's renders, higher is better).
   Facade profile: 9 window rows at ≈ 2.85 m + ground floor = 10 storeys — conflicts with the 11 counted in render-005.
 - No change this iteration (conflicting client images); next: re-count render-005, then update C1/C2 together.
   Score unchanged 0.4854. Details: 06_reports/measure_render000.md.
+
+## 2026-11-12 — iteration 30: P3 C1/C2 storeys and C1 west edge — KEPT
+- **render-005 re-counted on a 2× zoom**: 9 window rows between the cornice and a tall, recessed glazed ground floor →
+  **10 storeys** (iteration 5 had counted the parapet band as a 10th row). render-000 shows the same 9 rows above a dark
+  GF band. The recessed GF explains last iteration's low 28.4 m (the "base" was the set-back glazing, not the corner).
+- Height from render-000: roof edge → soffit 86 px at 3.34 px/m (computed at the corner) = 25.7 m = 9 storeys + parapet
+  → keeps 2.85 m storeys; render-005's GF/upper ratio (≈ 0.19) fits the 4.4 m GF. C1 and C2: GF 4.4 + 9 × 2.85,
+  **31.05 m** (was 33.9, 11 storeys); C2's north setback moves to storey 10.
+- C1 SW corner: base and roof points agree on a **4.1 m westward** offset across the line of sight (height-independent);
+  the NW corner is within 0.5 m → only the SW vertex moved, to (−32.02, −57.57); the west edge now runs nearer N–S
+  (as measured for D's west wing).
+- Score (Cycles): **0.4854 → 0.4855** (aerial 0.3428 → 0.3564, render-004 0.4293 → 0.4384, render-005 0.6618 → 0.6398 —
+  that camera was tuned on the 11-storey model). GFA None m²; §21 failing windows 10 → 9, §25 −249 → −241.
+  Capacity study baseline (client scheme) not re-scored yet (it fails §21/§25 either way).

@@ -363,3 +363,15 @@ client's renders, higher is better).
   adopted; model and score unchanged (0.4848). P2 marked BLOCKED after two attempts.
 - Found on the way (P4): RÚIAN puts office E's west wall at x ≈ 91–92, the model at 94.8–98.3 (3–4 m).
 - To unblock: the client's camera data for render-002 or their context model, or another photo-based view.
+
+## 2026-11-12 — iteration 28: P3 measure the client buildings in calibrated render-000 — KEPT (B, B2 PH moved)
+- New `tools/triangulate.py`: projects each building's visible roof outline (diagrid crown = footprint + 1.9 m offset,
+  top slab + 1.1 m) through the calibrated camera, finds the corners with the sub-pixel detector, back-projects them to
+  the roof plane and propagates ±1.5 px and ±0.5 m height into a 1-σ ellipse (≈ 1.2 × 0.35 m, long along the view).
+- 42 candidates, 15 accepted after a tile-by-tile check (A0, B3, facade and diagrid hits rejected; A v0 hand-read).
+- **B**: 4 corners consistent (spread 0.66 m) → 3.0 m across the line of sight + 2.5 m along it → B moved (−3.93, −0.23);
+  B3 (attached, never visible) and B2's vertices on B's walls follow (ASSUMED). **B2 PH**: 2 corners → (−1.16, −1.62).
+- Not changed (evidence not clean): A (crown corners disagree by 4 m), C1 (detected corner is not the vertex assumed),
+  D (one corner, 1.7 m), E (P4). Details: 06_reports/measure_render000.md.
+- Score (Cycles, all cameras): **0.4848 → 0.4854** (aerial 0.3409 → 0.3428, render-004 0.4199 → 0.4293, render-005
+  0.6663 → 0.6618, -006 0.6056 → 0.6040, -003 0.3913 → 0.3892). Overlay: B's roof outline now sits on the client's roof.

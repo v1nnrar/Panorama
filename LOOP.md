@@ -77,6 +77,8 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       second PHOTO-based client view. Meanwhile P3 uses the calibrated render-000 + known heights (single view).
 - [ ] P3. `tools/triangulate.py`: pick each client building's roof corners in 2–3 calibrated views, least-squares 3D
       points with covariance; update footprints/heights where the shift > 1 m; keep single-view items flagged.
+      Iteration 28 (single view, P2 blocked): tool done; B (+B3, B2 inner edge) moved (−3.93, −0.23), B2 PH (−1.16, −1.62);
+      06_reports/measure_render000.md. Still open: A (inconsistent crown corners), C1 (re-pick, wrong vertex), D (1 corner).
 - [ ] P4. Office E from RÚIAN (kod 96272635 = reference 154; its west wall is at x ≈ 91–92, the model's at 94.8–98.3 →
       3–4 m off; 12 storeys in the register, terrain ≈ 7 m below site GF on the east;
       the trimmed southern wedge is in the cadastral outline — model it as a low podium at its true level).

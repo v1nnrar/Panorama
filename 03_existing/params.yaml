@@ -60,7 +60,7 @@ buildings:
   - id: B
     name: Green tower (E residential tower)
     use: Residential
-    footprint: [[55.1, -16.66], [81.29, -11.74], [88.95, -48.07], [61.76, -53.62]]
+    footprint: [[51.17, -16.89], [77.36, -11.97], [85.02, -48.3], [57.83, -53.85]]   # MEASURED P3 (2026-11-12): 4 roof corners in calibrated render-000 → moved (−3.93, −0.23); 3.0 m of it is across the line of sight (height-independent, σ 0.35 m)
     height: 68.9                         # PSG v3 estimate
     notes: 22 storeys; storeys 1–6 = timber-fin base widened 4 m to the west, 7–22 = tower with planted balconies
     setbacks:
@@ -91,7 +91,7 @@ buildings:
     use: Residential
     # MEASURED (audit): south face ~8 m further north and east end ~5 m further west than the PSG fit (calibrated aerial:
     # terrace edge SW (65.9, -68.5), SE (100.4, -61.3), vertical check 25.8 m); now inside the official plot.
-    footprint: [[68.0, -66.2], [65.79, -52.87], [89.04, -48.54], [82.15, -11.58], [94.48, -9.26], [99.45, -60.31]]
+    footprint: [[68.0, -66.2], [61.86, -53.1], [85.11, -48.77], [78.22, -11.81], [94.48, -9.26], [99.45, -60.31]]   # vertices on B's walls follow B (P3)
     height: 26.9                         # PSG v3 estimate (top terrace level)
     notes: >-
       8 storeys, straight walls (render-000 aerial, render-004): deep white balcony slabs with planters on every floor,
@@ -101,7 +101,7 @@ buildings:
       - {name: GF, height: 4.5, use: Retail}
       - {name: L, count: 6, start: 1, height: 3.0, use: Apartments}
       # MEASURED (audit, calibrated aerial): PV penthouse ≈ 26 x 9.5 m along tower B's south face, terrace to the south
-      - {name: PH, height: 3.0, use: Apartments, footprint: [[72.0, -61.5], [69.8, -52.8], [96.4, -47.2], [97.8, -55.3]]}
+      - {name: PH, height: 3.0, use: Apartments, footprint: [[70.84, -63.12], [68.64, -54.42], [95.24, -48.82], [96.64, -56.92]]}   # MEASURED P3: 2 PV-roof corners, moved (−1.16, −1.62)
     facade:
       - {type: curtain, from: 1, to: 1, glass: Glass dark}
       - {type: curtain, from: 2, glass: Glass, mullion: 1.8}
@@ -119,7 +119,7 @@ buildings:
   - id: B3
     name: Podium north (E)
     use: Residential
-    footprint: [[58.9, -15.92], [56.34, -2.15], [88.94, 3.92], [91.44, -9.85]]
+    footprint: [[54.97, -16.15], [52.41, -2.38], [85.01, 3.69], [87.51, -10.08]]   # ASSUMED: moves with tower B (attached, hidden in every view)
     height: 19.2                         # PSG v3 estimate
     notes: 5 storeys; base expression as B (timber fins)
     storeys:

@@ -94,7 +94,7 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       Done 2026-11-12: tower = RÚIAN outline (wedge = ramp/greenery at grade → ASSUMED underground), roof edge 29.2 m
       measured on the RÚIAN NE/SE verticals in render-000 (30.0 / 28.3 m). Ground level stays unknown (terrain model
       shows a construction pit there).
-- [ ] P5. `06_reports/accuracy.md`: per building the achieved ± (plan, height), method and number of views.
+- [x] P5. `06_reports/accuracy.md`: per building the achieved ± (plan, height), method and number of views.
 
 ### D. Capacity study for OUR design (priority)
 - [x] D1. Option B: make it pass §21 (failing: panel blocks south of Milevská, three-wing building north) — move/slim/rotate

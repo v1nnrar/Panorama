@@ -416,3 +416,10 @@ client's renders, higher is better).
   construction pit around E (−7 … −11 m on three sides, 0 on the east), so E's ground level stays at the site GF (unknown).
 - Score (Cycles): **0.4855 → 0.4860** (aerial 0.3564 → 0.3572, render-006 0.6037 → 0.6050). Compliance unchanged
   (4/6; §21 9 windows, §25 −241).
+
+## 2026-11-12 — iteration 33: P5 accuracy report — DONE (report only)
+- `06_reports/accuracy.md`: per building plan / height 1-σ, method, number of views. Within ±1 m: **B** (across;
+  ≈ along), **B2 penthouse**, **C1**, **E** (plan from the cadastre, roof edge). Heights within ±1 m also for C2 and D.
+  Not yet: **A** (±4 m along the view, ±2.5 m height), **D** plan along the view (±5 m), A0, B3, B2 terrace block,
+  C2 plan, U. Closing them needs the client's drawings or a second calibrated view.
+- Section P is complete apart from the blocked P2/P3b. Score unchanged 0.4860.

@@ -151,8 +151,10 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       Attempt 2 (2026-11-13): floor tips down B's near corner show a two-storey rhythm that does not map onto the
       model's per-floor balconies; cam_search 3 sweeps from the current camera: no better point (0.4732, 43 renders).
       **BLOCKED** (2 attempts) — likely limited by B's facade model (A16) rather than the camera.
-- [ ] A16. B tower facade rhythm: render-004 shows thick planted balcony slabs every SECOND storey (≈ 58–64 px apart at
+- [x] A16. B tower facade rhythm: render-004 shows thick planted balcony slabs every SECOND storey (≈ 58–64 px apart at
       the near corner) with thinner slabs between; the model has identical 1.6 m balconies on every floor.
+      (iteration 38: the thick band every 2nd storey already existed; planters now only on those storeys, plain slabs
+      between. Mean −0.0010, render-004 0.4906 → 0.4817 — kept within tolerance; render-004's limit is its framing.)
 - [x] A13. Tower A shows above D in render-003 where the client image has sky: the client render omits A (audit 2026-11-09).
 - [~] A14. (BLOCKED, = P2/P3b) Calibrate render-002 (SE) on context and triangulate A and B2 with render-000.
 - [ ] A12. B2 roof terrace: green roof + planters around the PV penthouse (aerial render-000).

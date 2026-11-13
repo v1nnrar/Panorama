@@ -74,7 +74,9 @@ buildings:
       - {type: fins, from: 2, to: 6, spacing: 1.5, width: 0.28, depth: 0.35, material: Timber}
       - {type: band, from: 2, to: 6, depth: 0.3, thickness: 0.3, material: Concrete white}
       - {type: curtain, from: 7, glass: Glass, mullion: 1.5}
-      - {type: balcony, from: 7, depth: 1.6, planter: true, planter_material: Concrete white}
+      # A16 (render-004): greenery only on the thick slab every second storey; the storeys between have plain slabs
+      - {type: balcony, from: 7, every: 2, depth: 1.6, planter: true, planter_material: Concrete white}
+      - {type: balcony, from: 8, every: 2, depth: 1.6}
       - {type: band, from: 7, every: 2, depth: 1.9, thickness: 0.5, material: Concrete white}
       - {type: fins, from: 7, spacing: 0.9, width: 0.06, depth: 0.25, offset: 1.3, material: Aluminium white}
     terrace_edge: {planter: true, railing: true}

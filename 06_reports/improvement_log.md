@@ -458,3 +458,11 @@ client's renders, higher is better).
 - `cam_search` with 3 sweeps from the current camera: no improvement (0.4732, 43 renders) — a local optimum.
 - No change; score unchanged (0.4934). A15 blocked after two attempts. New A16: model B's two-storey planted-slab
   rhythm, which is probably what keeps render-004's edge match low.
+
+## 2026-11-13 — iteration 38: A16 B facade two-storey rhythm — KEPT (within tolerance)
+- The model already had B's thick 1.9 m band every second storey; render-004 shows the planting only on those thick
+  slabs, with plain slabs, railings and full-height white fins on the storeys between. B's balcony rule split into
+  planted balconies on storeys 7, 9, 11 … and plain ones on 8, 10, 12 …
+- Score (Cycles): mean **0.4934 → 0.4924** (−0.0010, within the 0.005 tolerance); render-004 0.4906 → 0.4817,
+  render-003 0.3906 → 0.3932, aerial 0.3529 → 0.3537. Kept because it matches the client facade; render-004's edge
+  score is dominated by its framing (A15, blocked).

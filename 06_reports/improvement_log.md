@@ -442,3 +442,11 @@ client's renders, higher is better).
   lens 40.5 → 41.5).
 - Score (Cycles): render-004 **0.4385 → 0.4906**, mean **0.4830 → 0.4934**. Framing still differs (client's B larger and
   further left) → new item A15 (corner fit).
+
+## 2026-11-13 — iteration 36: A15 render-004 corner fit — REVERTED (attempt 1)
+- Read B's top-slab corners in the client image (near/SW 332,32; NW 82,169.5; SE 442,172) and solved a level camera
+  (eye 1.7 m, two-point perspective) against B's footprint + 1.6 m balcony ring at 68.4 m: (−4.27, −113.98), lens
+  37.6 mm, shift 0.37, residuals 3–4 px.
+- Edge score (Workbench): 0.3855 at start, 0.4511 after a cam_search sweep (target z 7.7) — below the current camera's
+  0.4732 → reverted; score unchanged (Cycles mean 0.4934). Three roof corners do not constrain the lower frame; the
+  B/B2 lower geometry must enter the fit (next attempt).

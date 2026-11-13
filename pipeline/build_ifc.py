@@ -25,7 +25,7 @@ from shapely.geometry import LineString, MultiPolygon, Point, Polygon
 from shapely.geometry.polygon import orient
 from shapely.ops import unary_union
 
-from .geom import core_rects, edges, facing_edges, rule_edges, in_range, inset, local_frame, offset_edges, outward_normal, rect_world
+from .geom import core_rects, room_layout, edges, facing_edges, rule_edges, in_range, inset, local_frame, offset_edges, outward_normal, rect_world
 
 API = ifcopenshell.api
 
@@ -495,6 +495,31 @@ def _add_building(C, site, b):
     for r in rules:
         if r.get("type") == "diagrid":
             _diagrid(C, b, st_map, r)
+
+    for n, s in enumerate(b["storeys"], start=1):                     # B2: corridor + rooms (partitions, spaces)
+        lay = room_layout(b, n, s, t)
+        if not lay:
+            continue
+        pw = (b.get("layout") or {}).get("partition", 0.15)
+        walls = []
+        for p0, p1 in lay["partitions"]:
+            L = math.hypot(p1[0] - p0[0], p1[1] - p0[1])
+            if L < 0.3:
+                continue
+            nx, ny = -(p1[1] - p0[1]) / L * pw / 2, (p1[0] - p0[0]) / L * pw / 2
+            walls.append(plan_solid(f, [(p0[0] - nx, p0[1] - ny), (p1[0] - nx, p1[1] - ny),
+                                        (p1[0] + nx, p1[1] + ny), (p0[0] + nx, p0[1] + ny)],
+                                    s["elevation"] + slab, s["height"] - slab))
+        if walls:
+            product(C, "IfcWall", f"{s['name']} partitions", walls, st_map[s["name"]], "PARTITIONING",
+                    material="Render white")
+        for j, r in enumerate(lay["rooms"]):
+            if r.geom_type != "Polygon":
+                continue
+            sp = product(C, "IfcSpace", f"{s['name']} room {j + 1}",
+                         [plan_solid(f, [tuple(c) for c in list(orient(r, sign=1.0).exterior.coords)[:-1]],
+                                     s["elevation"] + slab, s["height"] - slab)], predefined="INTERNAL")
+            API.aggregate.assign_object(f, products=[sp], relating_object=st_map[s["name"]])
 
     for k, (rect, lo, hi, cdef) in enumerate(core_rects(b)):          # B1: stair / lift / shaft cores
         tw = cdef.get("wall", 0.3)

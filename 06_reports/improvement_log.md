@@ -484,3 +484,14 @@ client's renders, higher is better).
   core checked to lie 0.5 m inside each storey's outline.
 - NFA 87,599 → **78,983 m²** (−8,616 m² of cores); GFA unchanged 92,021 m². Score unchanged **0.4922** (cores are
   inside the envelope). 118 core walls in the IFC; test block 6/6.
+
+## 2026-11-13 — iteration 41: B2 hotel room layout in block C — KEPT
+- Pipeline: new building key `layout: {type: corridor, module, corridor, offset, min_area, partition, from, to}`
+  (`pipeline/geom.py::room_layout`): a corridor along each storey's longest edge through its centroid, bays every
+  `module` m from corridor to facade, bays clipped by cores and kept if ≥ min_area. → IfcWall PARTITIONING (0.15 m),
+  one IfcSpace per room, layer ROOMS + room numbers on the plans, room counts in metrics / area schedule.
+- 03_existing: block C (C1 + C2) as the likely hotel (ASSUMED — the user has not named the hotel block), storeys 2–10,
+  3.8 m module (brief 3.6–4.2 m), 1.8 m corridor: C1 11 rooms/floor (99), C2 ≈ 24/floor (218) → **317 rooms** of
+  ≈ 28–30 m² (all standard). The PSP programme estimate (70/20/10 mix incl. 56 m² suites, 62 % efficiency) gives
+  236 keys for the same floors.
+- Score unchanged **0.4922** (interior only). Test block 6/6. CLAUDE.md schema updated.

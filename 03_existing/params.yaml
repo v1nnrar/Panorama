@@ -148,6 +148,7 @@ buildings:
     height: 31.05                        # GF 4.4 + 9 x 2.85 + parapet 1.0; render-000 roof edge→soffit 86 px = 25.7 m at 3.34 px/m
     notes: 10 storeys (render-005 re-counted on a zoom - 9 window rows over a tall recessed glazed GF; render-000 shows the same 9 rows); light grey fins + horizontal bands, green roof with rooftop units
     cores: [{dx: 0.0, dy: 0.0, w: 6, d: 9, note: stair + 2 lifts}]   # ASSUMED (B1): plausible core position/size (local frame of the GF footprint), not from client drawings
+    layout: {type: corridor, module: 3.8, corridor: 1.8, from: 2}   # ASSUMED (B2): front block C as the hotel (user has not named it); double-loaded corridor, 3.8 m room module (brief 3.6–4.2 m)
     storeys:
       - {name: GF, height: 4.4, use: Lobby}            # ESTIMATED from render-005: GF ≈ 1.5 x typical storey
       - {name: L, count: 9, height: 2.85, use: Rooms}   # ESTIMATED from render-005 + render-000: 9 window rows (iteration 5 counted the parapet band as a 10th)
@@ -182,6 +183,7 @@ buildings:
     setbacks:
       - {facing: N, distance: 4.0, from: 10, to: 10}
     cores: [{dx: -12.5, dy: 0.0, w: 6, d: 8, note: stair + 2 lifts}, {dx: 12.5, dy: 0.0, w: 6, d: 8, note: stair + 2 lifts}]   # ASSUMED (B1): plausible core position/size (local frame of the GF footprint), not from client drawings
+    layout: {type: corridor, module: 3.8, corridor: 1.8, from: 2}   # ASSUMED (B2): front block C as the hotel (user has not named it); double-loaded corridor, 3.8 m room module (brief 3.6–4.2 m)
     storeys:
       - {name: GF, height: 4.4, use: Lobby / retail}   # ESTIMATED from render-005, same levels as C1
       - {name: L, count: 9, height: 2.85, use: Rooms}

@@ -12,7 +12,7 @@ from shapely.geometry import Polygon
 from shapely.ops import unary_union
 
 from .build_ifc import _window_positions
-from .geom import core_rects
+from .geom import core_rects, room_layout
 
 
 def site_polygon(design):
@@ -32,6 +32,12 @@ def _core_area(b: dict, n: int, s: dict) -> float:
     return sum(Polygon(r).intersection(P).area for r, lo, hi, _ in core_rects(b) if lo <= n <= hi)
 
 
+def _rooms(b: dict, n: int, s: dict) -> int:
+    """Rooms on storey n: from the corridor layout (B2) if the building has one, else the storey's `rooms` value."""
+    lay = room_layout(b, n, s, b["exterior_wall"])
+    return len(lay["rooms"]) if lay else int(s.get("rooms") or 0)
+
+
 def building_metrics(b: dict) -> dict:
     above = [s for s in b["storeys"] if s["elevation"] >= 0]
     return {
@@ -43,7 +49,7 @@ def building_metrics(b: dict) -> dict:
         "gfa_m2": round(sum(Polygon(s["footprint"]).area for s in above), 1),
         "nfa_m2": round(sum(_nfa(s["footprint"], b["exterior_wall"]) - _core_area(b, n, s)
                             for n, s in enumerate(b["storeys"], start=1) if s["elevation"] >= 0), 1),
-        "rooms": sum(int(s.get("rooms") or 0) for s in b["storeys"]),
+        "rooms": sum(_rooms(b, n, s) for n, s in enumerate(b["storeys"], start=1)),
     }
 
 
@@ -139,7 +145,7 @@ def schedule(design, out_dir: Path):
             rows.append({"Building": b["id"], "Storey": s["name"], "Use": s["use"], "Elevation (m)": s["elevation"],
                          "Height (m)": round(s["height"], 3), "GFA (m²)": round(p.area, 1),
                          "Net floor area (m²)": round(_nfa(s["footprint"], b["exterior_wall"]) - _core_area(b, n, s), 1),
-                         "Rooms": s.get("rooms") or 0,
+                         "Rooms": _rooms(b, n, s),
                          "Windows": _windows_on(s["footprint"], s["windows"]) if s["windows"] else 0})
     df = pd.DataFrame(rows)
     summary = df.groupby("Building", sort=False).agg({"Storey": "count", "GFA (m²)": "sum",
@@ -156,7 +162,7 @@ def _new_doc():
     doc = ezdxf.new("R2018", setup=True)
     doc.units = ezdxf.units.M
     for name, col in (("PARCEL", 6), ("SITE", 3), ("SETBACK", 1), ("WALL", 7), ("WINDOW", 5), ("TEXT", 250),
-                      ("CONTEXT", 8), ("BUILDING", 5), ("CORE", 1)):
+                      ("CONTEXT", 8), ("BUILDING", 5), ("CORE", 1), ("ROOMS", 4)):
         doc.layers.add(name, color=col)
     return doc
 
@@ -246,7 +252,9 @@ def drawings(design, out_dir: Path):
         cores = core_rects(b)
         for n, s in enumerate(b["storeys"], start=1):
             here = [r for r, lo, hi, _ in cores if lo <= n <= hi]
-            key = (b["id"], tuple(s["footprint"]), json.dumps(s["windows"], sort_keys=True), s["use"], len(here))
+            lay = room_layout(b, n, s, t)
+            key = (b["id"], tuple(s["footprint"]), json.dumps(s["windows"], sort_keys=True), s["use"], len(here),
+                   bool(lay))
             if key in seen:
                 continue
             seen.add(key)
@@ -280,6 +288,16 @@ def drawings(design, out_dir: Path):
                 core_a += rp.intersection(inner).area
             c = inner.difference(unary_union([Polygon(r) for r in here])).representative_point() if here \
                 else inner.representative_point()
-            _text(msp, f"{s['name']} - {s['use']}  NFA {inner.area - core_a:.0f} m2", (c.x, c.y), 1.0)
+            label = f"{s['name']} - {s['use']}  NFA {inner.area - core_a:.0f} m2"
+            if lay:                                           # B2 room layout (ASSUMED)
+                for p0, p1 in lay["partitions"]:
+                    msp.add_line(p0, p1, dxfattribs={"layer": "ROOMS"})
+                for k, r in enumerate(lay["rooms"]):
+                    q = r.representative_point()
+                    _text(msp, f"{k + 1}", (q.x, q.y), 0.6)
+                label += f"  {len(lay['rooms'])} rooms"
+                cr = lay["corridor"]
+                c = cr.representative_point() if not cr.is_empty else c
+            _text(msp, label, (c.x, c.y), 1.0)
             files.append(_save(doc, d_dir / f"plan_{s['name']}"))
     return files

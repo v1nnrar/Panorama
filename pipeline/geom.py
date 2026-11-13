@@ -119,3 +119,74 @@ def core_rects(b):
         hi = len(st) + hi + 1 if hi < 0 else hi
         out.append((rect_world(frame, c.get("dx", 0), c.get("dy", 0), c["w"], c["d"]), lo, hi, c))
     return out
+
+
+def room_layout(b, n, s, t):
+    """Double-loaded corridor layout of storey n (1-based) if the building has `layout:` covering it (B2 of LOOP.md).
+
+    layout: {type: corridor, module: 3.8, corridor: 1.8, offset: 0, min_area: 14, from, to}
+    The corridor runs along the storey's longest edge through its centroid (shifted by `offset`); rooms are cut every
+    `module` metres from the corridor to the inner face of the facade; bays are clipped by cores and kept if ≥ min_area.
+    Returns {"rooms": [polygons], "corridor": polygon, "partitions": [(p0, p1)]} in world coordinates, or None.
+    """
+    from shapely.geometry import Polygon, box
+    from shapely import affinity
+    from shapely.ops import unary_union
+    L = b.get("layout")
+    if not L:
+        return None
+    lo, hi = L.get("from", 1), L.get("to", len(b["storeys"]))
+    if not lo <= n <= hi:
+        return None
+    (ox, oy), (ux, uy), (vx, vy) = local_frame(s["footprint"])
+    inner = Polygon(s["footprint"]).buffer(-t, join_style="mitre")
+    # world -> local: translate to origin, rotate by -angle of u
+    ang = math.degrees(math.atan2(uy, ux))
+    loc = affinity.rotate(affinity.translate(inner, -ox, -oy), -ang, origin=(0, 0))
+    to_w = lambda g: affinity.translate(affinity.rotate(g, ang, origin=(0, 0)), ox, oy)  # noqa: E731
+    cores = [affinity.rotate(affinity.translate(Polygon(r), -ox, -oy), -ang, origin=(0, 0)).buffer(0.1)
+             for r, clo, chi, _ in core_rects(b) if clo <= n <= chi]
+    core_u = unary_union(cores) if cores else None
+    m, c, off = L.get("module", 3.8), L.get("corridor", 1.8), L.get("offset", 0.0)
+    u0, v0, u1, v1 = loc.bounds
+    y_lo, y_hi = off - c / 2, off + c / 2
+    rooms, parts = [], []
+    k_max = int(math.ceil((u1 - u0) / m))
+    for side, (ya, yb) in (("S", (v0 - 1, y_lo)), ("N", (y_hi, v1 + 1))):
+        prev_ok = False
+        for k in range(k_max):
+            cell = loc.intersection(box(u0 + k * m, ya, u0 + (k + 1) * m, yb))
+            if core_u is not None and not cell.is_empty:
+                cell = cell.difference(core_u)                   # rooms beside a core keep the rest of the bay
+                if cell.geom_type == "MultiPolygon":
+                    cell = max(cell.geoms, key=lambda g: g.area)
+            ok = not cell.is_empty and cell.area >= L.get("min_area", 14.0)
+            if ok:
+                rooms.append(to_w(cell))
+            if k > 0 and (ok or prev_ok):                        # partition at u = u0 + k*m on this side
+                from shapely.geometry import LineString as _LS
+                seg = loc.intersection(_LS([(u0 + k * m, ya), (u0 + k * m, yb)]))
+                if core_u is not None:
+                    seg = seg.difference(core_u)
+                for g in getattr(seg, "geoms", [seg]):
+                    if isinstance(g, _LS) and g.length > 0.3:
+                        parts.append((_rot_pt(g.coords[0], ang, ox, oy), _rot_pt(g.coords[-1], ang, ox, oy)))
+            prev_ok = ok
+    from shapely.geometry import LineString
+    for y in (y_lo, y_hi):                                       # corridor walls
+        ln = loc.intersection(LineString([(u0 - 1, y), (u1 + 1, y)]))
+        if core_u is not None:
+            ln = ln.difference(core_u)
+        for g in getattr(ln, "geoms", [ln]):
+            if isinstance(g, LineString) and g.length > 0.5:
+                (xa, ya_), (xb, yb_) = g.coords[0], g.coords[-1]
+                parts.append((_rot_pt((xa, ya_), ang, ox, oy), _rot_pt((xb, yb_), ang, ox, oy)))
+    corr = loc.intersection(box(u0 - 1, y_lo, u1 + 1, y_hi))
+    if core_u is not None:
+        corr = corr.difference(core_u)
+    return {"rooms": rooms, "corridor": to_w(corr), "partitions": parts}
+
+
+def _rot_pt(p, ang, ox, oy):
+    a = math.radians(ang)
+    return (ox + p[0] * math.cos(a) - p[1] * math.sin(a), oy + p[0] * math.sin(a) + p[1] * math.cos(a))

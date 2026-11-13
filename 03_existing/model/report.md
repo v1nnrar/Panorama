@@ -13,7 +13,7 @@ Source: `params.yaml`
 | footprint_area_m2 | 8120.1 |
 | gfa_m2 | 92021.3 |
 | net_floor_area_m2 | 78983.2 |
-| rooms | 0 |
+| rooms | 317 |
 | site_area_m2 | 16491.7 |
 | built_up_ratio | 0.492 |
 | plot_ratio_far | 5.58 |

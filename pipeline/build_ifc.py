@@ -25,7 +25,7 @@ from shapely.geometry import LineString, MultiPolygon, Point, Polygon
 from shapely.geometry.polygon import orient
 from shapely.ops import unary_union
 
-from .geom import edges, facing_edges, rule_edges, in_range, inset, local_frame, offset_edges, outward_normal, rect_world
+from .geom import core_rects, edges, facing_edges, rule_edges, in_range, inset, local_frame, offset_edges, outward_normal, rect_world
 
 API = ifcopenshell.api
 
@@ -495,6 +495,14 @@ def _add_building(C, site, b):
     for r in rules:
         if r.get("type") == "diagrid":
             _diagrid(C, b, st_map, r)
+
+    for k, (rect, lo, hi, cdef) in enumerate(core_rects(b)):          # B1: stair / lift / shaft cores
+        tw = cdef.get("wall", 0.3)
+        hole = inset(rect, tw)
+        for n, s in enumerate(b["storeys"], start=1):
+            if lo <= n <= hi:
+                product(C, "IfcWall", f"{s['name']} core {k + 1}", [plan_solid(f, rect, s["elevation"], s["height"],
+                        holes=[hole])], st_map[s["name"]], "SHEAR", material=cdef.get("material", "Concrete grey"))
 
     roof_st = API.root.create_entity(f, ifc_class="IfcBuildingStorey", name=f"{b['id']}-Roof")
     API.geometry.edit_object_placement(f, product=roof_st, matrix=np.eye(4))

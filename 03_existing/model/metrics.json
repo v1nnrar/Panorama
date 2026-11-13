@@ -6,7 +6,7 @@
     "height_top_of_parapet_m": 83.8,
     "footprint_area_m2": 8120.1,
     "gfa_m2": 92021.3,
-    "net_floor_area_m2": 87599.2,
+    "net_floor_area_m2": 78983.2,
     "rooms": 0,
     "site_area_m2": 16491.7,
     "built_up_ratio": 0.492,
@@ -84,7 +84,7 @@
         "target_height_m": 83.8,
         "footprint_m2": 1172.6,
         "gfa_m2": 25796.6,
-        "nfa_m2": 24752.3,
+        "nfa_m2": 22112.3,
         "rooms": 0
       },
       {
@@ -108,7 +108,7 @@
         "target_height_m": 68.9,
         "footprint_m2": 1165.9,
         "gfa_m2": 23243.9,
-        "nfa_m2": 22243.8,
+        "nfa_m2": 20263.8,
         "rooms": 0
       },
       {
@@ -120,7 +120,7 @@
         "target_height_m": 26.9,
         "footprint_m2": 1035.9,
         "gfa_m2": 7482.0,
-        "nfa_m2": 7031.3,
+        "nfa_m2": 6359.3,
         "rooms": 0
       },
       {
@@ -132,7 +132,7 @@
         "target_height_m": 19.2,
         "footprint_m2": 463.8,
         "gfa_m2": 2319.2,
-        "nfa_m2": 2156.7,
+        "nfa_m2": 1916.7,
         "rooms": 0
       },
       {
@@ -144,7 +144,7 @@
         "target_height_m": 31.05,
         "footprint_m2": 434.0,
         "gfa_m2": 4340.4,
-        "nfa_m2": 4051.6,
+        "nfa_m2": 3511.6,
         "rooms": 0
       },
       {
@@ -156,7 +156,7 @@
         "target_height_m": 31.05,
         "footprint_m2": 942.5,
         "gfa_m2": 9222.2,
-        "nfa_m2": 8747.0,
+        "nfa_m2": 7787.0,
         "rooms": 0
       },
       {
@@ -168,7 +168,7 @@
         "target_height_m": 32.3,
         "footprint_m2": 1061.6,
         "gfa_m2": 10456.2,
-        "nfa_m2": 9919.9,
+        "nfa_m2": 9055.9,
         "rooms": 0
       },
       {
@@ -180,7 +180,7 @@
         "target_height_m": 29.2,
         "footprint_m2": 768.1,
         "gfa_m2": 6912.6,
-        "nfa_m2": 6527.2,
+        "nfa_m2": 5807.2,
         "rooms": 0
       },
       {

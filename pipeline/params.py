@@ -97,6 +97,7 @@ def _building(b: dict, scheme_defaults: dict) -> dict:
         "below_ground": float(b.get("ground_elevation", 0.0)) < 0,
         "existing": bool(b.get("existing", False)),        # existing building kept (excluded from new-build checks)
         **({"terrace_edge": b["terrace_edge"]} if b.get("terrace_edge") else {}),   # was dropped before (A12 fix)
+        "cores": b.get("cores", []),                       # [{dx, dy, w, d, from, to, lifts, stairs}] (B1)
     }
 
 

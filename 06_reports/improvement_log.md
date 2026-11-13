@@ -474,3 +474,13 @@ client's renders, higher is better).
   so every building used the default (planters + railings) — B and C2 asked for exactly that, so they are unchanged.
 - B2: `green: true` on its terrace edge; the PH gets dark glass behind dense timber fins (glass curtain now storeys 2–7).
 - Score (Cycles): mean **0.4924 → 0.4922** (−0.0002; aerial 0.3537 → 0.3547). Test block 6/6. CLAUDE.md schema updated.
+
+## 2026-11-13 — iteration 40: B1 cores in every building — KEPT
+- Pipeline: new building key `cores: [{dx, dy, w, d, from, to, wall, note}]` (local frame of the ground-floor
+  footprint, like roof structures) → per storey a concrete shear-wall ring (IfcWall SHEAR, 0.3 m), layer CORE on the
+  DXF/PNG plans, and core area deducted from the net floor area (metrics, area schedule, plan labels).
+- 03_existing (all ASSUMED, not from client drawings): A 10 × 12 m (2 stairs + 4 lifts), B 9 × 10 m, B2 two 6 × 8 m
+  (one per wing, storeys 1–7), B3 6 × 8 m, C1 6 × 9 m, C2 two 6 × 8 m, D two 6 × 9 m (one per wing), E 8 × 10 m; every
+  core checked to lie 0.5 m inside each storey's outline.
+- NFA 87,599 → **78,983 m²** (−8,616 m² of cores); GFA unchanged 92,021 m². Score unchanged **0.4922** (cores are
+  inside the envelope). 118 core walls in the IFC; test block 6/6.

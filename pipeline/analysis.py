@@ -12,6 +12,7 @@ from shapely.geometry import Polygon
 from shapely.ops import unary_union
 
 from .build_ifc import _window_positions
+from .geom import core_rects
 
 
 def site_polygon(design):
@@ -25,6 +26,12 @@ def _nfa(fp, t):
     return Polygon(fp).buffer(-t, join_style="mitre").area
 
 
+def _core_area(b: dict, n: int, s: dict) -> float:
+    """Area of the building's cores (B1) on storey n, inside the storey's footprint."""
+    P = Polygon(s["footprint"])
+    return sum(Polygon(r).intersection(P).area for r, lo, hi, _ in core_rects(b) if lo <= n <= hi)
+
+
 def building_metrics(b: dict) -> dict:
     above = [s for s in b["storeys"] if s["elevation"] >= 0]
     return {
@@ -34,7 +41,8 @@ def building_metrics(b: dict) -> dict:
         "target_height_m": b["target_height"],
         "footprint_m2": round(Polygon(b["storeys"][0]["footprint"]).area, 1),
         "gfa_m2": round(sum(Polygon(s["footprint"]).area for s in above), 1),
-        "nfa_m2": round(sum(_nfa(s["footprint"], b["exterior_wall"]) for s in above), 1),
+        "nfa_m2": round(sum(_nfa(s["footprint"], b["exterior_wall"]) - _core_area(b, n, s)
+                            for n, s in enumerate(b["storeys"], start=1) if s["elevation"] >= 0), 1),
         "rooms": sum(int(s.get("rooms") or 0) for s in b["storeys"]),
     }
 
@@ -126,11 +134,11 @@ def _windows_on(fp, w):
 def schedule(design, out_dir: Path):
     rows = []
     for b in design["buildings"]:
-        for s in b["storeys"]:
+        for n, s in enumerate(b["storeys"], start=1):
             p = Polygon(s["footprint"])
             rows.append({"Building": b["id"], "Storey": s["name"], "Use": s["use"], "Elevation (m)": s["elevation"],
                          "Height (m)": round(s["height"], 3), "GFA (m²)": round(p.area, 1),
-                         "Net floor area (m²)": round(_nfa(s["footprint"], b["exterior_wall"]), 1),
+                         "Net floor area (m²)": round(_nfa(s["footprint"], b["exterior_wall"]) - _core_area(b, n, s), 1),
                          "Rooms": s.get("rooms") or 0,
                          "Windows": _windows_on(s["footprint"], s["windows"]) if s["windows"] else 0})
     df = pd.DataFrame(rows)
@@ -148,7 +156,7 @@ def _new_doc():
     doc = ezdxf.new("R2018", setup=True)
     doc.units = ezdxf.units.M
     for name, col in (("PARCEL", 6), ("SITE", 3), ("SETBACK", 1), ("WALL", 7), ("WINDOW", 5), ("TEXT", 250),
-                      ("CONTEXT", 8), ("BUILDING", 5)):
+                      ("CONTEXT", 8), ("BUILDING", 5), ("CORE", 1)):
         doc.layers.add(name, color=col)
     return doc
 
@@ -235,8 +243,10 @@ def drawings(design, out_dir: Path):
     seen = set()
     for b in design["buildings"]:
         t = b["exterior_wall"]
-        for s in b["storeys"]:
-            key = (b["id"], tuple(s["footprint"]), json.dumps(s["windows"], sort_keys=True), s["use"])
+        cores = core_rects(b)
+        for n, s in enumerate(b["storeys"], start=1):
+            here = [r for r, lo, hi, _ in cores if lo <= n <= hi]
+            key = (b["id"], tuple(s["footprint"]), json.dumps(s["windows"], sort_keys=True), s["use"], len(here))
             if key in seen:
                 continue
             seen.add(key)
@@ -261,7 +271,15 @@ def drawings(design, out_dir: Path):
                               a[1] + uy * (dd - w["width"] / 2) + ny * t / 2)
                         msp.add_line(q0, (q0[0] + ux * w["width"], q0[1] + uy * w["width"]),
                                      dxfattribs={"layer": "WINDOW"})
-            c = inner.representative_point()
-            _text(msp, f"{s['name']} - {s['use']}  NFA {inner.area:.0f} m2", (c.x, c.y), 1.0)
+            core_a = 0.0
+            for r in here:                                    # B1 cores (ASSUMED positions)
+                msp.add_lwpolyline(r, close=True, dxfattribs={"layer": "CORE", "lineweight": 50})
+                rp = Polygon(r)
+                msp.add_line(r[0], r[2], dxfattribs={"layer": "CORE"})
+                msp.add_line(r[1], r[3], dxfattribs={"layer": "CORE"})
+                core_a += rp.intersection(inner).area
+            c = inner.difference(unary_union([Polygon(r) for r in here])).representative_point() if here \
+                else inner.representative_point()
+            _text(msp, f"{s['name']} - {s['use']}  NFA {inner.area - core_a:.0f} m2", (c.x, c.y), 1.0)
             files.append(_save(doc, d_dir / f"plan_{s['name']}"))
     return files

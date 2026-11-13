@@ -106,3 +106,16 @@ def in_range(n, rule, n_max):
     hi = rule.get("to", n_max)
     hi = n_max + hi + 1 if hi < 0 else hi
     return lo <= n <= hi
+
+
+def core_rects(b):
+    """Cores of a building: (rectangle in world xy, from, to, definition) per `cores:` entry. dx, dy, w, d are in the
+    local frame of the ground-floor footprint (centroid + longest edge), so cores stay put through setbacks."""
+    st = b["storeys"]
+    frame = local_frame(st[0]["footprint"])
+    out = []
+    for c in b.get("cores", []) or []:
+        lo, hi = c.get("from", 1), c.get("to", len(st))
+        hi = len(st) + hi + 1 if hi < 0 else hi
+        out.append((rect_world(frame, c.get("dx", 0), c.get("dy", 0), c["w"], c["d"]), lo, hi, c))
+    return out

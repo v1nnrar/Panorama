@@ -162,7 +162,8 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       dropping `terrace_edge`.)
 
 ### B. Completeness of the plan
-- [ ] B1. Floor plans per building: cores (stairs, lifts, shafts) at plausible positions, marked ASSUMED.
+- [x] B1. Floor plans per building: cores (stairs, lifts, shafts) at plausible positions, marked ASSUMED.
+      (iteration 40: `cores:` in the schema → IfcWall SHEAR rings per storey, layer CORE on the plans, deducted from NFA.)
 - [ ] B2. Hotel/residential layout on typical floors (room module 3.6–4.2 m) for the block(s) the user names as hotel;
       if not named yet, do C front block as the likely hotel and mark ASSUMED.
 - [ ] B3. Sections and elevations (drawings-producer) into `05_drawings/existing/<date>/`.

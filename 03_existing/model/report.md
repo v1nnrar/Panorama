@@ -12,7 +12,7 @@ Source: `params.yaml`
 | height_top_of_parapet_m | 83.8 |
 | footprint_area_m2 | 8120.1 |
 | gfa_m2 | 92021.3 |
-| net_floor_area_m2 | 87599.2 |
+| net_floor_area_m2 | 78983.2 |
 | rooms | 0 |
 | site_area_m2 | 16491.7 |
 | built_up_ratio | 0.492 |
@@ -46,15 +46,15 @@ Source: `params.yaml`
 
 | ID | Name | Use | Storeys | Height (m) | Target (m) | Footprint (m²) | GFA (m²) | NFA (m²) |
 |---|---|---|---|---|---|---|---|---|
-| A | Diagrid tower (T2) | Residential / hotel tower | 22 | 83.8 | 83.8 | 1172.6 | 25796.6 | 24752.3 |
+| A | Diagrid tower (T2) | Residential / hotel tower | 22 | 83.8 | 83.8 | 1172.6 | 25796.6 | 22112.3 |
 | A0 | Diagrid tower podium + courtyard link | Lobby / restaurant | 1 | 5.9 |  | 2248.2 | 2248.2 | 2169.4 |
-| B | Green tower (E residential tower) | Residential | 22 | 68.9 | 68.9 | 1165.9 | 23243.9 | 22243.8 |
-| B2 | Terraced block (E) | Residential | 8 | 26.9 | 26.9 | 1035.9 | 7482.0 | 7031.3 |
-| B3 | Podium north (E) | Residential | 5 | 19.2 | 19.2 | 463.8 | 2319.2 | 2156.7 |
-| C1 | Front slab — west head (T5) | Hotel / office | 10 | 31.05 | 31.05 | 434.0 | 4340.4 | 4051.6 |
-| C2 | Front slab — wing (T5) | Hotel / office | 10 | 31.05 | 31.05 | 942.5 | 9222.2 | 8747.0 |
-| D | Butterfly office (T1 bow-tie) | Office | 8 | 32.3 | 32.3 | 1061.6 | 10456.2 | 9919.9 |
-| E | Existing corner office (parcel 1133/12) | Office (existing, kept) | 9 | 29.2 | 29.2 | 768.1 | 6912.6 | 6527.2 |
+| B | Green tower (E residential tower) | Residential | 22 | 68.9 | 68.9 | 1165.9 | 23243.9 | 20263.8 |
+| B2 | Terraced block (E) | Residential | 8 | 26.9 | 26.9 | 1035.9 | 7482.0 | 6359.3 |
+| B3 | Podium north (E) | Residential | 5 | 19.2 | 19.2 | 463.8 | 2319.2 | 1916.7 |
+| C1 | Front slab — west head (T5) | Hotel / office | 10 | 31.05 | 31.05 | 434.0 | 4340.4 | 3511.6 |
+| C2 | Front slab — wing (T5) | Hotel / office | 10 | 31.05 | 31.05 | 942.5 | 9222.2 | 7787.0 |
+| D | Butterfly office (T1 bow-tie) | Office | 8 | 32.3 | 32.3 | 1061.6 | 10456.2 | 9055.9 |
+| E | Existing corner office (parcel 1133/12) | Office (existing, kept) | 9 | 29.2 | 29.2 | 768.1 | 6912.6 | 5807.2 |
 | U | Underground parking | Parking / technical | 0 | 0.3 |  | 8597.0 | 0 | 0 |
 
 ## Compliance

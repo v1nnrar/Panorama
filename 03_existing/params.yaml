@@ -24,6 +24,7 @@ buildings:
                                          # tower height/width ratio in render-006 gives ~3.7 m storeys (5.0 + 21 x 3.7 + 1.1 parapet). Was 88.2 (PSG v3 estimate), which put the roof ~2
                                          # storeys above the client's in the tuned aerial and above D in render-003.
     notes: 22 storeys = podium level + 21 tower floors (7 diagrid modules x 3, counted in render-006 and render-000)
+    cores: [{dx: 0.0, dy: 0.0, w: 10, d: 12, note: 2 stairs + 4 lifts}]   # ASSUMED (B1): plausible core position/size (local frame of the GF footprint), not from client drawings
     storeys:
       - {name: P1, height: 5.0, use: Lobby}
       - {name: P2, height: 3.7, use: Amenities}   # ASSUMED: same as typical storey so the 3-storey diagrid modules are equal
@@ -65,6 +66,7 @@ buildings:
     notes: 22 storeys; storeys 1–6 = timber-fin base widened 4 m to the west, 7–22 = tower with planted balconies
     setbacks:
       - {facing: W, distance: -4.0, from: 1, to: 6}
+    cores: [{dx: 0.0, dy: 2.0, w: 9, d: 10, note: 2 stairs + 3 lifts}]   # ASSUMED (B1): plausible core position/size (local frame of the GF footprint), not from client drawings
     storeys:
       - {name: GF, height: 4.5, use: Retail / lobby}
       - {name: L, count: 21, height: 3.0, use: Apartments}
@@ -99,6 +101,7 @@ buildings:
       8 storeys, straight walls (render-000 aerial, render-004): deep white balcony slabs with planters on every floor,
       timber piers between bays, set-back penthouse with PV in the SE corner, roof terrace around it.
       Was modelled stepping back 1 m per floor to S and E, which read as a tilted pyramid; not in the renders.
+    cores: [{dx: -16.0, dy: 7.2, w: 6, d: 8, to: 7, note: stair + 2 lifts (south wing)}, {dx: 15.0, dy: -4.9, w: 6, d: 8, to: 7, note: stair + 2 lifts (east wing)}]   # ASSUMED (B1): plausible core position/size (local frame of the GF footprint), not from client drawings
     storeys:
       - {name: GF, height: 4.5, use: Retail}
       - {name: L, count: 6, start: 1, height: 3.0, use: Apartments}
@@ -126,6 +129,7 @@ buildings:
     footprint: [[54.97, -16.15], [52.41, -2.38], [85.01, 3.69], [87.51, -10.08]]   # ASSUMED: moves with tower B (attached, hidden in every view)
     height: 19.2                         # PSG v3 estimate
     notes: 5 storeys; base expression as B (timber fins)
+    cores: [{dx: 0.0, dy: 0.0, w: 6, d: 8, note: stair + lift}]   # ASSUMED (B1): plausible core position/size (local frame of the GF footprint), not from client drawings
     storeys:
       - {name: GF, height: 4.5, use: Retail}
       - {name: L, count: 4, height: 3.3, use: Apartments}
@@ -143,6 +147,7 @@ buildings:
     footprint: [[-32.57, -39.21], [-11.26, -35.24], [-12.67, -59.62], [-32.02, -57.57]]   # SW vertex MEASURED P3 (calibrated render-000, SW vertical edge, base + roof): 4.1 m west across the view (was [-28.08, -58.73])
     height: 31.05                        # GF 4.4 + 9 x 2.85 + parapet 1.0; render-000 roof edge→soffit 86 px = 25.7 m at 3.34 px/m
     notes: 10 storeys (render-005 re-counted on a zoom - 9 window rows over a tall recessed glazed GF; render-000 shows the same 9 rows); light grey fins + horizontal bands, green roof with rooftop units
+    cores: [{dx: 0.0, dy: 0.0, w: 6, d: 9, note: stair + 2 lifts}]   # ASSUMED (B1): plausible core position/size (local frame of the GF footprint), not from client drawings
     storeys:
       - {name: GF, height: 4.4, use: Lobby}            # ESTIMATED from render-005: GF ≈ 1.5 x typical storey
       - {name: L, count: 9, height: 2.85, use: Rooms}   # ESTIMATED from render-005 + render-000: 9 window rows (iteration 5 counted the parapet band as a 10th)
@@ -176,6 +181,7 @@ buildings:
     notes: 10 storeys, window rows continuous with C1 (render-005); top floor set back 4 m on the north (roof terraces, render-000)
     setbacks:
       - {facing: N, distance: 4.0, from: 10, to: 10}
+    cores: [{dx: -12.5, dy: 0.0, w: 6, d: 8, note: stair + 2 lifts}, {dx: 12.5, dy: 0.0, w: 6, d: 8, note: stair + 2 lifts}]   # ASSUMED (B1): plausible core position/size (local frame of the GF footprint), not from client drawings
     storeys:
       - {name: GF, height: 4.4, use: Lobby / retail}   # ESTIMATED from render-005, same levels as C1
       - {name: L, count: 9, height: 2.85, use: Rooms}
@@ -207,6 +213,7 @@ buildings:
     notes: 8 storeys (render-003 - 7 ribbon-glazed office floors over a tall recessed GF); white horizontal bands; sawtooth PV roof (top view)
     setbacks:
       - {facing: [N, E], distance: 3.0, from: 1, to: 1}   # ESTIMATED from render-003: upper floors overhang the recessed GF
+    cores: [{dx: -18.1, dy: 2.5, w: 6, d: 9, note: stair + 2 lifts (west wing)}, {dx: 20.1, dy: -0.5, w: 6, d: 9, note: stair + 2 lifts (east wing)}]   # ASSUMED (B1): plausible core position/size (local frame of the GF footprint), not from client drawings
     storeys:
       - {name: GF, height: 6.5, use: Lobby}               # ESTIMATED from render-003: ≈1.9 x typical storey
       - {name: L, count: 7, height: 3.45, use: Offices}   # ESTIMATED from render-003: 7 ribbon-glazing rows
@@ -232,6 +239,7 @@ buildings:
     footprint: [[90.8, 3.7], [92.4, 4.0], [91.0, 11.4], [125.3, 17.7], [126.3, 12.2], [124.6, 11.8], [125.0, 10.0], [132.0, 11.0], [124.7, -4.6], [118.3, -5.8], [118.4, -7.2], [117.2, -8.2], [115.9, -7.9], [115.2, -6.4], [107.3, -7.5], [92.84, -7.5]]
     height: 29.2                         # MEASURED P4: calibrated render-000, roof edge on the verticals of the RÚIAN NE / SE corners = 30.0 / 28.3 m (miss 3–4 px); OSM had 32.0. RÚIAN: 12 storeys incl. lower levels; ground level unknown (terrain model predates E)
     notes: Existing building kept in the client scheme (render-002); dark glass, white frame, bronze crown
+    cores: [{dx: 0.0, dy: 0.0, w: 8, d: 10, note: 2 stairs + 3 lifts}]   # ASSUMED (B1): plausible core position/size (local frame of the GF footprint), not from client drawings
     storeys:
       - {name: GF, height: 4.5, use: Lobby}
       - {name: L, count: 8, height: 3.3, use: Offices}

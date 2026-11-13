@@ -167,7 +167,8 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
 - [x] B2. Hotel/residential layout on typical floors (room module 3.6–4.2 m) for the block(s) the user names as hotel;
       if not named yet, do C front block as the likely hotel and mark ASSUMED.
       (iteration 41: `layout:` double-loaded corridor, 3.8 m module, on C1/C2 storeys 2–10 → 317 rooms, ASSUMED.)
-- [ ] B3. Sections and elevations (drawings-producer) into `05_drawings/existing/<date>/`.
+- [x] B3. Sections and elevations (drawings-producer) into `05_drawings/existing/<date>/`.
+      (iteration 42: `tools/sections.py` → 4 elevations + sections AA (W–E, y = 5) / BB (S–N, x = 5), DXF + PNG.)
 - [ ] B4. Underground parking: ramp position from the top view, parking grid, space count.
 - [ ] B5. Web viewer `viewer/index.html` for `model.glb` (lightweight GLB: merge by material, no normals).
 

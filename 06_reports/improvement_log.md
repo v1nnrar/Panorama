@@ -495,3 +495,12 @@ client's renders, higher is better).
   ≈ 28–30 m² (all standard). The PSP programme estimate (70/20/10 mix incl. 56 m² suites, 62 % efficiency) gives
   236 keys for the same floors.
 - Score unchanged **0.4922** (interior only). Test block 6/6. CLAUDE.md schema updated.
+
+## 2026-11-13 — iteration 42: B3 elevations and sections — DONE (drawings only)
+- New `tools/sections.py <scheme> [--out] [--section name:axis=a,b:pos]`, generated from the params like every other
+  output: 4 compass elevations (storey prisms projected, drawn far → near with opaque fill, storey lines, ground line,
+  parapet heights labelled) and sections with cut storeys solid + slab poché and buildings beyond in light line.
+- Issued to `05_drawings/existing/2026-11-13/` (DXF in metres, local survey frame + PNG, index.md): elevations S/E/N/W,
+  section AA (W–E at y = 5: A, A0, B3, E, basement) and BB (S–N at x = 5: C2 with its setback top floor, A0, A, D,
+  basement; B beyond).
+- No model change; score unchanged 0.4922.

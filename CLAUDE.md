@@ -34,7 +34,7 @@ Schemes use `buildings:` (list) and `site: {file: ../00_site/site.yaml}`.
   setbacks:                   # per-storey footprint changes (terraces, overhangs)
     - {facing: [S, E], per_storey: 1.0, from: 2}     # cumulative step back
     - {facing: W, distance: -4.0, from: 1, to: 6}    # fixed (negative = outward)
-  terrace_edge: {planter: true, railing: true}       # on slab edges exposed by setbacks
+  terrace_edge: {planter: true, railing: true, green: true}   # on slab edges exposed by setbacks; green = planted terrace surface
   facade:                     # rules apply to storeys from..to (1-based, inclusive), facing = compass list
                               # or near: [[x,y], ...] = the single edge whose midpoint is closest (recesses)
     - {type: curtain, glass: Glass, mullion: 1.5, spandrel: 1.0}   # replaces walls + windows

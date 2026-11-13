@@ -279,6 +279,16 @@ def _terrace_edges(C, st, s, slab_poly, rule):
                      if math.hypot(cs[k + 1][0] - cs[k][0], cs[k + 1][1] - cs[k][1]) > 0.3]
     if segs:
         _edge_elements(C, st, f"{s['name']} terrace", segs, s["elevation"] + rule.get("slab", 0.3), rule)
+    if rule.get("green"):                    # planted terrace surface (terrace_edge: {green: true})
+        area = slab_poly.difference(Polygon(s["footprint"]).buffer(0.3, join_style="mitre"))
+        parts = [g for g in getattr(area, "geoms", [area]) if isinstance(g, Polygon) and g.area > 2.0]
+        solids = [plan_solid(C.f, _ring(orient(g.buffer(-0.5, join_style="mitre"), sign=1.0)),
+                             s["elevation"] + rule.get("slab", 0.3), 0.25)
+                  for g in parts if not g.buffer(-0.5, join_style="mitre").is_empty
+                  and isinstance(g.buffer(-0.5, join_style="mitre"), Polygon)]
+        if solids:
+            product(C, "IfcCovering", f"{s['name']} terrace green", solids, st, "USERDEFINED", "GREEN ROOF",
+                    material="Planting")
 
 
 def _diagrid(C, b, st_map, rule):

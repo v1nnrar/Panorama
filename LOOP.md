@@ -157,7 +157,9 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       between. Mean −0.0010, render-004 0.4906 → 0.4817 — kept within tolerance; render-004's limit is its framing.)
 - [x] A13. Tower A shows above D in render-003 where the client image has sky: the client render omits A (audit 2026-11-09).
 - [~] A14. (BLOCKED, = P2/P3b) Calibrate render-002 (SE) on context and triangulate A and B2 with render-000.
-- [ ] A12. B2 roof terrace: green roof + planters around the PV penthouse (aerial render-000).
+- [x] A12. B2 roof terrace: green roof + planters around the PV penthouse (aerial render-000).
+      (iteration 39: new `terrace_edge: {green: true}` planted terrace surface; timber-clad PH; fixed the params loader
+      dropping `terrace_edge`.)
 
 ### B. Completeness of the plan
 - [ ] B1. Floor plans per building: cores (stairs, lifts, shafts) at plausible positions, marked ASSUMED.

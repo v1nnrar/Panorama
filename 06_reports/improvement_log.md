@@ -466,3 +466,11 @@ client's renders, higher is better).
 - Score (Cycles): mean **0.4934 → 0.4924** (−0.0010, within the 0.005 tolerance); render-004 0.4906 → 0.4817,
   render-003 0.3906 → 0.3932, aerial 0.3529 → 0.3537. Kept because it matches the client facade; render-004's edge
   score is dominated by its framing (A15, blocked).
+
+## 2026-11-13 — iteration 39: A12 B2 roof terrace — KEPT
+- render-000: B2's roof terrace around the PV penthouse is fully planted, and the penthouse walls read timber-clad.
+- Pipeline: `terrace_edge: {green: true}` now lays a planted covering (IfcCovering GREEN ROOF, material Planting) on
+  the slab area a smaller storey leaves exposed. **Bug fixed**: `pipeline/params.py` never passed `terrace_edge` on,
+  so every building used the default (planters + railings) — B and C2 asked for exactly that, so they are unchanged.
+- B2: `green: true` on its terrace edge; the PH gets dark glass behind dense timber fins (glass curtain now storeys 2–7).
+- Score (Cycles): mean **0.4924 → 0.4922** (−0.0002; aerial 0.3537 → 0.3547). Test block 6/6. CLAUDE.md schema updated.

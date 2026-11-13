@@ -106,13 +106,15 @@ buildings:
       - {name: PH, height: 3.0, use: Apartments, footprint: [[70.84, -63.12], [68.64, -54.42], [95.24, -48.82], [96.64, -56.92]]}   # MEASURED P3: 2 PV-roof corners, moved (−1.16, −1.62)
     facade:
       - {type: curtain, from: 1, to: 1, glass: Glass dark}
-      - {type: curtain, from: 2, glass: Glass, mullion: 1.8}
+      - {type: curtain, from: 2, to: 7, glass: Glass, mullion: 1.8}
+      - {type: curtain, from: 8, glass: Glass dark, mullion: 1.2}   # A12: penthouse reads timber-clad in render-000
+      - {type: fins, from: 8, spacing: 0.4, width: 0.3, depth: 0.12, offset: 0, material: Timber}
       # ESTIMATED from render-004 / render-000: ~2.2 m deep slabs wrapping the street faces, planters + glass railing
       # (N faces are against tower B / B3, so not included)
       - {type: balcony, from: 2, to: 7, facing: [S, E, W], depth: 2.2, thickness: 0.35, planter: true, railing: true, planter_material: Concrete white}
       # ESTIMATED from render-004: timber piers between bays, full balcony depth
       - {type: fins, from: 2, to: 7, facing: [S, E, W], spacing: 4.2, width: 0.45, depth: 2.2, offset: 0, material: Timber}
-    terrace_edge: {planter: true, railing: true}
+    terrace_edge: {planter: true, railing: true, green: true}   # A12: planted roof terrace around the PH (render-000)
     roof:
       parapet: 0.6
       parapet_material: Concrete white

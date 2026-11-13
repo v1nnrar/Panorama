@@ -20,6 +20,27 @@ Source: `params.yaml`
 | unbuilt_ratio | 0.679 |
 | footprint_outside_plot_m2 | 0.0 |
 | min_setback_m | 8.0 |
+| parking_zone | 02 |
+| parking_required_min | 47 |
+| parking_required_max | 60 |
+| parking_capacity_est | 0 |
+| parking_margin | -47 |
+| gfa_by_use_m2 | {'restaurant': 1124.0, 'hotel': 5620.0} |
+| flats_est | 0 |
+| hotel_keys_est | 0 |
+| hotel_programme | None |
+| psp22_min_boundary_distance_m | None |
+| psp21_windows_checked | 0 |
+| psp21_windows_failing | 0 |
+| psp21_fail_ratio | 0.0 |
+| psp21_failing_neighbours | [] |
+| daylight_proxy_windows | 28 |
+| daylight_proxy_fail_ratio | 0.0 |
+| vsc_mean | 0.397 |
+| daylight_method | VSC < 15 % (CIE overcast) |
+| courtyard_sun_hours_mean_mar21 | 0.0 |
+| courtyard_area_2h_sun_ratio | 0.0 |
+| open_ground_m2 | 0.0 |
 
 ## Buildings
 

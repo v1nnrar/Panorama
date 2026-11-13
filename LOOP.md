@@ -143,11 +143,16 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
 
 - [x] A11. C2 east end hides B's timber base in render-004 (client shows the base): check C2 length / whether the client render omits it.
       (iteration 35: the client render omits block C, as in render-006 → `hide: [C1, C2]`, camera re-searched.)
-- [ ] A15. render-004 framing: the client's B is larger and further left than ours → corner-fit the camera on B's roof
+- [~] A15. (BLOCKED) render-004 framing: the client's B is larger and further left than ours → corner-fit the camera on B's roof
       corners and base (the cam_search optimum is local).
       Attempt 1 (2026-11-13): level-camera fit on B's top-slab corners (3 corners, 3–4 px) → Workbench 0.3855, 0.4511
       after a sweep < 0.4732 now → reverted. Next: add B2/base points (the 3 roof corners alone are too few) or try a
       tilted camera (pitch free).
+      Attempt 2 (2026-11-13): floor tips down B's near corner show a two-storey rhythm that does not map onto the
+      model's per-floor balconies; cam_search 3 sweeps from the current camera: no better point (0.4732, 43 renders).
+      **BLOCKED** (2 attempts) — likely limited by B's facade model (A16) rather than the camera.
+- [ ] A16. B tower facade rhythm: render-004 shows thick planted balcony slabs every SECOND storey (≈ 58–64 px apart at
+      the near corner) with thinner slabs between; the model has identical 1.6 m balconies on every floor.
 - [x] A13. Tower A shows above D in render-003 where the client image has sky: the client render omits A (audit 2026-11-09).
 - [~] A14. (BLOCKED, = P2/P3b) Calibrate render-002 (SE) on context and triangulate A and B2 with render-000.
 - [ ] A12. B2 roof terrace: green roof + planters around the PV penthouse (aerial render-000).

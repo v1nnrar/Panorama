@@ -450,3 +450,11 @@ client's renders, higher is better).
 - Edge score (Workbench): 0.3855 at start, 0.4511 after a cam_search sweep (target z 7.7) — below the current camera's
   0.4732 → reverted; score unchanged (Cycles mean 0.4934). Three roof corners do not constrain the lower frame; the
   B/B2 lower geometry must enter the fit (next attempt).
+
+## 2026-11-13 — iteration 37: A15 render-004 camera, attempt 2 — FAILED → A15 BLOCKED; new item A16
+- Tried to add vertical scale from the balcony-slab tips down B's near corner: the bright bands repeat every ≈ 58–64 px
+  (a two-storey rhythm with thinner slabs between), which cannot be mapped onto the model's identical per-floor
+  balconies → no reliable heights.
+- `cam_search` with 3 sweeps from the current camera: no improvement (0.4732, 43 renders) — a local optimum.
+- No change; score unchanged (0.4934). A15 blocked after two attempts. New A16: model B's two-storey planted-slab
+  rhythm, which is probably what keeps render-004's edge match low.

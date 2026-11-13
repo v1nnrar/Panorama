@@ -70,10 +70,21 @@ def parking(design, zone="02", m2_per_space=30.0, basement_efficiency=0.85):
         base = a / per
         req_min += base * bs * bound_pct + base * vs * vis_min
         req_max += base * bs * bound_pct + base * vs * vis_max
-    below = sum(Polygon(s["footprint"]).area for b in design["buildings"] for s in b["storeys"] if s["elevation"] < 0)
-    capacity = below * basement_efficiency / m2_per_space
+    from .geom import all_core_rects, parking_layout
+    obstacles = all_core_rects(design)
+    capacity, method = 0.0, "area"
+    for b in design["buildings"]:
+        for s in b["storeys"]:
+            if s["elevation"] >= 0:
+                continue
+            lay = parking_layout(b, s, obstacles) if b.get("parking") else None
+            if lay:                                            # counted bays (B4 parking grid)
+                capacity += len(lay["stalls"])
+                method = "layout"
+            else:                                              # area estimate
+                capacity += Polygon(s["footprint"]).area * basement_efficiency / m2_per_space
     return {"parking_zone": zone, "parking_required_min": math.floor(req_min), "parking_required_max": math.ceil(req_max),
-            "parking_capacity_est": math.floor(capacity),
+            "parking_capacity_est": math.floor(capacity), "parking_capacity_method": method,
             "parking_margin": math.floor(capacity) - math.floor(req_min),
             "gfa_by_use_m2": {k: round(v, 1) for k, v in uses.items()}}
 

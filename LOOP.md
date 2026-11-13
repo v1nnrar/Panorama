@@ -169,7 +169,8 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       (iteration 41: `layout:` double-loaded corridor, 3.8 m module, on C1/C2 storeys 2–10 → 317 rooms, ASSUMED.)
 - [x] B3. Sections and elevations (drawings-producer) into `05_drawings/existing/<date>/`.
       (iteration 42: `tools/sections.py` → 4 elevations + sections AA (W–E, y = 5) / BB (S–N, x = 5), DXF + PNG.)
-- [ ] B4. Underground parking: ramp position from the top view, parking grid, space count.
+- [x] B4. Underground parking: ramp position from the top view, parking grid, space count.
+      (iteration 43: `parking:` bay grid → 244 spaces/level, 488 total, counted in §25; ramp ESTIMATED from the board.)
 - [ ] B5. Web viewer `viewer/index.html` for `model.glb` (lightweight GLB: merge by material, no normals).
 
 ### C. Waiting on the user (do not start without input)

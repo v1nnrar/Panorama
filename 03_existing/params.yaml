@@ -262,6 +262,10 @@ buildings:
     footprint: [[-49.78, 14.14], [-50.12, 11.75], [-49.3, 10.76], [-36.74, -55.39], [-37.61, -57.3], [53.85, -69.64], [33.28, 43.14], [-51.67, 24.54]]
     ground_elevation: -7.0
     notes: ASSUMED 2 basement levels under parcels 1051/3, 1090/2, 1051/16 (ramp + cars in top view) — VERIFY
+    # B4: 90° bays 2.5 x 5.0 m on 6 m aisles, cross aisle every 50 m (ASSUMED layout); bays clear the cores above.
+    # Ramp ESTIMATED from the client board (top view, registered ±2.4 m): light wedge with a car at the west end of the
+    # forecourt, board px (62..78, 318..345).
+    parking: {stall: [2.5, 5.0], aisle: 6.0, cross_every: 50, ramp: [[-38.9, -23.9], [-32.4, -23.3], [-31.7, -34.0], [-38.2, -34.6]]}
     windows: false
     material: Concrete grey
     storeys:

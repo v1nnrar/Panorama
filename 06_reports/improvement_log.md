@@ -504,3 +504,14 @@ client's renders, higher is better).
   section AA (W–E at y = 5: A, A0, B3, E, basement) and BB (S–N at x = 5: C2 with its setback top floor, A0, A, D,
   basement; B beyond).
 - No model change; score unchanged 0.4922.
+
+## 2026-11-13 — iteration 43: B4 underground parking grid — KEPT
+- Pipeline: basement key `parking: {stall, aisle, cross_every, offset, margin, ramp}` (`geom.parking_layout`):
+  double-loaded 90° rows along the storey's longest edge; a bay counts only if it and its aisle frontage lie inside
+  the outline, clear the ramp and the cores of every building above, and are off the cross aisles (every 50 m).
+  §25 now counts the bays (`parking_capacity_method: layout`) instead of area × 0.85 / 30 m²; plan U-B1 shows bays,
+  ramp and cores (layer PARKING).
+- Ramp ESTIMATED from the client board: light wedge with a car at the west end of the forecourt (≈ 6.5 × 11 m at
+  (−35.6, −28.9)).
+- Result: **244 bays per level, 488 in 2 levels** (≈ 35 m² of basement per bay); the old area estimate gave 486 → §25
+  margin −241 → −240 (still failing: 728 required). Score unchanged 0.4922; test block 6/6.

@@ -99,6 +99,7 @@ def _building(b: dict, scheme_defaults: dict) -> dict:
         **({"terrace_edge": b["terrace_edge"]} if b.get("terrace_edge") else {}),   # was dropped before (A12 fix)
         "cores": b.get("cores", []),                       # [{dx, dy, w, d, from, to, lifts, stairs}] (B1)
         "layout": b.get("layout"),                         # double-loaded corridor room layout (B2)
+        "parking": b.get("parking"),                       # basement parking grid + ramp (B4)
     }
 
 

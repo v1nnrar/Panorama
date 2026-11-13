@@ -190,3 +190,58 @@ def room_layout(b, n, s, t):
 def _rot_pt(p, ang, ox, oy):
     a = math.radians(ang)
     return (ox + p[0] * math.cos(a) - p[1] * math.sin(a), oy + p[0] * math.sin(a) + p[1] * math.cos(a))
+
+
+def parking_layout(b, s, obstacles=()):
+    """90° parking grid on a basement storey (LOOP.md B4) if the building has `parking:`.
+
+    parking: {stall: [2.5, 5.0], aisle: 6.0, margin: 0.5, ramp: [[x, y], ...], offset: 0, cross_every: 50}
+    Double-loaded rows (stall + aisle + stall) run along the longest edge of the storey; a stall is kept if it lies
+    inside the outline (inset by `margin`), its aisle frontage is inside too, it clears the ramp and every obstacle
+    (e.g. cores of the buildings above) and it is not on a cross aisle (every `cross_every` m).
+    Returns {"stalls": [polygons], "aisles": [polygons], "ramp": polygon|None} in world coordinates, or None.
+    """
+    from shapely.geometry import Polygon, box
+    from shapely import affinity
+    from shapely.ops import unary_union
+    P = b.get("parking")
+    if not P:
+        return None
+    w, dep = P.get("stall", [2.5, 5.0])
+    aisle = P.get("aisle", 6.0)
+    (ox, oy), (ux, uy), _ = local_frame(s["footprint"])
+    ang = math.degrees(math.atan2(uy, ux))
+    fwd = lambda g: affinity.rotate(affinity.translate(g, -ox, -oy), -ang, origin=(0, 0))  # noqa: E731
+    back = lambda g: affinity.translate(affinity.rotate(g, ang, origin=(0, 0)), ox, oy)  # noqa: E731
+    inner = fwd(Polygon(s["footprint"]).buffer(-P.get("margin", 0.5), join_style="mitre"))
+    ramp = Polygon(P["ramp"]) if P.get("ramp") else None
+    obs = [fwd(Polygon(o).buffer(0.3, join_style="mitre")) for o in obstacles]
+    if ramp is not None:
+        obs.append(fwd(ramp.buffer(0.5, join_style="mitre")))
+    block = unary_union(obs) if obs else None
+    u0, v0, u1, v1 = inner.bounds
+    ce = P.get("cross_every", 50.0)                              # cross aisles connecting the rows
+    cross_u = [u0 + k * ce for k in range(1, int((u1 - u0) / ce) + 1)]
+    stalls, aisles = [], []
+    v = v0 + P.get("offset", 0.0)
+    while v + 2 * dep + aisle <= v1 + 1e-6:
+        for row_v, front in ((v, v + dep), (v + dep + aisle, v + dep)):
+            u = u0
+            while u + w <= u1 + 1e-6:
+                c = box(u, row_v, u + w, row_v + dep)
+                a = box(u, front, u + w, front + aisle)              # the aisle strip this stall opens onto
+                crossing = any(abs(u + w / 2 - x) < (aisle + w) / 2 for x in cross_u)
+                if (not crossing and inner.contains(c) and inner.contains(a)
+                        and (block is None or not (c.intersects(block) or a.intersects(block)))):
+                    stalls.append(back(c))
+                u += w
+        a = inner.intersection(box(u0, v + dep, u1, v + dep + aisle))
+        if not a.is_empty:
+            aisles.append(back(a))
+        v += 2 * dep + aisle
+    return {"stalls": stalls, "aisles": aisles, "ramp": ramp}
+
+
+def all_core_rects(design):
+    """Core rectangles of every building of a design (obstacles for basement parking)."""
+    return [r for b in design["buildings"] for r, _, _, _ in core_rects(b)]

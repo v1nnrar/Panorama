@@ -23,8 +23,9 @@ Source: `params.yaml`
 | parking_zone | 02 |
 | parking_required_min | 728 |
 | parking_required_max | 825 |
-| parking_capacity_est | 487 |
-| parking_margin | -241 |
+| parking_capacity_est | 488 |
+| parking_capacity_method | layout |
+| parking_margin | -240 |
 | gfa_by_use_m2 | {'retail': 7449.0, 'residential': 53831.0, 'restaurant': 2248.2, 'hotel': 12186.0, 'office': 9394.5} |
 | flats_est | 645 |
 | hotel_keys_est | 236 |
@@ -66,4 +67,4 @@ Source: `params.yaml`
 | Regulated floor area (HPPreg) — not set in stabilised areas |  | 92021.3 | ℹ️ | MPP čl. 96 odst. 2: HPPreg/Zmax apply only to [T] and [R] areas; plot is [S] (KLZ 058 map, no T hatch) |
 | PSP §21: neighbour windows failing the 45°/45° distance angle | ≤ 0 | 9 | ❌ FAIL | PSP §21 odst. 1 + příloha 1 bod II (sampled windows on neighbour façades facing the plot; pipeline/psp.py) |
 | PSP §22: min distance to private neighbouring plots (m) | ≥ 2.0 | 3.64 | ✅ PASS | PSP §22 odst. 2 — ASSUMED: plot edges facing S (Milevská) and E (street/metro) are public space |
-| PSP §25: parking capacity minus required minimum (spaces) | ≥ 0 | -241 | ❌ FAIL | PSP §25 + příloha 2 (HPP per space by use) + příloha 3 — zone 02 (verified 2026-11-11: gs-pub.praha.eu dop/psp_zony_parkovani/MapServer layer 0 (Zóny parkování města (PSP), HMP-IPR), plot polygon intersects only OBJECTID 23, ZONA 02 — raw/psp_parking_zones_plot.geojson; bound 80 %, visitor 15–55 %), 30 m²/space at 85 % basement efficiency |
+| PSP §25: parking capacity minus required minimum (spaces) | ≥ 0 | -240 | ❌ FAIL | PSP §25 + příloha 2 (HPP per space by use) + příloha 3 — zone 02 (verified 2026-11-11: gs-pub.praha.eu dop/psp_zony_parkovani/MapServer layer 0 (Zóny parkování města (PSP), HMP-IPR), plot polygon intersects only OBJECTID 23, ZONA 02 — raw/psp_parking_zones_plot.geojson; bound 80 %, visitor 15–55 %), 30 m²/space at 85 % basement efficiency |

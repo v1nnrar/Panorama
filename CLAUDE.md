@@ -36,6 +36,7 @@ Schemes use `buildings:` (list) and `site: {file: ../00_site/site.yaml}`.
     - {facing: W, distance: -4.0, from: 1, to: 6}    # fixed (negative = outward)
   cores: [{dx, dy, w, d, from, to, wall, note}]   # stair/lift cores, local frame of the GF footprint; shear walls, deducted from NFA
   layout: {type: corridor, module: 3.8, corridor: 1.8, offset: 0, min_area: 14, partition: 0.15, from: 2}   # double-loaded rooms → partitions, IfcSpace per room, room count
+  parking: {stall: [2.5, 5.0], aisle: 6.0, cross_every: 50, offset: 0, ramp: [[x,y], ...]}   # basements: bay grid clear of ramp + cores → §25 capacity counted
   terrace_edge: {planter: true, railing: true, green: true}   # on slab edges exposed by setbacks; green = planted terrace surface
   facade:                     # rules apply to storeys from..to (1-based, inclusive), facing = compass list
                               # or near: [[x,y], ...] = the single edge whose midpoint is closest (recesses)

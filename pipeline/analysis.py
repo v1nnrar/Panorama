@@ -12,7 +12,7 @@ from shapely.geometry import Polygon
 from shapely.ops import unary_union
 
 from .build_ifc import _window_positions
-from .geom import core_rects, room_layout
+from .geom import all_core_rects, core_rects, parking_layout, room_layout
 
 
 def site_polygon(design):
@@ -162,7 +162,7 @@ def _new_doc():
     doc = ezdxf.new("R2018", setup=True)
     doc.units = ezdxf.units.M
     for name, col in (("PARCEL", 6), ("SITE", 3), ("SETBACK", 1), ("WALL", 7), ("WINDOW", 5), ("TEXT", 250),
-                      ("CONTEXT", 8), ("BUILDING", 5), ("CORE", 1), ("ROOMS", 4)):
+                      ("CONTEXT", 8), ("BUILDING", 5), ("CORE", 1), ("ROOMS", 4), ("PARKING", 8)):
         doc.layers.add(name, color=col)
     return doc
 
@@ -289,6 +289,20 @@ def drawings(design, out_dir: Path):
             c = inner.difference(unary_union([Polygon(r) for r in here])).representative_point() if here \
                 else inner.representative_point()
             label = f"{s['name']} - {s['use']}  NFA {inner.area - core_a:.0f} m2"
+            park = parking_layout(b, s, all_core_rects(design)) if b.get("parking") else None
+            if park:                                          # B4 parking grid (ASSUMED layout)
+                for r in park["stalls"]:
+                    msp.add_lwpolyline(list(r.exterior.coords)[:-1], close=True, dxfattribs={"layer": "PARKING"})
+                if park["ramp"] is not None:
+                    rp = park["ramp"]
+                    msp.add_lwpolyline(list(rp.exterior.coords)[:-1], close=True,
+                                       dxfattribs={"layer": "CORE", "lineweight": 50})
+                    q = rp.representative_point()
+                    _text(msp, "RAMP", (q.x, q.y), 1.0)
+                for r in all_core_rects(design):
+                    if Polygon(r).intersects(Polygon(fp)):
+                        msp.add_lwpolyline(r, close=True, dxfattribs={"layer": "CORE"})
+                label += f"  {len(park['stalls'])} parking spaces"
             if lay:                                           # B2 room layout (ASSUMED)
                 for p0, p1 in lay["partitions"]:
                     msp.add_line(p0, p1, dxfattribs={"layer": "ROOMS"})

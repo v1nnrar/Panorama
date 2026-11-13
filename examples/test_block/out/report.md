@@ -24,6 +24,7 @@ Source: `params.yaml`
 | parking_required_min | 47 |
 | parking_required_max | 60 |
 | parking_capacity_est | 0 |
+| parking_capacity_method | area |
 | parking_margin | -47 |
 | gfa_by_use_m2 | {'restaurant': 1124.0, 'hotel': 5620.0} |
 | flats_est | 0 |

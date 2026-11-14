@@ -539,3 +539,10 @@ client's renders, higher is better).
   from E's cadastral outline). Option D (client buildings made compliant) still needs 3 basement levels: 726 counted
   spaces for 665 required. Baseline row now: 92,021 m², §21 9 windows, parking 488 / 728.
 - Client-scheme match score unchanged 0.4922 (03_existing not modified).
+
+## 2026-11-14 — iteration 46: IDLE — nothing useful remains without user input
+- Open items are only section C (regulation documents, brief, our design, client site plan), which must not be started
+  without input; P2 / P3b / A14 / A15 are blocked on client data (render-002 camera or context model, drawings).
+- No change, no rebuild; score unchanged 0.4922. The loop will keep stopping here until the user answers one of:
+  hotel block · client drawings (DWG/PDF) · render-002 camera / context model · B2 east-side stepping ·
+  regulations / brief / design direction for the proposed scheme.

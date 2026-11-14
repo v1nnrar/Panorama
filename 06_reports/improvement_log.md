@@ -515,3 +515,15 @@ client's renders, higher is better).
   (−35.6, −28.9)).
 - Result: **244 bays per level, 488 in 2 levels** (≈ 35 m² of basement per bay); the old area estimate gave 486 → §25
   margin −241 → −240 (still failing: 728 required). Score unchanged 0.4922; test block 6/6.
+
+## 2026-11-14 — iteration 44: B5 web viewer — DONE
+- `pipeline/blender_scene.py::export_web_glb`: after the renders, copies of the visible scheme meshes (modifiers
+  applied) are joined into one object and exported as `model/model_web.glb` without normals or UVs → one mesh, one
+  primitive per material (17), positions only: **2.6 MB** (full `model.glb` 11.6 MB). Copies are deleted again.
+- `viewer/index.html`: three.js 0.160.0 vendored in `viewer/vendor` (MIT; the CDNs are not reachable from the build
+  environment and vendoring keeps it offline-capable), orbit controls, flat normals computed on load, sun with
+  shadows, translucent glass, a toggle per material, scheme selector (existing + capacity options once their
+  `model_web.glb` exists). Serve the repo root (`.venv/bin/python -m http.server 8000` → /viewer/).
+- Checked headless with Playwright (requests answered from disk): loads, 17 materials, 190k triangles, no errors
+  besides the expected 404s for unbuilt options; `viewer/preview.png`.
+- Score unchanged 0.4922 (export only).

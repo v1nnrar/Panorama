@@ -382,4 +382,38 @@ def build_scene(ifc_path: str, out_dir: Path, design: dict, do_render=False, eng
     bpy.ops.wm.save_as_mainfile(filepath=str(blend))
     renders = render(out_dir, cams, engine=engine, samples=design.get("render", {}).get("samples", 48),
                      only=only) if do_render else []
-    return {"blend": str(blend), "glb": str(glb), "renders": renders}
+    web = export_web_glb([o for o in scheme_objs if o.visible_get()], out_dir / "model_web.glb")
+    return {"blend": str(blend), "glb": str(glb), "web_glb": str(web), "renders": renders}
+
+
+def export_web_glb(objs, path):
+    """Lightweight GLB for viewer/index.html (LOOP.md B5): copies of the scheme's meshes joined into ONE object, so
+    the glTF exporter writes one primitive per material; no normals / UVs (the viewer computes flat normals).
+    Runs after the .blend is saved and the renders are done; the copies are deleted again."""
+    bpy.ops.object.select_all(action="DESELECT")
+    dg = bpy.context.evaluated_depsgraph_get()
+    copies = []
+    for o in objs:
+        if o.type != "MESH":
+            continue
+        me = bpy.data.meshes.new_from_object(o.evaluated_get(dg))
+        me.transform(o.matrix_world)
+        c = bpy.data.objects.new(o.name + "_web", me)
+        bpy.context.scene.collection.objects.link(c)
+        copies.append(c)
+    if not copies:
+        return None
+    for c in copies:
+        c.select_set(True)
+    bpy.context.view_layer.objects.active = copies[0]
+    bpy.ops.object.join()
+    merged = bpy.context.view_layer.objects.active
+    merged.name = "scheme"
+    bpy.ops.object.select_all(action="DESELECT")
+    merged.select_set(True)
+    bpy.ops.export_scene.gltf(filepath=str(path), export_format="GLB", use_selection=True, export_normals=False,
+                              export_texcoords=False, export_apply=True, export_yup=True)
+    me = merged.data
+    bpy.data.objects.remove(merged)
+    bpy.data.meshes.remove(me)
+    return path

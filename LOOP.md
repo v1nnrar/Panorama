@@ -171,7 +171,8 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
       (iteration 42: `tools/sections.py` → 4 elevations + sections AA (W–E, y = 5) / BB (S–N, x = 5), DXF + PNG.)
 - [x] B4. Underground parking: ramp position from the top view, parking grid, space count.
       (iteration 43: `parking:` bay grid → 244 spaces/level, 488 total, counted in §25; ramp ESTIMATED from the board.)
-- [ ] B5. Web viewer `viewer/index.html` for `model.glb` (lightweight GLB: merge by material, no normals).
+- [x] B5. Web viewer `viewer/index.html` for `model.glb` (lightweight GLB: merge by material, no normals).
+      (iteration 44: `model_web.glb` 2.6 MB vs 11.6 MB, 1 mesh / 17 primitives; three.js 0.160 vendored; tested headless.)
 
 ### C. Waiting on the user (do not start without input)
 - [ ] C1. Regulations → `02_regulations/rules.yaml` (needs documents).

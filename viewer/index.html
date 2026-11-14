@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panorama Model Viewer</title>
+<!--
+  Web viewer for the scheme models (LOOP.md B5). Loads <scheme>/model/model_web.glb, written by
+  pipeline/blender_scene.py::export_web_glb (one mesh, one primitive per material, positions only).
+  Open through a local web server from the repository root (browsers block file:// fetches):
+      .venv/bin/python -m http.server 8000      →  http://localhost:8000/viewer/
+  three.js 0.160.0 is vendored in viewer/vendor (MIT, see vendor/three/LICENSE) so it works offline.
+-->
+<style>
+  :root { --bg: #eef0f2; --panel: rgba(255,255,255,.92); --ink: #1d2329; --muted: #5d6873; --line: #d5dade; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #15191d; --panel: rgba(28,33,38,.92); --ink: #e8ecef; --muted: #9aa5ae; --line: #333b42; } }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink);
+               font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  #view { position: fixed; inset: 0; }
+  #panel { position: fixed; top: 12px; left: 12px; width: 230px; max-height: calc(100% - 24px); overflow: auto;
+           background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+  h1 { font-size: 14px; margin: 0 0 6px; }
+  label { display: flex; gap: 6px; align-items: center; margin: 2px 0; cursor: pointer; }
+  select, button { width: 100%; margin: 4px 0 8px; font: inherit; color: var(--ink); background: transparent;
+                   border: 1px solid var(--line); border-radius: 5px; padding: 4px; }
+  .muted { color: var(--muted); font-size: 12px; }
+  .sw { width: 12px; height: 12px; border-radius: 2px; border: 1px solid var(--line); flex: none; }
+  #status { margin-top: 6px; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/build/three.module.min.js",
+               "three/addons/": "./vendor/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div id="view"></div>
+<div id="panel">
+  <h1>Panorama Hotel</h1>
+  <select id="scheme"></select>
+  <button id="reset">Reset view</button>
+  <div class="muted">Materials</div>
+  <div id="mats"></div>
+  <div id="status" class="muted">loading…</div>
+  <div class="muted">Drag to orbit · right-drag to pan · wheel to zoom. Local survey frame, metres.</div>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const SCHEMES = [
+  ['Existing scheme (client)', '../03_existing/model/model_web.glb'],
+  ...['A', 'B', 'C', 'D', 'E'].map(k => [`Capacity option ${k}`, `../04_proposed/options/${k}/model/model_web.glb`]),
+];
+const el = document.getElementById('view');
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+el.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+scene.background = new THREE.Color(dark ? 0x15191d : 0xeef0f2);
+const camera = new THREE.PerspectiveCamera(35, 1, 1, 5000);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8f94, 1.6));
+const sun = new THREE.DirectionalLight(0xffffff, 2.2);
+sun.position.set(-150, 220, 180);           // glTF y-up: x east, y up, z south
+sun.castShadow = true;
+Object.assign(sun.shadow.camera, { left: -250, right: 250, top: 250, bottom: -250, far: 1000 });
+sun.shadow.mapSize.set(4096, 4096);
+sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.6;   // no acne on flat-shaded, normal-less geometry
+scene.add(sun);
+const ground = new THREE.Mesh(new THREE.CircleGeometry(400, 64), new THREE.MeshLambertMaterial({ color: dark ? 0x2a3036 : 0xd9dcdf }));
+ground.rotation.x = -Math.PI / 2; ground.position.y = -0.05; ground.receiveShadow = true;
+scene.add(ground);
+
+let model = null, home = null;
+const status = document.getElementById('status');
+const sel = document.getElementById('scheme');
+const loader = new GLTFLoader();
+
+function frame(obj) {
+  const box = new THREE.Box3().setFromObject(obj), c = box.getCenter(new THREE.Vector3());
+  const r = box.getSize(new THREE.Vector3()).length() / 2;
+  home = { target: c.clone(), pos: c.clone().add(new THREE.Vector3(-0.9, 0.75, 1.2).multiplyScalar(r * 1.25)) };
+  controls.target.copy(home.target); camera.position.copy(home.pos); controls.update();
+}
+
+function load(url) {
+  status.textContent = 'loading…';
+  loader.load(url, gltf => {
+    if (model) scene.remove(model);
+    model = gltf.scene;
+    const mats = new Map();
+    model.traverse(o => {
+      if (!o.isMesh) return;
+      // positions only in the web GLB → flat normals here
+      o.geometry = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry;
+      o.geometry.computeVertexNormals();
+      const m = o.material;
+      if (/glass/i.test(m.name)) { m.transparent = true; m.opacity = 0.45; m.depthWrite = false; }
+      m.side = THREE.DoubleSide; m.flatShading = true; m.needsUpdate = true;
+      o.castShadow = o.receiveShadow = !/glass/i.test(m.name);
+      if (!mats.has(m.name)) mats.set(m.name, []);
+      mats.get(m.name).push(o);
+    });
+    scene.add(model);
+    frame(model);
+    const box = document.getElementById('mats'); box.innerHTML = '';
+    [...mats.keys()].sort().forEach(name => {
+      const objs = mats.get(name), col = '#' + objs[0].material.color.getHexString();
+      const lab = document.createElement('label');
+      lab.innerHTML = `<input type="checkbox" checked><span class="sw" style="background:${col}"></span>${name}`;
+      lab.querySelector('input').onchange = e => objs.forEach(o => o.visible = e.target.checked);
+      box.appendChild(lab);
+    });
+    let tris = 0; model.traverse(o => { if (o.isMesh) tris += o.geometry.attributes.position.count / 3; });
+    status.textContent = `${mats.size} materials · ${Math.round(tris / 1000)}k triangles`;
+  }, undefined, () => { status.textContent = `not built yet: ${url}`; });
+}
+
+for (const [name, url] of SCHEMES) {
+  const ok = await fetch(url, { method: 'HEAD' }).then(r => r.ok).catch(() => false);
+  if (ok) sel.add(new Option(name, url));
+}
+if (!sel.options.length) status.textContent = 'no model_web.glb found — run build.py first';
+sel.onchange = () => load(sel.value);
+document.getElementById('reset').onclick = () => { if (home) { controls.target.copy(home.target); camera.position.copy(home.pos); } };
+if (sel.options.length) load(sel.value);
+
+function resize() { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+window.__viewer = { scene, camera, status };
+</script>
+</body>
+</html>

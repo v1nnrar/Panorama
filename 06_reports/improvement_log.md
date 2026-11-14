@@ -527,3 +527,15 @@ client's renders, higher is better).
 - Checked headless with Playwright (requests answered from disk): loads, 17 materials, 190k triangles, no errors
   besides the expected 404s for unbuilt options; `viewer/preview.png`.
 - Score unchanged 0.4922 (export only).
+
+## 2026-11-14 — iteration 45: D12 capacity study re-run on the measured client model — DONE
+- The backlog's open items were all done, blocked or waiting on the user, so (per the guardrail) a new item was added:
+  the capacity study still showed the pre-precision client scheme, and option D is derived from it.
+- `tools/make_options.py` now reads office E (RÚIAN outline, 29.2 m) and the calibrated `aerial_S` camera from
+  `03_existing/params.yaml` instead of private copies (old OSM polygon at 32 m, audit camera).
+- All five options regenerated, rebuilt with renders (each also gets `model_web.glb` → selectable in the viewer) and
+  re-scored. Ranking unchanged, every option passes all hard rules:
+  E 71.87 → **72.53**, A 71.13 → **71.79**, D 68.74 → **69.27**, B 62.85 → **63.59**, C 55.52 → **56.18** (each +≈740 m²
+  from E's cadastral outline). Option D (client buildings made compliant) still needs 3 basement levels: 726 counted
+  spaces for 665 required. Baseline row now: 92,021 m², §21 9 windows, parking 488 / 728.
+- Client-scheme match score unchanged 0.4922 (03_existing not modified).

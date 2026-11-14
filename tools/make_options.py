@@ -21,9 +21,16 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "04_proposed" / "options"
 ROT = math.radians(-7.7)          # plot frame → survey frame
 
-E_EXISTING = [[94.76, 12.3], [125.82, 18.02], [126.85, 12.26], [125.39, 12.02], [125.78, 10.41], [131.87, 11.17],
-              [125.83, -4.35], [120.4, -5.47], [120.42, -6.96], [119.35, -7.83], [117.94, -7.24], [117.57, -5.99],
-              [110.95, -6.87], [98.27, -6.87]]
+def _existing():
+    """The client scheme as currently measured (03_existing/params.yaml): office E and the calibrated aerial camera
+    are taken from there, so the options always sit next to the same E and are seen from the same camera (D12)."""
+    raw = yaml.safe_load((ROOT / "03_existing" / "params.yaml").read_text())
+    e = next(b for b in raw["buildings"] if b["id"] == "E")
+    cam = next(c for c in raw["render"]["cameras"] if c["name"] == "aerial_S_like_render000")
+    return e["footprint"], float(e.get("height", 32.0)), cam
+
+
+E_EXISTING, E_HEIGHT, _AERIAL = _existing()
 
 
 def to_survey(pts):
@@ -215,7 +222,7 @@ def basement(levels):
 
 def existing_E():
     return {"id": "E", "name": "Existing corner office (parcel 1133/12)", "existing": True, "use": "Office (existing, kept)",
-            "footprint": E_EXISTING, "height": 32.0,
+            "footprint": E_EXISTING, "height": E_HEIGHT,
             "storeys": [{"name": "GF", "height": 4.5, "use": "Lobby"}, {"name": "L", "count": 8, "height": 3.3, "use": "Offices"}],
             "facade": [{"type": "curtain", "glass": "Glass dark", "mullion": 1.5, "spandrel": 0.9},
                        {"type": "band", "from": 2, "depth": 0.35, "thickness": 0.4, "material": "Aluminium white"}],
@@ -256,7 +263,8 @@ def _build_from_existing(key, spec):
 
 
 CAMERAS = [
-    {"name": "aerial_S", "location": [-93.67, -255.78, 218.91], "target": [14.88, -5.5, 20], "lens": 36.86, "resolution": [1280, 905]},
+    {"name": "aerial_S", "location": _AERIAL["location"], "target": _AERIAL["target"], "lens": _AERIAL["lens"],
+     "resolution": [1280, 905]},   # = the calibrated client aerial (render-000, P1)
     {"name": "aerial_SE", "location": [260, -200, 160], "target": [30, -5, 25], "lens": 35, "resolution": [1280, 905]},
     {"name": "top_view", "location": [40, -10, 600], "target": [40, -9.99, 0], "lens": 35, "resolution": [1100, 1100]}]
 

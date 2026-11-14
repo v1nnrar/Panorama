@@ -118,6 +118,8 @@ exist in it (`usable`), or RÚIAN footprints with heights from storeys for newer
 - [x] D9. Presentation: Cycles aerials of the top 2 options + client scheme side by side, and a one-page comparison
       in `06_reports/capacity_study.md` (no new hosts, no paid services).
 - [x] D10. Verify parking zone 02 (Atlas Prahy zone map) — mark **blocked** if the map needs a token.
+- [x] D12. Re-run the capacity study on the measured client model (added 2026-11-14: P/A/B work changed the baseline,
+      option D and office E). make_options now reads office E and the calibrated aerial camera from 03_existing.
       (2026-11-11: user allowed gs-pub.praha.eu; official PSP zone layer → whole plot in **zone 02**.)
 
 ### A. Fidelity of the existing scheme (measurable with `score_match.py`)

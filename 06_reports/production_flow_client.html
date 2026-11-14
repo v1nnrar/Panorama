@@ -89,7 +89,7 @@ footer { margin-top: 44px; font-size: 13px; color: var(--muted); max-width: 70ch
     <span><i class="big"></i>Checkpoint</span>
     <span><i class="mini"></i>Step leading into it</span>
     <span><i class="mini" style="border-color:var(--you)"></i>Your input needed</span>
-    <span class="badge b-done">Complete</span>
+    <span class="badge b-done">Finished</span>
     <span class="badge b-now">In progress</span>
   </div>
   <main id="flow"></main>
@@ -126,7 +126,7 @@ const CP = [
 
 const small = `<svg viewBox="0 0 52 34" aria-hidden="true"><path d="M3 11 H28 V3 L49 17 L28 31 V23 H3 Z" fill="var(--bg)" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/></svg>`;
 const big = `<svg viewBox="0 0 70 74" aria-hidden="true"><path d="M22 3 H48 V38 H65 L35 71 L5 38 H22 Z" fill="var(--bg)" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round"/></svg>`;
-const badge = { done: '<span class="badge b-done">Complete</span>', now: '<span class="badge b-now">In progress</span>', later: '<span class="badge b-later">Upcoming</span>' };
+const badge = { done: '<span class="badge b-done">Finished</span>', now: '<span class="badge b-now">In progress</span>', later: '<span class="badge b-later">Upcoming</span>' };
 
 document.getElementById("flow").innerHTML = CP.map((c, i) => `
   <div class="row">

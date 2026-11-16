@@ -1,77 +1,55 @@
 PANORAMA PANKRÁC — LOCAL REGULATIONS
 Compiled by tools/compile_regulations.py from the sources in 02_regulations/raw/. Parts B–E are the
-official Czech texts (extracted from the PDFs; layout simplified). Part A is our English digest.
+official Czech texts (extracted from the PDFs; layout simplified). Part A is an English summary.
+Building-height regulation (MPP čl. 18, 97–103; tower level XIV. Pankrác) is not included.
 
 
-PART A — DIGEST (English): what applies to the Panorama Pankrác plot
-====================================================================
+PART A — SUMMARY (English): regulations that apply to the Panorama Pankrác plot
+==============================================================================
 
 1. GOVERNING DOCUMENTS
   - Metropolitan Plan of Prague (Územní plán hl. m. Prahy — Metropolitní plán, MPP), OOP 001/2026,
     issued by the Prague City Assembly 28 May 2026, in force since 1 Sep 2026. Replaced the 1999 zoning plan.
-    Court review pending (MS Praha 11 A 24/2026).  Text: raw/MPP_textova_cast.pdf; Part D below.
+    Court review pending (MS Praha 11 A 24/2026). Part D below.
   - MPP příloha 4, locality cover sheet 058 / Horní Pankrác. Part B below.
-  - MPP příloha 2, tables (transformation areas, tower levels, infrastructure). Part C below.
+  - MPP příloha 2, tables (transformation areas, infrastructure). Part C below.
   - Prague Building Regulations (Pražské stavební předpisy, PSP, nařízení 12/2024 Sb. hl. m. Prahy),
     consolidated with the national construction requirements (VPV) — "Souhrnné znění požadavků na výstavbu
-    v Praze", normative text 2025/01. Text: raw/PSP_souhrnne_zneni.pdf; Part E below.
+    v Praze", normative text 2025/01. Part E below.
 
-2. CLASSIFICATION OF THE PLOT (16,487 m², 11 ČÚZK parcels; origin Milevská 7)
+2. CLASSIFICATION OF THE PLOT (16,487 m², 11 ČÚZK parcels)
   - Locality .............. 058 / Horní Pankrác (Praha 4; k.ú. Krč, Michle, Nusle; 40 ha)
   - Buildability .......... Z — buildable (zastavitelná stavební)
   - Structure ............. (03) hybrid structure (čl. 43): compact/loose blocks and solitaires forming
-                            sub-centres, varied heights
+                            sub-centres
   - Use ................... O — residential (obytná, čl. 63); admin and commercial buildings are part of the locality
-  - Stability ............. [S] stabilised (čl. 69, 70): target character derived from the existing character
+  - Stability ............. [S] stabilised (čl. 69, 70): changes take the existing character into account
   - Transformation areas .. none on the plot (T 411/058/2235 and 411/058/2336 lie east of the metro D corridor)
-  - Height squares (Z 02) . storey range 27 over the whole plot (black = above height-stable development)
 
-3. LIMITS
-  - Max regulated building height: 100 m (range 27, čl. 98 odst. 3)
-  - Max storeys above ground (RNP): range 27 = more than 21 RNP — read as max 27 (INTERPRETATION, čl. 98/3)
-  - Height in a stabilised area: must take the surrounding heights and any territorial study into account
-    (čl. 98 odst. 2a; čl. 70). Neighbours: City Tower 109 m, V Tower 105 m, City Empiria 104 m.
-  - One set-back storey / attic / roof structure allowed above the main cornice (čl. 98 odst. 6).
-  - Regulated floor area (HPPreg) and max coverage (Zmax): NOT set in [S] areas (čl. 95, 96 apply to [T]/[R]).
-    Benchmark only: neighbouring T areas use Zz 35 %/Vz 8.0 (HPPreg 2.8 x plot) and Zz 60 %/Vz 8.0 (4.8 x plot).
-  - Tower level XIV. Pankrác (towers max 70 m, max 75 % of built area, čl. 100) applies only to the marked
-    squares by the metro D, NOT to this plot.
-  - Metro D corridor (VPS 910-621/-/1, 910-621/-/3) borders the east wedge of the plot.
-  - PSP §20  daylight per ČSN 73 0580 / EN 17037 (direct sunlight requirement for flats does not apply in Prague)
-  - PSP §21  distance from neighbouring buildings: no new building above 45° within a ≥45° horizontal sector
-             in front of habitable-room windows of existing neighbours (příloha 1, bod II)
-  - PSP §22  at least 2 m from boundaries with neighbouring plots (not public space)
-  - PSP §25  parking: min/max from HPP per space (hotel 100 m², housing 85, office 50, retail 70,
-             restaurant 40) x zone %; plot is in parking zone 02 (IPR layer, verified 2026-11-11):
-             bound spaces 80 %, visitor 15–55 %
-  - PSP §26  form of parking; §27 bicycle parking; §28–30 utility connections; Part E has the rest.
-
-4. CHECK OF THE EXISTING (CLIENT) SCHEME — generated from the model
-  - Max regulated building height (storey range 27)
-      limit: <= 100   existing scheme: 83.8   -> PASS
-      source: MPP text čl. 98 odst. 3 (range 27: >21 RNP, max 100 m); Z 02 / KLZ 058 map — squares over the plot read 27
-  - Max regulated above-ground storeys (range 27)
-      limit: <= 27   existing scheme: 22   -> PASS
-      source: MPP čl. 98 odst. 3 — INTERPRETATION: range label 27 = maximum RNP (ranges 21 = 13–21, 15 = 10–15 …)
-  - Regulated floor area (HPPreg) — not set in stabilised areas
-      limit: no numeric limit   existing scheme: 92021.3   -> info
-      source: MPP čl. 96 odst. 2: HPPreg/Zmax apply only to [T] and [R] areas; plot is [S] (KLZ 058 map, no T hatch)
-  - PSP §21: neighbour windows failing the 45°/45° distance angle
-      limit: <= 0   existing scheme: 9   -> FAIL
-      source: PSP §21 odst. 1 + příloha 1 bod II (sampled windows on neighbour façades facing the plot; pipeline/psp.py)
-  - PSP §22: min distance to private neighbouring plots (m)
-      limit: >= 2.0   existing scheme: 3.64   -> PASS
-      source: PSP §22 odst. 2 — ASSUMED: plot edges facing S (Milevská) and E (street/metro) are public space
-  - PSP §25: parking capacity minus required minimum (spaces)
-      limit: >= 0   existing scheme: -240   -> FAIL
-      source: PSP §25 + příloha 2 (HPP per space by use) + příloha 3 — zone 02 (verified 2026-11-11: gs-pub.praha.eu dop/psp_zony_parkovani/MapServer layer 0 (Zóny parkování města (PSP), HMP-IPR), plot polygon intersects only OBJECTID 23, ZONA 02 — raw/psp_parking_zones_plot.geojson; bound 80 %, visitor 15–55 %), 30 m²/space at 85 % basement efficiency
-
-5. OPEN POINTS
-  - Confirm with IPR / the building authority that the whole plot is [S] (read from the binding KLZ 058 map, ±5 m).
-  - §22 assumes the S (Milevská) and E (street/metro) plot edges face public space — to confirm.
-  - Any existing permit or territorial decision for the client scheme under the old plan would take precedence.
-
-Machine-checkable rules: 02_regulations/rules.yaml.  Notes: 02_regulations/summary.md.
+3. KEY PROVISIONS
+  MPP
+  - Regulated floor area (HPPreg) and max coverage (Zmax) are set only for [T]/[R] areas (čl. 95, 96);
+    the plot is [S]. Neighbouring T areas: 411/058/2235 Zmax 70 %, Zz 35 %, Vz 8.0;
+    411/058/2336 Zmax 100 %, Zz 60 %, Vz 8.0 (HPPreg = area x Zz x Vz, čl. 96).
+  - MPP gross floor area also counts underground floors except garages and service spaces (čl. 96 odst. 1).
+  - Panoramas and protected vistas (čl. 104, 105; KLZ 058/200).
+  - Streets: 5. května metropolitan level; náměstí Arkády, Budějovická, Na Pankráci district level (čl. 82).
+  - Metro D (621/-/1, 621/-/3, stations and vestibules Pankrác D) and its public-benefit constructions
+    (VPS 910-621/-/1, 910-621/-/3) border the east of the plot; tram Pankrác–Budějovická (622/-/9);
+    cycle routes 650/-/127, 650/-/222.
+  PSP (Prague building regulations)
+  - §20  daylight, sunlight and shading per ČSN 73 0580 / EN 17037
+  - §21  distance from neighbouring buildings: no new building above 45° within a ≥45° horizontal sector in
+         front of habitable-room windows of existing neighbours (příloha 1, bod II)
+  - §22  building at the plot boundary: at least 2 m from boundaries with neighbouring plots (not public space)
+  - §23  fencing
+  - §24  connection to roads
+  - §25  parking capacity: min/max from gross floor area per space (příloha 2: hotel 100 m², housing 85,
+         office 50, retail 70, restaurant 40) x zone %; the plot is in parking zone 02 (příloha 3):
+         bound spaces 80 %, visitor 15–55 %
+  - §26  form and character of parking; §27 bicycle parking
+  - §28–30  water supply, waste water, other utility connections
+  - §49  residential buildings and flats; §50 accommodation (hotel) buildings; §58–62 garages
 
 
 PART B — LOCALITY COVER SHEET 058 / HORNÍ PANKRÁC (MPP příloha 4), full text
@@ -128,12 +106,6 @@ východní části lokality mají významný potenciál pro širší okolí.
           Náměstí a ulice čtvrťové úrovně: náměstí Arkády, Budějovická, Na Pankráci
           -> Hierarchie uličních prostranství, čl. 82
 
-          Výšková regulace
-          Místo se stanovenou hladinou věží XIV. Pankrác
-          Podíl zástavby, pro který je možné uplatnit hladinu věží: 75 %
-          Maximální výška věží: 70 m
-
-          -> Hladina věží, čl. 100
           -> Panoramata a veduty k ochraně čl. 104—105
           -> Příloha č. 1 textové části: Panoramata a veduty
 
@@ -220,7 +192,6 @@ PART C — MPP PŘÍLOHA 2, table rows for locality 058
 ===================================================
 (columns: code, type, structure, use, Zmax %, Zz %, Vz, area m² — or name and status)
 
-XIV. Pankrác   75   70   058 / Horní Pankrác
 058   Horní Pankrác   zastavitelná stavební   hybridní struktura   zastavitelná obytná   stabilizovaná   ne   40
 411/058/2235   transformační   hybridní struktura   obytná   70   35   8,0   120 967
 411/058/2336   transformační   hybridní struktura   obytná   100   60   8,0   22 810
@@ -493,7 +464,7 @@ v čl. 36.
 
                                  Metropolitní priority
 
---- čl. 17–18: Mass and structure of the city; height regulation concept ---
+--- čl. 17: Mass and structure of the city ---
 
 Článek 17
                       Hmota a struktura města
@@ -510,32 +481,6 @@ hodnotám uvedeným v čl. 9 odst. 7 a 8.
 (3)    Jednotlivé typy struktur vystavěného prostředí městské krajiny
 jsou definovány na základě prostorových vztahů stavebních bloků
 a veřejných prostranství a podrobně popsány v čl. 41 až 50.
-
-Článek 18
-                Koncepce výškové regulace města
-
-(1)     Koncepce výškové regulace města je součástí urbanistické
-koncepce, která určuje stabilizaci výškového uspořádání zástavby
-a rozvíjení celkové kompozice pražské zástavby. Cílem výškové
-regulace je zachování výškové různorodosti v různých částech
-města.
-
-(2)      Výškové řešení jako základní kompozice zastavitelného území
-a její centrální (metropolitní) i lokální a místní vertikální dominanty
-zpřehledňují rozlehlou urbánní strukturu zasazenou do krajiny
-a umožňují v ní orientaci.
-
-(3)    Metropolitní plán stanovuje podstatné znaky výškové
-kompozice podléhající ochraně a současně, zejména v zastavitelných
-transformačních a rozvojových lokalitách, určuje podmínky pro
-doplnění této kompozice současnou kulturní vrstvou.
-
-(4)    Výšková regulace je stanovena pro zastavitelné území
-a uplatňuje se pouze nad stavebními bloky.
-
-                          Městská příroda
-
-                                                                     18
 
 --- čl. 35–40: Locality code, target character, cover sheets, buildability, structure ---
 
@@ -1125,7 +1070,7 @@ s cílovým charakterem lokality doplňovat nezpevněné plochy.
 nezobrazují, ale mohou být graficky vymezeny v podrobnějších
 dokumentacích.
 
---- čl. 95–105: Building coverage, regulated floor area, height regulation, towers, dominants, panoramas ---
+--- čl. 95–96: Building coverage coefficients, regulated gross floor area ---
 
 Článek 95
                        Koeficienty zastavění budovami
@@ -1241,234 +1186,7 @@ a při dodržení prostorových regulativů dle čl. 73 odst. 4.
                              04/ Hlava III
                            Regulace výšek
 
-Článek 97
-                                Výšková regulace
-
-(1)     Výšková regulace stanovuje rozsah maximálního
-regulovaného počtu nadzemních podlaží zástavby (RNP) včetně
-podrobných pravidel. Dále stanovuje horizontály, hladinu věží
-a panoramatické fotografie pro ověřování vlivu nové zástavby na
-celkovou kompozici města včetně jeho panoramatu (panoramata
-a veduty k ochraně). Výšková regulace se nevztahuje na jiné stavby,
-(např. stavby a zařízení dopravní nebo technické infrastruktury).
-
-(2)    Plocha výškové regulace je čtverec o délce strany 100 m.
-Souřadnice jihovýchodního rohu počátečního čtverce jsou:
-                 X = -742 273 m, Y = -1 043 995 m 70.
-Čtvercová síť s určením souřadnic vrcholů jednotlivých ploch je
-součástí schématu S 03.
-
-                    Základní pravidla výškové regulace
-
-Článek 98
-                              Rozmezí podlažnosti
-
-(1)    Každé ploše výškové regulace (čtverci) je přiřazeno rozmezí
-podlažnosti, které určuje rozsah možného maximálního počtu RNP
-pro zástavbu. Minimální výška zástavby se nestanovuje.
-
-69 Územní studie pořízená a schválená pořizovatelem jako podklad pro rozhodování v území
-dle § 30 SZ, resp. § 67–69 NSZ
-70 Souřadnicový systém S-JTSK / Krovak East North
-                                                                                       56
-
-(2)   V rámci stavebních bloků je přípustné umisťovat budovy
-s maximálním počtem RNP v rámci rozmezí podlažnosti. Při
-stanovení konkrétního počtu RNP:
-      a) ve stabilizovaných plochách je nutné přihlédnout k výšce
-      okolní zástavby a k územní studii 71,
-      b) v transformačních a rozvojových plochách se k výšce
-      stávající zástavby nepřihlíží,
-      c) v plochách památkových rezervací a památkových zón je
-      nutné vycházet z objemu a prostorové skladby zástavby.
-
-(3)   Metropolitní plán stanovuje následující rozmezí podlažnosti,
-přičemž pro rozmezí podlažnosti 12, 15, 21 a 27 je pro zástavbu
-zároveň stanovena maximální regulovaná výška budovy 72:
-
-         rozmezí podlažnosti 27                  > 21 RNP           max. 100 m
-         rozmezí podlažnosti 21                  13–21 RNP          max. 70 m
-         rozmezí podlažnosti 15                  10–15 RNP          max. 50 m
-         rozmezí podlažnosti 12                  7–12 RNP           max. 40 m
-         rozmezí podlažnosti 8                   6–8 RNP            -
-         rozmezí podlažnosti 6                   4–6 RNP            -
-         rozmezí podlažnosti 4                   2–4 RNP            -
-         rozmezí podlažnosti 3                   1–3 RNP            -
-         rozmezí podlažnosti 2                   1–2 RNP            -
-
-(4)    Pokud nad stavebním blokem nebo jeho částí není vymezena
-plocha výškové regulace, stanovuje se rozmezí podlažnosti podle
-sousední plochy výškové regulace s vyšší hodnotou.
-
-(5)    Plochy výškové regulace spolu se stanoveným rozmezím
-podlažnosti jsou vymezeny v grafické části Z 02. Plochy s rozmezím
-podlažnosti nad výškově ustálenou zástavbou jsou zobrazeny černou
-barvou, plochy s rozmezím podlažnosti pro nově navrženou zástavbu
-jsou zobrazeny modrou barvou.
-
-(6)    Nad úrovní hlavní římsy je přípustná výstavba jednoho
-ustupujícího podlaží, podkroví, případně jiných prostorových řešení
-střechy. 73
-
-Článek 99
-                                         Horizontály
-
-(1)     Horizontály vystavěného prostředí (zejména nábřeží,
-opevnění, mosty a záměrně urbanisticky a umělecky komponované
-části zástavby, které jsou zpravidla vodorovné, výrazně viditelné
-a v rozsahu i několika bloků) jsou významnou součástí kompozice
-města. Horizontály jsou nenahraditelné a pro obraz města určující.
-
-(2)    Horizontály definované Metropolitním plánem jsou zobrazeny
-v regulaci výškového uspořádání v příloze č. 1.
-
-Článek 100
-                                      Hladina věží
-
-71 V případě, že je pro dané území pořízena a schválena jako podklad pro rozhodování
-v území
-72 § 27 odst. 1 PSP, resp. § 20 NPSP
-73 Prostorové řešení střechy nebo ustupujícího podlaží je regulováno § 27 odst. 2 PSP, resp.
-§ 20 odst. 2 NPSP.
-                                                                                           57
-
-(1)    Ploše výškové regulace může být přiřazena hladina věží, která
-umožňuje pro část zástavby v dané ploše výškové regulace navýšit
-maximální počet RNP určený rozmezím podlažnosti. Hladina věží je
-stanovena pro místa s potenciálem doplnění výškových budov, které
-se podílejí na celkové kompozici Prahy.
-
-(2)    Plochy výškové regulace se stanovenou hladinou věží se
-sdružují do míst, pro která Metropolitní plán stanovuje ověřování vlivu
-stavebních záměrů na celkovou kompozici dle čl. 101. Jednotlivá
-místa se vztahují ke konkrétní lokalitě nebo lokalitám a jsou
-zobrazena ve schématu S 03.
-
-(3)    Zástavba v místech se stanovenou hladinou věží je dále
-omezena maximální regulovanou výškou budov 74 a maximálním
-podílem zástavby 75, pro který je možné uplatnit hladinu věží.
-
-(4)     Plochy výškové regulace se stanovenou hladinou věží jsou
-vymezeny v grafické části Z 02, kde jsou zobrazeny purpurovou
-barvou. Číslice označující rozmezí podlažnosti je doplněna číslicí
-v kulaté závorce označující stanovený maximální počet RNP dle
-hladiny věží. Podíl zástavby, pro který je možné uplatnit hladinu věží
-a maximální regulovaná výška budov dle odst. 3, a zařazení plochy
-výškové regulace do místa se stanovenou hladinou věží jsou
-uvedeny v KLZ/200, jejich výčet je uveden v příloze č. 2/200.
-
-Článek 101
-          Ověřování vlivu na celkovou kompozici a panorama
-
-(1)    Budovy s RNP vycházejícím ze stanovené hladiny věží,
-výrazné horizontály dle čl. 99, výjimečně i jiné objekty významně
-zasahující do obrazu města se vždy posuzují z hlediska vlivu na
-celkovou kompozici Prahy.
-
-(2)     Metropolitní plán stanovuje regulaci výškového uspořádání
-v příloze č. 1, ve které jsou zakreslena místa, kde Metropolitní plán
-vymezuje hladinu věží. Pro každé toto místo je stanoven výškový
-strop zástavby, který bude posuzován.
-
-(3)     Doplnění kompozice města se ověřuje při pohledu ze středu
-města k jeho okraji na vybraných panoramatických fotografiích dle
-čl. 104 a 105. Posuzuje se měřítko zástavby a adekvátnost zásahu
-vzhledem k umístění záměru, zejména vztah k morfologii terénu,
-význam budovy jako lokální dominanty nebo orientačního bodu
-v rámci celé Prahy a vztah záměru k celkové kompozici města.
-
-(4)    Z hlediska celkové kompozice města je možné navrženou
-zástavbu kontrolně posuzovat i pomocí vložení do 3D modelu
-a zákresu do ortogonálních digitálních vedut.
-
-                     Podrobná pravidla výškové regulace
-
-Článek 102
-                                 Rozhraní a tolerance
-
-74 § 27 odst. 1 PSP, resp. § 20 odst. 1 NPSP
-75 Posuzuje se součet regulovaných ploch budov nebo jejich částí s RNP určeným podle
-hladiny věží. V [T] a [R] plochách dle čl. 76 a 77 jde o podíl z koeficientu maximálního zastavění
-budovami dle čl. 95 odst. 1. Ve stabilizovaném území a malých [R] plochách navazujících na
-stávající strukturu dle čl. 75 jde o podíl z možného zastavění budovami, které se odvozuje z
-okolí (čl. 74 odst. 3, resp. čl. 75 odst. 3).
-                                                                                              58
-
-(1)    Pokud se posuzovaný záměr nachází na rozhraní více ploch
-výškové regulace, je možné využít vyšší rozmezí podlažnosti za
-podmínky, že budova alespoň ze 75 % RPB leží v ploše výškové
-regulace stanovující vyšší rozmezí podlažnosti a zároveň nezasahuje
-do plochy výškové regulace stanovující nižší rozmezí podlažnosti do
-vzdálenosti větší než 25 metrů, v plochách památkových rezervací
-a památkových zón do vzdálenosti větší než 10 metrů, přičemž je
-nutné vycházet z objemu a prostorové skladby stávající zástavby.
-
-(2)      Pokud plocha výškové regulace zasahuje do více lokalit
-s rozdílným typem struktury a výška stávající zástavby v jedné
-z lokalit neodpovídá stanovenému rozmezí podlažnosti, odvozuje se
-maximální počet RNP pro nové budovy ve stabilizovaných plochách
-od okolní zástavby v příslušné lokalitě. Obdobně se postupuje při
-stanovování maximálního počtu RNP pro nové budovy na rozhraní
-různých typů zástavby v lokalitách s typem struktury (04) heterogenní
-struktura a v rámci areálů v lokalitách s typem struktury
-(07) modernistická struktura.
-
-Článek 103
-                      Pravidla pro dominanty
-
-(1)    Maximální počet RNP stanovený dle čl. 98 je možné navýšit:
-       a) o 1 RNP pro budovy podél metropolitních a čtvrťových tříd
-       a na metropolitních a čtvrťových náměstích,
-       b) o další 1 RNP pro budovy podél metropolitních tříd a na
-       metropolitních náměstích v transformačních a rozvojových
-       plochách a se stanoveným rozmezím podlažnosti 6 a vyšší,
-       c) o 2 RNP nad maximálně 1/3 RPB pro budovy na nárožích
-       na křížení metropolitních, čtvrťových a lokalitních tříd
-       a náměstí, pokud to není v rozporu s charakterem území.
-Tato jednotlivá přípustná navýšení maximálního počtu RNP lze sčítat.
-Na území památkových rezervací a památkových zón se ustanovení
-písm. a) a b) nevztahuje.
-
-(2)     Budovy občanské vybavenosti mohou v odůvodněných
-případech překročit maximální počet RNP stanovený dle čl. 98,
-nejvíce však o 2 RNP, a jen pokud to není v rozporu s charakterem
-území, přičemž se odst. 1 neuplatní. Pro sportovní stadiony
-a typologicky obdobné stavby rekreační vybavenosti se
-v odůvodněných případech výšková regulace neuplatňuje, v plochách
-památkových rezervací a památkových zón je nutné v případě
-umísťování těchto budov vycházet z objemu a prostorové skladby
-stávající zástavby.
-
-(3)     V plochách stávající občanské a komerční vybavenosti dle
-čl. 149 v lokalitách s typem struktury (07) modernistická struktura,
-které se nenacházejí v památkových rezervacích nebo památkových
-zónách, je možné stávající budovy navyšovat o maximálně 2 RNP
-nebo nahrazovat novými budovami o maximálně 2 RNP vyššími než
-stávající budovy, i pokud to znamená překročení maximálního počtu
-RNP stanoveného dle čl. 98.
-
-(4)     V lokalitách s typem struktury (08) struktura areálů produkce
-a v lokalitách komerční vybavenosti dle čl. 145 mohou budovy nebo
-části budov sloužící zejména pro technologické, výzkumné
-a administrativní provozy přiměřeně překročit maximální počet RNP
-stanovený dle čl. 98 s ohledem na charakter území.
-
-                                                                    59
-
-(5)    Pravidla pro dominanty se neuplatní, pokud jde o budovy
-s RNP vycházejícím ze stanovené hladiny věží nebo pokud by užitím
-tohoto pravidla mohla být narušena výrazná stávající nebo navržená
-horizontála.
-
-(6)    Stávající budovy s vyšším počtem RNP, než je přípustné dle
-výškové regulace, je možné nahradit novými budovami s jakýmkoliv
-počtem RNP, pokud RPB nové budovy nepřekročí RPB původní
-budovy a regulovaná výška 76 nové budovy nepřekročí regulovanou
-výšku původní budovy. V plochách památkových rezervací
-a památkových zón je nutné při umisťování těchto nových budov
-vycházet z objemu a prostorové skladby stávající zástavby.
-
-                            Panoramatické fotografie
+--- čl. 104–105: Panoramas and protected vistas ---
 
 Článek 104
                                      Panoramata
